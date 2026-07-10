@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aljabar — Khusni Academy</title>
+<meta name="description" content="Pengenalan Aljabar: variabel, operasi bentuk aljabar, persamaan linear, persamaan kuadrat, dan latihan soal bertingkat dari Mudah sampai Sulit.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f9dff'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia, serif' font-weight='700' fill='%23090d17' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="aljabar.html" class="active">Aljabar</a>
+      <a href="trigonometri.html">Trigonometri</a>
+      <a href="olimpiade.html">Olimpiade</a>
+      <a href="fisika.html" class="soon">Fisika <span class="tag-soon">Segera</span></a>
+    </div>
+    <div class="nav-cta">
+      <a href="index.html#materi" class="btn btn-outline btn-sm">Materi Lain</a>
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><span>/</span><a href="index.html#materi">Materi</a><span>/</span><span>Aljabar</span></div>
+    <span class="eyebrow">Materi · Tersedia</span>
+    <h1>Aljabar</h1>
+    <p class="hero-sub">Dari variabel dan suku, sampai persamaan kuadrat — fondasi yang dipakai di hampir semua cabang Matematika lainnya.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container lesson-layout">
+    <aside class="lesson-nav">
+      <div class="lesson-nav-title">Isi Materi</div>
+      <a href="#pendahuluan">Pendahuluan</a>
+      <a href="#konsep-dasar">Konsep Dasar</a>
+      <a href="#operasi">Operasi Bentuk Aljabar</a>
+      <a href="#persamaan-linear">Persamaan Linear</a>
+      <a href="#persamaan-kuadrat">Persamaan Kuadrat</a>
+      <a href="#latihan">Latihan Soal</a>
+    </aside>
+
+    <div class="lesson">
+
+      <div class="lesson-section" id="pendahuluan">
+        <h2>Pendahuluan</h2>
+        <p>Aljabar adalah cabang Matematika yang menggunakan <strong>simbol atau huruf</strong> untuk mewakili bilangan yang belum diketahui nilainya. Simbol ini disebut <strong>variabel</strong>, biasa ditulis sebagai $x$, $y$, atau $n$.</p>
+        <p>Alih-alih menghitung satu angka spesifik, Aljabar membantu kita menulis <em class="accent-word">pola umum</em> yang berlaku untuk banyak kasus sekaligus. Karena itu, Aljabar menjadi fondasi hampir semua cabang Matematika lainnya — dari Trigonometri, Kalkulus, sampai soal-soal Olimpiade.</p>
+      </div>
+
+      <div class="lesson-section" id="konsep-dasar">
+        <h2>Konsep Dasar</h2>
+        <p>Perhatikan bentuk aljabar berikut:</p>
+        <div class="box formula">
+          <span class="box-label">Bentuk Aljabar</span>
+          $$3x + 5$$
+        </div>
+        <p>Bentuk ini memiliki tiga bagian penting:</p>
+        <ul>
+          <li><strong>Variabel</strong> — huruf yang mewakili bilangan belum diketahui. Di sini, variabelnya adalah $x$.</li>
+          <li><strong>Koefisien</strong> — angka yang mengalikan variabel. Di sini, koefisiennya adalah $3$.</li>
+          <li><strong>Konstanta</strong> — angka tetap yang berdiri sendiri. Di sini, konstantanya adalah $5$.</li>
+        </ul>
+        <p>Setiap bagian yang dipisahkan tanda $+$ atau $-$ disebut <strong>suku</strong>. Jika dua suku memiliki variabel dan pangkat yang sama persis (misalnya $3x$ dan $5x$), keduanya disebut <strong>suku sejenis</strong> dan bisa digabungkan.</p>
+      </div>
+
+      <div class="lesson-section" id="operasi">
+        <h2>Operasi Bentuk Aljabar</h2>
+
+        <h3>Penjumlahan &amp; Pengurangan</h3>
+        <p>Hanya suku sejenis yang bisa dijumlahkan atau dikurangkan — gabungkan koefisiennya saja.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Sederhanakan $4x + 7 - 2x + 3$.</p>
+          <p style="margin-bottom:0;">$4x - 2x = 2x$, lalu $7+3=10$. Jadi hasilnya $2x + 10$.</p>
+        </div>
+
+        <h3>Perkalian &amp; Sifat Distributif</h3>
+        <p>Untuk mengalikan bentuk seperti $a(b+c)$, gunakan sifat distributif: $a(b+c) = ab + ac$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Jabarkan $(x+2)(x+3)$.</p>
+          <p style="margin-bottom:0;">$(x+2)(x+3) = x^2 + 3x + 2x + 6 = x^2 + 5x + 6$</p>
+        </div>
+
+        <h3>Faktorisasi Dasar</h3>
+        <p>Faktorisasi adalah kebalikan dari perkalian — mengubah bentuk penjumlahan menjadi bentuk perkalian.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Faktorkan $6x + 9$.</p>
+          <p style="margin-bottom:0;">Faktor persekutuan terbesar dari $6$ dan $9$ adalah $3$, sehingga $6x+9 = 3(2x+3)$.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="persamaan-linear">
+        <h2>Persamaan Linear Satu Variabel</h2>
+        <p>Persamaan Linear Satu Variabel (PLSV) berbentuk umum:</p>
+        <div class="box formula"><span class="box-label">Bentuk Umum</span>$$ax + b = c$$</div>
+        <p>dengan $a \neq 0$. Tujuannya adalah mencari nilai $x$ yang membuat persamaan itu benar.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Selesaikan $2x + 5 = 17$.</p>
+          <p style="margin-bottom:0.15rem;">Kurangi kedua ruas dengan $5$: $2x = 12$</p>
+          <p style="margin-bottom:0;">Bagi kedua ruas dengan $2$: $x = 6$</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="persamaan-kuadrat">
+        <h2>Persamaan Kuadrat</h2>
+        <p>Persamaan kuadrat memiliki variabel berpangkat dua, dengan bentuk umum:</p>
+        <div class="box formula"><span class="box-label">Bentuk Umum</span>$$ax^2 + bx + c = 0, \quad a \neq 0$$</div>
+        <p>Ada tiga cara umum untuk menyelesaikannya:</p>
+        <ul>
+          <li><strong>Faktorisasi</strong> — mengubah menjadi perkalian dua faktor linear, jika memungkinkan.</li>
+          <li><strong>Melengkapkan kuadrat sempurna</strong> — mengubah bentuk menjadi $(x+p)^2 = q$.</li>
+          <li><strong>Rumus kuadratik (rumus ABC)</strong> — cara yang selalu berhasil untuk semua persamaan kuadrat:</li>
+        </ul>
+        <div class="box formula">
+          <span class="box-label">Rumus ABC</span>
+          $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh — Faktorisasi</span>
+          <p style="margin-bottom:0.3rem;">Selesaikan $x^2 - 5x + 6 = 0$.</p>
+          <p style="margin-bottom:0.15rem;">Cari dua bilangan yang jika dikalikan $=6$ dan dijumlahkan $=-5$, yaitu $-2$ dan $-3$.</p>
+          <p style="margin-bottom:0;">$(x-2)(x-3)=0 \Rightarrow x=2 \text{ atau } x=3$</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="latihan">
+        <h2>Latihan Soal Bertingkat</h2>
+        <p>Pilih tingkat kesulitan, lalu klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
+
+        <div data-tier-group>
+          <div class="tier-tabs">
+            <button class="tier-tab active" data-tier="mudah"><span class="dot"></span>Mudah</button>
+            <button class="tier-tab" data-tier="sedang"><span class="dot"></span>Sedang</button>
+            <button class="tier-tab" data-tier="sulit"><span class="dot"></span>Sulit</button>
+          </div>
+
+          <!-- MUDAH -->
+          <div class="tier-panel active" data-tier="mudah">
+            <div class="tier-score">Skor: <strong>0/4</strong></div>
+
+            <div class="quiz-card" data-answer="A">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Sederhanakan bentuk berikut: $3x + 5x - 2x$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$6x$</button>
+                <button class="quiz-option" data-option="B">$8x$</button>
+                <button class="quiz-option" data-option="C">$10x$</button>
+                <button class="quiz-option" data-option="D">$4x$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$3x+5x-2x = (3+5-2)x = 6x$</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Jika $x = 4$, berapa nilai dari $2x + 7$?</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$11$</button>
+                <button class="quiz-option" data-option="B">$13$</button>
+                <button class="quiz-option" data-option="C">$15$</button>
+                <button class="quiz-option" data-option="D">$18$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$2(4) + 7 = 8 + 7 = 15$</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Selesaikan: $x + 9 = 15$. Berapa nilai $x$?</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$5$</button>
+                <button class="quiz-option" data-option="B">$6$</button>
+                <button class="quiz-option" data-option="C">$7$</button>
+                <button class="quiz-option" data-option="D">$24$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kurangi kedua ruas dengan $9$: $x = 15-9 = 6$</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Bentuk faktorisasi paling sederhana dari $4x + 8$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4(x+2)$</button>
+                <button class="quiz-option" data-option="B">$4(x+4)$</button>
+                <button class="quiz-option" data-option="C">$8(x+1)$</button>
+                <button class="quiz-option" data-option="D">$2(2x+4)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>FPB dari $4$ dan $8$ adalah $4$, sehingga $4x+8=4(x+2)$. Opsi D benar secara nilai tapi belum difaktorkan tuntas.</div>
+            </div>
+          </div>
+
+          <!-- SEDANG -->
+          <div class="tier-panel" data-tier="sedang">
+            <div class="tier-score">Skor: <strong>0/4</strong></div>
+
+            <div class="quiz-card" data-answer="B">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Sederhanakan: $3(x+4) - 2(x-1)$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x + 10$</button>
+                <button class="quiz-option" data-option="B">$x + 14$</button>
+                <button class="quiz-option" data-option="C">$5x + 10$</button>
+                <button class="quiz-option" data-option="D">$x + 13$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$3x+12-2x+2 = x+14$</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Selesaikan persamaan: $2(x+3) = 3x - 1$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x = 5$</button>
+                <button class="quiz-option" data-option="B">$x = 7$</button>
+                <button class="quiz-option" data-option="C">$x = -7$</button>
+                <button class="quiz-option" data-option="D">$x = 1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$2x+6=3x-1 \Rightarrow 7 = x$. Cek: $2(10)=20$ dan $3(7)-1=20$ ✓</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Faktorkan bentuk: $x^2 + 5x + 6$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(x+1)(x+6)$</button>
+                <button class="quiz-option" data-option="B">$(x-2)(x-3)$</button>
+                <button class="quiz-option" data-option="C">$(x+2)(x+3)$</button>
+                <button class="quiz-option" data-option="D">$(x+6)(x-1)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Cari 2 bilangan: hasil kali $=6$, jumlah $=5$, yaitu $2$ dan $3$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Umur Ani sekarang 3 kali umur adiknya. Jika jumlah umur mereka 24 tahun, berapa umur Ani?</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$15$</button>
+                <button class="quiz-option" data-option="B">$18$</button>
+                <button class="quiz-option" data-option="C">$20$</button>
+                <button class="quiz-option" data-option="D">$24$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Misal umur adik $=x$, umur Ani $=3x$. $x+3x=24 \Rightarrow x=6$, umur Ani $=3(6)=18$</div>
+            </div>
+          </div>
+
+          <!-- SULIT -->
+          <div class="tier-panel" data-tier="sulit">
+            <div class="tier-score">Skor: <strong>0/4</strong></div>
+
+            <div class="quiz-card" data-answer="A">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Tentukan kedua akar dari $x^2 - 5x + 6 = 0$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x=2$ atau $x=3$</button>
+                <button class="quiz-option" data-option="B">$x=-2$ atau $x=-3$</button>
+                <button class="quiz-option" data-option="C">$x=1$ atau $x=6$</button>
+                <button class="quiz-option" data-option="D">$x=6$ atau $x=-1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$(x-2)(x-3)=0$, sehingga $x=2$ atau $x=3$</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Jika $2x - 3y = 7$ dan $x + y = 6$, berapa nilai $x$?</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x=4$</button>
+                <button class="quiz-option" data-option="B">$x=5$</button>
+                <button class="quiz-option" data-option="C">$x=3$</button>
+                <button class="quiz-option" data-option="D">$x=6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Dari $x+y=6$: $y=6-x$. Substitusi: $2x-3(6-x)=7 \Rightarrow 5x-18=7 \Rightarrow x=5$</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Panjang persegi panjang $(x+4)$ cm, lebar $(x-1)$ cm, luas $24\ \text{cm}^2$. Nilai $x$?</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x=-7$</button>
+                <button class="quiz-option" data-option="B">$x=3$</button>
+                <button class="quiz-option" data-option="C">$x=4$</button>
+                <button class="quiz-option" data-option="D">$x=6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$(x+4)(x-1)=24 \Rightarrow x^2+3x-28=0 \Rightarrow (x+7)(x-4)=0$. Karena panjang harus positif, $x=4$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Diketahui $a+b=7$ dan $ab=10$. Tentukan nilai $a^2+b^2$.</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$39$</button>
+                <button class="quiz-option" data-option="B">$29$</button>
+                <button class="quiz-option" data-option="C">$49$</button>
+                <button class="quiz-option" data-option="D">$20$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Gunakan identitas $a^2+b^2=(a+b)^2-2ab = 49-20=29$. Trik ini sering dipakai dalam soal Olimpiade.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+        <p>Belajar Matematika dari konsep dasar sampai persiapan olimpiade, untuk pelajar SMA, mahasiswa, dan umum.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Materi</h4>
+          <a href="aljabar.html">Aljabar</a>
+          <a href="trigonometri.html">Trigonometri</a>
+          <a href="olimpiade.html">Matematika Olimpiade</a>
+          <a href="fisika.html">Fisika (Segera)</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tentang</h4>
+          <span>Khusni Academy</span>
+          <span>Dibuat untuk pelajar Indonesia</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Khusni Academy.</span>
+      <span>Dibuat dengan ♥ untuk kemajuan Matematika Indonesia.</span>
+    </div>
+  </div>
+</footer>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

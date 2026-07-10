@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigonometri — Khusni Academy</title>
+<meta name="description" content="Pengenalan Trigonometri: sudut & radian, perbandingan trigonometri, lingkaran satuan, identitas dasar, dan latihan soal bertingkat dari Mudah sampai Sulit.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f9dff'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia, serif' font-weight='700' fill='%23090d17' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="aljabar.html">Aljabar</a>
+      <a href="trigonometri.html" class="active">Trigonometri</a>
+      <a href="olimpiade.html">Olimpiade</a>
+      <a href="fisika.html" class="soon">Fisika <span class="tag-soon">Segera</span></a>
+    </div>
+    <div class="nav-cta">
+      <a href="index.html#materi" class="btn btn-outline btn-sm">Materi Lain</a>
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><span>/</span><a href="index.html#materi">Materi</a><span>/</span><span>Trigonometri</span></div>
+    <span class="eyebrow">Materi · Tersedia</span>
+    <h1>Trigonometri</h1>
+    <p class="hero-sub">Bagaimana sudut dan sisi segitiga saling berhubungan — dasar untuk Fisika, rekayasa, hingga navigasi.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container lesson-layout">
+    <aside class="lesson-nav">
+      <div class="lesson-nav-title">Isi Materi</div>
+      <a href="#pendahuluan">Pendahuluan</a>
+      <a href="#sudut">Sudut &amp; Radian</a>
+      <a href="#perbandingan">Perbandingan Trigonometri</a>
+      <a href="#lingkaran-satuan">Lingkaran Satuan</a>
+      <a href="#identitas">Identitas Dasar</a>
+      <a href="#latihan">Latihan Soal</a>
+    </aside>
+
+    <div class="lesson">
+
+      <div class="lesson-section" id="pendahuluan">
+        <h2>Pendahuluan</h2>
+        <p>Trigonometri mempelajari hubungan antara <strong>sudut</strong> dan <strong>panjang sisi</strong> pada segitiga, terutama segitiga siku-siku. Cabang ini menjadi dasar untuk memahami gelombang dalam Fisika, navigasi, arsitektur, bahkan grafika komputer.</p>
+        <p>Tiga fungsi utamanya adalah <strong>sinus (sin)</strong>, <strong>cosinus (cos)</strong>, dan <strong>tangen (tan)</strong> — masing-masing menghubungkan sebuah sudut dengan rasio dua sisi segitiga.</p>
+      </div>
+
+      <div class="lesson-section" id="sudut">
+        <h2>Sudut &amp; Radian</h2>
+        <p>Sudut bisa diukur dalam dua satuan: <strong>derajat (°)</strong> yang biasa dipakai sehari-hari, dan <strong>radian</strong> yang lebih sering dipakai dalam Matematika lanjut. Hubungan keduanya:</p>
+        <div class="box formula"><span class="box-label">Konversi</span>$$180^\circ = \pi \text{ radian}$$</div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Ubah $60^\circ$ menjadi radian.</p>
+          <p style="margin-bottom:0;">$60^\circ \times \dfrac{\pi}{180^\circ} = \dfrac{\pi}{3} \text{ radian}$</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="perbandingan">
+        <h2>Perbandingan Trigonometri pada Segitiga Siku-siku</h2>
+        <p>Untuk sudut $\theta$ pada segitiga siku-siku, tiga sisi dibedakan menjadi sisi <strong>depan</strong>, <strong>samping</strong>, dan <strong>miring</strong> (hipotenusa). Definisinya:</p>
+        <div class="box formula">
+          <span class="box-label">Definisi</span>
+          $$\sin\theta = \frac{\text{depan}}{\text{miring}} \qquad \cos\theta = \frac{\text{samping}}{\text{miring}} \qquad \tan\theta = \frac{\text{depan}}{\text{samping}}$$
+        </div>
+        <p>Nilai untuk sudut-sudut istimewa berikut ini sebaiknya dihafal karena sering muncul:</p>
+        <table class="math-table">
+          <thead><tr><th>$\theta$</th><th>$0^\circ$</th><th>$30^\circ$</th><th>$45^\circ$</th><th>$60^\circ$</th><th>$90^\circ$</th></tr></thead>
+          <tbody>
+            <tr><td>$\sin\theta$</td><td>$0$</td><td>$\frac{1}{2}$</td><td>$\frac{\sqrt2}{2}$</td><td>$\frac{\sqrt3}{2}$</td><td>$1$</td></tr>
+            <tr><td>$\cos\theta$</td><td>$1$</td><td>$\frac{\sqrt3}{2}$</td><td>$\frac{\sqrt2}{2}$</td><td>$\frac{1}{2}$</td><td>$0$</td></tr>
+            <tr><td>$\tan\theta$</td><td>$0$</td><td>$\frac{\sqrt3}{3}$</td><td>$1$</td><td>$\sqrt3$</td><td>tak terdefinisi</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lesson-section" id="lingkaran-satuan">
+        <h2>Lingkaran Satuan</h2>
+        <p>Lingkaran satuan (<em class="accent-word">unit circle</em>) adalah lingkaran berjari-jari $1$ yang berpusat di titik $(0,0)$. Konsep ini memperluas sin dan cos untuk sudut berapa pun, tidak terbatas pada segitiga siku-siku saja.</p>
+        <p>Tanda nilai sin, cos, dan tan berbeda-beda tergantung kuadran tempat sudut berada:</p>
+        <ul>
+          <li><strong>Kuadran I</strong> ($0^\circ$–$90^\circ$): sin, cos, tan semua positif</li>
+          <li><strong>Kuadran II</strong> ($90^\circ$–$180^\circ$): hanya sin positif</li>
+          <li><strong>Kuadran III</strong> ($180^\circ$–$270^\circ$): hanya tan positif</li>
+          <li><strong>Kuadran IV</strong> ($270^\circ$–$360^\circ$): hanya cos positif</li>
+        </ul>
+      </div>
+
+      <div class="lesson-section" id="identitas">
+        <h2>Identitas Trigonometri Dasar</h2>
+        <p>Identitas berikut berlaku untuk <strong>semua nilai</strong> $\theta$, dan sangat sering dipakai untuk menyederhanakan soal:</p>
+        <div class="box formula"><span class="box-label">Identitas Pythagoras</span>$$\sin^2\theta + \cos^2\theta = 1$$</div>
+        <div class="box formula"><span class="box-label">Hubungan Tangen</span>$$\tan\theta = \frac{\sin\theta}{\cos\theta}$$</div>
+        <p>Ketiga fungsi kebalikannya juga kadang muncul: cosecan $\csc\theta = \frac{1}{\sin\theta}$, secan $\sec\theta = \frac{1}{\cos\theta}$, dan cotangen $\cot\theta = \frac{1}{\tan\theta}$.</p>
+      </div>
+
+      <div class="lesson-section" id="latihan">
+        <h2>Latihan Soal Bertingkat</h2>
+        <p>Pilih tingkat kesulitan, lalu klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
+
+        <div data-tier-group>
+          <div class="tier-tabs">
+            <button class="tier-tab active" data-tier="mudah"><span class="dot"></span>Mudah</button>
+            <button class="tier-tab" data-tier="sedang"><span class="dot"></span>Sedang</button>
+            <button class="tier-tab" data-tier="sulit"><span class="dot"></span>Sulit</button>
+          </div>
+
+          <!-- MUDAH -->
+          <div class="tier-panel active" data-tier="mudah">
+            <div class="tier-score">Skor: <strong>0/4</strong></div>
+
+            <div class="quiz-card" data-answer="B">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Konversi $90^\circ$ ke radian.</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{\pi}{4}$</button>
+                <button class="quiz-option" data-option="B">$\frac{\pi}{2}$</button>
+                <button class="quiz-option" data-option="C">$\pi$</button>
+                <button class="quiz-option" data-option="D">$2\pi$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$90^\circ \times \frac{\pi}{180^\circ} = \frac{\pi}{2}$</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Nilai dari $\sin 30^\circ$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{\sqrt3}{2}$</button>
+                <button class="quiz-option" data-option="B">$\frac{\sqrt2}{2}$</button>
+                <button class="quiz-option" data-option="C">$\frac{1}{2}$</button>
+                <button class="quiz-option" data-option="D">$1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\sin 30^\circ = \frac{1}{2}$ — salah satu nilai sudut istimewa yang wajib dihafal.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Pada segitiga siku-siku, sisi depan sudut $\theta = 3$, sisi miring $=5$. Berapa $\sin\theta$?</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{4}{5}$</button>
+                <button class="quiz-option" data-option="B">$\frac{5}{3}$</button>
+                <button class="quiz-option" data-option="C">$\frac{3}{4}$</button>
+                <button class="quiz-option" data-option="D">$\frac{3}{5}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\sin\theta = \frac{\text{depan}}{\text{miring}} = \frac{3}{5}$</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Nilai dari $\cos 0^\circ$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$-1$</button>
+                <button class="quiz-option" data-option="B">$0$</button>
+                <button class="quiz-option" data-option="C">$1$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{2}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\cos 0^\circ = 1$</div>
+            </div>
+          </div>
+
+          <!-- SEDANG -->
+          <div class="tier-panel" data-tier="sedang">
+            <div class="tier-score">Skor: <strong>0/4</strong></div>
+
+            <div class="quiz-card" data-answer="B">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Segitiga siku-siku: sisi depan $=6$, sisi samping $=8$. Tentukan $\tan\theta$.</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{4}{3}$</button>
+                <button class="quiz-option" data-option="B">$\frac{3}{4}$</button>
+                <button class="quiz-option" data-option="C">$\frac{3}{5}$</button>
+                <button class="quiz-option" data-option="D">$\frac{4}{5}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\tan\theta = \frac{\text{depan}}{\text{samping}} = \frac{6}{8} = \frac{3}{4}$</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Sederhanakan: $\sin^2\theta + \cos^2\theta + 5$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$5$</button>
+                <button class="quiz-option" data-option="B">$1$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$11$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Karena $\sin^2\theta+\cos^2\theta=1$, hasilnya $1+5=6$</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Jika $\sin\theta = \frac{4}{5}$ dan $\theta$ sudut lancip, tentukan $\cos\theta$.</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{4}{5}$</button>
+                <button class="quiz-option" data-option="B">$\frac{9}{25}$</button>
+                <button class="quiz-option" data-option="C">$\frac{1}{5}$</button>
+                <button class="quiz-option" data-option="D">$\frac{3}{5}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\cos^2\theta = 1-\frac{16}{25}=\frac{9}{25}$, sehingga $\cos\theta=\frac{3}{5}$ (positif karena sudut lancip)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Nilai dari $\tan 45^\circ + \sin 90^\circ$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0$</button>
+                <button class="quiz-option" data-option="B">$1$</button>
+                <button class="quiz-option" data-option="C">$2$</button>
+                <button class="quiz-option" data-option="D">$1{,}5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\tan45^\circ=1$ dan $\sin90^\circ=1$, jumlahnya $=2$</div>
+            </div>
+          </div>
+
+          <!-- SULIT -->
+          <div class="tier-panel" data-tier="sulit">
+            <div class="tier-score">Skor: <strong>0/4</strong></div>
+
+            <div class="quiz-card" data-answer="C">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Tentukan nilai dari $(\sin 30^\circ + \cos 60^\circ)^2$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{1}{2}$</button>
+                <button class="quiz-option" data-option="B">$2$</button>
+                <button class="quiz-option" data-option="C">$1$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{4}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\sin30^\circ=\frac12$, $\cos60^\circ=\frac12$, jumlah $=1$, dikuadratkan $=1$</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Jika $\tan\theta = \frac{3}{4}$ dan $\theta$ di kuadran I, tentukan $\sin\theta + \cos\theta$.</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$1$</button>
+                <button class="quiz-option" data-option="B">$\frac{5}{7}$</button>
+                <button class="quiz-option" data-option="C">$\frac{5}{4}$</button>
+                <button class="quiz-option" data-option="D">$\frac{7}{5}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Segitiga $3$–$4$–$5$: $\sin\theta=\frac35$, $\cos\theta=\frac45$. Jumlahnya $=\frac{7}{5}$</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Sederhanakan bentuk: $\dfrac{1-\sin^2\theta}{\cos^2\theta}$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\cos^2\theta$</button>
+                <button class="quiz-option" data-option="B">$\sin^2\theta$</button>
+                <button class="quiz-option" data-option="C">$1$</button>
+                <button class="quiz-option" data-option="D">$0$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Karena $1-\sin^2\theta=\cos^2\theta$, bentuk menjadi $\frac{\cos^2\theta}{\cos^2\theta}=1$</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Diketahui $\sin\theta+\cos\theta=\frac{7}{5}$. Tentukan nilai $\sin\theta \cdot \cos\theta$.</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{24}{25}$</button>
+                <button class="quiz-option" data-option="B">$\frac{12}{25}$</button>
+                <button class="quiz-option" data-option="C">$\frac{49}{25}$</button>
+                <button class="quiz-option" data-option="D">$\frac{6}{25}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kuadratkan: $1+2\sin\theta\cos\theta=\frac{49}{25}$, sehingga $\sin\theta\cos\theta=\frac{12}{25}$. Trik identitas ini sering muncul di soal Olimpiade.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+        <p>Belajar Matematika dari konsep dasar sampai persiapan olimpiade, untuk pelajar SMA, mahasiswa, dan umum.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Materi</h4>
+          <a href="aljabar.html">Aljabar</a>
+          <a href="trigonometri.html">Trigonometri</a>
+          <a href="olimpiade.html">Matematika Olimpiade</a>
+          <a href="fisika.html">Fisika (Segera)</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tentang</h4>
+          <span>Khusni Academy</span>
+          <span>Dibuat untuk pelajar Indonesia</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Khusni Academy.</span>
+      <span>Dibuat dengan ♥ untuk kemajuan Matematika Indonesia.</span>
+    </div>
+  </div>
+</footer>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
