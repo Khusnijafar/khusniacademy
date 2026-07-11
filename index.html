@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Khusni Academy — Belajar Matematika dari Dasar sampai Olimpiade</title>
-<meta name="description" content="Khusni Academy adalah tempat belajar Matematika untuk siswa SMA, mahasiswa, dan umum — materi terstruktur, latihan soal bertingkat, dan peta jalan menuju Olimpiade Sains Nasional & IMO.">
+<meta name="description" content="Khusni Academy adalah tempat belajar Matematika untuk siswa SMA, mahasiswa, dan umum — materi terstruktur, simulasi interaktif, latihan soal bertingkat, dan peta jalan menuju Olimpiade Sains Nasional & IMO.">
 <meta name="robots" content="index, follow">
+<meta name="theme-color" content="#090d17">
 <link rel="canonical" href="https://khusniacademy.netlify.app/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Khusni Academy — Belajar Matematika dari Dasar sampai Olimpiade">
-<meta property="og:description" content="Materi Aljabar, Trigonometri, latihan soal bertingkat, dan peta jalan menuju Olimpiade Sains Nasional & IMO — untuk siswa SMA, mahasiswa, dan umum.">
+<meta property="og:description" content="Materi Aljabar, Trigonometri, simulasi interaktif, latihan soal bertingkat, dan peta jalan menuju Olimpiade Sains Nasional & IMO — untuk siswa SMA, mahasiswa, dan umum.">
 <meta property="og:url" content="https://khusniacademy.netlify.app/">
 <meta property="og:locale" content="id_ID">
 <meta name="twitter:card" content="summary">
@@ -30,6 +31,9 @@
 </head>
 <body>
 
+<a class="skip-link" href="#konten">Langsung ke konten</a>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
+
 <nav class="navbar">
   <div class="container">
     <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
@@ -48,15 +52,20 @@
 </nav>
 
 <!-- HERO -->
-<header class="hero">
+<header class="hero" id="konten">
   <div class="container">
     <div class="hero-text">
       <span class="eyebrow">Platform Belajar Matematika</span>
       <h1>Dari Konsep Dasar Sampai Panggung Olimpiade</h1>
-      <p class="hero-sub">Khusni Academy membangun pemahaman Matematika mulai dari akar konsepnya — bukan sekadar hafalan rumus. Mulai dari Aljabar dan Trigonometri, latihan soal bertingkat lengkap pembahasan, sampai peta jalan menuju Olimpiade Sains Nasional dan International Mathematical Olympiad.</p>
+      <p class="hero-sub">Khusni Academy membangun pemahaman Matematika mulai dari akar konsepnya — bukan sekadar hafalan rumus. Mulai dari Aljabar dan Trigonometri, simulasi interaktif yang bisa dimainkan langsung, latihan soal bertingkat lengkap pembahasan, sampai peta jalan menuju Olimpiade Sains Nasional dan International Mathematical Olympiad.</p>
       <div class="hero-actions">
         <a href="aljabar.html" class="btn btn-primary">Mulai dari Aljabar →</a>
         <a href="olimpiade.html" class="btn btn-outline">Peta Jalan Olimpiade</a>
+      </div>
+      <div class="badge-row">
+        <span>Gratis sepenuhnya</span>
+        <span>Tanpa akun</span>
+        <span>Progres tersimpan otomatis</span>
       </div>
     </div>
     <div class="hero-visual">
@@ -89,15 +98,39 @@
 <!-- STATS -->
 <section class="stats-strip">
   <div class="container">
-    <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">Mapel Aktif</span></div>
-    <div class="stat-item"><span class="stat-num">24+</span><span class="stat-label">Latihan Soal Bertingkat</span></div>
-    <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Tingkat Kesulitan</span></div>
-    <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Pilar Materi Olimpiade</span></div>
+    <div class="stat-item"><span class="stat-num" data-count="2">2</span><span class="stat-label">Mapel Aktif</span></div>
+    <div class="stat-item"><span class="stat-num" data-count="30" data-suffix="+">30+</span><span class="stat-label">Soal + Pembahasan</span></div>
+    <div class="stat-item"><span class="stat-num" data-count="2">2</span><span class="stat-label">Simulasi Interaktif</span></div>
+    <div class="stat-item"><span class="stat-num" data-count="4">4</span><span class="stat-label">Pilar Materi Olimpiade</span></div>
+  </div>
+</section>
+
+<!-- PEMANASAN -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Pemanasan</span>
+      <h2>Coba Satu Soal Dulu</h2>
+      <p>Soal ringan bergaya olimpiade — jawab dulu, baru lanjut jelajahi materinya.</p>
+    </div>
+    <div class="teaser-wrap reveal">
+      <div class="quiz-card" data-answer="C" data-qid="idx-t1">
+        <div class="quiz-head"><span class="quiz-number">?</span><p class="quiz-question">Ada berapa bilangan bulat dari $1$ sampai $100$ yang habis dibagi $3$ <em>atau</em> $5$?</p></div>
+        <div class="quiz-options">
+          <button class="quiz-option" data-option="A">$33$</button>
+          <button class="quiz-option" data-option="B">$40$</button>
+          <button class="quiz-option" data-option="C">$47$</button>
+          <button class="quiz-option" data-option="D">$53$</button>
+        </div>
+        <div class="quiz-feedback" hidden><strong></strong>Kelipatan $3$ ada $33$, kelipatan $5$ ada $20$, tapi kelipatan $15$ terhitung dua kali ($6$ bilangan). Prinsip inklusi–eksklusi: $33 + 20 - 6 = 47$.</div>
+      </div>
+      <p class="teaser-more">Suka soal seperti ini? <a href="olimpiade.html">Lihat Peta Jalan Olimpiade →</a></p>
+    </div>
   </div>
 </section>
 
 <!-- KENAPA -->
-<section class="section">
+<section class="section" style="padding-top:0;">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Kenapa Khusni Academy</span>
@@ -110,9 +143,9 @@
         <p>Konsep disusun bertahap dari dasar, supaya siap menghadapi soal ujian sekolah maupun olimpiade.</p>
       </div>
       <div class="card feature-card reveal">
-        <div class="icon-box"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"><path d="M3 17l4-4 4 4 6-8 4 4"/><path d="M3 21h18"/></svg></div>
-        <h4>Latihan Bertingkat</h4>
-        <p>Soal disusun dari level Mudah, Sedang, sampai Sulit — lengkap dengan pembahasan tiap jawaban.</p>
+        <div class="icon-box"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"><path d="M8 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M4 21c0-2.2 1.8-4 4-4s4 1.8 4 4"/><path d="M15 5h6M15 9h6M15 13h4"/></svg></div>
+        <h4>Simulasi Interaktif</h4>
+        <p>Geser, seret, dan lihat sendiri bagaimana rumus bekerja — dari parabola sampai lingkaran satuan.</p>
       </div>
       <div class="card feature-card reveal">
         <div class="icon-box gold"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4Z"/></svg></div>
@@ -120,9 +153,9 @@
         <p>Bukan cuma materi sekolah — ada peta jalan nyata menuju OSN/KSN sampai IMO.</p>
       </div>
       <div class="card feature-card reveal">
-        <div class="icon-box"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"><path d="M12 20s-7-4.4-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 5c-2.5 4.6-9.5 9-9.5 9Z"/></svg></div>
-        <h4>Bahasa yang Membumi</h4>
-        <p>Penjelasan disampaikan dengan bahasa yang mudah dicerna, tanpa kehilangan kedalaman konsep.</p>
+        <div class="icon-box"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"><path d="M3 17l4-4 4 4 6-8 4 4"/><path d="M3 21h18"/></svg></div>
+        <h4>Latihan Bertingkat</h4>
+        <p>Soal dari level Mudah, Sedang, sampai Sulit — lengkap pembahasan, dan progresmu tersimpan otomatis.</p>
       </div>
     </div>
   </div>
@@ -134,19 +167,19 @@
     <div class="section-head reveal">
       <span class="eyebrow">Materi Pembelajaran</span>
       <h2>Mulai dari mana pun kamu siap</h2>
-      <p>Setiap bab dilengkapi penjelasan konsep, contoh soal terurai, dan latihan bertingkat.</p>
+      <p>Setiap bab dilengkapi penjelasan konsep, contoh soal terurai, simulasi interaktif, dan latihan bertingkat.</p>
     </div>
     <div class="grid-3">
       <div class="card subject-card reveal">
         <div class="subject-top"><span class="badge live">Tersedia</span></div>
         <h3>Aljabar</h3>
-        <p>Variabel, operasi bentuk aljabar, faktorisasi, persamaan linear, hingga persamaan kuadrat.</p>
+        <p>Variabel, operasi bentuk aljabar, faktorisasi, persamaan linear, persamaan kuadrat — plus Laboratorium Parabola interaktif.</p>
         <a href="aljabar.html" class="subject-link">Lihat Materi →</a>
       </div>
       <div class="card subject-card reveal">
         <div class="subject-top"><span class="badge live">Tersedia</span></div>
         <h3>Trigonometri</h3>
-        <p>Sudut &amp; radian, perbandingan trigonometri, lingkaran satuan, dan identitas dasar.</p>
+        <p>Sudut &amp; radian, perbandingan trigonometri, identitas dasar — plus Lingkaran Satuan interaktif yang bisa diseret langsung.</p>
         <a href="trigonometri.html" class="subject-link">Lihat Materi →</a>
       </div>
       <div class="card subject-card disabled reveal">
@@ -170,7 +203,7 @@
       <div class="card subject-card reveal" style="border-color: rgba(226,172,63,0.35);">
         <div class="subject-top"><span class="badge" style="color:var(--medal);border-color:rgba(226,172,63,0.3);background:var(--medal-soft);">Andalan</span></div>
         <h3>Matematika Olimpiade</h3>
-        <p>Peta jalan lengkap: 4 pilar materi, jenjang kompetisi, dan sumber belajar terarah.</p>
+        <p>Peta jalan lengkap: 4 pilar materi, jenjang kompetisi, checklist kesiapan, dan sumber belajar terarah.</p>
         <a href="olimpiade.html" class="subject-link" style="color:var(--medal);">Lihat Peta Jalan →</a>
       </div>
     </div>
@@ -219,6 +252,38 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="section" id="faq" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Pertanyaan yang Sering Diajukan</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details>
+        <summary>Apakah semua materi di Khusni Academy gratis?<span class="faq-icon">+</span></summary>
+        <div class="faq-body"><p>Ya. Seluruh materi, simulasi interaktif, dan latihan soal bisa diakses gratis, tanpa perlu membuat akun.</p></div>
+      </details>
+      <details>
+        <summary>Sebaiknya saya mulai belajar dari mana?<span class="faq-icon">+</span></summary>
+        <div class="faq-body"><p>Kalau fondasimu belum kuat, mulai dari <a href="aljabar.html">Aljabar</a>, lalu lanjut ke <a href="trigonometri.html">Trigonometri</a>. Kalau targetmu kompetisi, baca dulu <a href="olimpiade.html">Peta Jalan Olimpiade</a> supaya arah persiapanmu jelas dari awal.</p></div>
+      </details>
+      <details>
+        <summary>Apakah progres latihan saya tersimpan?<span class="faq-icon">+</span></summary>
+        <div class="faq-body"><p>Ya — jawaban kuis dan checklist kesiapan tersimpan otomatis di peramban perangkatmu, tanpa akun dan tanpa server. Menghapus data situs pada peramban akan mengosongkan progres, dan progres tidak ikut berpindah antar perangkat.</p></div>
+      </details>
+      <details>
+        <summary>Apakah materinya cukup untuk persiapan OSN?<span class="faq-icon">+</span></summary>
+        <div class="faq-body"><p>Materi di sini membangun fondasi dan arah persiapannya. Untuk benar-benar menembus OSN, kamu tetap perlu rutin berlatih dari arsip soal tahun-tahun sebelumnya dan sumber lanjutan yang kami rekomendasikan di halaman <a href="olimpiade.html">Olimpiade</a>.</p></div>
+      </details>
+      <details>
+        <summary>Kapan materi Fisika, Geometri, dan Kalkulus hadir?<span class="faq-icon">+</span></summary>
+        <div class="faq-body"><p>Sedang disiapkan bertahap dengan pendekatan yang sama: konsep dulu, baru latihan. Pantau halaman ini untuk pembaruannya.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- CTA AKHIR -->
 <section class="section" style="padding-top:0;">
   <div class="container">
@@ -261,6 +326,8 @@
     </div>
   </div>
 </footer>
+
+<button class="back-top" aria-label="Kembali ke atas">↑</button>
 
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>

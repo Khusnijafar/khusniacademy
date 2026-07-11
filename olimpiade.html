@@ -6,6 +6,7 @@
 <title>Peta Jalan Olimpiade Matematika — Khusni Academy</title>
 <meta name="description" content="Peta jalan lengkap menuju Olimpiade Matematika: 4 pilar materi, jenjang OSN/KSN dari kabupaten sampai nasional, Pelatnas, hingga Tim Indonesia di IMO.">
 <meta name="robots" content="index, follow">
+<meta name="theme-color" content="#090d17">
 <link rel="canonical" href="https://khusniacademy.netlify.app/olimpiade.html">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Peta Jalan Olimpiade Matematika — Khusni Academy">
@@ -19,6 +20,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 </head>
 <body>
+
+<a class="skip-link" href="#konten">Langsung ke konten</a>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
 
 <nav class="navbar">
   <div class="container">
@@ -37,7 +41,7 @@
   </div>
 </nav>
 
-<header class="page-hero gold-theme">
+<header class="page-hero gold-theme" id="konten">
   <div class="container">
     <div class="breadcrumb"><a href="index.html">Beranda</a><span>/</span><span>Olimpiade</span></div>
     <span class="eyebrow gold">Peta Jalan Olimpiade</span>
@@ -179,6 +183,37 @@
   </div>
 </section>
 
+<!-- CHECKLIST KESIAPAN -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow gold">Interaktif</span>
+      <h2>Checklist Kesiapan Awal</h2>
+      <p>Centang hal yang sudah kamu kuasai atau jalani — progresmu tersimpan otomatis di perangkat ini, jadi bisa kamu tinjau lagi kapan pun.</p>
+    </div>
+
+    <div class="card check-card reveal" data-checklist="osn">
+      <div class="check-head">
+        <span class="check-count">Kesiapan: <strong data-check-count>0/10</strong></span>
+        <div class="check-progress" aria-hidden="true"><i></i></div>
+      </div>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" data-check="f1"><span><em>Fondasi</em>Materi Aljabar sekolah sudah solid — termasuk persamaan kuadrat dan sistem persamaan</span></label>
+        <label class="check-item"><input type="checkbox" data-check="f2"><span><em>Fondasi</em>Materi Trigonometri dasar sudah dikuasai — sudut istimewa dan identitas Pythagoras</span></label>
+        <label class="check-item"><input type="checkbox" data-check="a1"><span><em>Aljabar</em>Pernah mencoba soal ketaksamaan sederhana, misalnya menggunakan AM-GM</span></label>
+        <label class="check-item"><input type="checkbox" data-check="n1"><span><em>Teori Bilangan</em>Paham konsep keterbagian dan sisa pembagian (aritmetika modular dasar)</span></label>
+        <label class="check-item"><input type="checkbox" data-check="k1"><span><em>Kombinatorika</em>Kenal prinsip pencacahan dasar dan prinsip sarang merpati (pigeonhole)</span></label>
+        <label class="check-item"><input type="checkbox" data-check="g1"><span><em>Geometri</em>Hafal sifat-sifat dasar segitiga dan lingkaran beserta garis-garis istimewanya</span></label>
+        <label class="check-item"><input type="checkbox" data-check="l1"><span><em>Latihan</em>Pernah mengerjakan minimal satu paket soal OSN-K tahun sebelumnya</span></label>
+        <label class="check-item"><input type="checkbox" data-check="l2"><span><em>Latihan</em>Terbiasa mencoba satu soal lebih dari 15 menit tanpa langsung melihat kunci</span></label>
+        <label class="check-item"><input type="checkbox" data-check="l3"><span><em>Kebiasaan</em>Punya problem journal — catatan soal gagal beserta pelajaran dari tiap kesalahan</span></label>
+        <label class="check-item"><input type="checkbox" data-check="l4"><span><em>Kebiasaan</em>Rutin berlatih terjadwal tiap minggu, bukan hanya menjelang lomba</span></label>
+      </div>
+      <p class="check-msg" data-check-msg hidden><strong>Semua tercentang — fondasimu siap!</strong> Saatnya naik level: rutinkan latihan soal OSN dan jelajahi sumber belajar di bawah ini.</p>
+    </div>
+  </div>
+</section>
+
 <!-- SUMBER BELAJAR -->
 <section class="section">
   <div class="container">
@@ -269,6 +304,8 @@
     </div>
   </div>
 </footer>
+
+<button class="back-top" aria-label="Kembali ke atas">↑</button>
 
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>

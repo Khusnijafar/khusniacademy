@@ -1,7 +1,9 @@
 /* ==========================================================================
-   KHUSNI ACADEMY — DESIGN SYSTEM
+   KHUSNI ACADEMY — DESIGN SYSTEM v2
    Konsep: "Blueprint Matematika" — ink-blue gelap, garis konstruksi presisi,
    emas dipakai khusus untuk konten Olimpiade & level Sulit.
+   v2: grid kertas-blueprint, simulasi interaktif, mesin kuis dengan progres,
+   checklist kesiapan, FAQ, dan polesan aksesibilitas.
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -78,6 +80,21 @@ body {
   background-attachment: fixed;
 }
 
+/* Kertas blueprint: grid konstruksi samar yang memudar ke bawah */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(79, 157, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 157, 255, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse 95% 70% at 50% 0%, black 25%, transparent 100%);
+  mask-image: radial-gradient(ellipse 95% 70% at 50% 0%, black 25%, transparent 100%);
+}
+
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
@@ -85,6 +102,37 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 input { font-family: inherit; }
 
 ::selection { background: var(--signal); color: var(--ink); }
+
+/* ---------- Aksesibilitas ---------- */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 300;
+  background: var(--signal);
+  color: #05070d;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.65rem 1.1rem;
+  border-radius: var(--r-md);
+  transition: top 0.2s ease;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---------- Indikator progres baca ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 200;
+  pointer-events: none;
+}
+.scroll-progress i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--signal), var(--medal));
+}
 
 /* ---------- Tipografi umum ---------- */
 h1, h2, h3, h4 {
@@ -179,7 +227,7 @@ em.accent-word { font-style: italic; color: var(--signal); }
 .btn-gold:hover { background: #edc266; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(226,172,63,0.25); }
 
 .btn-sm { padding: 0.6rem 1.1rem; font-size: 0.85rem; }
-.btn:focus-visible, a:focus-visible, button:focus-visible, .quiz-option:focus-visible {
+.btn:focus-visible, a:focus-visible, button:focus-visible, .quiz-option:focus-visible, input:focus-visible {
   outline: 2px solid var(--signal);
   outline-offset: 3px;
 }
@@ -191,7 +239,13 @@ em.accent-word { font-style: italic; color: var(--signal); }
   z-index: 100;
   background: rgba(9, 13, 23, 0.82);
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--ink-line-soft);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.navbar.scrolled {
+  border-bottom-color: var(--ink-line);
+  box-shadow: 0 10px 30px rgba(3, 5, 12, 0.45);
 }
 .navbar .container {
   display: flex;
@@ -294,6 +348,26 @@ em.accent-word { font-style: italic; color: var(--signal); }
 .hero-visual { position: relative; }
 .hero-visual svg { width: 100%; height: auto; }
 
+.badge-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.7rem; }
+.badge-row span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--chalk-dim);
+  border: 1px solid var(--ink-line);
+  padding: 0.32rem 0.75rem;
+  border-radius: var(--r-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.badge-row span::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--tier-mudah);
+}
+
 /* ---------- Stats strip ---------- */
 .stats-strip {
   border-top: 1px solid var(--ink-line-soft);
@@ -312,6 +386,7 @@ em.accent-word { font-style: italic; color: var(--signal); }
   font-weight: 600;
   color: var(--signal);
   display: block;
+  font-variant-numeric: tabular-nums;
 }
 .stat-label {
   font-size: 0.82rem;
@@ -410,6 +485,57 @@ em.accent-word { font-style: italic; color: var(--signal); }
   border-radius: var(--r-full);
 }
 
+/* ---------- Kuis pemanasan (beranda) ---------- */
+.teaser-wrap { max-width: 680px; margin: 0 auto; }
+.teaser-more {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 1.2rem;
+  color: var(--chalk-mute);
+}
+.teaser-more a { color: var(--medal); font-weight: 700; }
+.teaser-more a:hover { text-decoration: underline; }
+
+/* ---------- FAQ ---------- */
+.faq-list { max-width: 760px; }
+.faq-list details {
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-md);
+  background: var(--ink-raised);
+  margin-bottom: 0.8rem;
+  overflow: hidden;
+}
+.faq-list summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.05rem 1.3rem;
+  font-weight: 700;
+  color: var(--chalk);
+  font-size: 0.98rem;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-icon {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--ink-line);
+  color: var(--signal);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  transition: transform 0.2s ease;
+}
+.faq-list details[open] .faq-icon { transform: rotate(45deg); }
+.faq-list details[open] summary { border-bottom: 1px solid var(--ink-line-soft); }
+.faq-body { padding: 0.95rem 1.3rem 1.15rem; font-size: 0.92rem; }
+.faq-body p { margin-bottom: 0; }
+.faq-body a { color: var(--signal); font-weight: 600; }
+.faq-body a:hover { text-decoration: underline; }
+
 /* ---------- Footer ---------- */
 footer {
   border-top: 1px solid var(--ink-line-soft);
@@ -434,6 +560,26 @@ footer {
   font-size: 0.82rem; color: var(--chalk-mute);
 }
 
+/* ---------- Tombol kembali ke atas ---------- */
+.back-top {
+  position: fixed;
+  right: 1.2rem; bottom: 1.2rem;
+  z-index: 90;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--ink-raised-2);
+  border: 1px solid var(--ink-line);
+  color: var(--chalk);
+  font-size: 1.05rem;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.back-top.show { opacity: 1; pointer-events: auto; transform: none; }
+.back-top:hover { border-color: var(--signal); color: var(--signal); }
+
 /* ---------- Page hero (subpages) ---------- */
 .page-hero {
   padding: 3rem 0 2.5rem;
@@ -455,6 +601,7 @@ footer {
 /* ---------- Konten materi (lesson) ---------- */
 .lesson {
   max-width: 760px;
+  min-width: 0;
 }
 .lesson-nav {
   position: sticky;
@@ -467,12 +614,13 @@ footer {
   padding: 0.5rem 0 0.5rem 0.9rem;
   border-left: 2px solid var(--ink-line);
   margin-bottom: 0.15rem;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 .lesson-nav a:hover, .lesson-nav a.active { color: var(--signal); border-left-color: var(--signal); }
 
 .lesson-layout {
   display: grid;
-  grid-template-columns: 190px 1fr;
+  grid-template-columns: 190px minmax(0, 1fr);
   gap: 3rem;
   align-items: start;
 }
@@ -482,6 +630,7 @@ footer {
 .lesson-section h3 { margin: 1.6rem 0 0.7rem; color: var(--signal); }
 .lesson-section p { margin-bottom: 1rem; font-size: 1rem; }
 .lesson-section ul, .lesson-section ol { margin: 0 0 1rem 1.3rem; color: var(--chalk-dim); }
+.lesson-section ul { list-style: disc; }
 .lesson-section li { margin-bottom: 0.4rem; }
 .lesson-section li::marker { color: var(--signal); }
 
@@ -507,6 +656,11 @@ footer {
 .box.formula { text-align: center; border-left-color: var(--medal); }
 .box.formula .box-label { color: var(--medal); }
 .box.formula .katex-display { margin: 0.4rem 0 0; }
+.box.recap { border-left-color: var(--medal); }
+.box.recap .box-label { color: var(--medal); }
+.box.recap ul { margin: 0 0 0 1.15rem; }
+.box.recap li { font-size: 0.93rem; margin-bottom: 0.4rem; color: var(--chalk-dim); }
+.box.recap li:last-child { margin-bottom: 0; }
 
 .math-table {
   width: 100%;
@@ -522,11 +676,179 @@ footer {
 .math-table th { background: var(--ink-raised-2); color: var(--chalk); font-family: var(--font-mono); font-size: 0.75rem; }
 .math-table td { color: var(--chalk-dim); }
 
+/* ---------- Pager antar-materi ---------- */
+.lesson-pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--ink-line-soft);
+}
+.pager-card {
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-md);
+  padding: 1rem 1.2rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.pager-card span {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--chalk-mute);
+  margin-bottom: 0.3rem;
+}
+.pager-card strong { color: var(--chalk); font-size: 0.95rem; transition: color 0.15s ease; }
+.pager-card.next { text-align: right; }
+.pager-card:hover { border-color: var(--signal); background: var(--signal-soft); }
+.pager-card:hover strong { color: var(--signal); }
+
+/* ---------- Simulasi interaktif (widget) ---------- */
+.widget-card {
+  background: linear-gradient(180deg, var(--ink-raised-2), var(--ink-raised));
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-lg);
+  padding: 1.6rem;
+  margin: 1.6rem 0 2rem;
+  box-shadow: var(--shadow-card);
+}
+.widget-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--signal);
+  border: 1px solid rgba(79, 157, 255, 0.3);
+  background: var(--signal-soft);
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--r-full);
+}
+.widget-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--signal);
+  animation: pulseDot 2s ease infinite;
+}
+#widget-lingkaran .widget-tag { color: var(--medal); border-color: rgba(226,172,63,0.3); background: var(--medal-soft); }
+#widget-lingkaran .widget-tag::before { background: var(--medal); }
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.widget-head h3 { margin: 0.7rem 0 0.4rem; color: var(--chalk); font-family: var(--font-display); }
+.widget-head p { font-size: 0.92rem; margin-bottom: 0; }
+.widget-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  margin-top: 1.3rem;
+  align-items: start;
+}
+.widget-canvas {
+  background: var(--ink);
+  border: 1px solid var(--ink-line-soft);
+  border-radius: var(--r-md);
+  padding: 0.6rem;
+}
+.widget-canvas svg { width: 100%; height: auto; display: block; touch-action: none; -webkit-user-select: none; user-select: none; }
+.w-fallback { font-size: 0.88rem; color: var(--chalk-mute); margin: 0; }
+
+.ctrl-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem; }
+.ctrl-row label { font-size: 0.84rem; font-weight: 700; color: var(--chalk); }
+.ctrl-row output { font-family: var(--font-mono); font-size: 0.8rem; color: var(--signal); }
+#widget-lingkaran .ctrl-row output { color: var(--medal); }
+.widget-controls input[type="range"] {
+  width: 100%;
+  accent-color: var(--signal);
+  margin-bottom: 1rem;
+  cursor: pointer;
+  height: 20px;
+}
+#widget-lingkaran input[type="range"] { accent-color: var(--medal); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.1rem; }
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  border: 1px solid var(--ink-line);
+  color: var(--chalk-dim);
+  padding: 0.3rem 0.62rem;
+  border-radius: var(--r-full);
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.chip:hover { border-color: var(--signal); color: var(--signal); }
+.chip.active { border-color: var(--signal); color: var(--signal); background: var(--signal-soft); }
+#widget-lingkaran .chip:hover { border-color: var(--medal); color: var(--medal); }
+#widget-lingkaran .chip.active { border-color: var(--medal); color: var(--medal); background: var(--medal-soft); }
+
+.readout { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.55rem; margin-bottom: 1rem; }
+.readout > div {
+  background: var(--ink);
+  border: 1px solid var(--ink-line-soft);
+  border-radius: var(--r-sm);
+  padding: 0.5rem 0.7rem;
+  min-width: 0;
+}
+.readout > div.full { grid-column: 1 / -1; }
+.readout span {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--chalk-mute);
+  margin-bottom: 0.15rem;
+}
+.readout b { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 600; color: var(--chalk); overflow-wrap: anywhere; }
+.readout b[data-r="sin"] { color: var(--tier-mudah); }
+.readout b[data-r="cos"] { color: var(--signal); }
+
+.disc-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: var(--r-full);
+  border: 1px solid;
+  margin-top: 0.4rem;
+}
+.disc-badge.pos { color: var(--tier-mudah); border-color: rgba(62,207,142,0.35); background: var(--tier-mudah-soft); }
+.disc-badge.zero { color: var(--tier-sedang); border-color: rgba(240,169,78,0.35); background: var(--tier-sedang-soft); }
+.disc-badge.neg { color: var(--tier-sulit); border-color: rgba(199,147,255,0.35); background: var(--tier-sulit-soft); }
+.disc-badge[hidden] { display: none; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 0.9rem; font-size: 0.74rem; color: var(--chalk-mute); font-family: var(--font-mono); }
+.legend .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 0.35rem; vertical-align: middle; }
+.w-note { font-size: 0.78rem; color: var(--chalk-mute); margin: 0.9rem 0 0; }
+
+/* Elemen SVG di dalam widget */
+.uc-axis { stroke: var(--ink-line); stroke-width: 1; }
+.uc-tick { stroke: var(--ink-line); stroke-width: 1; }
+.uc-circ { stroke: #33406a; stroke-width: 1.5; fill: none; }
+.uc-cos { stroke: var(--signal); stroke-width: 3.5; stroke-linecap: round; }
+.uc-sin { stroke: var(--tier-mudah); stroke-width: 3.5; stroke-linecap: round; }
+.uc-rad { stroke: var(--chalk); stroke-width: 1.5; opacity: 0.8; }
+.uc-arc { stroke: var(--medal); stroke-width: 2; fill: none; }
+.uc-pt { fill: var(--medal); stroke: var(--ink); stroke-width: 2; cursor: grab; }
+.uc-pt:active { cursor: grabbing; }
+.pb-grid { stroke: var(--ink-line-soft); stroke-width: 1; }
+.pb-axis { stroke: #33406a; stroke-width: 1.5; }
+.pb-curve { stroke: var(--signal); stroke-width: 2.5; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.pb-root { fill: var(--tier-mudah); stroke: var(--ink); stroke-width: 2; }
+.pb-vertex { fill: var(--medal); stroke: var(--ink); stroke-width: 2; }
+svg text.w-lbl { font-family: var(--font-mono); font-size: 10px; fill: var(--chalk-mute); }
+
 /* ---------- Tingkat kesulitan tabs ---------- */
 .tier-tabs {
   display: flex;
   gap: 0.6rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.6rem;
   flex-wrap: wrap;
 }
 .tier-tab {
@@ -539,7 +861,6 @@ footer {
   transition: all 0.15s ease;
 }
 .tier-tab .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
-.tier-tab[data-tier="mudah"] { }
 .tier-tab[data-tier="mudah"].active { color: var(--tier-mudah); border-color: var(--tier-mudah); background: var(--tier-mudah-soft); }
 .tier-tab[data-tier="sedang"].active { color: var(--tier-sedang); border-color: var(--tier-sedang); background: var(--tier-sedang-soft); }
 .tier-tab[data-tier="sulit"].active { color: var(--tier-sulit); border-color: var(--tier-sulit); background: var(--tier-sulit-soft); }
@@ -548,14 +869,75 @@ footer {
 .tier-panel { display: none; }
 .tier-panel.active { display: block; animation: fadeUp 0.35s ease; }
 
-.tier-score {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  color: var(--chalk-mute);
+/* ---------- Meta panel latihan: skor, progres, ulangi ---------- */
+.tier-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
   margin-bottom: 1.5rem;
 }
+.tier-score {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--chalk-mute);
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--r-full);
+}
 .tier-score strong { color: var(--chalk); font-family: var(--font-mono); }
+.tier-progress {
+  flex: 1;
+  min-width: 140px;
+  height: 6px;
+  border-radius: var(--r-full);
+  background: var(--ink-raised-2);
+  border: 1px solid var(--ink-line-soft);
+  overflow: hidden;
+}
+.tier-progress i {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: var(--signal);
+  transition: width 0.35s ease;
+}
+.tier-panel[data-tier="mudah"] .tier-progress i { background: var(--tier-mudah); }
+.tier-panel[data-tier="sedang"] .tier-progress i { background: var(--tier-sedang); }
+.tier-panel[data-tier="sulit"] .tier-progress i { background: var(--tier-sulit); }
+.tier-reset {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--chalk-dim);
+  border: 1px solid var(--ink-line);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--r-full);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.tier-reset:hover { color: var(--incorrect); border-color: var(--incorrect); }
+
+.tier-complete {
+  margin-top: 0.4rem;
+  padding: 1rem 1.2rem;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(62, 207, 142, 0.3);
+  background: var(--correct-soft);
+  color: var(--chalk-dim);
+  font-size: 0.9rem;
+}
+.tier-complete strong { color: var(--correct); }
+.tier-complete[hidden] { display: none; }
+
+.quiz-note {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--chalk-mute);
+  margin: -0.4rem 0 1.6rem;
+}
 
 /* ---------- Kartu soal (quiz) ---------- */
 .quiz-card {
@@ -674,6 +1056,78 @@ footer {
   border-radius: var(--r-full);
 }
 
+/* ---------- Checklist kesiapan Olimpiade ---------- */
+.check-card { padding: 1.7rem; }
+.check-card:hover { transform: none; }
+.check-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.3rem;
+}
+.check-count { font-family: var(--font-mono); font-size: 0.8rem; color: var(--chalk-mute); }
+.check-count strong { color: var(--medal); font-family: var(--font-mono); }
+.check-progress {
+  flex: 1;
+  min-width: 150px;
+  height: 7px;
+  background: var(--ink);
+  border: 1px solid var(--ink-line-soft);
+  border-radius: var(--r-full);
+  overflow: hidden;
+}
+.check-progress i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--medal-dim), var(--medal));
+  transition: width 0.35s ease;
+}
+.check-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+.check-item {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-md);
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  background: var(--ink);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.check-item:hover { border-color: var(--chalk-mute); }
+.check-item input {
+  margin-top: 0.25rem;
+  width: 16px; height: 16px;
+  accent-color: var(--medal);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.check-item span { font-size: 0.88rem; color: var(--chalk-dim); line-height: 1.5; }
+.check-item em {
+  display: block;
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--medal);
+  margin-bottom: 0.2rem;
+}
+.check-item.done { border-color: rgba(226, 172, 63, 0.4); background: var(--medal-soft); }
+.check-item.done span { color: var(--chalk); }
+.check-msg {
+  margin: 1.2rem 0 0;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(226, 172, 63, 0.35);
+  background: var(--medal-soft);
+  color: var(--chalk);
+  font-size: 0.9rem;
+}
+.check-msg[hidden] { display: none; }
+
 /* ---------- Resource cards ---------- */
 .resource-card { display: flex; flex-direction: column; height: 100%; }
 .resource-type {
@@ -688,7 +1142,7 @@ footer {
 .resource-card .by { font-size: 0.82rem; color: var(--chalk-mute); margin-bottom: 0.7rem; }
 .resource-card p { font-size: 0.87rem; }
 
-/* ---------- Timeline persiapan (horizontal-ish list) ---------- */
+/* ---------- Timeline persiapan ---------- */
 .prep-stage {
   border: 1px solid var(--ink-line);
   border-radius: var(--r-lg);
@@ -717,7 +1171,8 @@ footer {
 }
 .coming-soon-inner { max-width: 480px; }
 .coming-soon .icon-box { margin: 0 auto 1.5rem; width: 60px; height: 60px; border-radius: var(--r-lg); }
-.coming-soon .icon-box svg { width: 28px; height: 28px; }
+.coming-soon .icon-box svg { width: 28px; height: 28px; animation: atomSpin 18s linear infinite; }
+@keyframes atomSpin { to { transform: rotate(360deg); } }
 .coming-soon h1 { margin-bottom: 0.9rem; }
 .coming-soon p { margin-bottom: 2rem; }
 .topic-preview { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin-bottom: 2.2rem; }
@@ -742,9 +1197,6 @@ footer {
   stroke-dashoffset: 1000;
   animation: drawLine 2.6s ease forwards;
 }
-.draw-line.d2 { animation-delay: 0.3s; }
-.draw-line.d3 { animation-delay: 0.6s; }
-.draw-line.d4 { animation-delay: 0.9s; }
 @keyframes drawLine {
   to { stroke-dashoffset: 0; }
 }
@@ -785,19 +1237,31 @@ footer {
   .lesson-nav { display: none; }
 }
 
+@media (max-width: 860px) {
+  .widget-body { grid-template-columns: 1fr; }
+  .widget-canvas { max-width: 440px; margin: 0 auto; width: 100%; }
+}
+
 @media (max-width: 768px) {
-  .nav-links { 
+  .nav-links {
     position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
     background: var(--ink);
     flex-direction: column;
     align-items: flex-start;
     padding: 2rem 1.5rem;
-    gap: 1.5rem;
+    gap: 0.4rem;
     transform: translateX(100%);
     transition: transform 0.25s ease;
     overflow-y: auto;
   }
   .nav-links.open { transform: translateX(0); }
+  .nav-links a {
+    width: 100%;
+    padding: 0.9rem 0.2rem;
+    font-size: 1.05rem;
+    border-bottom: 1px solid var(--ink-line-soft);
+  }
+  .nav-links a.active::after { display: none; }
   .nav-cta .btn-outline { display: none; }
   .nav-toggle { display: flex; }
 
@@ -808,10 +1272,18 @@ footer {
   .footer-top { flex-direction: column; }
   .quiz-options { grid-template-columns: 1fr; }
   .pillar-card { flex-direction: column; }
+  .check-grid { grid-template-columns: 1fr; }
+  .tier-meta .tier-progress { order: 3; flex-basis: 100%; }
+}
+
+@media (max-width: 560px) {
+  .lesson-pager { grid-template-columns: 1fr; }
+  .pager-card.next { text-align: left; }
 }
 
 @media (max-width: 480px) {
   .container { padding: 0 1.1rem; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .hero-actions .btn { width: 100%; }
+  .readout { grid-template-columns: 1fr 1fr; }
 }

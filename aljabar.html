@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aljabar — Khusni Academy</title>
-<meta name="description" content="Pengenalan Aljabar: variabel, operasi bentuk aljabar, persamaan linear, persamaan kuadrat, dan latihan soal bertingkat dari Mudah sampai Sulit.">
+<meta name="description" content="Pengenalan Aljabar: variabel, operasi bentuk aljabar, persamaan linear, persamaan kuadrat, Laboratorium Parabola interaktif, dan latihan soal bertingkat dari Mudah sampai Sulit.">
 <meta name="robots" content="index, follow">
+<meta name="theme-color" content="#090d17">
 <link rel="canonical" href="https://khusniacademy.netlify.app/aljabar.html">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Aljabar — Khusni Academy">
@@ -19,6 +20,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 </head>
 <body>
+
+<a class="skip-link" href="#konten">Langsung ke konten</a>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
 
 <nav class="navbar">
   <div class="container">
@@ -37,7 +41,7 @@
   </div>
 </nav>
 
-<header class="page-hero">
+<header class="page-hero" id="konten">
   <div class="container">
     <div class="breadcrumb"><a href="index.html">Beranda</a><span>/</span><a href="index.html#materi">Materi</a><span>/</span><span>Aljabar</span></div>
     <span class="eyebrow">Materi · Tersedia</span>
@@ -143,11 +147,44 @@
           <p style="margin-bottom:0.15rem;">Cari dua bilangan yang jika dikalikan $=6$ dan dijumlahkan $=-5$, yaitu $-2$ dan $-3$.</p>
           <p style="margin-bottom:0;">$(x-2)(x-3)=0 \Rightarrow x=2 \text{ atau } x=3$</p>
         </div>
+
+        <h3>Diskriminan: Meramal Jenis Akar</h3>
+        <p>Sebelum menyelesaikan persamaan kuadrat, kita bisa "mengintip" jenis akarnya lewat <strong>diskriminan</strong> — bagian di bawah tanda akar pada rumus ABC:</p>
+        <div class="box formula"><span class="box-label">Diskriminan</span>$$D = b^2 - 4ac$$</div>
+        <ul>
+          <li>$D > 0$ — dua akar real berbeda (parabola memotong sumbu-$x$ di dua titik)</li>
+          <li>$D = 0$ — satu akar real kembar (parabola menyinggung sumbu-$x$)</li>
+          <li>$D < 0$ — tidak ada akar real (parabola tidak menyentuh sumbu-$x$)</li>
+        </ul>
+        <p>Coba mainkan nilai $a$, $b$, dan $c$ di bawah ini, dan lihat sendiri bagaimana $D$ mengendalikan jumlah titik potong parabola dengan sumbu-$x$.</p>
+
+        <div class="widget-card reveal" id="widget-parabola">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Laboratorium Parabola</h3>
+            <p>Geser nilai $a$, $b$, dan $c$, lalu perhatikan bagaimana bentuk kurva, titik puncak, akar, dan diskriminan ikut berubah.</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+
+        <div class="box recap">
+          <span class="box-label">Ringkasan Cepat</span>
+          <ul>
+            <li>Hanya <strong>suku sejenis</strong> yang boleh digabungkan: $3x + 5x = 8x$.</li>
+            <li>Sifat distributif: $a(b+c) = ab + ac$ — dasar menjabarkan dan memfaktorkan.</li>
+            <li>PLSV: pindahkan konstanta, lalu bagi dengan koefisien untuk mengisolasi $x$.</li>
+            <li>Persamaan kuadrat: coba faktorisasi dulu; kalau buntu, rumus ABC selalu berhasil.</li>
+            <li>Diskriminan $D = b^2 - 4ac$ menentukan banyaknya akar real tanpa harus menyelesaikan persamaannya.</li>
+          </ul>
+        </div>
       </div>
 
       <div class="lesson-section" id="latihan">
         <h2>Latihan Soal Bertingkat</h2>
         <p>Pilih tingkat kesulitan, lalu klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
+        <p class="quiz-note">Progres tersimpan otomatis di peramban ini — tekan "Ulangi" untuk mencoba lagi dari awal.</p>
 
         <div data-tier-group>
           <div class="tier-tabs">
@@ -158,9 +195,13 @@
 
           <!-- MUDAH -->
           <div class="tier-panel active" data-tier="mudah">
-            <div class="tier-score">Skor: <strong>0/4</strong></div>
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/5</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
 
-            <div class="quiz-card" data-answer="A">
+            <div class="quiz-card" data-answer="A" data-qid="alj-m1">
               <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Sederhanakan bentuk berikut: $3x + 5x - 2x$</p></div>
               <div class="quiz-options">
                 <button class="quiz-option" data-option="A">$6x$</button>
@@ -171,7 +212,7 @@
               <div class="quiz-feedback" hidden><strong></strong>$3x+5x-2x = (3+5-2)x = 6x$</div>
             </div>
 
-            <div class="quiz-card" data-answer="C">
+            <div class="quiz-card" data-answer="C" data-qid="alj-m2">
               <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Jika $x = 4$, berapa nilai dari $2x + 7$?</p></div>
               <div class="quiz-options">
                 <button class="quiz-option" data-option="A">$11$</button>
@@ -182,7 +223,7 @@
               <div class="quiz-feedback" hidden><strong></strong>$2(4) + 7 = 8 + 7 = 15$</div>
             </div>
 
-            <div class="quiz-card" data-answer="B">
+            <div class="quiz-card" data-answer="B" data-qid="alj-m3">
               <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Selesaikan: $x + 9 = 15$. Berapa nilai $x$?</p></div>
               <div class="quiz-options">
                 <button class="quiz-option" data-option="A">$5$</button>
@@ -193,7 +234,7 @@
               <div class="quiz-feedback" hidden><strong></strong>Kurangi kedua ruas dengan $9$: $x = 15-9 = 6$</div>
             </div>
 
-            <div class="quiz-card" data-answer="A">
+            <div class="quiz-card" data-answer="A" data-qid="alj-m4">
               <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Bentuk faktorisasi paling sederhana dari $4x + 8$ adalah…</p></div>
               <div class="quiz-options">
                 <button class="quiz-option" data-option="A">$4(x+2)$</button>
@@ -203,13 +244,30 @@
               </div>
               <div class="quiz-feedback" hidden><strong></strong>FPB dari $4$ dan $8$ adalah $4$, sehingga $4x+8=4(x+2)$. Opsi D benar secara nilai tapi belum difaktorkan tuntas.</div>
             </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="alj-m5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Pada bentuk $7x - 4$, koefisien dari $x$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$7$</button>
+                <button class="quiz-option" data-option="B">$-4$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">$x$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Koefisien adalah angka yang mengalikan variabel, yaitu $7$. Sedangkan $-4$ adalah konstanta.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
           </div>
 
           <!-- SEDANG -->
           <div class="tier-panel" data-tier="sedang">
-            <div class="tier-score">Skor: <strong>0/4</strong></div>
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/5</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
 
-            <div class="quiz-card" data-answer="B">
+            <div class="quiz-card" data-answer="B" data-qid="alj-s1">
               <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Sederhanakan: $3(x+4) - 2(x-1)$</p></div>
               <div class="quiz-options">
                 <button class="quiz-option" data-option="A">$x + 10$</button>
@@ -220,7 +278,7 @@
               <div class="quiz-feedback" hidden><strong></strong>$3x+12-2x+2 = x+14$</div>
             </div>
 
-            <div class="quiz-card" data-answer="B">
+            <div class="quiz-card" data-answer="B" data-qid="alj-s2">
               <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Selesaikan persamaan: $2(x+3) = 3x - 1$</p></div>
               <div class="quiz-options">
                 <button class="quiz-option" data-option="A">$x = 5$</button>
@@ -228,10 +286,10 @@
                 <button class="quiz-option" data-option="C">$x = -7$</button>
                 <button class="quiz-option" data-option="D">$x = 1$</button>
               </div>
-              <div class="quiz-feedback" hidden><strong></strong>$2x+6=3x-1 \Rightarrow 7 = x$. Cek: $2(10)=20$ dan $3(7)-1=20$ ✓</div>
+              <div class="quiz-feedback" hidden><strong></strong>$2x+6=3x-1 \Rightarrow x=7$. Cek: ruas kiri $2(7+3)=20$, ruas kanan $3(7)-1=20$ ✓</div>
             </div>
 
-            <div class="quiz-card" data-answer="C">
+            <div class="quiz-card" data-answer="C" data-qid="alj-s3">
               <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Faktorkan bentuk: $x^2 + 5x + 6$</p></div>
               <div class="quiz-options">
                 <button class="quiz-option" data-option="A">$(x+1)(x+6)$</button>
@@ -242,7 +300,7 @@
               <div class="quiz-feedback" hidden><strong></strong>Cari 2 bilangan: hasil kali $=6$, jumlah $=5$, yaitu $2$ dan $3$.</div>
             </div>
 
-            <div class="quiz-card" data-answer="B">
+            <div class="quiz-card" data-answer="B" data-qid="alj-s4">
               <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Umur Ani sekarang 3 kali umur adiknya. Jika jumlah umur mereka 24 tahun, berapa umur Ani?</p></div>
               <div class="quiz-options">
                 <button class="quiz-option" data-option="A">$15$</button>
@@ -252,13 +310,30 @@
               </div>
               <div class="quiz-feedback" hidden><strong></strong>Misal umur adik $=x$, umur Ani $=3x$. $x+3x=24 \Rightarrow x=6$, umur Ani $=3(6)=18$</div>
             </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="alj-s5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Selesaikan: $\dfrac{x}{3} + 2 = 7$. Berapa nilai $x$?</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$15$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$21$</button>
+                <button class="quiz-option" data-option="D">$9$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kurangi kedua ruas dengan $2$: $\frac{x}{3}=5$, lalu kalikan $3$: $x=15$</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
           </div>
 
           <!-- SULIT -->
           <div class="tier-panel" data-tier="sulit">
-            <div class="tier-score">Skor: <strong>0/4</strong></div>
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/5</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
 
-            <div class="quiz-card" data-answer="A">
+            <div class="quiz-card" data-answer="A" data-qid="alj-x1">
               <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Tentukan kedua akar dari $x^2 - 5x + 6 = 0$</p></div>
               <div class="quiz-options">
                 <button class="quiz-option" data-option="A">$x=2$ atau $x=3$</button>
@@ -269,7 +344,7 @@
               <div class="quiz-feedback" hidden><strong></strong>$(x-2)(x-3)=0$, sehingga $x=2$ atau $x=3$</div>
             </div>
 
-            <div class="quiz-card" data-answer="B">
+            <div class="quiz-card" data-answer="B" data-qid="alj-x2">
               <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Jika $2x - 3y = 7$ dan $x + y = 6$, berapa nilai $x$?</p></div>
               <div class="quiz-options">
                 <button class="quiz-option" data-option="A">$x=4$</button>
@@ -280,7 +355,7 @@
               <div class="quiz-feedback" hidden><strong></strong>Dari $x+y=6$: $y=6-x$. Substitusi: $2x-3(6-x)=7 \Rightarrow 5x-18=7 \Rightarrow x=5$</div>
             </div>
 
-            <div class="quiz-card" data-answer="C">
+            <div class="quiz-card" data-answer="C" data-qid="alj-x3">
               <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Panjang persegi panjang $(x+4)$ cm, lebar $(x-1)$ cm, luas $24\ \text{cm}^2$. Nilai $x$?</p></div>
               <div class="quiz-options">
                 <button class="quiz-option" data-option="A">$x=-7$</button>
@@ -291,7 +366,7 @@
               <div class="quiz-feedback" hidden><strong></strong>$(x+4)(x-1)=24 \Rightarrow x^2+3x-28=0 \Rightarrow (x+7)(x-4)=0$. Karena panjang harus positif, $x=4$.</div>
             </div>
 
-            <div class="quiz-card" data-answer="B">
+            <div class="quiz-card" data-answer="B" data-qid="alj-x4">
               <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Diketahui $a+b=7$ dan $ab=10$. Tentukan nilai $a^2+b^2$.</p></div>
               <div class="quiz-options">
                 <button class="quiz-option" data-option="A">$39$</button>
@@ -301,8 +376,26 @@
               </div>
               <div class="quiz-feedback" hidden><strong></strong>Gunakan identitas $a^2+b^2=(a+b)^2-2ab = 49-20=29$. Trik ini sering dipakai dalam soal Olimpiade.</div>
             </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="alj-x5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Akar-akar $x^2 - 7x + k = 0$ adalah $x_1$ dan $x_2$ dengan $x_1 - x_2 = 1$. Tentukan nilai $k$.</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$12$</button>
+                <button class="quiz-option" data-option="B">$10$</button>
+                <button class="quiz-option" data-option="C">$7$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Vieta: $x_1+x_2=7$ dan $x_1x_2=k$. Gunakan $(x_1-x_2)^2=(x_1+x_2)^2-4x_1x_2$, jadi $1=49-4k \Rightarrow k=12$. (Akarnya $4$ dan $3$.)</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span> soal. Siap untuk tantangan lebih besar? Lihat <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a>.</div>
           </div>
         </div>
+      </div>
+
+      <div class="lesson-pager">
+        <a class="pager-card" href="index.html"><span>← Sebelumnya</span><strong>Beranda</strong></a>
+        <a class="pager-card next" href="trigonometri.html"><span>Selanjutnya →</span><strong>Trigonometri</strong></a>
       </div>
 
     </div>
@@ -337,6 +430,8 @@
     </div>
   </div>
 </footer>
+
+<button class="back-top" aria-label="Kembali ke atas">↑</button>
 
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>

@@ -1,13 +1,60 @@
 // ==========================================================================
-// KHUSNI ACADEMY — script.js
-// Navigasi mobile, tab tingkat kesulitan, mesin kuis, scroll-reveal, KaTeX.
+// KHUSNI ACADEMY — script.js (v2)
+// Navigasi, progres baca, tab tingkat kesulitan, mesin kuis dengan progres
+// tersimpan, scroll-reveal, statistik count-up, scrollspy, checklist
+// kesiapan Olimpiade, simulasi interaktif (Laboratorium Parabola &
+// Lingkaran Satuan), dan render KaTeX.
 // ==========================================================================
+
+'use strict';
+
+/* ---------- Penyimpanan aman ----------
+   localStorage bisa diblokir (mode privat / iframe sandbox), jadi semua
+   akses dibungkus try-catch dan situs tetap berfungsi tanpa penyimpanan. */
+const KAStore = (() => {
+  let ok = false;
+  try {
+    const k = '__ka_test__';
+    window.localStorage.setItem(k, '1');
+    window.localStorage.removeItem(k);
+    ok = true;
+  } catch (e) { ok = false; }
+  return {
+    ok,
+    get(key, fallback) {
+      if (!ok) return fallback;
+      try {
+        const v = window.localStorage.getItem(key);
+        return v === null ? fallback : JSON.parse(v);
+      } catch (e) { return fallback; }
+    },
+    set(key, val) {
+      if (!ok) return;
+      try { window.localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+    },
+    remove(key) {
+      if (!ok) return;
+      try { window.localStorage.removeItem(key); } catch (e) {}
+    }
+  };
+})();
+
+const REDUCE_MOTION = !!(window.matchMedia &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavToggle();
+  initNavScrolled();
+  initScrollProgress();
+  initBackToTop();
   initTierTabs();
   initQuizEngine();
   initScrollReveal();
+  initCountUp();
+  initScrollSpy();
+  initChecklist();
+  initUnitCircle();
+  initParabola();
   initKatex();
 });
 
@@ -17,87 +64,186 @@ function initNavToggle() {
   const links = document.querySelector('.nav-links');
   if (!toggle || !links) return;
 
+  const close = () => {
+    links.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
   toggle.addEventListener('click', () => {
     const isOpen = links.classList.toggle('open');
     toggle.classList.toggle('open', isOpen);
     toggle.setAttribute('aria-expanded', String(isOpen));
   });
 
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      links.classList.remove('open');
-      toggle.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && links.classList.contains('open')) close();
+  });
+}
+
+/* ---------- Bayangan navbar saat digulir ---------- */
+function initNavScrolled() {
+  const nav = document.querySelector('.navbar');
+  if (!nav) return;
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* ---------- Indikator progres baca ---------- */
+function initScrollProgress() {
+  const bar = document.querySelector('.scroll-progress i');
+  if (!bar) return;
+  const update = () => {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    bar.style.width = (max > 0 ? (doc.scrollTop / max) * 100 : 0) + '%';
+  };
+  document.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}
+
+/* ---------- Tombol kembali ke atas ---------- */
+function initBackToTop() {
+  const btn = document.querySelector('.back-top');
+  if (!btn) return;
+  const onScroll = () => btn.classList.toggle('show', window.scrollY > 600);
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  btn.addEventListener('click', () => {
+    try {
+      window.scrollTo({ top: 0, behavior: REDUCE_MOTION ? 'auto' : 'smooth' });
+    } catch (e) { window.scrollTo(0, 0); }
   });
 }
 
 /* ---------- Tab tingkat kesulitan (Mudah / Sedang / Sulit) ---------- */
 function initTierTabs() {
-  const groups = document.querySelectorAll('[data-tier-group]');
-  groups.forEach(group => {
+  document.querySelectorAll('[data-tier-group]').forEach(group => {
     const tabs = group.querySelectorAll('.tier-tab');
     const panels = group.querySelectorAll('.tier-panel');
+    const tablist = group.querySelector('.tier-tabs');
+    if (tablist) tablist.setAttribute('role', 'tablist');
+    panels.forEach(p => p.setAttribute('role', 'tabpanel'));
 
     tabs.forEach(tab => {
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-selected', String(tab.classList.contains('active')));
       tab.addEventListener('click', () => {
         const target = tab.dataset.tier;
-        tabs.forEach(t => t.classList.toggle('active', t === tab));
+        tabs.forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', String(on));
+        });
         panels.forEach(p => p.classList.toggle('active', p.dataset.tier === target));
       });
     });
   });
 }
 
-/* ---------- Mesin kuis interaktif ---------- */
+/* ---------- Mesin kuis interaktif (v2: progres tersimpan + ulangi) ---------- */
 function initQuizEngine() {
   document.querySelectorAll('.quiz-card').forEach(card => {
-    const options = card.querySelectorAll('.quiz-option');
-    const feedback = card.querySelector('.quiz-feedback');
-    const correctAnswer = card.dataset.answer;
+    const qid = card.dataset.qid;
 
-    options.forEach(opt => {
+    card.querySelectorAll('.quiz-option').forEach(opt => {
       opt.addEventListener('click', () => {
         if (card.dataset.answered === 'true') return;
-        card.dataset.answered = 'true';
-
-        const chosen = opt.dataset.option;
-        const isCorrect = chosen === correctAnswer;
-
-        options.forEach(o => {
-          o.disabled = true;
-          if (o.dataset.option === correctAnswer) {
-            o.classList.add(o === opt ? 'correct' : 'reveal-correct');
-          } else if (o === opt) {
-            o.classList.add('incorrect');
-          }
-        });
-
-        if (feedback) {
-          feedback.hidden = false;
-          feedback.classList.add(isCorrect ? 'is-correct' : 'is-incorrect');
-          const label = feedback.querySelector('strong');
-          if (label) label.textContent = isCorrect ? 'Benar!' : 'Belum tepat';
-        }
-
-        updateScore(card.closest('.tier-panel'));
+        applyAnswer(card, opt.dataset.option);
+        if (qid) KAStore.set('ka:quiz:' + qid, opt.dataset.option);
+        refreshPanel(card.closest('.tier-panel'));
       });
+    });
+
+    // Pulihkan jawaban yang tersimpan dari kunjungan sebelumnya
+    if (qid) {
+      const saved = KAStore.get('ka:quiz:' + qid, null);
+      if (saved) applyAnswer(card, saved);
+    }
+  });
+
+  document.querySelectorAll('.tier-panel').forEach(refreshPanel);
+
+  document.querySelectorAll('.tier-reset').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = btn.closest('.tier-panel');
+      if (!panel) return;
+      panel.querySelectorAll('.quiz-card').forEach(resetCard);
+      refreshPanel(panel);
     });
   });
 }
 
-function updateScore(panel) {
+function applyAnswer(card, chosen) {
+  const correct = card.dataset.answer;
+  const feedback = card.querySelector('.quiz-feedback');
+  card.dataset.answered = 'true';
+  const isCorrect = chosen === correct;
+
+  card.querySelectorAll('.quiz-option').forEach(o => {
+    o.disabled = true;
+    if (o.dataset.option === correct) {
+      o.classList.add(o.dataset.option === chosen ? 'correct' : 'reveal-correct');
+    } else if (o.dataset.option === chosen) {
+      o.classList.add('incorrect');
+    }
+  });
+
+  if (feedback) {
+    feedback.hidden = false;
+    feedback.classList.remove('is-correct', 'is-incorrect');
+    feedback.classList.add(isCorrect ? 'is-correct' : 'is-incorrect');
+    const label = feedback.querySelector('strong');
+    if (label) label.textContent = isCorrect ? 'Benar!' : 'Belum tepat';
+  }
+}
+
+function resetCard(card) {
+  delete card.dataset.answered;
+  const qid = card.dataset.qid;
+  if (qid) KAStore.remove('ka:quiz:' + qid);
+  card.querySelectorAll('.quiz-option').forEach(o => {
+    o.disabled = false;
+    o.classList.remove('correct', 'incorrect', 'reveal-correct');
+  });
+  const fb = card.querySelector('.quiz-feedback');
+  if (fb) {
+    fb.hidden = true;
+    fb.classList.remove('is-correct', 'is-incorrect');
+    const s = fb.querySelector('strong');
+    if (s) s.textContent = '';
+  }
+}
+
+function refreshPanel(panel) {
   if (!panel) return;
-  const scoreEl = panel.querySelector('.tier-score strong');
-  if (!scoreEl) return;
   const cards = panel.querySelectorAll('.quiz-card');
   const answered = panel.querySelectorAll('.quiz-card[data-answered="true"]');
   let correctCount = 0;
   answered.forEach(c => {
-    const chosen = c.querySelector('.quiz-option.correct');
-    if (chosen) correctCount++;
+    if (c.querySelector('.quiz-option.correct')) correctCount++;
   });
-  scoreEl.textContent = `${correctCount}/${cards.length}`;
+
+  const scoreEl = panel.querySelector('.tier-score strong');
+  if (scoreEl) scoreEl.textContent = correctCount + '/' + cards.length;
+
+  const bar = panel.querySelector('.tier-progress i');
+  if (bar) bar.style.width = (cards.length ? (answered.length / cards.length) * 100 : 0) + '%';
+
+  const done = panel.querySelector('.tier-complete');
+  if (done) {
+    if (cards.length > 0 && answered.length === cards.length) {
+      const s = done.querySelector('[data-final]');
+      if (s) s.textContent = correctCount + ' dari ' + cards.length;
+      done.hidden = false;
+    } else {
+      done.hidden = true;
+    }
+  }
 }
 
 /* ---------- Scroll reveal ---------- */
@@ -122,14 +268,611 @@ function initScrollReveal() {
   els.forEach(el => observer.observe(el));
 }
 
+/* ---------- Statistik count-up ---------- */
+function initCountUp() {
+  const nums = document.querySelectorAll('.stat-num[data-count]');
+  if (!nums.length) return;
+
+  const run = el => {
+    const target = parseInt(el.dataset.count, 10) || 0;
+    const suffix = el.dataset.suffix || '';
+    if (REDUCE_MOTION || typeof requestAnimationFrame !== 'function') {
+      el.textContent = target + suffix;
+      return;
+    }
+    const dur = 900;
+    const t0 = performance.now();
+    const step = now => {
+      const p = Math.min(1, (now - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    nums.forEach(run);
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        run(e.target);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  nums.forEach(n => io.observe(n));
+}
+
+/* ---------- Scrollspy navigasi materi ---------- */
+function initScrollSpy() {
+  const nav = document.querySelector('.lesson-nav');
+  if (!nav || !('IntersectionObserver' in window)) return;
+
+  const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
+  const map = new Map();
+  links.forEach(l => {
+    const sec = document.querySelector(l.getAttribute('href'));
+    if (sec) map.set(sec, l);
+  });
+  if (!map.size) return;
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const link = map.get(en.target);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+  map.forEach((_, sec) => io.observe(sec));
+}
+
+/* ---------- Checklist kesiapan Olimpiade ---------- */
+function initChecklist() {
+  const wrap = document.querySelector('[data-checklist]');
+  if (!wrap) return;
+
+  const key = 'ka:check:' + (wrap.dataset.checklist || 'default');
+  const saved = KAStore.get(key, {});
+  const items = wrap.querySelectorAll('.check-item input[type="checkbox"]');
+
+  const update = () => {
+    let done = 0;
+    items.forEach(i => {
+      const li = i.closest('.check-item');
+      if (li) li.classList.toggle('done', i.checked);
+      if (i.checked) done++;
+    });
+    const count = wrap.querySelector('[data-check-count]');
+    if (count) count.textContent = done + '/' + items.length;
+    const bar = wrap.querySelector('.check-progress i');
+    if (bar) bar.style.width = (items.length ? (done / items.length) * 100 : 0) + '%';
+    const msg = wrap.querySelector('[data-check-msg]');
+    if (msg) msg.hidden = done !== items.length;
+  };
+
+  items.forEach(i => {
+    if (saved[i.dataset.check]) i.checked = true;
+    i.addEventListener('change', () => {
+      saved[i.dataset.check] = i.checked;
+      KAStore.set(key, saved);
+      update();
+    });
+  });
+  update();
+}
+
+/* ---------- Util SVG ---------- */
+function svgEl(name, attrs, parent) {
+  const n = document.createElementNS('http://www.w3.org/2000/svg', name);
+  if (attrs) for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+
+function elDiv(cls, html) {
+  const d = document.createElement('div');
+  if (cls) d.className = cls;
+  if (html !== undefined) d.innerHTML = html;
+  return d;
+}
+
+const fmt3 = v => {
+  let s = String(Math.round(v * 1000) / 1000);
+  if (s === '-0') s = '0';
+  return s.replace('-', '\u2212');
+};
+
+const fnum = v => {
+  const r = Math.round(v * 100) / 100;
+  return String(Object.is(r, -0) ? 0 : r).replace('-', '\u2212');
+};
+
+/* ==========================================================================
+   SIMULASI 1 — Lingkaran Satuan Interaktif (trigonometri.html)
+   ========================================================================== */
+function initUnitCircle() {
+  const host = document.getElementById('widget-lingkaran');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const SIZE = 340, C = 170, R = 118;
+
+  /* --- Bangun SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + SIZE + ' ' + SIZE,
+    class: 'uc-svg',
+    role: 'img',
+    'aria-label': 'Lingkaran satuan interaktif: seret titik untuk mengubah sudut'
+  });
+
+  svgEl('line', { x1: 14, y1: C, x2: SIZE - 14, y2: C, class: 'uc-axis' }, svg);
+  svgEl('line', { x1: C, y1: 14, x2: C, y2: SIZE - 14, class: 'uc-axis' }, svg);
+  [[C + R, C, '1', C + R - 4, C + 18], [C - R, C, '\u22121', C - R - 10, C + 18],
+   [C, C - R, '1', C + 8, C - R + 4], [C, C + R, '\u22121', C + 8, C + R + 4]].forEach(t => {
+    const vertical = t[0] === C;
+    svgEl('line', vertical
+      ? { x1: C - 4, y1: t[1], x2: C + 4, y2: t[1], class: 'uc-tick' }
+      : { x1: t[0], y1: C - 4, x2: t[0], y2: C + 4, class: 'uc-tick' }, svg);
+    const lbl = svgEl('text', { x: t[3], y: t[4], class: 'w-lbl' }, svg);
+    lbl.textContent = t[2];
+  });
+
+  svgEl('circle', { cx: C, cy: C, r: R, class: 'uc-circ' }, svg);
+  const arc = svgEl('path', { d: '', class: 'uc-arc' }, svg);
+  const cosLine = svgEl('line', { x1: C, y1: C, x2: C, y2: C, class: 'uc-cos' }, svg);
+  const sinLine = svgEl('line', { x1: C, y1: C, x2: C, y2: C, class: 'uc-sin' }, svg);
+  const radLine = svgEl('line', { x1: C, y1: C, x2: C, y2: C, class: 'uc-rad' }, svg);
+  const point = svgEl('circle', { cx: C, cy: C, r: 6, class: 'uc-pt' }, svg);
+
+  /* --- Bangun kontrol --- */
+  const controls = elDiv('widget-controls');
+  const row = elDiv('ctrl-row');
+  const lab = document.createElement('label');
+  lab.textContent = 'Sudut \u03b8';
+  lab.setAttribute('for', 'uc-slider');
+  const out = document.createElement('output');
+  row.appendChild(lab); row.appendChild(out);
+  controls.appendChild(row);
+
+  const slider = document.createElement('input');
+  slider.type = 'range';
+  slider.min = '0'; slider.max = '360'; slider.step = '1'; slider.value = '45';
+  slider.id = 'uc-slider';
+  slider.setAttribute('aria-label', 'Sudut theta dalam derajat');
+  controls.appendChild(slider);
+
+  const chips = elDiv('chips');
+  [0, 30, 45, 60, 90, 120, 135, 150, 180, 270].forEach(d => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.dataset.deg = String(d);
+    b.textContent = d + '\u00b0';
+    b.addEventListener('click', () => { slider.value = String(d); render(d); });
+    chips.appendChild(b);
+  });
+  controls.appendChild(chips);
+
+  const readout = elDiv('readout',
+    '<div><span>\u03b8 (derajat)</span><b data-r="deg"></b></div>' +
+    '<div><span>Radian</span><b data-r="rad"></b></div>' +
+    '<div><span>sin \u03b8</span><b data-r="sin"></b></div>' +
+    '<div><span>cos \u03b8</span><b data-r="cos"></b></div>' +
+    '<div><span>tan \u03b8</span><b data-r="tan"></b></div>' +
+    '<div><span>Kuadran</span><b data-r="quad"></b></div>');
+  controls.appendChild(readout);
+
+  const legend = elDiv('legend',
+    '<span><i class="dot" style="background:var(--tier-mudah)"></i>sin \u03b8</span>' +
+    '<span><i class="dot" style="background:var(--signal)"></i>cos \u03b8</span>' +
+    '<span><i class="dot" style="background:var(--medal)"></i>sudut \u03b8</span>');
+  controls.appendChild(legend);
+
+  const note = elDiv('w-note');
+  note.textContent = 'Geser slider, klik sudut istimewa, atau seret langsung titik emas di lingkaran. Nilai sudut istimewa ditampilkan dalam bentuk eksak.';
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => readout.querySelector(sel);
+
+  /* --- Nilai eksak sudut istimewa --- */
+  function exactTrig(deg) {
+    const d = ((Math.round(deg) % 360) + 360) % 360;
+    if (d % 30 !== 0 && d % 45 !== 0) return null;
+    let ref;
+    if (d <= 90) ref = d;
+    else if (d <= 180) ref = 180 - d;
+    else if (d <= 270) ref = d - 180;
+    else ref = 360 - d;
+    const base = {
+      0: ['0', '1', '0'],
+      30: ['1/2', '\u221a3/2', '\u221a3/3'],
+      45: ['\u221a2/2', '\u221a2/2', '1'],
+      60: ['\u221a3/2', '1/2', '\u221a3'],
+      90: ['1', '0', '']
+    }[ref];
+    if (!base) return null;
+    const sinPos = d > 0 && d < 180;
+    const cosPos = d < 90 || d > 270;
+    const sign = (str, pos) => (str === '0' ? '0' : (pos ? '' : '\u2212') + str);
+    const s = sign(base[0], sinPos);
+    const c = sign(base[1], cosPos);
+    let t;
+    if (ref === 90) t = 'tak terdefinisi';
+    else if (base[2] === '0') t = '0';
+    else t = (sinPos === cosPos ? '' : '\u2212') + base[2];
+    return { s: s, c: c, t: t };
+  }
+
+  function radLabel(deg) {
+    const raw = Math.round(deg);
+    if (raw === 360) return '2\u03c0';
+    const d = ((raw % 360) + 360) % 360;
+    if (d === 0) return '0';
+    if (d % 15 === 0) {
+      const g = (a, b) => (b ? g(b, a % b) : a);
+      const k = g(d, 180);
+      const n = d / k, m = 180 / k;
+      const num = n === 1 ? '\u03c0' : n + '\u03c0';
+      return m === 1 ? num : num + '/' + m;
+    }
+    return (d * Math.PI / 180).toFixed(2) + ' rad';
+  }
+
+  function quadLabel(deg) {
+    const d = ((Math.round(deg) % 360) + 360) % 360;
+    if (d % 90 === 0) return 'Pada sumbu';
+    if (d < 90) return 'I \u2014 semua positif';
+    if (d < 180) return 'II \u2014 sin positif';
+    if (d < 270) return 'III \u2014 tan positif';
+    return 'IV \u2014 cos positif';
+  }
+
+  function arcPath(deg) {
+    if (deg < 1 || deg >= 360) return '';
+    const r0 = 28;
+    const a = deg * Math.PI / 180;
+    const ex = C + r0 * Math.cos(a);
+    const ey = C - r0 * Math.sin(a);
+    const large = deg > 180 ? 1 : 0;
+    return 'M ' + (C + r0) + ' ' + C +
+      ' A ' + r0 + ' ' + r0 + ' 0 ' + large + ' 0 ' + ex.toFixed(1) + ' ' + ey.toFixed(1);
+  }
+
+  /* --- Render --- */
+  function render(deg) {
+    deg = Math.max(0, Math.min(360, Math.round(deg)));
+    const rad = deg * Math.PI / 180;
+    const cos = Math.cos(rad);
+    const sin = Math.sin(rad);
+    const px = C + R * cos;
+    const py = C - R * sin;
+
+    radLine.setAttribute('x2', px.toFixed(1));
+    radLine.setAttribute('y2', py.toFixed(1));
+    cosLine.setAttribute('x2', px.toFixed(1));
+    sinLine.setAttribute('x1', px.toFixed(1));
+    sinLine.setAttribute('y1', C);
+    sinLine.setAttribute('x2', px.toFixed(1));
+    sinLine.setAttribute('y2', py.toFixed(1));
+    point.setAttribute('cx', px.toFixed(1));
+    point.setAttribute('cy', py.toFixed(1));
+    arc.setAttribute('d', arcPath(deg));
+
+    out.textContent = deg + '\u00b0';
+    q('[data-r="deg"]').textContent = deg + '\u00b0';
+    q('[data-r="rad"]').textContent = radLabel(deg);
+
+    const exact = exactTrig(deg);
+    if (exact) {
+      q('[data-r="sin"]').textContent = exact.s;
+      q('[data-r="cos"]').textContent = exact.c;
+      q('[data-r="tan"]').textContent = exact.t;
+    } else {
+      q('[data-r="sin"]').textContent = fmt3(sin);
+      q('[data-r="cos"]').textContent = fmt3(cos);
+      q('[data-r="tan"]').textContent = Math.abs(cos) < 1e-4 ? 'tak terdefinisi' : fmt3(Math.tan(rad));
+    }
+    q('[data-r="quad"]').textContent = quadLabel(deg);
+
+    chips.querySelectorAll('.chip').forEach(ch => {
+      ch.classList.toggle('active', Number(ch.dataset.deg) === (deg % 360));
+    });
+  }
+
+  slider.addEventListener('input', () => render(Number(slider.value)));
+
+  /* --- Seret titik di lingkaran --- */
+  let dragging = false;
+  const fromPointer = e => {
+    const rect = svg.getBoundingClientRect();
+    if (!rect.width) return;
+    const x = (e.clientX - rect.left) * (SIZE / rect.width);
+    const y = (e.clientY - rect.top) * (SIZE / rect.height);
+    let deg = Math.atan2(C - y, x - C) * 180 / Math.PI;
+    deg = Math.round(((deg % 360) + 360) % 360);
+    for (let s = 0; s <= 360; s += 15) {
+      if (Math.abs(deg - s) <= 4) { deg = s % 360; break; }
+    }
+    slider.value = String(deg);
+    render(deg);
+  };
+  svg.addEventListener('pointerdown', e => {
+    dragging = true;
+    try { svg.setPointerCapture(e.pointerId); } catch (err) {}
+    fromPointer(e);
+    e.preventDefault();
+  });
+  svg.addEventListener('pointermove', e => { if (dragging) fromPointer(e); });
+  ['pointerup', 'pointercancel'].forEach(ev =>
+    svg.addEventListener(ev, () => { dragging = false; }));
+
+  render(45);
+}
+
+/* ==========================================================================
+   SIMULASI 2 — Laboratorium Parabola (aljabar.html)
+   ========================================================================== */
+function initParabola() {
+  const host = document.getElementById('widget-parabola');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const W = 360, H = 300, PAD = 24;
+  const XMIN = -6, XMAX = 6, YMIN = -8, YMAX = 8;
+  const px = x => PAD + (x - XMIN) / (XMAX - XMIN) * (W - 2 * PAD);
+  const py = y => PAD + (YMAX - y) / (YMAX - YMIN) * (H - 2 * PAD);
+
+  /* --- Bangun SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + W + ' ' + H,
+    class: 'pb-svg',
+    role: 'img',
+    'aria-label': 'Grafik interaktif fungsi kuadrat y = ax kuadrat + bx + c'
+  });
+
+  for (let x = XMIN; x <= XMAX; x++) {
+    if (x !== 0) svgEl('line', { x1: px(x), y1: PAD, x2: px(x), y2: H - PAD, class: 'pb-grid' }, svg);
+  }
+  for (let y = YMIN; y <= YMAX; y += 2) {
+    if (y !== 0) svgEl('line', { x1: PAD, y1: py(y), x2: W - PAD, y2: py(y), class: 'pb-grid' }, svg);
+  }
+  svgEl('line', { x1: PAD, y1: py(0), x2: W - PAD, y2: py(0), class: 'pb-axis' }, svg);
+  svgEl('line', { x1: px(0), y1: PAD, x2: px(0), y2: H - PAD, class: 'pb-axis' }, svg);
+  [['x', W - 16, py(0) - 7], ['y', px(0) + 9, PAD + 8],
+   ['5', px(5) - 3, py(0) + 14], ['\u22125', px(-5) - 8, py(0) + 14],
+   ['5', px(0) - 16, py(5) + 3], ['\u22125', px(0) - 22, py(-5) + 3]].forEach(t => {
+    const lbl = svgEl('text', { x: t[1], y: t[2], class: 'w-lbl' }, svg);
+    lbl.textContent = t[0];
+  });
+
+  const defs = svgEl('defs', {}, svg);
+  const clip = svgEl('clipPath', { id: 'pb-clip' }, defs);
+  svgEl('rect', { x: PAD, y: PAD, width: W - 2 * PAD, height: H - 2 * PAD }, clip);
+
+  const plotG = svgEl('g', { 'clip-path': 'url(#pb-clip)' }, svg);
+  const curve = svgEl('path', { d: '', class: 'pb-curve' }, plotG);
+  const root1 = svgEl('circle', { r: 5, class: 'pb-root', display: 'none' }, plotG);
+  const root2 = svgEl('circle', { r: 5, class: 'pb-root', display: 'none' }, plotG);
+  const vertex = svgEl('circle', { r: 5, class: 'pb-vertex', display: 'none' }, plotG);
+
+  /* --- Bangun kontrol --- */
+  const controls = elDiv('widget-controls');
+  const sliders = {};
+  [['a', -3, 3, 0.5, 1], ['b', -6, 6, 0.5, -1], ['c', -8, 8, 0.5, -6]].forEach(cfg => {
+    const name = cfg[0];
+    const row = elDiv('ctrl-row');
+    const lab = document.createElement('label');
+    lab.textContent = 'Koefisien ' + name;
+    lab.setAttribute('for', 'pb-' + name);
+    const out = document.createElement('output');
+    row.appendChild(lab); row.appendChild(out);
+    controls.appendChild(row);
+
+    const s = document.createElement('input');
+    s.type = 'range';
+    s.min = String(cfg[1]); s.max = String(cfg[2]);
+    s.step = String(cfg[3]); s.value = String(cfg[4]);
+    s.id = 'pb-' + name;
+    s.setAttribute('aria-label', 'Koefisien ' + name);
+    controls.appendChild(s);
+    sliders[name] = { input: s, out: out };
+    s.addEventListener('input', render);
+  });
+
+  const chips = elDiv('chips');
+  [['x\u00b2 \u2212 x \u2212 6', 1, -1, -6],
+   ['x\u00b2 \u2212 4x + 4', 1, -4, 4],
+   ['x\u00b2 + 2x + 5', 1, 2, 5],
+   ['\u2212\u00bdx\u00b2 + 2x + 3', -0.5, 2, 3]].forEach(p => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.textContent = p[0];
+    b.dataset.abc = p[1] + ',' + p[2] + ',' + p[3];
+    b.addEventListener('click', () => {
+      sliders.a.input.value = String(p[1]);
+      sliders.b.input.value = String(p[2]);
+      sliders.c.input.value = String(p[3]);
+      render();
+    });
+    chips.appendChild(b);
+  });
+  controls.appendChild(chips);
+
+  const readout = elDiv('readout',
+    '<div class="full"><span>Persamaan</span><b data-r="eq"></b></div>' +
+    '<div><span>Diskriminan D = b\u00b2 \u2212 4ac</span><b data-r="D"></b>' +
+    '<div class="disc-badge" data-r="badge" hidden></div></div>' +
+    '<div><span>Titik puncak</span><b data-r="vertex"></b></div>' +
+    '<div class="full"><span>Akar real (titik potong sumbu-x)</span><b data-r="roots"></b></div>');
+  controls.appendChild(readout);
+
+  const legend = elDiv('legend',
+    '<span><i class="dot" style="background:var(--tier-mudah)"></i>akar</span>' +
+    '<span><i class="dot" style="background:var(--medal)"></i>titik puncak</span>' +
+    '<span><i class="dot" style="background:var(--signal)"></i>kurva</span>');
+  controls.appendChild(legend);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => readout.querySelector(sel);
+
+  function eqString(a, b, c) {
+    const terms = [];
+    if (a !== 0) terms.push((a === 1 ? '' : a === -1 ? '\u2212' : fnum(a)) + 'x\u00b2');
+    if (b !== 0) terms.push((b === 1 ? '' : b === -1 ? '\u2212' : fnum(b)) + 'x');
+    if (c !== 0 || terms.length === 0) terms.push(fnum(c));
+    let s = 'y = ' + terms[0];
+    for (let i = 1; i < terms.length; i++) {
+      const t = terms[i];
+      s += t.charAt(0) === '\u2212' ? ' \u2212 ' + t.slice(1) : ' + ' + t;
+    }
+    return s;
+  }
+
+  function render() {
+    const a = parseFloat(sliders.a.input.value);
+    const b = parseFloat(sliders.b.input.value);
+    const c = parseFloat(sliders.c.input.value);
+
+    sliders.a.out.textContent = 'a = ' + fnum(a);
+    sliders.b.out.textContent = 'b = ' + fnum(b);
+    sliders.c.out.textContent = 'c = ' + fnum(c);
+
+    /* Kurva */
+    let d = '';
+    const f = x => a * x * x + b * x + c;
+    for (let x = XMIN; x <= XMAX + 1e-9; x += 0.08) {
+      const yy = Math.max(-60, Math.min(60, f(x)));
+      d += (d ? ' L ' : 'M ') + px(x).toFixed(1) + ' ' + py(yy).toFixed(1);
+    }
+    curve.setAttribute('d', d);
+
+    q('[data-r="eq"]').textContent = eqString(a, b, c);
+
+    const badge = q('[data-r="badge"]');
+    const setMark = (el, x) => {
+      if (x >= XMIN && x <= XMAX) {
+        el.setAttribute('cx', px(x).toFixed(1));
+        el.setAttribute('cy', py(0).toFixed(1));
+        el.removeAttribute('display');
+      } else {
+        el.setAttribute('display', 'none');
+      }
+    };
+    root1.setAttribute('display', 'none');
+    root2.setAttribute('display', 'none');
+    vertex.setAttribute('display', 'none');
+
+    if (a === 0) {
+      /* Garis lurus, bukan parabola */
+      q('[data-r="D"]').textContent = '\u2014';
+      badge.hidden = true;
+      q('[data-r="vertex"]').textContent = '\u2014';
+      if (b === 0) {
+        q('[data-r="roots"]').textContent =
+          c === 0 ? 'Semua nilai x memenuhi' : 'Tidak ada';
+      } else {
+        const r = -c / b;
+        q('[data-r="roots"]').textContent = 'x = ' + fnum(r);
+        setMark(root1, r);
+      }
+      note.textContent = 'a = 0 \u2192 grafik menjadi garis lurus y = bx + c, bukan parabola. Geser a menjauh dari 0 untuk melihat kurva kuadrat.';
+      markPresets(a, b, c);
+      return;
+    }
+
+    const D = b * b - 4 * a * c;
+    const h = -b / (2 * a);
+    const k = f(h);
+
+    q('[data-r="D"]').textContent = fnum(D);
+    badge.hidden = false;
+    badge.classList.remove('pos', 'zero', 'neg');
+    if (Math.abs(D) < 1e-9) {
+      badge.classList.add('zero');
+      badge.textContent = 'D = 0 \u00b7 akar kembar';
+      q('[data-r="roots"]').textContent = 'x\u2081 = x\u2082 = ' + fnum(h);
+      setMark(root1, h);
+    } else if (D > 0) {
+      badge.classList.add('pos');
+      badge.textContent = 'D > 0 \u00b7 dua akar real';
+      const sq = Math.sqrt(D);
+      const r1 = (-b - sq) / (2 * a);
+      const r2 = (-b + sq) / (2 * a);
+      const lo = Math.min(r1, r2), hi = Math.max(r1, r2);
+      q('[data-r="roots"]').textContent = 'x\u2081 = ' + fnum(lo) + ',  x\u2082 = ' + fnum(hi);
+      setMark(root1, lo);
+      setMark(root2, hi);
+    } else {
+      badge.classList.add('neg');
+      badge.textContent = 'D < 0 \u00b7 tidak ada akar real';
+      q('[data-r="roots"]').textContent = 'Tidak ada (parabola tidak memotong sumbu-x)';
+    }
+
+    q('[data-r="vertex"]').textContent = '(' + fnum(h) + ', ' + fnum(k) + ')';
+    if (h >= XMIN && h <= XMAX && k >= YMIN && k <= YMAX) {
+      vertex.setAttribute('cx', px(h).toFixed(1));
+      vertex.setAttribute('cy', py(k).toFixed(1));
+      vertex.removeAttribute('display');
+    }
+
+    note.textContent = a > 0
+      ? 'a > 0 \u2192 parabola terbuka ke atas; titik puncak adalah nilai minimum.'
+      : 'a < 0 \u2192 parabola terbuka ke bawah; titik puncak adalah nilai maksimum.';
+
+    markPresets(a, b, c);
+  }
+
+  function markPresets(a, b, c) {
+    chips.querySelectorAll('.chip').forEach(ch => {
+      const abc = ch.dataset.abc.split(',').map(Number);
+      ch.classList.toggle('active', abc[0] === a && abc[1] === b && abc[2] === c);
+    });
+  }
+
+  render();
+}
+
 /* ---------- Render KaTeX ---------- */
 function initKatex() {
-  if (typeof renderMathInElement !== 'function') return;
-  renderMathInElement(document.body, {
-    delimiters: [
-      { left: '$$', right: '$$', display: true },
-      { left: '$', right: '$', display: false }
-    ],
-    throwOnError: false
-  });
+  const render = () => {
+    if (typeof renderMathInElement === 'function') {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false }
+        ],
+        throwOnError: false
+      });
+      return true;
+    }
+    return false;
+  };
+  if (!render()) window.addEventListener('load', render);
 }
