@@ -864,6 +864,7 @@ svg text.w-lbl { font-family: var(--font-mono); font-size: 10px; fill: var(--cha
 .tier-tab[data-tier="mudah"].active { color: var(--tier-mudah); border-color: var(--tier-mudah); background: var(--tier-mudah-soft); }
 .tier-tab[data-tier="sedang"].active { color: var(--tier-sedang); border-color: var(--tier-sedang); background: var(--tier-sedang-soft); }
 .tier-tab[data-tier="sulit"].active { color: var(--tier-sulit); border-color: var(--tier-sulit); background: var(--tier-sulit-soft); }
+.tier-tab[data-tier="olimpiade"].active { color: var(--medal); border-color: var(--medal); background: var(--medal-soft); }
 .tier-tab:not(.active):hover { border-color: var(--chalk-mute); color: var(--chalk); }
 
 .tier-panel { display: none; }
@@ -908,6 +909,7 @@ svg text.w-lbl { font-family: var(--font-mono); font-size: 10px; fill: var(--cha
 .tier-panel[data-tier="mudah"] .tier-progress i { background: var(--tier-mudah); }
 .tier-panel[data-tier="sedang"] .tier-progress i { background: var(--tier-sedang); }
 .tier-panel[data-tier="sulit"] .tier-progress i { background: var(--tier-sulit); }
+.tier-panel[data-tier="olimpiade"] .tier-progress i { background: var(--medal); }
 .tier-reset {
   font-family: var(--font-mono);
   font-size: 0.74rem;

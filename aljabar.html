@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aljabar — Khusni Academy</title>
-<meta name="description" content="Pengenalan Aljabar: variabel, operasi bentuk aljabar, persamaan linear, persamaan kuadrat, Laboratorium Parabola interaktif, dan latihan soal bertingkat dari Mudah sampai Sulit.">
+<meta name="description" content="Pengenalan Aljabar: variabel, operasi bentuk aljabar, persamaan linear, persamaan kuadrat, Laboratorium Parabola interaktif, bekal aljabar olimpiade (rumus Vieta, identitas, AM-GM), dan latihan soal bertingkat dari Mudah sampai Olimpiade.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#090d17">
 <link rel="canonical" href="https://khusniacademy.netlify.app/aljabar.html">
@@ -59,6 +59,7 @@
       <a href="#operasi">Operasi Bentuk Aljabar</a>
       <a href="#persamaan-linear">Persamaan Linear</a>
       <a href="#persamaan-kuadrat">Persamaan Kuadrat</a>
+      <a href="#menuju-olimpiade">Menuju Olimpiade</a>
       <a href="#latihan">Latihan Soal</a>
     </aside>
 
@@ -181,9 +182,67 @@
         </div>
       </div>
 
+      <div class="lesson-section" id="menuju-olimpiade">
+        <h2>Menuju Aljabar Olimpiade</h2>
+        <p>Sampai di sini, seluruh aljabar dasar sudah di tanganmu. Di level olimpiade, soal jarang berbunyi "selesaikan persamaan ini" — yang diuji adalah <em class="accent-word">kejelian melihat struktur</em>: mengenali identitas yang tersembunyi, memanfaatkan hubungan antar-akar, dan memfaktorkan bentuk yang kelihatannya buntu. Empat perkakas berikut adalah bekal wajibnya.</p>
+
+        <h3>1. Rumus Vieta — Membaca Akar Tanpa Menyelesaikan</h3>
+        <p>Jika $x_1$ dan $x_2$ adalah akar-akar $ax^2+bx+c=0$, keduanya selalu terikat oleh hubungan:</p>
+        <div class="box formula"><span class="box-label">Rumus Vieta</span>$$x_1 + x_2 = -\frac{b}{a} \qquad\qquad x_1 \cdot x_2 = \frac{c}{a}$$</div>
+        <p>Kekuatannya: banyak besaran simetris — seperti $x_1^2+x_2^2$ atau $\dfrac{1}{x_1}+\dfrac{1}{x_2}$ — bisa dihitung <strong>tanpa pernah mencari akarnya</strong>.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Akar-akar $x^2-5x+3=0$ adalah $p$ dan $q$. Hitung $p^2+q^2$.</p>
+          <p style="margin-bottom:0;">Vieta: $p+q=5$ dan $pq=3$. Maka $p^2+q^2=(p+q)^2-2pq=25-6=19$ — tanpa rumus ABC sama sekali.</p>
+        </div>
+
+        <h3>2. Identitas Aljabar Andalan</h3>
+        <p>Hafal-pahami identitas berikut sampai refleks; hampir semua soal manipulasi aljabar olimpiade berputar di sekitarnya:</p>
+        <ul>
+          <li>$a^2-b^2=(a-b)(a+b)$ — selisih kuadrat, sang bintang utama.</li>
+          <li>$(a\pm b)^2 = a^2 \pm 2ab + b^2$, sehingga $a^2+b^2=(a+b)^2-2ab$.</li>
+          <li>$a^3\pm b^3=(a\pm b)(a^2\mp ab+b^2)$, dengan bentuk praktis $a^3+b^3=(a+b)^3-3ab(a+b)$.</li>
+          <li>$n(n+2)+1=(n+1)^2$ — kuadrat sempurna yang sering "disembunyikan" di balik angka besar.</li>
+        </ul>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Hitung $2026^2-2025^2$ tanpa kalkulator.</p>
+          <p style="margin-bottom:0;">Selisih kuadrat: $(2026-2025)(2026+2025) = 1 \times 4051 = 4051$.</p>
+        </div>
+
+        <h3>3. Ketaksamaan AM-GM</h3>
+        <p>Rataan aritmetika (<em>arithmetic mean</em>) tidak pernah lebih kecil dari rataan geometri (<em>geometric mean</em>). Untuk dua bilangan tak negatif:</p>
+        <div class="box formula"><span class="box-label">AM-GM</span>$$\frac{a+b}{2} \;\ge\; \sqrt{ab}\,, \qquad \text{kesamaan terjadi saat } a=b$$</div>
+        <p>Versi umumnya berlaku untuk $n$ bilangan. Inilah alat standar mencari <strong>nilai minimum atau maksimum</strong> tanpa kalkulus — pilar "AM-GM" yang kamu lihat di <a href="olimpiade.html">Peta Jalan Olimpiade</a>.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Untuk $x>0$, cari nilai minimum $x+\dfrac{1}{x}$.</p>
+          <p style="margin-bottom:0;">AM-GM: $x+\dfrac{1}{x} \ge 2\sqrt{x\cdot\dfrac{1}{x}} = 2$, tercapai saat $x=1$. Jadi minimumnya $2$.</p>
+        </div>
+
+        <h3>4. Trik Faktorisasi Persamaan Bulat</h3>
+        <p>Persamaan berbentuk $xy+ax+by=c$ dengan syarat bilangan bulat hampir selalu bisa "dipaksa terfaktor" dengan menambahkan konstanta yang pas — dikenal sebagai <em class="accent-word">Simon's Favorite Factoring Trick</em>, jembatan antara Aljabar dan Teori Bilangan.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Cari semua pasangan bulat positif $(x,y)$ dengan $xy = 2x+2y$.</p>
+          <p style="margin-bottom:0;">$xy-2x-2y+4=4 \Rightarrow (x-2)(y-2)=4$. Pasangan faktor positif dari $4$: $1\times4$, $2\times2$, $4\times1$ — menghasilkan $(3,6)$, $(4,4)$, dan $(6,3)$.</p>
+        </div>
+
+        <div class="box recap">
+          <span class="box-label">Bekal Olimpiade</span>
+          <ul>
+            <li>Vieta mengubah pertanyaan tentang akar menjadi aritmetika sederhana: $x_1+x_2=-\frac{b}{a}$, $x_1 x_2=\frac{c}{a}$.</li>
+            <li>Lihat angka besar berdekatan? Curigai selisih kuadrat atau pola $n(n+2)+1=(n+1)^2$.</li>
+            <li>Butuh nilai minimum/maksimum bentuk positif? Coba AM-GM sebelum cara lain.</li>
+            <li>Persamaan bulat bercampur $xy$, $x$, dan $y$? Faktorkan paksa ala Simon.</li>
+            <li>Uji keempatnya langsung di tab <strong>Olimpiade</strong> pada latihan di bawah.</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="lesson-section" id="latihan">
         <h2>Latihan Soal Bertingkat</h2>
-        <p>Pilih tingkat kesulitan, lalu klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
+        <p>Empat tingkat kesulitan — dari Mudah sampai Olimpiade. Klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
         <p class="quiz-note">Progres tersimpan otomatis di peramban ini — tekan "Ulangi" untuk mencoba lagi dari awal.</p>
 
         <div data-tier-group>
@@ -191,6 +250,7 @@
             <button class="tier-tab active" data-tier="mudah"><span class="dot"></span>Mudah</button>
             <button class="tier-tab" data-tier="sedang"><span class="dot"></span>Sedang</button>
             <button class="tier-tab" data-tier="sulit"><span class="dot"></span>Sulit</button>
+            <button class="tier-tab" data-tier="olimpiade"><span class="dot"></span>Olimpiade</button>
           </div>
 
           <!-- MUDAH -->
@@ -388,7 +448,73 @@
               <div class="quiz-feedback" hidden><strong></strong>Vieta: $x_1+x_2=7$ dan $x_1x_2=k$. Gunakan $(x_1-x_2)^2=(x_1+x_2)^2-4x_1x_2$, jadi $1=49-4k \Rightarrow k=12$. (Akarnya $4$ dan $3$.)</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span> soal. Siap untuk tantangan lebih besar? Lihat <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a>.</div>
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+          </div>
+
+          <!-- OLIMPIADE -->
+          <div class="tier-panel" data-tier="olimpiade">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/5</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="alj-o1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Untuk $x>0$, nilai minimum dari $x + \dfrac{9}{x}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3$</button>
+                <button class="quiz-option" data-option="B">$6$</button>
+                <button class="quiz-option" data-option="C">$9$</button>
+                <button class="quiz-option" data-option="D">$12$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>AM-GM: $x+\frac{9}{x} \ge 2\sqrt{x \cdot \frac{9}{x}} = 2\sqrt{9} = 6$, tercapai saat $x=3$. Tanpa kalkulus sama sekali.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="alj-o2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Akar-akar $x^2 - 6x + 4 = 0$ adalah $p$ dan $q$. Nilai $\dfrac{1}{p}+\dfrac{1}{q}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{3}{2}$</button>
+                <button class="quiz-option" data-option="B">$\frac{2}{3}$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$24$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Vieta: $p+q=6$, $pq=4$. Maka $\frac{1}{p}+\frac{1}{q} = \frac{p+q}{pq} = \frac{6}{4} = \frac{3}{2}$ — tanpa mencari akarnya sama sekali.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="alj-o3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Jika $x+y=5$ dan $x^2+y^2=17$, nilai $x^3+y^3$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$55$</button>
+                <button class="quiz-option" data-option="B">$85$</button>
+                <button class="quiz-option" data-option="C">$65$</button>
+                <button class="quiz-option" data-option="D">$95$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Cari dulu $xy = \frac{(x+y)^2-(x^2+y^2)}{2} = \frac{25-17}{2}=4$, lalu $x^3+y^3=(x+y)^3-3xy(x+y)=125-60=65$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="alj-o4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Nilai dari $\sqrt{2025 \times 2027 + 1}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2025$</button>
+                <button class="quiz-option" data-option="B">$2026$</button>
+                <button class="quiz-option" data-option="C">$2027$</button>
+                <button class="quiz-option" data-option="D">$4051$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pola $n(n+2)+1=(n+1)^2$ dengan $n=2025$: bentuk di dalam akar adalah $2026^2$, jadi hasilnya $2026$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="alj-o5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Banyaknya pasangan bilangan bulat positif $(x,y)$ yang memenuhi $\dfrac{1}{x}+\dfrac{1}{y}=\dfrac{1}{6}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4$</button>
+                <button class="quiz-option" data-option="B">$6$</button>
+                <button class="quiz-option" data-option="C">$9$</button>
+                <button class="quiz-option" data-option="D">$10$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kalikan $6xy$: $6y+6x=xy$, lalu faktorkan paksa: $(x-6)(y-6)=36$. Karena $36$ memiliki $9$ pembagi positif, ada $9$ pasangan terurut — trik Simon beraksi.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span> soal. Fondasimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
           </div>
         </div>
       </div>
