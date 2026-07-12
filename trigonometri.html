@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trigonometri — Khusni Academy</title>
-<meta name="description" content="Pengenalan Trigonometri: sudut & radian, perbandingan trigonometri, Lingkaran Satuan interaktif, identitas dasar, dan latihan soal bertingkat dari Mudah sampai Sulit.">
+<meta name="description" content="Pengenalan Trigonometri: sudut & radian, perbandingan trigonometri, Lingkaran Satuan interaktif, identitas, aturan sinus & cosinus, sudut rangkap, bekal trigonometri olimpiade, dan latihan soal bertingkat dari Mudah sampai Olimpiade.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#090d17">
 <link rel="canonical" href="https://khusniacademy.netlify.app/trigonometri.html">
@@ -59,6 +59,10 @@
       <a href="#perbandingan">Perbandingan Trigonometri</a>
       <a href="#lingkaran-satuan">Lingkaran Satuan</a>
       <a href="#identitas">Identitas Dasar</a>
+      <a href="#aturan">Aturan Sinus &amp; Cosinus</a>
+      <a href="#grafik">Grafik Fungsi</a>
+      <a href="#menuju-olimpiade">Menuju Olimpiade</a>
+      <a href="#bedah-soal">Bedah Soal</a>
       <a href="#latihan">Latihan Soal</a>
     </aside>
 
@@ -68,6 +72,15 @@
         <h2>Pendahuluan</h2>
         <p>Trigonometri mempelajari hubungan antara <strong>sudut</strong> dan <strong>panjang sisi</strong> pada segitiga, terutama segitiga siku-siku. Cabang ini menjadi dasar untuk memahami gelombang dalam Fisika, navigasi, arsitektur, bahkan grafika komputer.</p>
         <p>Tiga fungsi utamanya adalah <strong>sinus (sin)</strong>, <strong>cosinus (cos)</strong>, dan <strong>tangen (tan)</strong> — masing-masing menghubungkan sebuah sudut dengan rasio dua sisi segitiga.</p>
+        <div class="box">
+          <span class="box-label">Peta Belajar Halaman Ini</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Pahami dulu, hafal belakangan</strong> — nilai-nilai istimewa akan kita <em>bangun</em> dari dua segitiga sederhana, bukan sekadar dihafal.</li>
+            <li><strong>Seret lingkaran satuannya</strong> — biar tanda tiap kuadran menempel di kepala lewat mata, bukan lewat catatan.</li>
+            <li><strong>Tutup contohnya</strong> — coba kerjakan sendiri dulu sebelum membaca penyelesaian.</li>
+            <li><strong>Naik bertahap di latihan</strong> — dari Mudah sampai Olimpiade; ulangi tingkat yang skornya belum penuh.</li>
+          </ul>
+        </div>
       </div>
 
       <div class="lesson-section" id="sudut">
@@ -79,6 +92,9 @@
           <p style="margin-bottom:0.3rem;">Ubah $60^\circ$ menjadi radian.</p>
           <p style="margin-bottom:0;">$60^\circ \times \dfrac{\pi}{180^\circ} = \dfrac{\pi}{3} \text{ radian}$</p>
         </div>
+        <p>Kenapa repot-repot memakai radian? Karena radian membuat rumus jadi <em class="accent-word">bersih</em>. Satu radian adalah sudut yang panjang busurnya tepat sama dengan jari-jari — sehingga:</p>
+        <div class="box formula"><span class="box-label">Panjang Busur</span>$$s = r\,\theta \qquad (\theta \text{ dalam radian})$$</div>
+        <p>Contoh: busur berjari-jari $6$ cm dengan sudut pusat $\dfrac{\pi}{3}$ panjangnya langsung $6 \times \dfrac{\pi}{3} = 2\pi$ cm. Dengan derajat, rumusnya harus diberi faktor koreksi $\frac{\pi}{180}$ — itulah kenapa matematika tingkat lanjut nyaris selalu berbahasa radian.</p>
       </div>
 
       <div class="lesson-section" id="perbandingan">
@@ -97,6 +113,21 @@
             <tr><td>$\tan\theta$</td><td>$0$</td><td>$\frac{\sqrt3}{3}$</td><td>$1$</td><td>$\sqrt3$</td><td>tak terdefinisi</td></tr>
           </tbody>
         </table>
+        <p>Tabel ini tidak perlu dihafal buta — seluruhnya bisa <strong>dibangun ulang</strong> dari dua segitiga sederhana:</p>
+        <ul>
+          <li><strong>Segitiga $45^\circ$–$45^\circ$–$90^\circ$</strong>: belah persegi bersisi $1$ lewat diagonalnya — kakinya $1$ dan $1$, miringnya $\sqrt2$. Maka $\sin 45^\circ = \frac{1}{\sqrt2} = \frac{\sqrt2}{2}$.</li>
+          <li><strong>Segitiga $30^\circ$–$60^\circ$–$90^\circ$</strong>: belah segitiga sama sisi bersisi $2$ tepat di tengah — kakinya $1$, tingginya $\sqrt3$, miringnya $2$. Maka $\sin 30^\circ = \frac{1}{2}$ dan $\sin 60^\circ = \frac{\sqrt3}{2}$.</li>
+        </ul>
+        <p>Lupa satu nilai di tengah ujian? Gambar segitiganya $10$ detik, dan tabelnya kembali.</p>
+        <div class="box warn">
+          <span class="box-label">Awas, Jebakan Klasik!</span>
+          <ul>
+            <li>$\sin(A+B) \neq \sin A + \sin B$ — sin bukan perkalian yang bisa didistribusi; rumus jumlah sudut yang benar ada di bagian olimpiade di bawah.</li>
+            <li>$\sin^2\theta$ berarti $(\sin\theta)^2$, <strong>bukan</strong> $\sin(\theta^2)$.</li>
+            <li>$\tan\theta$ tak terdefinisi saat $\cos\theta = 0$, yaitu di $90^\circ$ dan $270^\circ$.</li>
+            <li>Nilai $\sin\theta$ dan $\cos\theta$ tidak pernah keluar dari $[-1, 1]$ — pakai fakta ini untuk mencoret pilihan jawaban yang mustahil.</li>
+          </ul>
+        </div>
       </div>
 
       <div class="lesson-section" id="lingkaran-satuan">
@@ -122,14 +153,28 @@
             <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
           </div>
         </div>
+
+        <h3>Sudut Berelasi: Menjinakkan Sudut Besar</h3>
+        <p>Semua sudut di luar $0^\circ$–$90^\circ$ bisa "dipulangkan" ke sudut acuan lancipnya. Resepnya dua langkah: <strong>(1)</strong> tentukan kuadrannya untuk tahu <em>tanda</em> (ingat: Semua–Sin–Tan–Cos), lalu <strong>(2)</strong> hitung sudut acuannya untuk tahu <em>besar</em> nilainya.</p>
+        <ul>
+          <li>Kuadran II: $\sin(180^\circ - \theta) = \sin\theta$, $\;\cos(180^\circ - \theta) = -\cos\theta$</li>
+          <li>Kuadran III: $\sin(180^\circ + \theta) = -\sin\theta$, $\;\cos(180^\circ + \theta) = -\cos\theta$</li>
+          <li>Kuadran IV: $\sin(360^\circ - \theta) = -\sin\theta$, $\;\cos(360^\circ - \theta) = \cos\theta$</li>
+          <li>Pasangan komplemen: $\sin(90^\circ - \theta) = \cos\theta$ — itulah asal nama <em>co</em>-sinus.</li>
+        </ul>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Tentukan $\cos 210^\circ$.</p>
+          <p style="margin-bottom:0;">$210^\circ$ ada di kuadran III (cos negatif), sudut acuannya $210^\circ - 180^\circ = 30^\circ$. Jadi $\cos 210^\circ = -\cos 30^\circ = -\dfrac{\sqrt3}{2}$. Uji di simulasi di atas — geser ke $210^\circ$!</p>
+        </div>
       </div>
 
       <div class="lesson-section" id="identitas">
         <h2>Identitas Trigonometri Dasar</h2>
-        <p>Identitas berikut berlaku untuk <strong>semua nilai</strong> $\theta$, dan sangat sering dipakai untuk menyederhanakan soal:</p>
+        <p>Identitas berikut berlaku untuk <strong>semua nilai</strong> $\theta$, dan sangat sering dipakai untuk menyederhanakan soal. Yang pertama bahkan bukan rumus baru: titik pada lingkaran satuan berkoordinat $(\cos\theta, \sin\theta)$ dan persamaan lingkarannya $x^2+y^2=1$ — substitusikan, dan lahirlah:</p>
         <div class="box formula"><span class="box-label">Identitas Pythagoras</span>$$\sin^2\theta + \cos^2\theta = 1$$</div>
         <div class="box formula"><span class="box-label">Hubungan Tangen</span>$$\tan\theta = \frac{\sin\theta}{\cos\theta}$$</div>
-        <p>Ketiga fungsi kebalikannya juga kadang muncul: cosecan $\csc\theta = \frac{1}{\sin\theta}$, secan $\sec\theta = \frac{1}{\cos\theta}$, dan cotangen $\cot\theta = \frac{1}{\tan\theta}$.</p>
+        <p>Ketiga fungsi kebalikannya juga kadang muncul: cosecan $\csc\theta = \frac{1}{\sin\theta}$, secan $\sec\theta = \frac{1}{\cos\theta}$, dan cotangen $\cot\theta = \frac{1}{\tan\theta}$. Bagi identitas Pythagoras dengan $\cos^2\theta$ atau $\sin^2\theta$, dan kamu mendapat dua saudaranya secara gratis: $1+\tan^2\theta = \sec^2\theta$ dan $1+\cot^2\theta = \csc^2\theta$.</p>
 
         <div class="box recap">
           <span class="box-label">Ringkasan Cepat</span>
@@ -143,9 +188,146 @@
         </div>
       </div>
 
+      <div class="lesson-section" id="aturan">
+        <h2>Aturan Sinus &amp; Cosinus</h2>
+        <p>Perbandingan trigonometri di atas hanya berlaku untuk segitiga <em>siku-siku</em>. Dua aturan berikut membebaskannya ke <strong>segitiga apa pun</strong> — dengan konvensi: sisi $a$ berhadapan dengan sudut $A$, dan seterusnya.</p>
+
+        <h3>Aturan Sinus</h3>
+        <div class="box formula"><span class="box-label">Aturan Sinus</span>$$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} = 2R$$</div>
+        <p>dengan $R$ jari-jari lingkaran luar segitiga. Pakai aturan ini saat kamu punya <strong>pasangan sisi–sudut yang berhadapan</strong> dan ingin mencari pasangan lainnya.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Diketahui $a = 10$, $\angle A = 30^\circ$, $\angle B = 45^\circ$. Tentukan $b$.</p>
+          <p style="margin-bottom:0;">$\dfrac{b}{\sin 45^\circ} = \dfrac{10}{\sin 30^\circ} = 20$, sehingga $b = 20 \times \dfrac{\sqrt2}{2} = 10\sqrt2$.</p>
+        </div>
+
+        <h3>Aturan Cosinus</h3>
+        <div class="box formula"><span class="box-label">Aturan Cosinus</span>$$c^2 = a^2 + b^2 - 2ab\cos C$$</div>
+        <p>Pakai saat kamu punya <strong>dua sisi dan sudut apitnya</strong> (mencari sisi ketiga), atau <strong>tiga sisi</strong> (mencari sudut). Perhatikan: saat $C = 90^\circ$, suku $\cos C$ lenyap dan tersisa $c^2 = a^2+b^2$ — aturan cosinus adalah <em class="accent-word">Pythagoras yang diperumum</em>.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Dua sisi segitiga $3$ dan $5$ mengapit sudut $60^\circ$. Tentukan sisi ketiga.</p>
+          <p style="margin-bottom:0;">$c^2 = 9 + 25 - 2(3)(5)\cos 60^\circ = 34 - 15 = 19$, jadi $c = \sqrt{19}$.</p>
+        </div>
+
+        <h3>Bonus: Luas Segitiga Tanpa Tinggi</h3>
+        <div class="box formula"><span class="box-label">Luas Segitiga</span>$$L = \tfrac{1}{2}\,ab\sin C$$</div>
+        <p>Alasannya sederhana: tinggi dari sisi $a$ adalah $b\sin C$, lalu masukkan ke $\frac{1}{2} \times$ alas $\times$ tinggi. Rumus ini tampil sangat sering di soal kompetisi.</p>
+      </div>
+
+      <div class="lesson-section" id="grafik">
+        <h2>Grafik Fungsi Trigonometri</h2>
+        <p>Karena lingkaran satuan berputar terus, nilai sin dan cos <strong>berulang</strong> — grafiknya berupa gelombang. $y = \sin x$ mulai dari $0$, memuncak di $1$ saat $x=90^\circ$, kembali ke $0$ di $180^\circ$, melembah ke $-1$ di $270^\circ$, dan menutup satu siklus penuh di $360^\circ$. Grafik $y = \cos x$ berbentuk persis sama, hanya bergeser: ia <em>mulai</em> dari puncak $1$.</p>
+        <p>Bentuk umum $y = A\sin(Bx)$ dikendalikan dua tombol:</p>
+        <ul>
+          <li><strong>Amplitudo</strong> $= |A|$ — setinggi apa gelombangnya (rentang nilai jadi $[-|A|, |A|]$).</li>
+          <li><strong>Periode</strong> $= \dfrac{360^\circ}{B}$ — seberapa cepat pola berulang.</li>
+        </ul>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Tentukan amplitudo dan periode $y = 3\sin(2x)$.</p>
+          <p style="margin-bottom:0;">Amplitudo $= 3$, periode $= \dfrac{360^\circ}{2} = 180^\circ$ — gelombangnya tiga kali lebih tinggi dan dua kali lebih rapat dari $\sin x$ biasa.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="menuju-olimpiade">
+        <h2>Menuju Trigonometri Olimpiade</h2>
+        <p>Di level kompetisi, trigonometri berhenti menjadi soal "hitung nilai" dan berubah menjadi permainan <em class="accent-word">manipulasi identitas</em>. Empat perkakas berikut menutup hampir semua kebutuhannya.</p>
+
+        <h3>1. Rumus Jumlah &amp; Selisih Sudut</h3>
+        <div class="box formula">
+          <span class="box-label">Jumlah &amp; Selisih</span>
+          $$\sin(A \pm B) = \sin A\cos B \pm \cos A\sin B$$
+          $$\cos(A \pm B) = \cos A\cos B \mp \sin A\sin B$$
+          $$\tan(A \pm B) = \frac{\tan A \pm \tan B}{1 \mp \tan A\tan B}$$
+        </div>
+        <p>Perhatikan tanda pada $\cos$ yang <strong>berlawanan</strong> — jebakan favorit pembuat soal. Rumus ini membuka nilai eksak sudut "aneh" seperti $15^\circ$ dan $75^\circ$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Tentukan nilai eksak $\cos 75^\circ$.</p>
+          <p style="margin-bottom:0;">$\cos(45^\circ+30^\circ) = \cos45^\circ\cos30^\circ - \sin45^\circ\sin30^\circ = \dfrac{\sqrt6}{4} - \dfrac{\sqrt2}{4} = \dfrac{\sqrt6-\sqrt2}{4}$.</p>
+        </div>
+
+        <h3>2. Sudut Rangkap</h3>
+        <div class="box formula">
+          <span class="box-label">Sudut Rangkap</span>
+          $$\sin 2\theta = 2\sin\theta\cos\theta \qquad \cos 2\theta = \cos^2\theta - \sin^2\theta = 2\cos^2\theta - 1 = 1 - 2\sin^2\theta$$
+        </div>
+        <p>Ketiga wajah $\cos 2\theta$ setara (saling terhubung lewat $\sin^2+\cos^2=1$) — pilih wajah yang cocok dengan apa yang <em>diketahui</em> soal.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Jika $\sin\theta = \dfrac{5}{13}$ dan $\theta$ lancip, tentukan $\sin 2\theta$.</p>
+          <p style="margin-bottom:0;">Segitiga $5$–$12$–$13$: $\cos\theta = \frac{12}{13}$. Maka $\sin 2\theta = 2 \cdot \frac{5}{13} \cdot \frac{12}{13} = \dfrac{120}{169}$.</p>
+        </div>
+
+        <h3>3. Bentuk $a\sin\theta + b\cos\theta$ — Rahasia Maks-Min</h3>
+        <p>Gabungan sinus dan cosinus satu sudut selalu bisa dipadatkan menjadi <strong>satu gelombang</strong>:</p>
+        <div class="box formula"><span class="box-label">Bentuk R</span>$$a\sin\theta + b\cos\theta = R\sin(\theta + \varphi), \qquad R = \sqrt{a^2+b^2}$$</div>
+        <p>Karena $\sin$ apa pun terkurung di $[-1,1]$, nilai <strong>maksimumnya $R$ dan minimumnya $-R$</strong>. Inilah rumus di balik soal Sulit no. 5 di latihan — sekarang kamu tahu <em>kenapa</em>-nya, bukan cuma hasilnya.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Padatkan $\sin\theta + \sqrt3\cos\theta$.</p>
+          <p style="margin-bottom:0;">$R = \sqrt{1+3} = 2$, dan bentuknya menjadi $2\sin(\theta + 60^\circ)$ — nilai maksimumnya $2$.</p>
+        </div>
+
+        <h3>4. Strategi Manipulasi Identitas</h3>
+        <ul>
+          <li><strong>Ubah semuanya ke sin dan cos</strong> — $\tan$, $\sec$, $\csc$ hampir selalu menyederhana setelahnya.</li>
+          <li><strong>Lihat $\sin\theta \pm \cos\theta$? Kuadratkan</strong> — hasilnya $1 \pm 2\sin\theta\cos\theta$. Ini saudara kandung trik $x+\frac{1}{x}$ di halaman Aljabar.</li>
+          <li><strong>Lihat $\sin^4\theta + \cos^4\theta$?</strong> Tulis sebagai $(\sin^2\theta+\cos^2\theta)^2 - 2\sin^2\theta\cos^2\theta = 1 - 2(\sin\theta\cos\theta)^2$.</li>
+          <li><strong>Buntu total?</strong> Cek apakah sudut-sudutnya berjumlah istimewa ($45^\circ$, $90^\circ$, $180^\circ$) — sering itulah kuncinya.</li>
+        </ul>
+
+        <div class="box recap">
+          <span class="box-label">Bekal Olimpiade</span>
+          <ul>
+            <li>Sudut aneh ($15^\circ$, $75^\circ$, $105^\circ$)? Pecah sebagai jumlah/selisih dua sudut istimewa.</li>
+            <li>Diketahui satu nilai trigonometri, ditanya sudut gandanya? Lengkapi segitiganya, lalu rumus sudut rangkap.</li>
+            <li>Maks-min $a\sin\theta + b\cos\theta$? Langsung $\pm\sqrt{a^2+b^2}$ — via bentuk $R$.</li>
+            <li>$\sin\theta \pm \cos\theta$ diketahui? Kuadratkan untuk membuka $\sin\theta\cos\theta$.</li>
+            <li>Segitiga sembarang: pasangan sisi–sudut → aturan sinus; dua sisi + apit atau tiga sisi → aturan cosinus.</li>
+            <li>Uji semuanya di tab <strong>Olimpiade</strong> pada latihan di bawah.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="bedah-soal">
+        <h2>Bedah Soal: Cara Berpikir Kompetisi</h2>
+        <p>Kerangka empat langkah yang sama dari halaman Aljabar — Pahami, Kenali Struktur, Kerjakan Rapi, Periksa — kini kita jalankan pada dua soal trigonometri sungguhan.</p>
+
+        <h3>Bedah Soal 1 — Sudut yang Menyamar</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Tentukan nilai eksak $\sin 75^\circ$.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> $75^\circ$ bukan sudut istimewa — tapi $75 = 45 + 30$, jumlah dua sudut istimewa. Struktur "sudut aneh dari penjumlahan sudut biasa" langsung menunjuk rumus jumlah sudut.</p>
+        <p><strong>Kerjakan:</strong></p>
+        <div class="box formula"><span class="box-label">Perhitungan</span>$$\sin 75^\circ = \sin45^\circ\cos30^\circ + \cos45^\circ\sin30^\circ = \frac{\sqrt6}{4} + \frac{\sqrt2}{4} = \frac{\sqrt6+\sqrt2}{4}$$</div>
+        <p><strong>Periksa dengan akal sehat:</strong> $75^\circ$ dekat $90^\circ$, jadi nilainya harus mendekati $1$. Cek: $\dfrac{\sqrt6+\sqrt2}{4} \approx \dfrac{2{,}449+1{,}414}{4} \approx 0{,}966$ — masuk akal, dan cocok dengan kalkulator. ✓</p>
+
+        <h3>Bedah Soal 2 — Berburu Nilai Maksimum</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Tentukan nilai maksimum dan minimum dari $6\sin\theta + 8\cos\theta$.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> gabungan $a\sin\theta + b\cos\theta$ dengan satu sudut yang sama — sinyal bentuk $R$. Tanpa kalkulus sama sekali.</p>
+        <p><strong>Kerjakan:</strong> $R = \sqrt{6^2+8^2} = \sqrt{100} = 10$, sehingga bentuknya $10\sin(\theta+\varphi)$. Karena sinus terkurung di $[-1,1]$: <strong>maksimum $10$, minimum $-10$</strong>.</p>
+        <p><strong>Periksa dengan satu titik:</strong> ambil $\sin\theta = \frac{3}{5}$, $\cos\theta = \frac{4}{5}$ (sah, karena $\left(\frac{3}{5}\right)^2+\left(\frac{4}{5}\right)^2 = 1$). Hasilnya $6 \cdot \frac{3}{5} + 8 \cdot \frac{4}{5} = 3{,}6 + 6{,}4 = 10$ — maksimumnya benar-benar tersentuh. ✓</p>
+
+        <div class="box recap">
+          <span class="box-label">Menulis Solusi ala Babak Esai</span>
+          <ul>
+            <li>Sebutkan identitas yang dipakai secara eksplisit: "dengan rumus jumlah sudut…", "karena $\sin^2\theta+\cos^2\theta=1$…".</li>
+            <li>Jaga syarat kuadran: nilai $\cos\theta$ dari identitas Pythagoras selalu punya dua tanda — pilih berdasarkan kuadran yang diberikan soal.</li>
+            <li>Uji kewajaran: $\sin$ dan $\cos$ tidak pernah keluar $[-1,1]$; sudut dekat $90^\circ$ bernilai dekat $1$.</li>
+            <li>Tutup dengan kesimpulan tegas: "Jadi, nilai maksimumnya adalah $10$."</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="lesson-section" id="latihan">
         <h2>Latihan Soal Bertingkat</h2>
-        <p>Pilih tingkat kesulitan, lalu klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
+        <p>Empat tingkat kesulitan — dari Mudah sampai Olimpiade. Klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
         <p class="quiz-note">Progres tersimpan otomatis di peramban ini — tekan "Ulangi" untuk mencoba lagi dari awal.</p>
 
         <div data-tier-group>
@@ -153,12 +335,13 @@
             <button class="tier-tab active" data-tier="mudah"><span class="dot"></span>Mudah</button>
             <button class="tier-tab" data-tier="sedang"><span class="dot"></span>Sedang</button>
             <button class="tier-tab" data-tier="sulit"><span class="dot"></span>Sulit</button>
+            <button class="tier-tab" data-tier="olimpiade"><span class="dot"></span>Olimpiade</button>
           </div>
 
           <!-- MUDAH -->
           <div class="tier-panel active" data-tier="mudah">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/5</strong></div>
+              <div class="tier-score">Skor <strong>0/6</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -218,13 +401,24 @@
               <div class="quiz-feedback" hidden><strong></strong>Pada $45^\circ$, sisi depan dan samping sama panjang, sehingga $\tan 45^\circ = 1$. Cek juga di simulasi lingkaran satuan!</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+            <div class="quiz-card" data-answer="A" data-qid="tri-m6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Nilai dari $\sin 150^\circ$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{1}{2}$</button>
+                <button class="quiz-option" data-option="B">$-\frac{1}{2}$</button>
+                <button class="quiz-option" data-option="C">$\frac{\sqrt3}{2}$</button>
+                <button class="quiz-option" data-option="D">$-\frac{\sqrt3}{2}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kuadran II (sin positif), sudut acuan $180^\circ-150^\circ = 30^\circ$: $\sin 150^\circ = \sin 30^\circ = \frac{1}{2}$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
           </div>
 
           <!-- SEDANG -->
           <div class="tier-panel" data-tier="sedang">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/5</strong></div>
+              <div class="tier-score">Skor <strong>0/6</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -284,13 +478,24 @@
               <div class="quiz-feedback" hidden><strong></strong>$\frac{2\pi}{3} \times \frac{180^\circ}{\pi} = 120^\circ$ — sudut ini berada di kuadran II.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+            <div class="quiz-card" data-answer="A" data-qid="tri-s6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Dua sisi segitiga panjangnya $5$ dan $8$ mengapit sudut $60^\circ$. Panjang sisi ketiga adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$7$</button>
+                <button class="quiz-option" data-option="B">$\sqrt{129}$</button>
+                <button class="quiz-option" data-option="C">$9$</button>
+                <button class="quiz-option" data-option="D">$\sqrt{89}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Aturan cosinus: $c^2 = 25+64-2(5)(8)\cos 60^\circ = 89-40 = 49$, jadi $c = 7$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
           </div>
 
           <!-- SULIT -->
           <div class="tier-panel" data-tier="sulit">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/5</strong></div>
+              <div class="tier-score">Skor <strong>0/6</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -350,7 +555,117 @@
               <div class="quiz-feedback" hidden><strong></strong>Bentuk $a\sin\theta + b\cos\theta$ punya nilai maksimum $\sqrt{a^2+b^2} = \sqrt{9+16} = 5$. Rumus andalan di soal kompetisi.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span> soal. Siap untuk tantangan lebih besar? Lihat <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a>.</div>
+            <div class="quiz-card" data-answer="A" data-qid="tri-x6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Jika $\sin\theta = \dfrac{3}{5}$ dan $\theta$ lancip, nilai $\sin 2\theta$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{24}{25}$</button>
+                <button class="quiz-option" data-option="B">$\frac{6}{5}$</button>
+                <button class="quiz-option" data-option="C">$\frac{12}{25}$</button>
+                <button class="quiz-option" data-option="D">$\frac{7}{25}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Segitiga $3$–$4$–$5$: $\cos\theta = \frac{4}{5}$. Maka $\sin 2\theta = 2\sin\theta\cos\theta = 2 \cdot \frac{3}{5} \cdot \frac{4}{5} = \frac{24}{25}$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+          </div>
+
+          <!-- OLIMPIADE -->
+          <div class="tier-panel" data-tier="olimpiade">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="tri-o1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Nilai eksak dari $\sin 15^\circ$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{\sqrt6-\sqrt2}{4}$</button>
+                <button class="quiz-option" data-option="B">$\frac{\sqrt6+\sqrt2}{4}$</button>
+                <button class="quiz-option" data-option="C">$\frac{\sqrt2-\sqrt6}{4}$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{4}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\sin(45^\circ-30^\circ) = \sin45^\circ\cos30^\circ - \cos45^\circ\sin30^\circ = \frac{\sqrt6}{4}-\frac{\sqrt2}{4} = \frac{\sqrt6-\sqrt2}{4} \approx 0{,}259$ — positif dan kecil, sesuai sudut lancip kecil.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="tri-o2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Jika $\cos\theta = \dfrac{1}{3}$, nilai $\cos 2\theta$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{7}{9}$</button>
+                <button class="quiz-option" data-option="B">$-\frac{7}{9}$</button>
+                <button class="quiz-option" data-option="C">$\frac{2}{9}$</button>
+                <button class="quiz-option" data-option="D">$-\frac{1}{3}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pilih wajah $\cos 2\theta = 2\cos^2\theta - 1$ karena yang diketahui cos: $2 \cdot \frac{1}{9} - 1 = -\frac{7}{9}$. Tidak perlu tahu $\sin\theta$ sama sekali.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="tri-o3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Nilai minimum dari $5\sin\theta - 12\cos\theta$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$-7$</button>
+                <button class="quiz-option" data-option="B">$-12$</button>
+                <button class="quiz-option" data-option="C">$-13$</button>
+                <button class="quiz-option" data-option="D">$-17$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Bentuk $R$: $R = \sqrt{5^2+12^2} = 13$, jadi rentang nilainya $[-13, 13]$ — minimumnya $-13$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="tri-o4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Jika $\sin\theta - \cos\theta = \dfrac{1}{2}$, nilai $\sin\theta\cos\theta$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{1}{8}$</button>
+                <button class="quiz-option" data-option="B">$\frac{3}{8}$</button>
+                <button class="quiz-option" data-option="C">$\frac{3}{4}$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{4}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kuadratkan: $\sin^2\theta - 2\sin\theta\cos\theta + \cos^2\theta = \frac{1}{4}$, yaitu $1 - 2\sin\theta\cos\theta = \frac{1}{4}$, sehingga $\sin\theta\cos\theta = \frac{3}{8}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="tri-o5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Jika $\tan A = \dfrac{1}{2}$ dan $\tan B = \dfrac{1}{3}$ dengan $A, B$ lancip, nilai $\tan(A+B)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{5}{6}$</button>
+                <button class="quiz-option" data-option="B">$\frac{6}{5}$</button>
+                <button class="quiz-option" data-option="C">$1$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{6}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\tan(A+B) = \dfrac{\frac{1}{2}+\frac{1}{3}}{1-\frac{1}{2}\cdot\frac{1}{3}} = \dfrac{5/6}{5/6} = 1$ — artinya $A+B = 45^\circ$. Soal klasik yang cantik.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="tri-o6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Segitiga $ABC$ memiliki $a = 10$ dan $\angle A = 30^\circ$. Jari-jari lingkaran luar segitiga itu adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$5$</button>
+                <button class="quiz-option" data-option="B">$10$</button>
+                <button class="quiz-option" data-option="C">$20$</button>
+                <button class="quiz-option" data-option="D">$40$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Aturan sinus versi lengkap: $\dfrac{a}{\sin A} = 2R$, jadi $2R = \dfrac{10}{1/2} = 20$ dan $R = 10$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="tri-o7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Dua sisi segitiga panjangnya $6$ dan $10$ mengapit sudut $30^\circ$. Luas segitiga itu adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$30$</button>
+                <button class="quiz-option" data-option="B">$15\sqrt3$</button>
+                <button class="quiz-option" data-option="C">$15$</button>
+                <button class="quiz-option" data-option="D">$60$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$L = \frac{1}{2}ab\sin C = \frac{1}{2}(6)(10)\sin 30^\circ = 30 \cdot \frac{1}{2} = 15$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="tri-o8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Jika $\sin\theta\cos\theta = \dfrac{1}{3}$, nilai $\sin^4\theta + \cos^4\theta$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{7}{9}$</button>
+                <button class="quiz-option" data-option="B">$\frac{8}{9}$</button>
+                <button class="quiz-option" data-option="C">$\frac{2}{3}$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{3}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\sin^4\theta+\cos^4\theta = (\sin^2\theta+\cos^2\theta)^2 - 2\sin^2\theta\cos^2\theta = 1 - 2\left(\frac{1}{3}\right)^2 = 1-\frac{2}{9} = \frac{7}{9}$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Fondasi trigonometrimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
           </div>
         </div>
       </div>
