@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initChecklist();
   initUnitCircle();
   initParabola();
+  initGeoAngle();
   initKatex();
 });
 
@@ -875,4 +876,233 @@ function initKatex() {
     return false;
   };
   if (!render()) window.addEventListener('load', render);
+}
+
+/* ==========================================================================
+   SIMULASI 3 — Sudut Keliling Interaktif (geometri.html)
+   Seret A, B (sudut pusat) dan C (sudut keliling) pada lingkaran.
+   ========================================================================== */
+function initGeoAngle() {
+  const host = document.getElementById('widget-sudut-keliling');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const SIZE = 340, CX = 170, CY = 170, R = 118;
+  const rad = d => d * Math.PI / 180;
+  const norm = d => ((d % 360) + 360) % 360;
+  const px = d => CX + R * Math.cos(rad(d));
+  const py = d => CY - R * Math.sin(rad(d));
+  const fmtDeg = v => String(Math.round(v * 10) / 10).replace('.', ',') + '\u00b0';
+
+  /* --- Keadaan awal: sudut pusat 120\u00b0, C di puncak --- */
+  let a = 330, b = 210, c = 90;
+
+  /* --- Bangun SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + SIZE + ' ' + SIZE,
+    role: 'img',
+    'aria-label': 'Simulasi sudut pusat dan sudut keliling: seret titik A, B, dan C pada lingkaran'
+  });
+  svgEl('circle', { cx: CX, cy: CY, r: R, class: 'uc-circ' }, svg);
+  svgEl('circle', { cx: CX, cy: CY, r: 3, fill: '#33406a' }, svg);
+  const oLbl = svgEl('text', { x: CX + 8, y: CY + 14, class: 'w-lbl' }, svg);
+  oLbl.textContent = 'O';
+
+  const chord = svgEl('line', { class: 'gc-chord' }, svg);
+  const arcO = svgEl('path', { class: 'gc-arc-o', d: '' }, svg);
+  const arcC = svgEl('path', { class: 'gc-arc-c', d: '' }, svg);
+  const radA = svgEl('line', { class: 'gc-rad' }, svg);
+  const radB = svgEl('line', { class: 'gc-rad' }, svg);
+  const insA = svgEl('line', { class: 'gc-ins' }, svg);
+  const insB = svgEl('line', { class: 'gc-ins' }, svg);
+  const ptA = svgEl('circle', { r: 6, class: 'gc-pt gold' }, svg);
+  const ptB = svgEl('circle', { r: 6, class: 'gc-pt gold' }, svg);
+  const ptC = svgEl('circle', { r: 7, class: 'gc-pt blue' }, svg);
+  const lblA = svgEl('text', { class: 'gc-lbl', 'text-anchor': 'middle' }, svg);
+  const lblB = svgEl('text', { class: 'gc-lbl', 'text-anchor': 'middle' }, svg);
+  const lblC = svgEl('text', { class: 'gc-lbl', 'text-anchor': 'middle' }, svg);
+  lblA.textContent = 'A'; lblB.textContent = 'B'; lblC.textContent = 'C';
+
+  /* --- Bangun kontrol --- */
+  const controls = elDiv('widget-controls');
+
+  const chips = elDiv('chips');
+  [[60, '60\u00b0'], [90, '90\u00b0'], [120, '120\u00b0'], [180, '180\u00b0 (Thales)']].forEach(p => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'chip';
+    btn.dataset.deg = String(p[0]);
+    btn.textContent = p[1];
+    btn.addEventListener('click', () => {
+      a = norm(270 + p[0] / 2);
+      b = norm(270 - p[0] / 2);
+      c = 90;
+      render();
+    });
+    chips.appendChild(btn);
+  });
+  controls.appendChild(chips);
+
+  const readout = elDiv('readout',
+    '<div><span>Sudut pusat \u2220AOB</span><b data-r="pusat"></b></div>' +
+    '<div><span>Sudut keliling \u2220ACB</span><b data-r="keliling"></b></div>' +
+    '<div><span>Perbandingan</span><b data-r="rasio">2 : 1</b></div>' +
+    '<div><span>Posisi titik C</span><b data-r="posisi"></b></div>');
+  controls.appendChild(readout);
+
+  const badgeWrap = elDiv('');
+  badgeWrap.innerHTML = '<span class="disc-badge gold" data-r="badge" hidden></span>';
+  controls.appendChild(badgeWrap);
+
+  const legend = elDiv('legend',
+    '<span><i class="dot" style="background:var(--medal)"></i>sudut pusat</span>' +
+    '<span><i class="dot" style="background:var(--signal)"></i>sudut keliling</span>');
+  legend.style.marginTop = '0.9rem';
+  controls.appendChild(legend);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  function arcAt(ccx, ccy, r0, startDeg, spanCCW) {
+    if (spanCCW <= 0.5 || spanCCW >= 359.5) return '';
+    const sx = ccx + r0 * Math.cos(rad(startDeg));
+    const sy = ccy - r0 * Math.sin(rad(startDeg));
+    const e2 = startDeg + spanCCW;
+    const ex = ccx + r0 * Math.cos(rad(e2));
+    const ey = ccy - r0 * Math.sin(rad(e2));
+    const large = spanCCW > 180 ? 1 : 0;
+    return 'M ' + sx.toFixed(1) + ' ' + sy.toFixed(1) +
+      ' A ' + r0 + ' ' + r0 + ' 0 ' + large + ' 0 ' + ex.toFixed(1) + ' ' + ey.toFixed(1);
+  }
+
+  /* --- Render --- */
+  function render() {
+    const ax = px(a), ay = py(a);
+    const bx = px(b), by = py(b);
+    const cx2 = px(c), cy2 = py(c);
+
+    chord.setAttribute('x1', ax.toFixed(1)); chord.setAttribute('y1', ay.toFixed(1));
+    chord.setAttribute('x2', bx.toFixed(1)); chord.setAttribute('y2', by.toFixed(1));
+    radA.setAttribute('x1', CX); radA.setAttribute('y1', CY);
+    radA.setAttribute('x2', ax.toFixed(1)); radA.setAttribute('y2', ay.toFixed(1));
+    radB.setAttribute('x1', CX); radB.setAttribute('y1', CY);
+    radB.setAttribute('x2', bx.toFixed(1)); radB.setAttribute('y2', by.toFixed(1));
+    insA.setAttribute('x1', cx2.toFixed(1)); insA.setAttribute('y1', cy2.toFixed(1));
+    insA.setAttribute('x2', ax.toFixed(1)); insA.setAttribute('y2', ay.toFixed(1));
+    insB.setAttribute('x1', cx2.toFixed(1)); insB.setAttribute('y1', cy2.toFixed(1));
+    insB.setAttribute('x2', bx.toFixed(1)); insB.setAttribute('y2', by.toFixed(1));
+    ptA.setAttribute('cx', ax.toFixed(1)); ptA.setAttribute('cy', ay.toFixed(1));
+    ptB.setAttribute('cx', bx.toFixed(1)); ptB.setAttribute('cy', by.toFixed(1));
+    ptC.setAttribute('cx', cx2.toFixed(1)); ptC.setAttribute('cy', cy2.toFixed(1));
+
+    const lp = (el, d) => {
+      el.setAttribute('x', (CX + (R + 17) * Math.cos(rad(d))).toFixed(1));
+      el.setAttribute('y', (CY - (R + 17) * Math.sin(rad(d)) + 4).toFixed(1));
+    };
+    lp(lblA, a); lp(lblB, b); lp(lblC, c);
+
+    /* Busur yang dihadapi C = busur AB yang TIDAK memuat C */
+    const ccwAB = norm(b - a);
+    const cIn = norm(c - a) < ccwAB;
+    const faced = cIn ? 360 - ccwAB : ccwAB;
+    const startFaced = cIn ? b : a;
+    const ins = faced / 2;
+
+    arcO.setAttribute('d', arcAt(CX, CY, 30, startFaced, faced));
+
+    const dCA = norm(Math.atan2(cy2 - ay, ax - cx2) * 180 / Math.PI);
+    const dCB = norm(Math.atan2(cy2 - by, bx - cx2) * 180 / Math.PI);
+    const sAB = norm(dCB - dCA);
+    const insStart = sAB <= 180 ? dCA : dCB;
+    const insSpan = sAB <= 180 ? sAB : 360 - sAB;
+    arcC.setAttribute('d', arcAt(cx2, cy2, 22, insStart, insSpan));
+
+    q('[data-r="pusat"]').textContent = fmtDeg(faced) + (faced > 180.5 ? ' \u00b7 refleks' : '');
+    q('[data-r="keliling"]').textContent = fmtDeg(ins);
+    q('[data-r="posisi"]').textContent =
+      faced < 179.5 ? 'C di busur besar' :
+      faced > 180.5 ? 'C di busur kecil' : 'C menghadap diameter';
+
+    const badge = q('[data-r="badge"]');
+    if (Math.abs(faced - 180) < 0.75) {
+      badge.hidden = false;
+      badge.textContent = 'Teorema Thales \u00b7 \u2220ACB = 90\u00b0';
+    } else {
+      badge.hidden = true;
+    }
+
+    note.textContent = faced > 180.5
+      ? 'C kini di busur kecil: ia menghadap busur besar (refleks), jadi \u2220ACB = \u00bd \u00d7 busur besar. Dua posisi C di busur berbeda selalu berjumlah 180\u00b0 \u2014 itulah segiempat tali busur.'
+      : 'Seret titik biru C menyusuri busur \u2014 \u2220ACB tidak berubah selama C tetap di busur yang sama. Seret A atau B (emas) untuk mengubah sudut pusatnya.';
+
+    const minor = Math.min(ccwAB, 360 - ccwAB);
+    chips.querySelectorAll('.chip').forEach(ch => {
+      ch.classList.toggle('active', Math.round(minor) === Number(ch.dataset.deg));
+    });
+  }
+
+  /* --- Seret titik --- */
+  let dragKey = null;
+  const svgXY = e => {
+    const rect = svg.getBoundingClientRect();
+    if (!rect.width) return null;
+    return {
+      x: (e.clientX - rect.left) * (SIZE / rect.width),
+      y: (e.clientY - rect.top) * (SIZE / rect.height)
+    };
+  };
+  const angDist = (u, v) => {
+    const d = norm(u - v);
+    return Math.min(d, 360 - d);
+  };
+  function moveTo(p) {
+    let deg = norm(Math.round(Math.atan2(CY - p.y, p.x - CX) * 180 / Math.PI));
+    for (let s2 = 0; s2 <= 360; s2 += 15) {
+      if (Math.abs(deg - s2) <= 3) { deg = s2 % 360; break; }
+    }
+    if (dragKey === 'a') {
+      if (angDist(deg, b) < 8) return;
+      a = deg;
+    } else if (dragKey === 'b') {
+      if (angDist(deg, a) < 8) return;
+      b = deg;
+    } else {
+      c = deg;
+    }
+    render();
+  }
+  svg.addEventListener('pointerdown', e => {
+    const p = svgXY(e);
+    if (!p) return;
+    let best = null, bd = 1e9;
+    [['a', a], ['b', b], ['c', c]].forEach(k => {
+      const d = Math.hypot(p.x - px(k[1]), p.y - py(k[1]));
+      if (d < bd) { bd = d; best = k[0]; }
+    });
+    if (bd > 34) return;
+    dragKey = best;
+    try { svg.setPointerCapture(e.pointerId); } catch (err) {}
+    moveTo(p);
+    e.preventDefault();
+  });
+  svg.addEventListener('pointermove', e => {
+    if (!dragKey) return;
+    const p = svgXY(e);
+    if (p) moveTo(p);
+  });
+  ['pointerup', 'pointercancel'].forEach(ev =>
+    svg.addEventListener(ev, () => { dragKey = null; }));
+
+  render();
 }
