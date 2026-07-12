@@ -661,6 +661,10 @@ footer {
 .box.recap ul { margin: 0 0 0 1.15rem; }
 .box.recap li { font-size: 0.93rem; margin-bottom: 0.4rem; color: var(--chalk-dim); }
 .box.recap li:last-child { margin-bottom: 0; }
+.box.warn { border-left-color: var(--incorrect); }
+.box.warn .box-label { color: var(--incorrect); }
+.box.warn ul { margin-bottom: 0; }
+.box.warn li:last-child { margin-bottom: 0; }
 
 .math-table {
   width: 100%;

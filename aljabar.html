@@ -60,6 +60,7 @@
       <a href="#persamaan-linear">Persamaan Linear</a>
       <a href="#persamaan-kuadrat">Persamaan Kuadrat</a>
       <a href="#menuju-olimpiade">Menuju Olimpiade</a>
+      <a href="#bedah-soal">Bedah Soal</a>
       <a href="#latihan">Latihan Soal</a>
     </aside>
 
@@ -69,6 +70,15 @@
         <h2>Pendahuluan</h2>
         <p>Aljabar adalah cabang Matematika yang menggunakan <strong>simbol atau huruf</strong> untuk mewakili bilangan yang belum diketahui nilainya. Simbol ini disebut <strong>variabel</strong>, biasa ditulis sebagai $x$, $y$, atau $n$.</p>
         <p>Alih-alih menghitung satu angka spesifik, Aljabar membantu kita menulis <em class="accent-word">pola umum</em> yang berlaku untuk banyak kasus sekaligus. Karena itu, Aljabar menjadi fondasi hampir semua cabang Matematika lainnya — dari Trigonometri, Kalkulus, sampai soal-soal Olimpiade.</p>
+        <div class="box">
+          <span class="box-label">Peta Belajar Halaman Ini</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Pahami dulu, hafal belakangan</strong> — baca tiap konsep pelan-pelan sampai kamu bisa menjelaskannya dengan kalimatmu sendiri.</li>
+            <li><strong>Tutup contohnya</strong> — sebelum membaca penyelesaian, coba kerjakan sendiri; nilai belajarnya justru ada di percobaan pertama itu.</li>
+            <li><strong>Mainkan simulasinya</strong> — Laboratorium Parabola membuat rumus yang abstrak jadi terlihat.</li>
+            <li><strong>Naik bertahap di latihan</strong> — dari Mudah sampai Olimpiade; ulangi tingkat yang skornya belum penuh.</li>
+          </ul>
+        </div>
       </div>
 
       <div class="lesson-section" id="konsep-dasar">
@@ -85,6 +95,16 @@
           <li><strong>Konstanta</strong> — angka tetap yang berdiri sendiri. Di sini, konstantanya adalah $5$.</li>
         </ul>
         <p>Setiap bagian yang dipisahkan tanda $+$ atau $-$ disebut <strong>suku</strong>. Jika dua suku memiliki variabel dan pangkat yang sama persis (misalnya $3x$ dan $5x$), keduanya disebut <strong>suku sejenis</strong> dan bisa digabungkan.</p>
+        <div class="box warn">
+          <span class="box-label">Awas, Jebakan Klasik!</span>
+          <ul>
+            <li>$3x + 5$ <strong>tidak bisa</strong> digabung menjadi $8x$ — $3x$ dan $5$ bukan suku sejenis.</li>
+            <li>$x \cdot x = x^2$, sedangkan $x + x = 2x$. Perkalian menaikkan pangkat; penjumlahan menggandakan koefisien.</li>
+            <li>$(a+b)^2 = a^2 + 2ab + b^2$, <strong>bukan</strong> $a^2 + b^2$. Suku tengah $2ab$ paling sering dilupakan.</li>
+            <li>$-(a-b) = -a+b$ — tanda minus di depan kurung menyebar ke <em>semua</em> suku di dalamnya.</li>
+            <li>$2x^2$ berarti $2 \cdot (x^2)$, bukan $(2x)^2 = 4x^2$. Pangkat hanya mengikat yang tepat di sebelahnya.</li>
+          </ul>
+        </div>
       </div>
 
       <div class="lesson-section" id="operasi">
@@ -99,7 +119,7 @@
         </div>
 
         <h3>Perkalian &amp; Sifat Distributif</h3>
-        <p>Untuk mengalikan bentuk seperti $a(b+c)$, gunakan sifat distributif: $a(b+c) = ab + ac$.</p>
+        <p>Untuk mengalikan bentuk seperti $a(b+c)$, gunakan sifat distributif: $a(b+c) = ab + ac$. Ini bukan aturan hafalan — bayangkan persegi panjang selebar $a$ dengan panjang $b+c$: luas totalnya jelas sama dengan luas dua petak $ab$ dan $ac$ yang berdampingan. Intinya, setiap suku di dalam kurung harus "kena" pengali di luar, tanpa terkecuali.</p>
         <div class="box example">
           <span class="box-label">Contoh</span>
           <p style="margin-bottom:0.3rem;">Jabarkan $(x+2)(x+3)$.</p>
@@ -113,6 +133,11 @@
           <p style="margin-bottom:0.3rem;">Faktorkan $6x + 9$.</p>
           <p style="margin-bottom:0;">Faktor persekutuan terbesar dari $6$ dan $9$ adalah $3$, sehingga $6x+9 = 3(2x+3)$.</p>
         </div>
+        <div class="box example">
+          <span class="box-label">Contoh — Selisih Kuadrat</span>
+          <p style="margin-bottom:0.3rem;">Faktorkan $9x^2 - 16$.</p>
+          <p style="margin-bottom:0;">Kenali sebagai selisih kuadrat: $(3x)^2 - 4^2 = (3x-4)(3x+4)$. Pola $a^2-b^2=(a-b)(a+b)$ ini akan jadi senjata utamamu sampai level olimpiade.</p>
+        </div>
       </div>
 
       <div class="lesson-section" id="persamaan-linear">
@@ -120,11 +145,26 @@
         <p>Persamaan Linear Satu Variabel (PLSV) berbentuk umum:</p>
         <div class="box formula"><span class="box-label">Bentuk Umum</span>$$ax + b = c$$</div>
         <p>dengan $a \neq 0$. Tujuannya adalah mencari nilai $x$ yang membuat persamaan itu benar.</p>
+        <p>Bayangkan persamaan sebagai <em class="accent-word">timbangan yang seimbang</em>: ruas kiri dan kanan punya "berat" yang sama. Selama kedua ruas diperlakukan dengan cara yang persis sama — ditambah, dikurangi, dikali, atau dibagi (asal bukan dengan nol) — timbangan tetap seimbang. Aturan populer <strong>"pindah ruas ganti tanda"</strong> sebenarnya hanyalah singkatan dari mengurangkan bilangan yang sama pada kedua ruas.</p>
         <div class="box example">
           <span class="box-label">Contoh</span>
           <p style="margin-bottom:0.3rem;">Selesaikan $2x + 5 = 17$.</p>
           <p style="margin-bottom:0.15rem;">Kurangi kedua ruas dengan $5$: $2x = 12$</p>
           <p style="margin-bottom:0;">Bagi kedua ruas dengan $2$: $x = 6$</p>
+        </div>
+
+        <h3>Menerjemahkan Kalimat ke Persamaan</h3>
+        <p>Banyak soal — termasuk soal kompetisi — datang sebagai cerita, bukan persamaan. Keterampilan pertamanya adalah menerjemahkan:</p>
+        <ul>
+          <li>"jumlah $a$ dan $b$" $\to$ $a+b$; "selisihnya" $\to$ $a-b$</li>
+          <li>"dua kali umur adik" $\to$ $2x$; "lima lebihnya dari $y$" $\to$ $y+5$</li>
+          <li>"hasil kalinya $40$" $\to$ $pq = 40$</li>
+          <li>"tiga tahun lagi" $\to$ ganti $x$ dengan $x+3$</li>
+        </ul>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">"Umur ayah $4$ tahun lebih tua dari tiga kali umur adik."</p>
+          <p style="margin-bottom:0;">Misalkan umur adik $= a$. Kalimat itu langsung menjadi: umur ayah $= 3a + 4$. Begitu terjemahannya beres, sisanya tinggal aljabar biasa.</p>
         </div>
       </div>
 
@@ -148,6 +188,23 @@
           <p style="margin-bottom:0.15rem;">Cari dua bilangan yang jika dikalikan $=6$ dan dijumlahkan $=-5$, yaitu $-2$ dan $-3$.</p>
           <p style="margin-bottom:0;">$(x-2)(x-3)=0 \Rightarrow x=2 \text{ atau } x=3$</p>
         </div>
+
+        <h3>Dari Mana Datangnya Rumus ABC?</h3>
+        <p>Rumus ABC bukan mantra — ia lahir dari teknik <strong>melengkapkan kuadrat sempurna</strong>. Rasakan dulu tekniknya pada contoh:</p>
+        <div class="box example">
+          <span class="box-label">Contoh — Melengkapkan Kuadrat</span>
+          <p style="margin-bottom:0.3rem;">Selesaikan $x^2 + 6x - 7 = 0$.</p>
+          <p style="margin-bottom:0.15rem;">Pindahkan konstanta: $x^2 + 6x = 7$. Tambahkan $\left(\frac{6}{2}\right)^2 = 9$ ke kedua ruas: $x^2+6x+9 = 16$.</p>
+          <p style="margin-bottom:0;">Ruas kiri kini kuadrat sempurna: $(x+3)^2 = 16$, sehingga $x+3 = \pm 4$, yaitu $x=1$ atau $x=-7$.</p>
+        </div>
+        <p>Terapkan langkah yang sama pada bentuk umum $ax^2+bx+c=0$: bagi kedua ruas dengan $a$, pindahkan konstanta, lalu tambahkan $\left(\frac{b}{2a}\right)^2$ ke kedua ruas. Hasilnya:</p>
+        <div class="box">
+          <span class="box-label">Penurunan Singkat</span>
+          $$\left(x + \frac{b}{2a}\right)^2 = \frac{b^2 - 4ac}{4a^2}$$
+          <p style="margin:0.6rem 0; text-align:center;">Tarik akar kedua ruas, lalu pindahkan $\frac{b}{2a}$:</p>
+          $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+        </div>
+        <p>Karena itu pula bagian di bawah tanda akar — $b^2-4ac$ — memegang kendali penuh atas jenis akarnya: itulah sang <em class="accent-word">diskriminan</em> yang kita bahas berikut ini.</p>
 
         <h3>Diskriminan: Meramal Jenis Akar</h3>
         <p>Sebelum menyelesaikan persamaan kuadrat, kita bisa "mengintip" jenis akarnya lewat <strong>diskriminan</strong> — bagian di bawah tanda akar pada rumus ABC:</p>
@@ -184,7 +241,7 @@
 
       <div class="lesson-section" id="menuju-olimpiade">
         <h2>Menuju Aljabar Olimpiade</h2>
-        <p>Sampai di sini, seluruh aljabar dasar sudah di tanganmu. Di level olimpiade, soal jarang berbunyi "selesaikan persamaan ini" — yang diuji adalah <em class="accent-word">kejelian melihat struktur</em>: mengenali identitas yang tersembunyi, memanfaatkan hubungan antar-akar, dan memfaktorkan bentuk yang kelihatannya buntu. Empat perkakas berikut adalah bekal wajibnya.</p>
+        <p>Sampai di sini, seluruh aljabar dasar sudah di tanganmu. Di level olimpiade, soal jarang berbunyi "selesaikan persamaan ini" — yang diuji adalah <em class="accent-word">kejelian melihat struktur</em>: mengenali identitas yang tersembunyi, memanfaatkan hubungan antar-akar, dan memfaktorkan bentuk yang kelihatannya buntu. Enam perkakas berikut adalah bekal wajibnya.</p>
 
         <h3>1. Rumus Vieta — Membaca Akar Tanpa Menyelesaikan</h3>
         <p>Jika $x_1$ dan $x_2$ adalah akar-akar $ax^2+bx+c=0$, keduanya selalu terikat oleh hubungan:</p>
@@ -203,6 +260,8 @@
           <li>$(a\pm b)^2 = a^2 \pm 2ab + b^2$, sehingga $a^2+b^2=(a+b)^2-2ab$.</li>
           <li>$a^3\pm b^3=(a\pm b)(a^2\mp ab+b^2)$, dengan bentuk praktis $a^3+b^3=(a+b)^3-3ab(a+b)$.</li>
           <li>$n(n+2)+1=(n+1)^2$ — kuadrat sempurna yang sering "disembunyikan" di balik angka besar.</li>
+          <li>$a^2+b^2+c^2-ab-bc-ca = \frac{1}{2}\left[(a-b)^2+(b-c)^2+(c-a)^2\right]$ — selalu $\ge 0$; kunci banyak ketaksamaan tiga variabel.</li>
+          <li>Identitas Sophie Germain: $a^4+4b^4 = (a^2+2b^2-2ab)(a^2+2b^2+2ab)$ — pemecah soal "buktikan bilangan ini bukan prima".</li>
         </ul>
         <div class="box example">
           <span class="box-label">Contoh</span>
@@ -213,7 +272,7 @@
         <h3>3. Ketaksamaan AM-GM</h3>
         <p>Rataan aritmetika (<em>arithmetic mean</em>) tidak pernah lebih kecil dari rataan geometri (<em>geometric mean</em>). Untuk dua bilangan tak negatif:</p>
         <div class="box formula"><span class="box-label">AM-GM</span>$$\frac{a+b}{2} \;\ge\; \sqrt{ab}\,, \qquad \text{kesamaan terjadi saat } a=b$$</div>
-        <p>Versi umumnya berlaku untuk $n$ bilangan. Inilah alat standar mencari <strong>nilai minimum atau maksimum</strong> tanpa kalkulus — pilar "AM-GM" yang kamu lihat di <a href="olimpiade.html">Peta Jalan Olimpiade</a>.</p>
+        <p>Versi tiga variabelnya: $\dfrac{a+b+c}{3} \ge \sqrt[3]{abc}$ untuk $a,b,c \ge 0$ (kesamaan saat $a=b=c$), dan pola ini berlanjut untuk $n$ bilangan. Inilah alat standar mencari <strong>nilai minimum atau maksimum</strong> tanpa kalkulus — pilar "AM-GM" yang kamu lihat di <a href="olimpiade.html">Peta Jalan Olimpiade</a>.</p>
         <div class="box example">
           <span class="box-label">Contoh</span>
           <p style="margin-bottom:0.3rem;">Untuk $x>0$, cari nilai minimum $x+\dfrac{1}{x}$.</p>
@@ -228,6 +287,24 @@
           <p style="margin-bottom:0;">$xy-2x-2y+4=4 \Rightarrow (x-2)(y-2)=4$. Pasangan faktor positif dari $4$: $1\times4$, $2\times2$, $4\times1$ — menghasilkan $(3,6)$, $(4,4)$, dan $(6,3)$.</p>
         </div>
 
+        <h3>5. Bentuk Simetris $x + \frac{1}{x}$ — Kuadratkan!</h3>
+        <p>Soal kompetisi gemar memberi nilai $x+\frac{1}{x}$ lalu menanyakan pangkat-pangkat tingginya. Jangan cari $x$-nya (biasanya irasional dan berantakan) — <strong>kuadratkan bentuknya</strong>. Karena $\left(x+\frac{1}{x}\right)^2 = x^2 + 2 + \frac{1}{x^2}$ (suku tengahnya $2 \cdot x \cdot \frac{1}{x} = 2$, konstan!), diperoleh:</p>
+        <div class="box formula"><span class="box-label">Kunci</span>$$x^2+\frac{1}{x^2} = \left(x+\frac{1}{x}\right)^2 - 2$$</div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Jika $x+\dfrac{1}{x} = 3$, tentukan $x^2+\dfrac{1}{x^2}$.</p>
+          <p style="margin-bottom:0;">Langsung: $3^2 - 2 = 7$. Pangkat tiga dan seterusnya menyusul dengan trik serupa — lihat Bedah Soal di bawah.</p>
+        </div>
+
+        <h3>6. Deret Runtuh (Telescoping)</h3>
+        <p>Jumlah pecahan panjang yang penyebutnya berpola sering bisa "diruntuhkan": pecah tiap suku menjadi selisih dua pecahan, dan hampir semuanya saling menghapus.</p>
+        <div class="box formula"><span class="box-label">Dekomposisi Kunci</span>$$\frac{1}{n(n+1)} = \frac{1}{n} - \frac{1}{n+1}$$</div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Hitung $\dfrac{1}{1\cdot2}+\dfrac{1}{2\cdot3}+\dfrac{1}{3\cdot4}$.</p>
+          <p style="margin-bottom:0;">$\left(1-\frac{1}{2}\right)+\left(\frac{1}{2}-\frac{1}{3}\right)+\left(\frac{1}{3}-\frac{1}{4}\right)$ — suku-suku tengah saling menghapus, tersisa $1-\frac{1}{4}=\frac{3}{4}$.</p>
+        </div>
+
         <div class="box recap">
           <span class="box-label">Bekal Olimpiade</span>
           <ul>
@@ -235,7 +312,63 @@
             <li>Lihat angka besar berdekatan? Curigai selisih kuadrat atau pola $n(n+2)+1=(n+1)^2$.</li>
             <li>Butuh nilai minimum/maksimum bentuk positif? Coba AM-GM sebelum cara lain.</li>
             <li>Persamaan bulat bercampur $xy$, $x$, dan $y$? Faktorkan paksa ala Simon.</li>
-            <li>Uji keempatnya langsung di tab <strong>Olimpiade</strong> pada latihan di bawah.</li>
+            <li>Diberi $x+\frac{1}{x}$? Kuadratkan — jangan pernah mencari $x$-nya.</li>
+            <li>Jumlah pecahan berpola panjang? Curigai deret runtuh: $\frac{1}{n(n+1)}=\frac{1}{n}-\frac{1}{n+1}$.</li>
+            <li>Uji semuanya langsung di tab <strong>Olimpiade</strong> pada latihan di bawah.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="bedah-soal">
+        <h2>Bedah Soal: Cara Berpikir Kompetisi</h2>
+        <p>Perkakas saja tidak cukup — pemenang kompetisi punya <em class="accent-word">alur berpikir</em> yang bisa dilatih. Setiap kali menghadapi soal, jalani empat langkah ini:</p>
+
+        <div class="roadmap" style="margin:1.8rem 0 2.2rem;">
+          <div class="roadmap-step" data-step="1">
+            <h4>Pahami</h4>
+            <p>Apa yang diketahui, apa yang ditanya? Tulis ulang dengan simbolmu sendiri. Banyak soal gugur di sini karena tergesa-gesa membaca.</p>
+          </div>
+          <div class="roadmap-step" data-step="2">
+            <h4>Kenali Struktur</h4>
+            <p>Bentuknya mirip perkakas yang mana — Vieta? Selisih kuadrat? AM-GM? Deret runtuh? Kalau buntu, coba kasus kecil dulu ($n=1,2,3$) dan cari polanya.</p>
+          </div>
+          <div class="roadmap-step" data-step="3">
+            <h4>Kerjakan Rapi</h4>
+            <p>Satu baris satu langkah, setiap langkah punya alasan. Di babak esai OSN, kerapian penulisan adalah bagian dari nilai.</p>
+          </div>
+          <div class="roadmap-step" data-step="4">
+            <h4>Periksa</h4>
+            <p>Substitusikan balik, uji dengan angka kecil, atau selesaikan lewat jalan kedua. Jawaban yang lolos dua jalan hampir pasti benar.</p>
+          </div>
+        </div>
+
+        <h3>Bedah Soal 1 — Bentuk Simetris</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Diketahui $x + \dfrac{1}{x} = 3$. Tentukan nilai $x^3 + \dfrac{1}{x^3}$.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> yang ditanya bentuk simetris pangkat tiga. Mencari $x$ secara langsung berarti menyelesaikan $x^2-3x+1=0$ yang akarnya irasional — jalan berlumpur. Struktur $x+\frac{1}{x}$ berteriak: pakai identitas pangkat.</p>
+        <p><strong>Kerjakan:</strong> kubikkan bentuk yang diketahui: $\left(x+\frac{1}{x}\right)^3 = x^3+\frac{1}{x^3}+3\left(x+\frac{1}{x}\right)$. Substitusikan nilai $3$:</p>
+        <div class="box formula"><span class="box-label">Perhitungan</span>$$27 = \left(x^3+\frac{1}{x^3}\right) + 3(3) \;\Rightarrow\; x^3+\frac{1}{x^3} = 18$$</div>
+        <p><strong>Periksa lewat jalan kedua:</strong> dari perkakas 5, $x^2+\frac{1}{x^2}=7$. Maka $x^3+\frac{1}{x^3} = \left(x+\frac{1}{x}\right)\left(x^2-1+\frac{1}{x^2}\right) = 3 \times 6 = 18$. Dua jalan, satu jawaban — aman. ✓</p>
+
+        <h3>Bedah Soal 2 — Deret Runtuh</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Hitung $S = \dfrac{1}{1\cdot2}+\dfrac{1}{2\cdot3}+\dfrac{1}{3\cdot4}+\cdots+\dfrac{1}{99\cdot100}$.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> ada $99$ suku — menjumlahkan satu-satu mustahil. Penyebutnya berpola $n(n+1)$: sinyal kuat deret runtuh.</p>
+        <p><strong>Kerjakan:</strong> pecah tiap suku dengan $\frac{1}{n(n+1)}=\frac{1}{n}-\frac{1}{n+1}$:</p>
+        <div class="box formula"><span class="box-label">Perhitungan</span>$$S = \left(1-\tfrac{1}{2}\right)+\left(\tfrac{1}{2}-\tfrac{1}{3}\right)+\cdots+\left(\tfrac{1}{99}-\tfrac{1}{100}\right) = 1 - \frac{1}{100} = \frac{99}{100}$$</div>
+        <p><strong>Periksa dengan kasus kecil:</strong> dua suku pertama memberi $\frac{1}{2}+\frac{1}{6}=\frac{2}{3}$, dan rumus memberi $1-\frac{1}{3}=\frac{2}{3}$. Cocok — pola runtuhnya benar. ✓</p>
+
+        <div class="box recap">
+          <span class="box-label">Menulis Solusi ala Babak Esai</span>
+          <ul>
+            <li>Definisikan setiap simbol sebelum dipakai: "Misalkan umur adik $=a$…".</li>
+            <li>Beri alasan tiap lompatan: "berdasarkan Vieta", "dengan AM-GM karena $x>0$".</li>
+            <li>Jangan hilangkan syarat: akar harus real, panjang harus positif, penyebut tak boleh nol.</li>
+            <li>Tutup dengan kesimpulan tegas: "Jadi, nilai $k$ adalah $12$." — jangan biarkan juri menebak.</li>
           </ul>
         </div>
       </div>
@@ -454,7 +587,7 @@
           <!-- OLIMPIADE -->
           <div class="tier-panel" data-tier="olimpiade">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/5</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -514,7 +647,40 @@
               <div class="quiz-feedback" hidden><strong></strong>Kalikan $6xy$: $6y+6x=xy$, lalu faktorkan paksa: $(x-6)(y-6)=36$. Karena $36$ memiliki $9$ pembagi positif, ada $9$ pasangan terurut — trik Simon beraksi.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span> soal. Fondasimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
+            <div class="quiz-card" data-answer="A" data-qid="alj-o6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Jika $x + \dfrac{1}{x} = 4$, nilai $x^2 + \dfrac{1}{x^2}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$14$</button>
+                <button class="quiz-option" data-option="B">$16$</button>
+                <button class="quiz-option" data-option="C">$12$</button>
+                <button class="quiz-option" data-option="D">$18$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kuadratkan: $\left(x+\frac{1}{x}\right)^2 = x^2+2+\frac{1}{x^2} = 16$, sehingga $x^2+\frac{1}{x^2} = 16-2 = 14$. Jangan pernah mencari $x$-nya!</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="alj-o7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Nilai dari $\dfrac{1}{1\cdot2}+\dfrac{1}{2\cdot3}+\dfrac{1}{3\cdot4}+\cdots+\dfrac{1}{9\cdot10}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{10}{11}$</button>
+                <button class="quiz-option" data-option="B">$1$</button>
+                <button class="quiz-option" data-option="C">$\frac{89}{90}$</button>
+                <button class="quiz-option" data-option="D">$\frac{9}{10}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Deret runtuh: $\frac{1}{n(n+1)}=\frac{1}{n}-\frac{1}{n+1}$, jadi jumlahnya $\left(1-\frac{1}{2}\right)+\left(\frac{1}{2}-\frac{1}{3}\right)+\cdots+\left(\frac{1}{9}-\frac{1}{10}\right) = 1-\frac{1}{10} = \frac{9}{10}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="alj-o8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Untuk bilangan positif $a, b, c$ dengan $abc = 27$, nilai minimum dari $a+b+c$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3$</button>
+                <button class="quiz-option" data-option="B">$9$</button>
+                <button class="quiz-option" data-option="C">$27$</button>
+                <button class="quiz-option" data-option="D">$81$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>AM-GM tiga variabel: $\frac{a+b+c}{3} \ge \sqrt[3]{abc} = \sqrt[3]{27} = 3$, jadi $a+b+c \ge 9$, tercapai saat $a=b=c=3$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Fondasimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
           </div>
         </div>
       </div>
