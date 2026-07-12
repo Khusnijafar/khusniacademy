@@ -57,7 +57,9 @@
       <a href="#pendahuluan">Pendahuluan</a>
       <a href="#konsep-dasar">Konsep Dasar</a>
       <a href="#operasi">Operasi Bentuk Aljabar</a>
+      <a href="#pangkat">Pangkat &amp; Akar</a>
       <a href="#persamaan-linear">Persamaan Linear</a>
+      <a href="#spldv">Sistem Persamaan</a>
       <a href="#persamaan-kuadrat">Persamaan Kuadrat</a>
       <a href="#menuju-olimpiade">Menuju Olimpiade</a>
       <a href="#bedah-soal">Bedah Soal</a>
@@ -140,6 +142,33 @@
         </div>
       </div>
 
+      <div class="lesson-section" id="pangkat">
+        <h2>Pangkat &amp; Akar</h2>
+        <p>Pangkat adalah singkatan perkalian berulang: $a^n$ berarti $a$ dikalikan dirinya sendiri sebanyak $n$ kali. Dari definisi sesederhana ini lahir sifat-sifat yang wajib mendarah daging:</p>
+        <div class="box formula">
+          <span class="box-label">Sifat-Sifat Pangkat</span>
+          $$a^m \cdot a^n = a^{m+n} \qquad \frac{a^m}{a^n} = a^{m-n} \qquad (a^m)^n = a^{mn}$$
+        </div>
+        <ul>
+          <li>$a^0 = 1$ untuk $a \neq 0$ — konsisten dengan $\frac{a^n}{a^n} = a^{n-n}$.</li>
+          <li>$a^{-n} = \dfrac{1}{a^n}$ — pangkat negatif berarti kebalikan.</li>
+          <li>$a^{1/n} = \sqrt[n]{a}$ — akar hanyalah pangkat pecahan, jadi semua sifat di atas tetap berlaku untuknya.</li>
+          <li>$(ab)^n = a^n b^n$ — pangkat menyebar ke perkalian, <strong>tapi tidak ke penjumlahan</strong>: $(a+b)^n \neq a^n + b^n$.</li>
+        </ul>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Sederhanakan $\dfrac{2^5 \cdot 2^3}{4^2}$.</p>
+          <p style="margin-bottom:0;">Samakan basisnya dulu: $4^2 = (2^2)^2 = 2^4$. Maka $\dfrac{2^{5+3}}{2^4} = 2^{8-4} = 2^4 = 16$. <em class="accent-word">Menyamakan basis</em> adalah langkah pembuka hampir semua soal pangkat, dari ulangan sekolah sampai OSN.</p>
+        </div>
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>$a^m \cdot a^n = a^{m+n}$, <strong>bukan</strong> $a^{mn}$ — perkalian basis sama <em>menjumlahkan</em> pangkat.</li>
+            <li>$\sqrt{a^2+b^2} \neq a+b$ — akar tidak bisa dipecah melewati tanda tambah.</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="lesson-section" id="persamaan-linear">
         <h2>Persamaan Linear Satu Variabel</h2>
         <p>Persamaan Linear Satu Variabel (PLSV) berbentuk umum:</p>
@@ -166,6 +195,30 @@
           <p style="margin-bottom:0.3rem;">"Umur ayah $4$ tahun lebih tua dari tiga kali umur adik."</p>
           <p style="margin-bottom:0;">Misalkan umur adik $= a$. Kalimat itu langsung menjadi: umur ayah $= 3a + 4$. Begitu terjemahannya beres, sisanya tinggal aljabar biasa.</p>
         </div>
+
+        <h3>Pertidaksamaan: Satu Aturan Ekstra</h3>
+        <p>Pertidaksamaan ($&lt;$, $&gt;$, $\le$, $\ge$) diselesaikan persis seperti persamaan, dengan <strong>satu pengecualian penting</strong>: mengalikan atau membagi kedua ruas dengan bilangan <em>negatif</em> membalik arah tandanya.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Selesaikan $-2x + 3 &gt; 9$.</p>
+          <p style="margin-bottom:0;">Kurangi $3$: $-2x &gt; 6$. Bagi dengan $-2$ <strong>dan balik tandanya</strong>: $x &lt; -3$. Cek dengan $x=-4$: $8+3 = 11 &gt; 9$ ✓.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="spldv">
+        <h2>Sistem Persamaan Linear</h2>
+        <p>Satu persamaan dengan dua variabel punya tak hingga penyelesaian. Tapi <strong>dua persamaan</strong> dengan dua variabel (SPLDV) biasanya mengunci tepat satu pasangan jawaban. Dua metode utamanya wajib sama-sama dikuasai:</p>
+        <ul>
+          <li><strong>Substitusi</strong> — nyatakan satu variabel dari persamaan pertama, lalu tancapkan ke persamaan kedua.</li>
+          <li><strong>Eliminasi</strong> — samakan koefisien salah satu variabel, lalu jumlahkan atau kurangkan kedua persamaan agar variabel itu lenyap.</li>
+        </ul>
+        <div class="box example">
+          <span class="box-label">Contoh — Dua Jalan, Satu Jawaban</span>
+          <p style="margin-bottom:0.3rem;">Selesaikan: $x + y = 10$ dan $x - y = 4$.</p>
+          <p style="margin-bottom:0.15rem;"><strong>Eliminasi:</strong> jumlahkan keduanya, $y$ lenyap: $2x = 14 \Rightarrow x = 7$, lalu $y = 3$.</p>
+          <p style="margin-bottom:0;"><strong>Substitusi:</strong> dari persamaan kedua, $x = y+4$; masukkan ke pertama: $(y+4)+y = 10 \Rightarrow y = 3$, lalu $x = 7$. Dua metode, jawaban sama — persis kebiasaan "periksa lewat jalan kedua" di Bedah Soal nanti.</p>
+        </div>
+        <p>Di soal kompetisi, SPLDV jarang tampil polos — ia menyamar dalam soal cerita atau berpadu dengan bentuk kuadrat (seperti soal Sulit no. 2 di latihan). Kuncinya selalu sama: <em class="accent-word">lenyapkan satu variabel dulu</em>.</p>
       </div>
 
       <div class="lesson-section" id="persamaan-kuadrat">
@@ -233,6 +286,8 @@
             <li>Hanya <strong>suku sejenis</strong> yang boleh digabungkan: $3x + 5x = 8x$.</li>
             <li>Sifat distributif: $a(b+c) = ab + ac$ — dasar menjabarkan dan memfaktorkan.</li>
             <li>PLSV: pindahkan konstanta, lalu bagi dengan koefisien untuk mengisolasi $x$.</li>
+            <li>Sifat pangkat: perkalian basis sama → jumlahkan pangkat; $(a^m)^n = a^{mn}$; akar = pangkat pecahan.</li>
+            <li>SPLDV: lenyapkan satu variabel — lewat eliminasi atau substitusi, keduanya harus memberi jawaban sama.</li>
             <li>Persamaan kuadrat: coba faktorisasi dulu; kalau buntu, rumus ABC selalu berhasil.</li>
             <li>Diskriminan $D = b^2 - 4ac$ menentukan banyaknya akar real tanpa harus menyelesaikan persamaannya.</li>
           </ul>
@@ -241,7 +296,7 @@
 
       <div class="lesson-section" id="menuju-olimpiade">
         <h2>Menuju Aljabar Olimpiade</h2>
-        <p>Sampai di sini, seluruh aljabar dasar sudah di tanganmu. Di level olimpiade, soal jarang berbunyi "selesaikan persamaan ini" — yang diuji adalah <em class="accent-word">kejelian melihat struktur</em>: mengenali identitas yang tersembunyi, memanfaatkan hubungan antar-akar, dan memfaktorkan bentuk yang kelihatannya buntu. Enam perkakas berikut adalah bekal wajibnya.</p>
+        <p>Sampai di sini, seluruh aljabar dasar sudah di tanganmu. Di level olimpiade, soal jarang berbunyi "selesaikan persamaan ini" — yang diuji adalah <em class="accent-word">kejelian melihat struktur</em>: mengenali identitas yang tersembunyi, memanfaatkan hubungan antar-akar, dan memfaktorkan bentuk yang kelihatannya buntu. Enam perkakas pertama membangun refleks manipulasi; perkakas ketujuh membuka pintu ke polinomial berderajat tinggi.</p>
 
         <h3>1. Rumus Vieta — Membaca Akar Tanpa Menyelesaikan</h3>
         <p>Jika $x_1$ dan $x_2$ adalah akar-akar $ax^2+bx+c=0$, keduanya selalu terikat oleh hubungan:</p>
@@ -305,6 +360,16 @@
           <p style="margin-bottom:0;">$\left(1-\frac{1}{2}\right)+\left(\frac{1}{2}-\frac{1}{3}\right)+\left(\frac{1}{3}-\frac{1}{4}\right)$ — suku-suku tengah saling menghapus, tersisa $1-\frac{1}{4}=\frac{3}{4}$.</p>
         </div>
 
+        <h3>7. Teorema Sisa &amp; Teorema Faktor</h3>
+        <p>Untuk polinomial $P(x)$, tidak perlu pembagian bersusun panjang hanya untuk mengetahui sisanya:</p>
+        <div class="box formula"><span class="box-label">Teorema Sisa</span>$$P(x) \text{ dibagi } (x-a) \;\Rightarrow\; \text{sisa} = P(a)$$</div>
+        <p>Konsekuensi langsungnya adalah <strong>Teorema Faktor</strong>: $(x-a)$ merupakan faktor dari $P(x)$ jika dan hanya jika $P(a)=0$. Inilah cara tercepat menebak dan memverifikasi akar polinomial berderajat tinggi — coba dulu pembagi-pembagi konstanta ($\pm1, \pm2, \dots$) sebelum menyerah.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Tentukan sisa pembagian $x^3 - 2x^2 + 5$ oleh $(x-2)$.</p>
+          <p style="margin-bottom:0;">Cukup hitung $P(2) = 8 - 8 + 5 = 5$. Selesai dalam satu baris — sisanya $5$.</p>
+        </div>
+
         <div class="box recap">
           <span class="box-label">Bekal Olimpiade</span>
           <ul>
@@ -314,6 +379,7 @@
             <li>Persamaan bulat bercampur $xy$, $x$, dan $y$? Faktorkan paksa ala Simon.</li>
             <li>Diberi $x+\frac{1}{x}$? Kuadratkan — jangan pernah mencari $x$-nya.</li>
             <li>Jumlah pecahan berpola panjang? Curigai deret runtuh: $\frac{1}{n(n+1)}=\frac{1}{n}-\frac{1}{n+1}$.</li>
+            <li>Sisa $P(x)$ dibagi $(x-a)$? Langsung hitung $P(a)$ — tanpa pembagian bersusun.</li>
             <li>Uji semuanya langsung di tab <strong>Olimpiade</strong> pada latihan di bawah.</li>
           </ul>
         </div>
@@ -389,7 +455,7 @@
           <!-- MUDAH -->
           <div class="tier-panel active" data-tier="mudah">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/5</strong></div>
+              <div class="tier-score">Skor <strong>0/6</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -449,13 +515,24 @@
               <div class="quiz-feedback" hidden><strong></strong>Koefisien adalah angka yang mengalikan variabel, yaitu $7$. Sedangkan $-4$ adalah konstanta.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+            <div class="quiz-card" data-answer="C" data-qid="alj-m6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Bentuk sederhana dari $2^3 \times 2^2$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$64$</button>
+                <button class="quiz-option" data-option="B">$12$</button>
+                <button class="quiz-option" data-option="C">$32$</button>
+                <button class="quiz-option" data-option="D">$16$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Basis sama → jumlahkan pangkat: $2^{3+2} = 2^5 = 32$. Jebakan $64$ datang dari keliru <em>mengalikan</em> pangkat ($2^6$).</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
           </div>
 
           <!-- SEDANG -->
           <div class="tier-panel" data-tier="sedang">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/5</strong></div>
+              <div class="tier-score">Skor <strong>0/6</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -515,13 +592,24 @@
               <div class="quiz-feedback" hidden><strong></strong>Kurangi kedua ruas dengan $2$: $\frac{x}{3}=5$, lalu kalikan $3$: $x=15$</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+            <div class="quiz-card" data-answer="D" data-qid="alj-s6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Jika $2x + y = 11$ dan $x - y = 1$, nilai $x$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$11$</button>
+                <button class="quiz-option" data-option="D">$4$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jumlahkan kedua persamaan agar $y$ lenyap: $3x = 12 \Rightarrow x = 4$ (dan $y = 3$). Cek: $2(4)+3 = 11$ ✓</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
           </div>
 
           <!-- SULIT -->
           <div class="tier-panel" data-tier="sulit">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/5</strong></div>
+              <div class="tier-score">Skor <strong>0/6</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -581,7 +669,18 @@
               <div class="quiz-feedback" hidden><strong></strong>Vieta: $x_1+x_2=7$ dan $x_1x_2=k$. Gunakan $(x_1-x_2)^2=(x_1+x_2)^2-4x_1x_2$, jadi $1=49-4k \Rightarrow k=12$. (Akarnya $4$ dan $3$.)</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+            <div class="quiz-card" data-answer="B" data-qid="alj-x6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Sisa pembagian $x^3 + 2x - 3$ oleh $(x-1)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3$</button>
+                <button class="quiz-option" data-option="B">$0$</button>
+                <button class="quiz-option" data-option="C">$-3$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Teorema sisa: sisa $= P(1) = 1 + 2 - 3 = 0$. Sisa nol berarti $(x-1)$ adalah <em>faktor</em> polinomial itu — teorema faktor beraksi.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
           </div>
 
           <!-- OLIMPIADE -->
