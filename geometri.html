@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geometri — Khusni Academy</title>
+<meta name="description" content="Pengenalan Geometri: sudut & garis sejajar, segitiga & Pythagoras, kekongruenan & kesebangunan, lingkaran, garis-garis istimewa, bekal geometri olimpiade (Heron, kuasa titik, kejar sudut), dan latihan soal bertingkat dari Mudah sampai Olimpiade.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#090d17">
+<link rel="canonical" href="https://khusniacademy.netlify.app/geometri.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Geometri — Khusni Academy">
+<meta property="og:description" content="Pengenalan Geometri: sudut & garis, segitiga, kekongruenan & kesebangunan, lingkaran, garis-garis istimewa, dan bekal geometri olimpiade dengan latihan soal bertingkat.">
+<meta property="og:url" content="https://khusniacademy.netlify.app/geometri.html">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Geometri — Khusni Academy">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f9dff'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia, serif' font-weight='700' fill='%23090d17' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<a class="skip-link" href="#konten">Langsung ke konten</a>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="aljabar.html">Aljabar</a>
+      <a href="trigonometri.html">Trigonometri</a>
+      <a href="geometri.html" class="active">Geometri</a>
+      <a href="olimpiade.html">Olimpiade</a>
+      <a href="fisika.html" class="soon">Fisika <span class="tag-soon">Segera</span></a>
+    </div>
+    <div class="nav-cta">
+      <a href="index.html#materi" class="btn btn-outline btn-sm">Materi Lain</a>
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero" id="konten">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><span>/</span><a href="index.html#materi">Materi</a><span>/</span><span>Geometri</span></div>
+    <span class="eyebrow">Materi · Tersedia</span>
+    <h1>Geometri</h1>
+    <p class="hero-sub">Ilmu bentuk, ukuran, dan posisi — dari sudut dan garis sejajar, sampai lingkaran dan garis-garis istimewa segitiga yang jadi arena favorit soal olimpiade.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container lesson-layout">
+    <aside class="lesson-nav">
+      <div class="lesson-nav-title">Isi Materi</div>
+      <a href="#pendahuluan">Pendahuluan</a>
+      <a href="#sudut-garis">Sudut &amp; Garis</a>
+      <a href="#segitiga">Segitiga</a>
+      <a href="#kongruen">Kongruen &amp; Sebangun</a>
+      <a href="#lingkaran">Lingkaran</a>
+      <a href="#garis-istimewa">Garis Istimewa</a>
+      <a href="#menuju-olimpiade">Menuju Olimpiade</a>
+      <a href="#bedah-soal">Bedah Soal</a>
+      <a href="#latihan">Latihan Soal</a>
+    </aside>
+
+    <div class="lesson">
+
+      <div class="lesson-section" id="pendahuluan">
+        <h2>Pendahuluan</h2>
+        <p>Geometri adalah cabang Matematika tertua — ilmu tentang <strong>bentuk, ukuran, dan posisi</strong>. Berbeda dari Aljabar yang bermain dengan simbol, Geometri bermain dengan <em class="accent-word">gambar dan penalaran</em>: dari satu fakta kecil tentang sudut, kita merangkai kesimpulan besar tentang seluruh bangun.</p>
+        <p>Justru karena itulah Geometri menjadi satu dari empat pilar Olimpiade Matematika: soalnya menguji kemampuan <em>melihat</em> — menemukan segitiga tersembunyi, sudut yang diam-diam sama besar, atau lingkaran yang menghubungkan semuanya.</p>
+        <div class="box">
+          <span class="box-label">Peta Belajar Halaman Ini</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Selalu gambar sendiri</strong> — geometri dipahami lewat tangan; gambar ulang setiap bangun di kertas, besar dan berlabel.</li>
+            <li><strong>Kejar "kenapa"-nya</strong> — tiap teorema di sini diberi alasannya; teorema yang dipahami tidak akan hilang saat gugup.</li>
+            <li><strong>Tutup contohnya</strong> — coba kerjakan sendiri dulu sebelum membaca penyelesaian.</li>
+            <li><strong>Naik bertahap di latihan</strong> — dari Mudah sampai Olimpiade; ulangi tingkat yang skornya belum penuh.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="sudut-garis">
+        <h2>Sudut &amp; Garis Sejajar</h2>
+        <p>Berdasar besarnya, sudut dibedakan menjadi: <strong>lancip</strong> ($&lt;90^\circ$), <strong>siku-siku</strong> ($90^\circ$), <strong>tumpul</strong> (antara $90^\circ$ dan $180^\circ$), dan <strong>lurus</strong> ($180^\circ$). Dua sudut yang berjumlah $90^\circ$ disebut <strong>berpenyiku</strong>; yang berjumlah $180^\circ$ disebut <strong>berpelurus</strong>.</p>
+        <p>Saat dua garis berpotongan, terbentuk pasangan <strong>sudut bertolak belakang</strong> yang selalu sama besar — alasannya sederhana: keduanya berpelurus dengan sudut yang sama, jadi tak punya pilihan selain sama.</p>
+        <h3>Garis Sejajar Dipotong Garis Lain</h3>
+        <p>Ketika dua garis sejajar dipotong sebuah garis (transversal), lahir tiga pasangan sudut yang wajib hafal-paham:</p>
+        <ul>
+          <li><strong>Sehadap</strong> — posisi serupa di kedua perpotongan: <em>sama besar</em>.</li>
+          <li><strong>Berseberangan dalam</strong> (dan luar) — menyilang di antara/di luar kedua garis: <em>sama besar</em>.</li>
+          <li><strong>Sepihak dalam</strong> — sesisi di antara kedua garis: <em>berjumlah $180^\circ$</em>.</li>
+        </ul>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Dua garis sejajar dipotong transversal. Salah satu sudut dalam besarnya $65^\circ$. Berapa pasangan sepihak dalamnya?</p>
+          <p style="margin-bottom:0;">Sepihak dalam berjumlah $180^\circ$, jadi pasangannya $180^\circ - 65^\circ = 115^\circ$.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="segitiga">
+        <h2>Segitiga</h2>
+        <p>Segitiga adalah bangun paling sederhana sekaligus paling kaya teorema. Fakta pertamanya yang paling terkenal:</p>
+        <div class="box formula"><span class="box-label">Jumlah Sudut Segitiga</span>$$\angle A + \angle B + \angle C = 180^\circ$$</div>
+        <div class="box">
+          <span class="box-label">Kenapa 180°?</span>
+          <p style="margin-bottom:0;">Tarik garis melalui titik $C$ yang <em>sejajar</em> sisi $AB$. Sudut $A$ dan $B$ "berpindah" ke atas sebagai sudut berseberangan dalam, dan bersama sudut $C$ ketiganya berjajar rapi membentuk satu sudut lurus — $180^\circ$. Satu garis bantu, satu teorema besar.</p>
+        </div>
+        <p>Konsekuensi langsungnya: <strong>sudut luar</strong> segitiga sama dengan jumlah dua sudut dalam yang tidak bersisian dengannya. Fakta lain yang sering jadi soal jebakan adalah <strong>ketaksamaan segitiga</strong>: jumlah dua sisi mana pun harus lebih besar dari sisi ketiga ($a + b &gt; c$) — kalau tidak, segitiganya tak bisa "menutup".</p>
+
+        <h3>Teorema Pythagoras</h3>
+        <p>Untuk segitiga siku-siku dengan kaki $a, b$ dan sisi miring $c$:</p>
+        <div class="box formula"><span class="box-label">Pythagoras</span>$$a^2 + b^2 = c^2$$</div>
+        <p>Hafalkan <strong>tripel Pythagoras</strong> yang paling sering muncul: $(3,4,5)$, $(5,12,13)$, $(8,15,17)$, $(7,24,25)$ — beserta kelipatannya seperti $(6,8,10)$. Mengenali tripel menghemat satu menit berharga di setiap soal.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Segitiga siku-siku memiliki kaki $9$ dan sisi miring $15$. Berapa kaki lainnya?</p>
+          <p style="margin-bottom:0;">Kenali kelipatan tripel $(3,4,5)\times3 = (9,12,15)$ — kakinya $12$. (Atau: $\sqrt{225-81}=\sqrt{144}=12$.)</p>
+        </div>
+        <p>Untuk luas: $L = \frac{1}{2} \times \text{alas} \times \text{tinggi}$. Kalau yang diketahui dua sisi dan sudut apitnya, ingat rumus dari halaman <a href="trigonometri.html">Trigonometri</a>: $L = \frac{1}{2}ab\sin C$.</p>
+      </div>
+
+      <div class="lesson-section" id="kongruen">
+        <h2>Kekongruenan &amp; Kesebangunan</h2>
+        <p>Dua bangun disebut <strong>kongruen</strong> jika bentuk <em>dan</em> ukurannya sama persis — bisa ditumpuk menutup sempurna. Untuk segitiga, cukup salah satu syarat ini: <strong>Sisi–Sisi–Sisi</strong> (SSS), <strong>Sisi–Sudut–Sisi</strong> (SAS, sudutnya harus yang <em>diapit</em>), atau <strong>Sudut–Sisi–Sudut</strong> (ASA).</p>
+        <p>Dua bangun disebut <strong>sebangun</strong> jika bentuknya sama tapi ukurannya boleh berbeda: semua sudut seletak sama besar, dan semua sisi seletak <em class="accent-word">sebanding dengan rasio yang sama</em>. Untuk segitiga, syaratnya sangat ringan: <strong>dua pasang sudut sama (AA) sudah cukup</strong> — sudut ketiga otomatis mengikuti karena jumlahnya $180^\circ$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh — Kesebangunan di Dunia Nyata</span>
+          <p style="margin-bottom:0.3rem;">Tongkat setinggi $2$ m punya bayangan $3$ m. Pada saat yang sama, bayangan sebuah pohon $12$ m. Berapa tinggi pohon?</p>
+          <p style="margin-bottom:0;">Matahari yang sama → sudut sama → dua segitiga sebangun (AA). Rasio tinggi : bayangan $= 2:3$, jadi tinggi pohon $= \dfrac{2}{3} \times 12 = 8$ m.</p>
+        </div>
+        <p>Satu akibat kesebangunan yang sangat sering dipakai: garis yang <strong>sejajar salah satu sisi segitiga</strong> memotong dua sisi lainnya secara proporsional — segitiga kecil yang terbentuk sebangun dengan segitiga besarnya.</p>
+        <div class="box warn">
+          <span class="box-label">Awas, Jebakan Klasik!</span>
+          <ul>
+            <li><strong>SSA bukan syarat kongruen</strong> — dua sisi dan sudut yang <em>tidak</em> diapit bisa menghasilkan dua segitiga berbeda.</li>
+            <li>Sebangun $\neq$ kongruen: sebangun hanya menjamin <em>bentuk</em>; kongruen menjamin bentuk <em>dan</em> ukuran.</li>
+            <li>Gambar pada soal sering <strong>tidak berskala</strong> — simpulkan dari data dan teorema, bukan dari penggaris.</li>
+            <li>Keliling sama tidak berarti luas sama, dan sebaliknya.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="lingkaran">
+        <h2>Lingkaran</h2>
+        <p>Unsur-unsurnya: <strong>jari-jari</strong> $r$, <strong>diameter</strong> $d = 2r$, <strong>tali busur</strong> (ruas garis penghubung dua titik pada lingkaran), <strong>busur</strong> (lengkungannya), dan <strong>juring</strong> (irisan "kue"). Keliling $= 2\pi r$ dan luas $= \pi r^2$.</p>
+        <h3>Sudut Pusat &amp; Sudut Keliling</h3>
+        <p>Inilah teorema lingkaran yang paling produktif di soal:</p>
+        <div class="box formula"><span class="box-label">Teorema Sudut Keliling</span>$$\text{sudut keliling} = \tfrac{1}{2} \times \text{sudut pusat} \quad (\text{menghadap busur yang sama})$$</div>
+        <p>Dua konsekuensi yang wajib melekat: <strong>(1)</strong> semua sudut keliling yang menghadap busur yang sama, sama besar; <strong>(2)</strong> sudut keliling yang menghadap <em>diameter</em> selalu $90^\circ$ (Teorema Thales — sudut pusatnya $180^\circ$, separuhnya $90^\circ$).</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Sudut pusat $AOB = 80^\circ$. Berapa sudut keliling $ACB$ yang menghadap busur $AB$ yang sama?</p>
+          <p style="margin-bottom:0;">Setengahnya: $\angle ACB = 40^\circ$ — di mana pun titik $C$ berada pada busur besar.</p>
+        </div>
+        <p>Satu fakta lagi untuk melengkapi: <strong>garis singgung</strong> lingkaran selalu tegak lurus jari-jari di titik singgungnya.</p>
+      </div>
+
+      <div class="lesson-section" id="garis-istimewa">
+        <h2>Garis-Garis Istimewa Segitiga</h2>
+        <p>Setiap segitiga menyimpan empat keluarga garis istimewa. Yang menakjubkan: ketiga garis dari tiap keluarga <em class="accent-word">selalu berpotongan di satu titik</em>.</p>
+        <ul>
+          <li><strong>Garis berat</strong> (titik sudut → tengah sisi di hadapannya) bertemu di <strong>titik berat</strong>, yang membagi tiap garis berat dengan rasio $2:1$ dari titik sudut.</li>
+          <li><strong>Garis tinggi</strong> (titik sudut → tegak lurus sisi di hadapannya) bertemu di <strong>titik tinggi</strong>.</li>
+          <li><strong>Garis bagi sudut</strong> bertemu di titik yang berjarak sama ke ketiga <em>sisi</em> — pusat <strong>lingkaran dalam</strong>, berjari-jari $r$.</li>
+          <li><strong>Garis sumbu sisi</strong> (tegak lurus di tengah sisi) bertemu di titik yang berjarak sama ke ketiga <em>titik sudut</em> — pusat <strong>lingkaran luar</strong>, berjari-jari $R$.</li>
+        </ul>
+        <p>Dua yang terakhir bukan sekadar hiasan: $r$ dan $R$ akan tampil sebagai bintang di bagian olimpiade di bawah.</p>
+
+        <div class="box recap">
+          <span class="box-label">Ringkasan Cepat</span>
+          <ul>
+            <li>Jumlah sudut segitiga $180^\circ$; sudut luar $=$ jumlah dua sudut dalam tak bersisian.</li>
+            <li>Pythagoras $a^2+b^2=c^2$ — hafalkan tripel $(3,4,5)$, $(5,12,13)$, $(8,15,17)$, $(7,24,25)$.</li>
+            <li>Sebangun cukup AA; sisi-sisi seletak sebanding. Garis sejajar sisi segitiga → segitiga kecil sebangun.</li>
+            <li>Sudut keliling $=$ ½ sudut pusat; menghadap diameter → $90^\circ$ (Thales).</li>
+            <li>Garis bagi → lingkaran dalam ($r$); garis sumbu → lingkaran luar ($R$); titik berat membagi $2:1$.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="menuju-olimpiade">
+        <h2>Menuju Geometri Olimpiade</h2>
+        <p>Soal geometri olimpiade jarang memberi gambar yang gamblang — ia memberi <em class="accent-word">petunjuk tersembunyi</em>. Empat perkakas berikut adalah pembuka kuncinya.</p>
+
+        <h3>1. Rumus Heron — Luas dari Tiga Sisi</h3>
+        <p>Tak ada tinggi? Tak masalah. Dengan setengah keliling $s = \frac{a+b+c}{2}$:</p>
+        <div class="box formula"><span class="box-label">Rumus Heron</span>$$L = \sqrt{s(s-a)(s-b)(s-c)}$$</div>
+        <div class="box example">
+          <span class="box-label">Contoh — Uji Cepat</span>
+          <p style="margin-bottom:0.3rem;">Segitiga $3$–$4$–$5$: $s = 6$.</p>
+          <p style="margin-bottom:0;">$L = \sqrt{6 \cdot 3 \cdot 2 \cdot 1} = \sqrt{36} = 6$ — cocok dengan $\frac{1}{2}(3)(4) = 6$. Heron lulus ujian.</p>
+        </div>
+
+        <h3>2. Luas sebagai Jembatan</h3>
+        <p>Trik paling elegan di geometri: hitung <strong>luas yang sama dengan dua cara berbeda</strong>, samakan, dan panjang tersembunyi pun keluar. Dua identitas luas yang menghubungkan segitiga dengan lingkarannya:</p>
+        <div class="box formula"><span class="box-label">Luas &amp; Dua Lingkaran</span>$$L = r \cdot s \qquad\qquad L = \frac{abc}{4R}$$</div>
+        <p>dengan $r$ jari-jari lingkaran <em>dalam</em>, $R$ lingkaran <em>luar</em>, dan $s$ setengah keliling. Bonus dari Thales: pada segitiga <strong>siku-siku</strong>, sisi miring adalah diameter lingkaran luar, jadi $R = \frac{c}{2}$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Tentukan jari-jari lingkaran dalam segitiga $5$–$12$–$13$.</p>
+          <p style="margin-bottom:0;">Siku-siku, jadi $L = \frac{1}{2}(5)(12) = 30$ dan $s = 15$. Dari $L = rs$: $r = \dfrac{30}{15} = 2$.</p>
+        </div>
+
+        <h3>3. Kuasa Titik (Power of a Point)</h3>
+        <p>Jika dua garis melalui titik $P$ masing-masing memotong lingkaran di $A,B$ dan $C,D$, maka:</p>
+        <div class="box formula"><span class="box-label">Kuasa Titik</span>$$PA \cdot PB = PC \cdot PD$$</div>
+        <p>Alasannya bukan sihir: $\angle PAC = \angle PDB$ (sudut keliling sebusur), sehingga $\triangle PAC \sim \triangle PDB$ — dan hasil kali itu lahir dari rasio kesebangunannya. Versi garis singgungnya: $PT^2 = PA \cdot PB$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Dua tali busur berpotongan di $P$: $PA = 2$, $PB = 9$, $PC = 3$. Tentukan $PD$.</p>
+          <p style="margin-bottom:0;">$2 \cdot 9 = 3 \cdot PD \Rightarrow PD = 6$.</p>
+        </div>
+
+        <h3>4. Strategi Kejar Sudut (Angle Chasing)</h3>
+        <p>Sebagian besar soal lingkaran olimpiade tumbang oleh kesabaran menandai sudut. Resepnya:</p>
+        <ul>
+          <li>Namai sudut-sudut kunci dengan $\alpha$ dan $\beta$, lalu <strong>rambatkan</strong> ke seluruh gambar lewat teorema.</li>
+          <li>Busur yang sama → semua sudut keliling yang menghadapnya <em>sama besar</em>.</li>
+          <li>Segiempat tali busur (keempat titiknya pada satu lingkaran): sudut berhadapan berjumlah $180^\circ$.</li>
+          <li>Dua jari-jari selalu membentuk <strong>segitiga sama kaki</strong> — dua sudut alasnya kembar gratis.</li>
+        </ul>
+
+        <div class="box recap">
+          <span class="box-label">Bekal Olimpiade</span>
+          <ul>
+            <li>Tiga sisi diketahui, ditanya luas? Heron.</li>
+            <li>Melibatkan $r$ atau $R$? Tulis luas dua cara: $\frac{1}{2}at$, $rs$, atau $\frac{abc}{4R}$ — lalu samakan.</li>
+            <li>Dua garis lewat satu titik menembus lingkaran? Kuasa titik: $PA \cdot PB = PC \cdot PD$.</li>
+            <li>Buntu di lingkaran? Kejar sudut: sebusur → sama; siklik → berhadapan $180^\circ$; dua jari-jari → sama kaki.</li>
+            <li>Jangan percaya gambar — percaya data. Gambar ulang besar dan berlabel.</li>
+            <li>Uji semuanya di tab <strong>Olimpiade</strong> pada latihan di bawah.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="bedah-soal">
+        <h2>Bedah Soal: Cara Berpikir Kompetisi</h2>
+        <p>Kerangka empat langkah yang sama — Pahami, Kenali Struktur, Kerjakan Rapi, Periksa — kini kita jalankan pada dua soal geometri sungguhan.</p>
+
+        <h3>Bedah Soal 1 — Luas Tanpa Tinggi</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Tentukan luas segitiga dengan sisi $13$, $14$, dan $15$.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> tidak ada sudut siku-siku yang terlihat, tidak ada tinggi — tapi ketiga sisi lengkap. Itu sinyal Heron.</p>
+        <p><strong>Kerjakan:</strong> $s = \dfrac{13+14+15}{2} = 21$, lalu:</p>
+        <div class="box formula"><span class="box-label">Perhitungan</span>$$L = \sqrt{21(21-13)(21-14)(21-15)} = \sqrt{21 \cdot 8 \cdot 7 \cdot 6} = \sqrt{7056} = 84$$</div>
+        <p><strong>Periksa lewat jalan kedua:</strong> jika $L = 84$, tinggi ke sisi $14$ adalah $t = \frac{2L}{14} = 12$. Cek kaki-kakinya: $\sqrt{13^2-12^2} = 5$ dan $\sqrt{15^2-12^2} = 9$, dan benar $5+9 = 14$ — segitiga itu ternyata gabungan tripel $(5,12,13)$ dan $(9,12,15)$. Dua jalan, satu jawaban. ✓</p>
+
+        <h3>Bedah Soal 2 — Garis Singgung &amp; Kuasa Titik</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Dari titik $P$ di luar lingkaran, garis singgung menyentuh lingkaran di $T$ dengan $PT = 8$. Garis lain dari $P$ memotong lingkaran di $A$ lalu $B$, dengan $PA = 4$. Tentukan panjang $AB$.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> satu titik luar, satu garis singgung, satu garis pemotong — kombinasi baku kuasa titik versi singgung.</p>
+        <p><strong>Kerjakan:</strong> $PT^2 = PA \cdot PB \Rightarrow 64 = 4 \cdot PB \Rightarrow PB = 16$. Karena $A$ di antara $P$ dan $B$: $AB = PB - PA = 16 - 4 = 12$.</p>
+        <p><strong>Periksa dengan kesebangunan:</strong> $\triangle PTA \sim \triangle PBT$ (sudut $P$ milik bersama, dan sudut singgung–tali busur $= $ sudut keliling). Rasionya harus konsisten: $\dfrac{PT}{PB} = \dfrac{PA}{PT}$, yaitu $\dfrac{8}{16} = \dfrac{4}{8}$. Cocok. ✓</p>
+
+        <div class="box recap">
+          <span class="box-label">Menulis Solusi ala Babak Esai</span>
+          <ul>
+            <li>Mulai dengan gambar ulang yang besar, rapi, dan berlabel — separuh solusi geometri adalah gambarnya.</li>
+            <li>Namai sudut dengan tiga huruf ($\angle ABC$) dan sebutkan teoremanya: "karena sudut keliling sebusur…".</li>
+            <li>Nyatakan kesebangunan lengkap dengan urutan titiknya: $\triangle PAC \sim \triangle PDB$ — urutan salah, rasio salah.</li>
+            <li>Uji kewajaran di akhir: panjang harus positif, sudut segitiga berjumlah $180^\circ$, ketaksamaan segitiga terpenuhi.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="latihan">
+        <h2>Latihan Soal Bertingkat</h2>
+        <p>Empat tingkat kesulitan — dari Mudah sampai Olimpiade. Klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
+        <p class="quiz-note">Progres tersimpan otomatis di peramban ini — tekan "Ulangi" untuk mencoba lagi dari awal.</p>
+
+        <div data-tier-group>
+          <div class="tier-tabs">
+            <button class="tier-tab active" data-tier="mudah"><span class="dot"></span>Mudah</button>
+            <button class="tier-tab" data-tier="sedang"><span class="dot"></span>Sedang</button>
+            <button class="tier-tab" data-tier="sulit"><span class="dot"></span>Sulit</button>
+            <button class="tier-tab" data-tier="olimpiade"><span class="dot"></span>Olimpiade</button>
+          </div>
+
+          <!-- MUDAH -->
+          <div class="tier-panel active" data-tier="mudah">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="geo-m1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Dua sudut segitiga besarnya $65^\circ$ dan $45^\circ$. Sudut ketiganya adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$60^\circ$</button>
+                <button class="quiz-option" data-option="B">$70^\circ$</button>
+                <button class="quiz-option" data-option="C">$80^\circ$</button>
+                <button class="quiz-option" data-option="D">$110^\circ$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jumlah sudut segitiga $180^\circ$: sudut ketiga $= 180^\circ - 65^\circ - 45^\circ = 70^\circ$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="geo-m2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Segitiga siku-siku memiliki kaki $6$ dan $8$. Panjang sisi miringnya adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$10$</button>
+                <button class="quiz-option" data-option="B">$14$</button>
+                <button class="quiz-option" data-option="C">$\sqrt{28}$</button>
+                <button class="quiz-option" data-option="D">$48$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kelipatan tripel $(3,4,5)\times2 = (6,8,10)$ — sisi miringnya $10$. Atau: $\sqrt{36+64} = \sqrt{100} = 10$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="geo-m3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Dua garis berpotongan membentuk sudut $130^\circ$. Sudut yang bertolak belakang dengannya besarnya…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$50^\circ$</button>
+                <button class="quiz-option" data-option="B">$65^\circ$</button>
+                <button class="quiz-option" data-option="C">$130^\circ$</button>
+                <button class="quiz-option" data-option="D">$230^\circ$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Sudut bertolak belakang selalu sama besar: $130^\circ$. (Yang $50^\circ$ adalah pelurusnya.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="geo-m4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Keliling lingkaran berjari-jari $7$ cm adalah… (gunakan $\pi = \frac{22}{7}$)</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$22$ cm</button>
+                <button class="quiz-option" data-option="B">$154$ cm</button>
+                <button class="quiz-option" data-option="C">$88$ cm</button>
+                <button class="quiz-option" data-option="D">$44$ cm</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$K = 2\pi r = 2 \cdot \frac{22}{7} \cdot 7 = 44$ cm. ($154$ adalah luasnya.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="geo-m5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Luas segitiga dengan alas $10$ dan tinggi $6$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$60$</button>
+                <button class="quiz-option" data-option="B">$16$</button>
+                <button class="quiz-option" data-option="C">$30$</button>
+                <button class="quiz-option" data-option="D">$15$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$L = \frac{1}{2} \times 10 \times 6 = 30$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="geo-m6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Dua garis sejajar dipotong sebuah transversal. Jika salah satu sudut $75^\circ$, sudut <em>sehadap</em>-nya besarnya…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$75^\circ$</button>
+                <button class="quiz-option" data-option="B">$105^\circ$</button>
+                <button class="quiz-option" data-option="C">$15^\circ$</button>
+                <button class="quiz-option" data-option="D">$150^\circ$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Sudut sehadap pada garis sejajar selalu sama besar: $75^\circ$. ($105^\circ$ adalah pasangan sepihaknya.)</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+          </div>
+
+          <!-- SEDANG -->
+          <div class="tier-panel" data-tier="sedang">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="geo-s1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Dua sudut dalam segitiga besarnya $50^\circ$ dan $60^\circ$. Sudut <em>luar</em> di titik sudut ketiga besarnya…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$70^\circ$</button>
+                <button class="quiz-option" data-option="B">$110^\circ$</button>
+                <button class="quiz-option" data-option="C">$130^\circ$</button>
+                <button class="quiz-option" data-option="D">$120^\circ$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Sudut luar $=$ jumlah dua sudut dalam tak bersisian $= 50^\circ + 60^\circ = 110^\circ$. (Sudut dalamnya sendiri $70^\circ$.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="geo-s2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Dua segitiga sebangun dengan rasio $2:3$. Jika sisi terpendek segitiga kecil $8$, sisi terpendek segitiga besar adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$12$</button>
+                <button class="quiz-option" data-option="B">$10$</button>
+                <button class="quiz-option" data-option="C">$16$</button>
+                <button class="quiz-option" data-option="D">$18$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Sisi seletak sebanding: $\frac{8}{x} = \frac{2}{3} \Rightarrow x = 12$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="geo-s3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Sudut pusat yang menghadap suatu busur besarnya $100^\circ$. Sudut keliling yang menghadap busur yang sama besarnya…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$100^\circ$</button>
+                <button class="quiz-option" data-option="B">$200^\circ$</button>
+                <button class="quiz-option" data-option="C">$50^\circ$</button>
+                <button class="quiz-option" data-option="D">$25^\circ$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Sudut keliling $= \frac{1}{2} \times$ sudut pusat $= 50^\circ$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="geo-s4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Segitiga di dalam lingkaran memiliki satu sisi berupa <em>diameter</em>. Dua sisi lainnya $6$ dan $8$. Jari-jari lingkarannya adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$10$</button>
+                <button class="quiz-option" data-option="B">$7$</button>
+                <button class="quiz-option" data-option="C">$4{,}8$</button>
+                <button class="quiz-option" data-option="D">$5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Thales: sudut yang menghadap diameter $= 90^\circ$, jadi segitiganya siku-siku dan diameter $=$ sisi miring $= \sqrt{36+64} = 10$. Jari-jari $= 5$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="geo-s5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Dua sisi segitiga panjangnya $5$ dan $9$. Panjang <em>bilangan bulat</em> terbesar yang mungkin untuk sisi ketiga adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$14$</button>
+                <button class="quiz-option" data-option="B">$13$</button>
+                <button class="quiz-option" data-option="C">$12$</button>
+                <button class="quiz-option" data-option="D">$15$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Ketaksamaan segitiga: sisi ketiga $&lt; 5+9 = 14$, jadi bilangan bulat terbesarnya $13$. ($14$ membuat segitiganya "gepeng" jadi garis.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="geo-s6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Sebuah garis berat panjangnya $18$. Jarak dari titik sudut ke titik berat segitiga itu adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$6$</button>
+                <button class="quiz-option" data-option="B">$9$</button>
+                <button class="quiz-option" data-option="C">$12$</button>
+                <button class="quiz-option" data-option="D">$3$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Titik berat membagi garis berat $2:1$ dari titik sudut: $\frac{2}{3} \times 18 = 12$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+          </div>
+
+          <!-- SULIT -->
+          <div class="tier-panel" data-tier="sulit">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="geo-x1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Luas segitiga dengan sisi $5$, $5$, dan $6$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$15$</button>
+                <button class="quiz-option" data-option="B">$12$</button>
+                <button class="quiz-option" data-option="C">$10$</button>
+                <button class="quiz-option" data-option="D">$24$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Sama kaki: tinggi ke sisi $6$ adalah $\sqrt{25-9} = 4$, jadi $L = \frac{1}{2}(6)(4) = 12$. Heron memberi hasil sama: $\sqrt{8 \cdot 3 \cdot 3 \cdot 2} = \sqrt{144} = 12$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="geo-x2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Segiempat tali busur (keempat titik sudutnya pada satu lingkaran) memiliki satu sudut $70^\circ$. Sudut yang <em>berhadapan</em> dengannya besarnya…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$70^\circ$</button>
+                <button class="quiz-option" data-option="B">$20^\circ$</button>
+                <button class="quiz-option" data-option="C">$110^\circ$</button>
+                <button class="quiz-option" data-option="D">$290^\circ$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Sudut berhadapan segiempat tali busur berjumlah $180^\circ$: pasangannya $110^\circ$. (Keduanya menghadap dua busur yang melengkapi lingkaran.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="geo-x3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Pada segitiga $ABC$, titik $D$ di $AB$ dan $E$ di $AC$ dengan $DE \parallel BC$. Jika $AD = 4$, $DB = 6$, dan $BC = 15$, maka $DE = $ …</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$6$</button>
+                <button class="quiz-option" data-option="B">$9$</button>
+                <button class="quiz-option" data-option="C">$10$</button>
+                <button class="quiz-option" data-option="D">$5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$DE \parallel BC \Rightarrow \triangle ADE \sim \triangle ABC$ dengan rasio $\frac{AD}{AB} = \frac{4}{10}$. Maka $DE = \frac{4}{10} \times 15 = 6$. (Jebakan: rasionya $4{:}10$, bukan $4{:}6$.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="geo-x4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Jari-jari lingkaran <em>dalam</em> segitiga siku-siku $6$–$8$–$10$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$1$</button>
+                <button class="quiz-option" data-option="B">$2$</button>
+                <button class="quiz-option" data-option="C">$3$</button>
+                <button class="quiz-option" data-option="D">$4$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$L = \frac{1}{2}(6)(8) = 24$ dan $s = 12$. Dari $L = rs$: $r = \frac{24}{12} = 2$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="geo-x5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Pada segitiga siku-siku berkaki $6$ dan $8$, panjang garis tinggi ke <em>sisi miring</em> adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4{,}8$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">$7$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Luas dua cara: $\frac{1}{2}(6)(8) = \frac{1}{2}(10)(t) \Rightarrow t = \frac{48}{10} = 4{,}8$. Inilah "luas sebagai jembatan" dalam aksi.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="geo-x6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Dari titik $P$ di luar lingkaran ditarik dua garis singgung. Jika sudut di antara keduanya $40^\circ$, sudut pusat yang menghadap kedua titik singgung (busur kecil) besarnya…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$40^\circ$</button>
+                <button class="quiz-option" data-option="B">$80^\circ$</button>
+                <button class="quiz-option" data-option="C">$140^\circ$</button>
+                <button class="quiz-option" data-option="D">$160^\circ$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Garis singgung $\perp$ jari-jari, jadi segiempat $P$–singgung–pusat–singgung punya dua sudut $90^\circ$. Jumlah sudut segiempat $360^\circ$: sudut pusat $= 360^\circ - 90^\circ - 90^\circ - 40^\circ = 140^\circ$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+          </div>
+
+          <!-- OLIMPIADE -->
+          <div class="tier-panel" data-tier="olimpiade">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="geo-o1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Luas segitiga dengan sisi $9$, $10$, dan $17$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$36$</button>
+                <button class="quiz-option" data-option="B">$72$</button>
+                <button class="quiz-option" data-option="C">$45$</button>
+                <button class="quiz-option" data-option="D">$90$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Heron: $s = 18$, $L = \sqrt{18 \cdot 9 \cdot 8 \cdot 1} = \sqrt{1296} = 36$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="geo-o2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Segitiga berkeliling $24$ memiliki lingkaran dalam berjari-jari $3$. Luas segitiga itu adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$72$</button>
+                <button class="quiz-option" data-option="B">$36$</button>
+                <button class="quiz-option" data-option="C">$24$</button>
+                <button class="quiz-option" data-option="D">$48$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$L = rs$ dengan $s = \frac{24}{2} = 12$: $L = 3 \times 12 = 36$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="geo-o3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Dua tali busur berpotongan di $P$ di dalam lingkaran. Jika $PA = 3$, $PB = 8$, dan $PC = 4$, maka $PD = $ …</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$7$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$12$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kuasa titik: $PA \cdot PB = PC \cdot PD \Rightarrow 3 \cdot 8 = 4 \cdot PD \Rightarrow PD = 6$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="geo-o4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Jari-jari lingkaran <em>luar</em> segitiga $6$–$8$–$10$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$10$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Dua jalan: $R = \frac{abc}{4L} = \frac{480}{96} = 5$, atau lewat Thales — segitiga siku-siku, sisi miring $=$ diameter, jadi $R = \frac{10}{2} = 5$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="geo-o5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Titik $C$ dan $D$ berada pada busur yang sama terhadap tali busur $AB$. Jika $\angle ACB = 35^\circ$, maka $\angle ADB = $ …</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$70^\circ$</button>
+                <button class="quiz-option" data-option="B">$17{,}5^\circ$</button>
+                <button class="quiz-option" data-option="C">$55^\circ$</button>
+                <button class="quiz-option" data-option="D">$35^\circ$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Sudut keliling yang menghadap busur yang sama selalu sama besar: $\angle ADB = 35^\circ$ — senjata utama kejar sudut.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="geo-o6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Dari titik $P$ di luar lingkaran, garis singgung $PT = 6$. Garis lain dari $P$ memotong lingkaran di $A$ lalu $B$ dengan $PA = 4$. Maka $PB = $ …</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$9$</button>
+                <button class="quiz-option" data-option="B">$10$</button>
+                <button class="quiz-option" data-option="C">$8$</button>
+                <button class="quiz-option" data-option="D">$12$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kuasa titik versi singgung: $PT^2 = PA \cdot PB \Rightarrow 36 = 4 \cdot PB \Rightarrow PB = 9$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="geo-o7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Luas segitiga sama sisi dengan panjang sisi $6$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$18\sqrt3$</button>
+                <button class="quiz-option" data-option="B">$9\sqrt3$</button>
+                <button class="quiz-option" data-option="C">$36$</button>
+                <button class="quiz-option" data-option="D">$12\sqrt3$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Tingginya $\frac{6\sqrt3}{2} = 3\sqrt3$, jadi $L = \frac{1}{2}(6)(3\sqrt3) = 9\sqrt3$ — sama dengan rumus $\frac{\sqrt3}{4}s^2$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="geo-o8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Jari-jari lingkaran <em>dalam</em> segitiga dengan sisi $13$, $14$, $15$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Heron: $s = 21$, $L = \sqrt{21 \cdot 8 \cdot 7 \cdot 6} = 84$. Lalu $L = rs \Rightarrow r = \frac{84}{21} = 4$. Dua perkakas olimpiade dalam satu soal.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Fondasi geometrimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-pager">
+        <a class="pager-card" href="trigonometri.html"><span>← Sebelumnya</span><strong>Trigonometri</strong></a>
+        <a class="pager-card next" href="olimpiade.html"><span>Selanjutnya →</span><strong>Peta Jalan Olimpiade</strong></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+        <p>Belajar Matematika dari konsep dasar sampai persiapan olimpiade, untuk pelajar SMA, mahasiswa, dan umum.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Materi</h4>
+          <a href="aljabar.html">Aljabar</a>
+          <a href="trigonometri.html">Trigonometri</a>
+          <a href="geometri.html">Geometri</a>
+          <a href="olimpiade.html">Matematika Olimpiade</a>
+          <a href="fisika.html">Fisika (Segera)</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tentang</h4>
+          <span>Khusni Academy</span>
+          <span>Dibuat untuk pelajar Indonesia</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Khusni Academy.</span>
+      <span>Dibuat dengan ♥ untuk kemajuan Matematika Indonesia.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" aria-label="Kembali ke atas">↑</button>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
