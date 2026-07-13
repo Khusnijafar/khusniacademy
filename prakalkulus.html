@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prakalkulus — Khusni Academy</title>
+<meta name="description" content="Prakalkulus (Pre-Calculus): fungsi & relasi, komposisi & invers, eksponen & logaritma, barisan & deret, limit dengan Penjelajah Limit interaktif, bekal olimpiade (persamaan fungsional, sigma, rantai logaritma), dan latihan soal bertingkat dari Mudah sampai Olimpiade.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#090d17">
+<link rel="canonical" href="https://khusniacademy.netlify.app/prakalkulus.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prakalkulus — Khusni Academy">
+<meta property="og:description" content="Fungsi & invers, eksponen & logaritma, barisan & deret, dan limit — jembatan lengkap dari Aljabar menuju Kalkulus, dengan simulasi interaktif dan latihan soal bertingkat.">
+<meta property="og:url" content="https://khusniacademy.netlify.app/prakalkulus.html">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Prakalkulus — Khusni Academy">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f9dff'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia, serif' font-weight='700' fill='%23090d17' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<a class="skip-link" href="#konten">Langsung ke konten</a>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="aljabar.html">Aljabar</a>
+      <a href="trigonometri.html">Trigonometri</a>
+      <a href="geometri.html">Geometri</a>
+      <a href="prakalkulus.html" class="active">Prakalkulus</a>
+      <a href="olimpiade.html">Olimpiade</a>
+      <a href="fisika.html" class="soon">Fisika <span class="tag-soon">Segera</span></a>
+    </div>
+    <div class="nav-cta">
+      <a href="index.html#materi" class="btn btn-outline btn-sm">Materi Lain</a>
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero" id="konten">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><span>/</span><a href="index.html#materi">Materi</a><span>/</span><span>Prakalkulus</span></div>
+    <span class="eyebrow">Materi · Tersedia</span>
+    <h1>Prakalkulus</h1>
+    <p class="hero-sub">Jembatan antara Aljabar dan Kalkulus — fungsi, logaritma, barisan, dan limit. Di sinilah Matematika berhenti menghitung angka diam, dan mulai bicara tentang <em class="accent-word">perubahan</em>.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container lesson-layout">
+    <aside class="lesson-nav">
+      <div class="lesson-nav-title">Isi Materi</div>
+      <a href="#pendahuluan">Pendahuluan</a>
+      <a href="#fungsi">Fungsi &amp; Relasi</a>
+      <a href="#komposisi">Komposisi &amp; Invers</a>
+      <a href="#eksponen-log">Eksponen &amp; Logaritma</a>
+      <a href="#barisan">Barisan &amp; Deret</a>
+      <a href="#limit">Limit</a>
+      <a href="#menuju-olimpiade">Menuju Olimpiade</a>
+      <a href="#bedah-soal">Bedah Soal</a>
+      <a href="#latihan">Latihan Soal</a>
+    </aside>
+
+    <div class="lesson">
+
+      <div class="lesson-section" id="pendahuluan">
+        <h2>Pendahuluan</h2>
+        <p>Kalau Aljabar mengajarkan cara <em>memanipulasi</em> bentuk, Prakalkulus mengajarkan cara <em class="accent-word">berpikir tentang perubahan</em>. Fokusnya bergeser: bukan lagi "berapa nilai $x$", melainkan "bagaimana keluaran berubah ketika masukan berubah" — dan apa yang terjadi ketika perubahan itu dibuat <strong>sangat kecil</strong>.</p>
+        <p>Empat pilar Prakalkulus — fungsi, logaritma, barisan, dan limit — adalah gerbang wajib menuju Kalkulus. Di ujung halaman ini, kamu akan melihat sendiri bagaimana limit melahirkan turunan.</p>
+        <div class="box">
+          <span class="box-label">Peta Belajar Halaman Ini</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Pastikan Aljabar sudah kokoh</strong> — faktorisasi dan sifat pangkat dipakai di hampir setiap baris. Bila ragu, mampir dulu ke <a href="aljabar.html">Aljabar</a>.</li>
+            <li><strong>Pikirkan fungsi sebagai mesin</strong> — masuk satu nilai, keluar tepat satu nilai. Gambarannya sederhana, gunanya luar biasa.</li>
+            <li><strong>Mainkan Penjelajah Limit</strong> — konsep tersulit di halaman ini justru paling mudah dipahami lewat mata.</li>
+            <li><strong>Naik bertahap di latihan</strong> — dari Mudah sampai Olimpiade; ulangi tingkat yang skornya belum penuh.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="fungsi">
+        <h2>Fungsi &amp; Relasi</h2>
+        <p>Bayangkan fungsi sebagai <strong>mesin</strong>: masukkan sebuah nilai, keluar tepat satu nilai. Aturan mainnya cuma satu, tapi mutlak:</p>
+        <div class="box formula"><span class="box-label">Definisi Fungsi</span>$$\text{setiap masukan } x \;\longmapsto\; \textbf{tepat satu} \text{ keluaran } f(x)$$</div>
+        <p>Kalau satu masukan bisa menghasilkan dua keluaran berbeda, itu <em>relasi</em> biasa — bukan fungsi. Tiga istilah yang wajib melekat:</p>
+        <ul>
+          <li><strong>Domain</strong> — himpunan semua masukan yang diizinkan.</li>
+          <li><strong>Kodomain</strong> — himpunan tempat keluaran "diletakkan".</li>
+          <li><strong>Range</strong> — himpunan keluaran yang benar-benar tercapai.</li>
+        </ul>
+        <p>Menentukan domain hampir selalu soal <em>menghindari yang terlarang</em>: penyebut tak boleh nol, dan yang di dalam akar kuadrat tak boleh negatif.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Tentukan domain $f(x) = \dfrac{1}{\sqrt{x-3}}$.</p>
+          <p style="margin-bottom:0;">Dalam akar harus tak negatif <em>dan</em> penyebut tak boleh nol, jadi $x - 3 &gt; 0$, yaitu $x &gt; 3$.</p>
+        </div>
+        <p>Ada pula <strong>uji garis vertikal</strong>: jika sebuah garis tegak memotong grafik lebih dari sekali, grafik itu bukan fungsi — sebab satu $x$ punya dua keluaran.</p>
+        <div class="box warn">
+          <span class="box-label">Awas, Jebakan Klasik!</span>
+          <ul>
+            <li>$f(x+1) \neq f(x) + 1$ — $f$ bukan pengali; ia mesin, dan isinya harus disubstitusi utuh.</li>
+            <li>Notasi $f(2)$ berarti "keluaran saat masukan $2$", bukan "$f$ dikali $2$".</li>
+            <li>Range $\neq$ kodomain — range hanya bagian yang benar-benar tercapai. Contoh: $f(x)=x^2$ berkodomain $\mathbb{R}$, tapi rangenya hanya $y \ge 0$.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="komposisi">
+        <h2>Komposisi &amp; Invers</h2>
+        <h3>Komposisi: Mesin Beruntun</h3>
+        <p>Pasang dua mesin berderet — keluaran mesin pertama menjadi masukan mesin kedua:</p>
+        <div class="box formula"><span class="box-label">Komposisi</span>$$(f \circ g)(x) = f\big(g(x)\big)$$</div>
+        <p>Baca dari <strong>dalam ke luar</strong>: $g$ bekerja lebih dulu, baru $f$. Urutannya <em class="accent-word">tidak boleh ditukar</em> — pada umumnya $f \circ g \neq g \circ f$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh — Urutan Itu Penting</span>
+          <p style="margin-bottom:0.3rem;">$f(x) = x^2$ dan $g(x) = x+1$. Bandingkan kedua komposisinya di $x = 3$.</p>
+          <p style="margin-bottom:0.15rem;">$(f \circ g)(3) = f(4) = 16$ &nbsp;— kuadratkan setelah ditambah.</p>
+          <p style="margin-bottom:0;">$(g \circ f)(3) = g(9) = 10$ &nbsp;— tambah setelah dikuadratkan. Jauh berbeda!</p>
+        </div>
+
+        <h3>Invers: Mesin Pembatal</h3>
+        <p>Fungsi invers $f^{-1}$ adalah mesin yang <strong>membatalkan</strong> kerja $f$ — ia mengembalikan keluaran menjadi masukan semula:</p>
+        <div class="box formula"><span class="box-label">Sifat Kunci Invers</span>$$f^{-1}\big(f(x)\big) = x \qquad\text{dan}\qquad f\big(f^{-1}(x)\big) = x$$</div>
+        <p>Tidak semua fungsi punya invers. Syaratnya: fungsi harus <strong>satu-satu</strong> (injektif) — dua masukan berbeda tak boleh menghasilkan keluaran sama. Kalau tidak, "pembatalannya" jadi ambigu. Itu sebabnya $f(x)=x^2$ baru bisa dibalik setelah domainnya dibatasi ke $x \ge 0$.</p>
+        <p>Cara mencarinya cuma tiga langkah: tulis $y = f(x)$, <strong>tukar</strong> $x$ dan $y$, lalu selesaikan untuk $y$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Tentukan invers dari $f(x) = 2x + 5$.</p>
+          <p style="margin-bottom:0.15rem;">Tulis $y = 2x+5$, tukar: $x = 2y+5$, selesaikan: $y = \dfrac{x-5}{2}$.</p>
+          <p style="margin-bottom:0;">Jadi $f^{-1}(x) = \dfrac{x-5}{2}$. Cek: $f^{-1}(f(3)) = f^{-1}(11) = 3$ ✓</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="eksponen-log">
+        <h2>Eksponen &amp; Logaritma</h2>
+        <p>Fungsi eksponen $f(x) = a^x$ menjawab: "berapa hasilnya kalau $a$ dipangkatkan $x$?" Logaritma menjawab <em class="accent-word">pertanyaan kebalikannya</em>: "berapa pangkatnya supaya hasilnya $b$?"</p>
+        <div class="box formula"><span class="box-label">Logaritma = Invers Eksponen</span>$$a^x = b \iff {}^{a}\!\log b = x$$</div>
+        <p>Sekali kalimat itu meresap, semua sifat logaritma berhenti menjadi hafalan — semuanya cuma <strong>sifat pangkat yang menyamar</strong>. Karena $a^m \cdot a^n = a^{m+n}$ (perkalian menjadi penjumlahan pangkat), maka:</p>
+        <div class="box formula">
+          <span class="box-label">Sifat Logaritma</span>
+          $${}^{a}\!\log(mn) = {}^{a}\!\log m + {}^{a}\!\log n \qquad {}^{a}\!\log\frac{m}{n} = {}^{a}\!\log m - {}^{a}\!\log n$$
+          $${}^{a}\!\log m^p = p \cdot {}^{a}\!\log m \qquad\qquad {}^{a}\!\log b = \frac{{}^{c}\!\log b}{{}^{c}\!\log a}$$
+        </div>
+        <p>Yang terakhir disebut <strong>ganti basis</strong> — senjata untuk menyeragamkan logaritma berbasis campur aduk menjadi satu basis.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Hitung ${}^{2}\!\log 32$ dan selesaikan ${}^{3}\!\log(x+1) = 2$.</p>
+          <p style="margin-bottom:0.15rem;">${}^{2}\!\log 32 = 5$, sebab $2^5 = 32$.</p>
+          <p style="margin-bottom:0;">${}^{3}\!\log(x+1) = 2 \Rightarrow x+1 = 3^2 = 9 \Rightarrow x = 8$. Ubah bentuk log menjadi bentuk pangkat — itu selalu langkah pertama.</p>
+        </div>
+        <div class="box warn">
+          <span class="box-label">Awas, Jebakan Klasik!</span>
+          <ul>
+            <li>${}^{a}\!\log(m+n) \neq {}^{a}\!\log m + {}^{a}\!\log n$ — yang berubah jadi penjumlahan adalah <em>perkalian</em>, bukan penjumlahan.</li>
+            <li>$\dfrac{{}^{a}\!\log m}{{}^{a}\!\log n} \neq {}^{a}\!\log\dfrac{m}{n}$ — jangan tertukar dengan sifat selisih.</li>
+            <li>Numerus (yang di-log) wajib <strong>positif</strong>: ${}^{2}\!\log(x-3)$ menuntut $x &gt; 3$. Lupa syarat ini = kehilangan poin di babak esai.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="barisan">
+        <h2>Barisan &amp; Deret</h2>
+        <p><strong>Barisan</strong> adalah daftar bilangan berpola; <strong>deret</strong> adalah jumlahnya. Dua jenis yang paling sering muncul:</p>
+
+        <h3>Aritmetika — Beda Tetap</h3>
+        <p>Tiap suku bertambah dengan beda $b$ yang tetap ($3, 7, 11, 15, \dots$ dengan $b=4$):</p>
+        <div class="box formula"><span class="box-label">Aritmetika</span>$$U_n = a + (n-1)b \qquad\qquad S_n = \frac{n}{2}\big(2a + (n-1)b\big) = \frac{n}{2}(a + U_n)$$</div>
+        <div class="box">
+          <span class="box-label">Kenapa Rumus Jumlahnya Begitu?</span>
+          <p style="margin-bottom:0;">Kisah masa kecil Gauss: untuk menjumlah $1+2+\cdots+100$, ia memasangkan ujung-ke-ujung — $1+100 = 101$, $2+99 = 101$, dan seterusnya. Ada $50$ pasang, masing-masing $101$, jadi totalnya $5050$. Itulah asal $\frac{n}{2}(a + U_n)$: <em>banyak pasangan</em> $\times$ <em>jumlah tiap pasang</em>.</p>
+        </div>
+
+        <h3>Geometri — Rasio Tetap</h3>
+        <p>Tiap suku dikali rasio $r$ yang tetap ($2, 6, 18, 54, \dots$ dengan $r=3$):</p>
+        <div class="box formula"><span class="box-label">Geometri</span>$$U_n = a\,r^{\,n-1} \qquad\qquad S_n = \frac{a(r^n - 1)}{r - 1}, \quad r \neq 1$$</div>
+        <p>Kalau rasionya mengecil ($|r| &lt; 1$), suku-sukunya menyusut menuju nol — dan meski dijumlah selamanya, hasilnya <strong>terbatas</strong>:</p>
+        <div class="box formula"><span class="box-label">Deret Geometri Tak Hingga</span>$$S_\infty = \frac{a}{1-r}, \qquad |r| &lt; 1$$</div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Hitung $8 + 4 + 2 + 1 + \tfrac{1}{2} + \cdots$ sampai tak hingga.</p>
+          <p style="margin-bottom:0;">$a = 8$, $r = \tfrac{1}{2}$, jadi $S_\infty = \dfrac{8}{1 - \frac12} = 16$. Menjumlah tak hingga suku, hasilnya tetap berhingga — inilah cikal bakal ide limit.</p>
+        </div>
+        <p>Untuk menulis penjumlahan panjang secara ringkas, dipakai <strong>notasi sigma</strong>: $\sum_{k=1}^{n} U_k$ berarti "jumlahkan $U_k$ dari $k=1$ sampai $k=n$".</p>
+      </div>
+
+      <div class="lesson-section" id="limit">
+        <h2>Limit</h2>
+        <p>Limit menjawab pertanyaan yang terdengar aneh tapi sangat berdaya: <em class="accent-word">"Ke mana $f(x)$ menuju saat $x$ mendekati suatu titik — tanpa pernah benar-benar sampai?"</em></p>
+        <div class="box formula"><span class="box-label">Notasi</span>$$\lim_{x \to a} f(x) = L$$</div>
+        <p>Bacanya: saat $x$ dibuat sedekat mungkin ke $a$, nilai $f(x)$ sedekat mungkin ke $L$. Perhatikan baik-baik: limit <strong>tidak peduli</strong> berapa nilai $f(a)$ — bahkan tidak peduli apakah $f(a)$ ada!</p>
+        <p>Contoh legendarisnya adalah $f(x) = \dfrac{x^2-1}{x-1}$. Di $x = 1$, penyebutnya nol — fungsi ini <em>tidak terdefinisi</em> di sana. Tapi untuk setiap $x \neq 1$:</p>
+        <div class="box formula"><span class="box-label">Faktorkan &amp; Coret</span>$$\frac{x^2-1}{x-1} = \frac{(x-1)(x+1)}{x-1} = x+1$$</div>
+        <p>Grafiknya adalah garis $y = x+1$ dengan <strong>satu titik bolong</strong> di $(1,2)$. Semakin $x$ mendekati $1$, nilai $f(x)$ mendekati $2$ — meski di titik $1$ sendiri tak ada apa-apa. Buktikan sendiri:</p>
+
+        <div class="widget-card reveal" id="widget-limit">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Penjelajah Limit</h3>
+            <p>Geser $x$ mendekati $1$ dari kiri maupun kanan. Perhatikan kolom jarak: sedekat apa pun $x$ ke $1$, $f(x)$ ikut sedekat itu ke $2$ — tapi lubang di $x=1$ tetap kosong.</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+
+        <h3>Tiga Aturan Praktis Menghitung Limit</h3>
+        <ul>
+          <li><strong>Coba substitusi langsung dulu.</strong> Kalau $f(a)$ terdefinisi rapi, itulah jawabannya. Contoh: $\lim_{x \to 2}(x^2+1) = 5$.</li>
+          <li><strong>Dapat $\frac{0}{0}$? Jangan panik — faktorkan.</strong> Bentuk $\frac{0}{0}$ bukan jawaban, melainkan <em>bentuk tak tentu</em>: sinyal bahwa ada faktor yang bisa dicoret.</li>
+          <li><strong>Limit menuju tak hingga? Bagi dengan pangkat tertinggi.</strong> Contoh: $\lim_{x \to \infty} \dfrac{3x^2+2x}{x^2-5} = \lim_{x \to \infty} \dfrac{3 + \frac{2}{x}}{1 - \frac{5}{x^2}} = 3$, sebab suku $\frac{1}{x}$ menyusut ke nol.</li>
+        </ul>
+
+        <div class="box recap">
+          <span class="box-label">Ringkasan Cepat</span>
+          <ul>
+            <li>Fungsi = mesin: satu masukan, tepat satu keluaran. Domain = yang diizinkan (penyebut $\neq 0$, akar $\ge 0$).</li>
+            <li>$(f \circ g)(x) = f(g(x))$ — kerjakan dari dalam ke luar; urutan tak bisa ditukar.</li>
+            <li>Invers membatalkan fungsi: tulis $y=f(x)$, tukar $x \leftrightarrow y$, selesaikan.</li>
+            <li>Logaritma adalah invers eksponen — semua sifatnya adalah sifat pangkat yang menyamar.</li>
+            <li>Aritmetika: $U_n = a+(n-1)b$. Geometri: $U_n = ar^{n-1}$, dan $S_\infty = \frac{a}{1-r}$ bila $|r|&lt;1$.</li>
+            <li>Limit: substitusi dulu; kalau $\frac{0}{0}$, faktorkan; kalau $x \to \infty$, bagi pangkat tertinggi.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="menuju-olimpiade">
+        <h2>Menuju Prakalkulus Olimpiade</h2>
+        <p>Di level kompetisi, materi ini berubah wujud: fungsi menjadi <em class="accent-word">teka-teki persamaan fungsional</em>, deret menjadi permainan sigma, dan logaritma menjadi rantai yang saling meniadakan. Empat perkakas berikut kuncinya.</p>
+
+        <h3>1. Persamaan Fungsional: Seni Substitusi</h3>
+        <p>Soal memberi <em>persamaan</em> yang dipenuhi $f$, lalu menanyakan nilainya. Aturan mainnya cuma satu: kalau persamaan berlaku untuk <strong>setiap</strong> $x$, kamu bebas memasukkan $x$ apa pun yang menguntungkan. Substitusi favorit: $x=0$, $x=1$, $x \to -x$, dan $x \to \frac{1}{x}$.</p>
+        <p>Kalau satu substitusi belum cukup, lakukan dua — lalu perlakukan hasilnya sebagai <strong>sistem persamaan biasa</strong>. Cari juga <em>titik tetap</em>: nilai $x$ yang membuat kedua sisi menyebut fungsi yang sama.</p>
+        <div class="box example">
+          <span class="box-label">Contoh — Titik Tetap</span>
+          <p style="margin-bottom:0.3rem;">Jika $f(x) + f(1-x) = 2$ untuk setiap $x$, tentukan $f\left(\tfrac{1}{2}\right)$.</p>
+          <p style="margin-bottom:0;">Substitusi $x = \tfrac12$ membuat $1-x$ juga $\tfrac12$, jadi persamaannya runtuh menjadi $2f\left(\tfrac12\right) = 2 \Rightarrow f\left(\tfrac12\right) = 1$. Satu substitusi cerdas mengalahkan sepuluh baris aljabar.</p>
+        </div>
+
+        <h3>2. Notasi Sigma &amp; Rumus Jumlah Baku</h3>
+        <div class="box formula">
+          <span class="box-label">Wajib Hafal</span>
+          $$\sum_{k=1}^{n} k = \frac{n(n+1)}{2} \qquad \sum_{k=1}^{n} k^2 = \frac{n(n+1)(2n+1)}{6} \qquad \sum_{k=1}^{n} k^3 = \left(\frac{n(n+1)}{2}\right)^2$$
+        </div>
+        <p>Ditambah sifat linear: $\sum (a\,U_k + c) = a\sum U_k + n\,c$. Dengan bekal itu, deret rumit pun bisa dipecah menjadi potongan-potongan baku.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Hitung $\sum_{k=1}^{n} (2k+1)$.</p>
+          <p style="margin-bottom:0;">$2\sum k + \sum 1 = 2 \cdot \dfrac{n(n+1)}{2} + n = n^2 + n + n = n^2 + 2n$. (Ingat hasil ini — ia muncul lagi di latihan!)</p>
+        </div>
+        <p>Dan jangan lupa <strong>deret runtuh</strong> dari halaman <a href="aljabar.html">Aljabar</a>: $\frac{1}{k(k+1)} = \frac{1}{k} - \frac{1}{k+1}$ — senjata pamungkas untuk sigma berpecahan.</p>
+
+        <h3>3. Rantai Logaritma</h3>
+        <p>Dari sifat ganti basis lahir identitas yang tampak seperti sulap:</p>
+        <div class="box formula"><span class="box-label">Rantai</span>$${}^{a}\!\log b \cdot {}^{b}\!\log c = {}^{a}\!\log c \qquad\qquad a^{{}^{a}\log x} = x$$</div>
+        <p>Alasannya jelas begitu ditulis sebagai pecahan: $\dfrac{\log b}{\log a} \cdot \dfrac{\log c}{\log b} = \dfrac{\log c}{\log a}$ — suku tengahnya saling mencoret, persis deret runtuh. Rantai sepanjang apa pun akan runtuh menjadi <em>basis pertama</em> dan <em>numerus terakhir</em>.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Hitung ${}^{3}\!\log 5 \cdot {}^{5}\!\log 9$.</p>
+          <p style="margin-bottom:0;">Rantainya runtuh: ${}^{3}\!\log 9 = 2$.</p>
+        </div>
+
+        <h3>4. Limit Istimewa &amp; Gerbang Turunan</h3>
+        <p>Dua limit yang wajib dikenali di kompetisi:</p>
+        <div class="box formula"><span class="box-label">Limit Istimewa</span>$$\lim_{x \to 0} \frac{\sin x}{x} = 1 \qquad\Longrightarrow\qquad \lim_{x \to 0} \frac{\sin ax}{x} = a$$</div>
+        <p>Dan inilah puncaknya — limit yang melahirkan seluruh Kalkulus:</p>
+        <div class="box formula"><span class="box-label">Definisi Turunan</span>$$f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$$</div>
+        <p>Maknanya geometris: $\frac{f(a+h)-f(a)}{h}$ adalah kemiringan garis yang memotong grafik di dua titik. Buat $h$ menyusut ke nol, kedua titik itu menyatu — dan garis potong berubah menjadi <strong>garis singgung</strong>. Limit inilah yang mengubah "kemiringan rata-rata" menjadi "kemiringan sesaat".</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Untuk $f(x) = x^2$, hitung $f'(3)$ dari definisi.</p>
+          <p style="margin-bottom:0;">$\lim_{h\to0} \dfrac{(3+h)^2 - 9}{h} = \lim_{h\to0} \dfrac{6h + h^2}{h} = \lim_{h\to0}(6+h) = 6$. Bentuk $\frac{0}{0}$ tertangani dengan mencoret $h$ — trik yang sama seperti sebelumnya.</p>
+        </div>
+
+        <div class="box recap">
+          <span class="box-label">Bekal Olimpiade</span>
+          <ul>
+            <li>Persamaan fungsional? Substitusi strategis ($x=0$, $x=1$, $-x$, $\frac1x$), lalu selesaikan sebagai sistem.</li>
+            <li>Cari titik tetap: nilai $x$ yang membuat kedua argumen fungsi menjadi sama.</li>
+            <li>Sigma rumit? Pecah dengan sifat linear, lalu pakai rumus baku $\sum k$, $\sum k^2$, $\sum k^3$.</li>
+            <li>Sigma berpecahan? Curigai deret runtuh.</li>
+            <li>Rantai logaritma selalu runtuh: basis pertama, numerus terakhir.</li>
+            <li>Bentuk $\frac00$ pada limit? Faktorkan, coret, substitusi — dan kenali definisi turunan saat ia menyamar.</li>
+            <li>Uji semuanya di tab <strong>Olimpiade</strong> pada latihan di bawah.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="bedah-soal">
+        <h2>Bedah Soal: Cara Berpikir Kompetisi</h2>
+        <p>Kerangka empat langkah yang sama — Pahami, Kenali Struktur, Kerjakan Rapi, Periksa — kini kita jalankan pada dua soal prakalkulus sungguhan.</p>
+
+        <h3>Bedah Soal 1 — Persamaan Fungsional</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Fungsi $f$ memenuhi $f(x) + 2f\!\left(\dfrac{1}{x}\right) = 3x$ untuk setiap $x \neq 0$. Tentukan $f(2)$.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> kita tidak tahu rumus $f$, dan tidak perlu tahu. Yang kita punya: persamaan yang berlaku untuk <em>setiap</em> $x$. Struktur $x \leftrightarrow \frac1x$ berteriak: substitusikan keduanya, lalu jadikan sistem.</p>
+        <p><strong>Kerjakan:</strong> substitusi $x=2$ dan $x=\tfrac12$ menghasilkan dua persamaan dengan dua "variabel" $f(2)$ dan $f\!\left(\tfrac12\right)$:</p>
+        <div class="box formula">
+          <span class="box-label">Sistem yang Terbentuk</span>
+          $$f(2) + 2f\!\left(\tfrac12\right) = 6 \qquad\qquad f\!\left(\tfrac12\right) + 2f(2) = \tfrac32$$
+        </div>
+        <p>Dari persamaan kedua: $f\!\left(\tfrac12\right) = \tfrac32 - 2f(2)$. Substitusikan ke yang pertama:</p>
+        <div class="box formula"><span class="box-label">Perhitungan</span>$$f(2) + 3 - 4f(2) = 6 \;\Longrightarrow\; -3f(2) = 3 \;\Longrightarrow\; f(2) = -1$$</div>
+        <p><strong>Periksa:</strong> jika $f(2) = -1$, maka $f\!\left(\tfrac12\right) = \tfrac32 + 2 = \tfrac72$. Uji ke persamaan asli: $-1 + 2 \cdot \tfrac72 = -1 + 7 = 6$ ✓ — dan itu memang $3x$ untuk $x=2$. Cocok. ✓</p>
+
+        <h3>Bedah Soal 2 — Bentuk Tak Tentu</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Hitung $\displaystyle\lim_{x \to 3} \frac{x^2 - x - 6}{x - 3}$.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> substitusi langsung memberi $\frac{9-3-6}{0} = \frac{0}{0}$ — bentuk tak tentu. Itu bukan kegagalan, melainkan <em>petunjuk</em>: pembilang pasti memuat faktor $(x-3)$ yang siap dicoret.</p>
+        <p><strong>Kerjakan:</strong> faktorkan pembilangnya — cari dua bilangan berjumlah $-1$ dan berhasil kali $-6$, yaitu $-3$ dan $2$:</p>
+        <div class="box formula"><span class="box-label">Perhitungan</span>$$\lim_{x \to 3} \frac{(x-3)(x+2)}{x-3} = \lim_{x \to 3} (x+2) = 5$$</div>
+        <p><strong>Periksa secara numerik:</strong> ambil $x = 2{,}99 \to$ hasilnya $4{,}99$; ambil $x = 3{,}01 \to$ hasilnya $5{,}01$. Dari kiri dan kanan sama-sama merapat ke $5$. ✓ (Persis pola yang kamu lihat di Penjelajah Limit di atas.)</p>
+
+        <div class="box recap">
+          <span class="box-label">Menulis Solusi ala Babak Esai</span>
+          <ul>
+            <li>Pada persamaan fungsional, <strong>sebutkan substitusinya</strong>: "Substitusikan $x = 2$ …", lalu beri nomor tiap persamaan.</li>
+            <li>Jangan pernah menulis $\frac00$ sebagai jawaban — tulis "bentuk tak tentu, sehingga difaktorkan terlebih dahulu".</li>
+            <li>Sertakan syarat: numerus logaritma positif, penyebut tak nol, $|r| &lt; 1$ untuk deret tak hingga.</li>
+            <li>Tutup dengan kesimpulan tegas: "Jadi, $f(2) = -1$."</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="latihan">
+        <h2>Latihan Soal Bertingkat</h2>
+        <p>Empat tingkat kesulitan — dari Mudah sampai Olimpiade. Klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
+        <p class="quiz-note">Progres tersimpan otomatis di peramban ini — tekan "Ulangi" untuk mencoba lagi dari awal.</p>
+
+        <div data-tier-group>
+          <div class="tier-tabs">
+            <button class="tier-tab active" data-tier="mudah"><span class="dot"></span>Mudah</button>
+            <button class="tier-tab" data-tier="sedang"><span class="dot"></span>Sedang</button>
+            <button class="tier-tab" data-tier="sulit"><span class="dot"></span>Sulit</button>
+            <button class="tier-tab" data-tier="olimpiade"><span class="dot"></span>Olimpiade</button>
+          </div>
+
+          <!-- MUDAH -->
+          <div class="tier-panel active" data-tier="mudah">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="pk-m1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Jika $f(x) = 2x + 3$, nilai $f(4)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$8$</button>
+                <button class="quiz-option" data-option="B">$11$</button>
+                <button class="quiz-option" data-option="C">$14$</button>
+                <button class="quiz-option" data-option="D">$5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Substitusi $x=4$: $f(4) = 2(4) + 3 = 11$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="pk-m2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Domain dari $f(x) = \dfrac{1}{x-2}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x \neq 0$</button>
+                <button class="quiz-option" data-option="B">$x \ge 2$</button>
+                <button class="quiz-option" data-option="C">$x \neq 2$</button>
+                <button class="quiz-option" data-option="D">semua bilangan real</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Penyebut tidak boleh nol: $x - 2 \neq 0$, jadi $x \neq 2$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="pk-m3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Suku ke-$10$ barisan aritmetika $3, 7, 11, \dots$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$39$</button>
+                <button class="quiz-option" data-option="B">$40$</button>
+                <button class="quiz-option" data-option="C">$43$</button>
+                <button class="quiz-option" data-option="D">$35$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$a=3$, $b=4$: $U_{10} = 3 + 9(4) = 39$. Jebakan $43$ muncul kalau salah memakai $n$ alih-alih $n-1$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="pk-m4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Nilai dari ${}^{2}\!\log 8$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$3$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">$8$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pertanyaannya: $2$ dipangkatkan berapa supaya jadi $8$? Karena $2^3 = 8$, jawabannya $3$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="pk-m5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Nilai $\displaystyle\lim_{x \to 2} (x^2 + 1)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$5$</button>
+                <button class="quiz-option" data-option="D">tak terdefinisi</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Fungsinya rapi di $x=2$, jadi substitusi langsung: $2^2 + 1 = 5$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="pk-m6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Rasio barisan geometri $2, 6, 18, 54, \dots$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$3$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rasio $=$ suku berikutnya dibagi suku sebelumnya: $\frac{6}{2} = 3$ (dan $\frac{18}{6}=3$ ✓).</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+          </div>
+
+          <!-- SEDANG -->
+          <div class="tier-panel" data-tier="sedang">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="pk-s1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Jika $f(x) = 2x$ dan $g(x) = x+3$, nilai $(f \circ g)(2)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$7$</button>
+                <button class="quiz-option" data-option="B">$10$</button>
+                <button class="quiz-option" data-option="C">$14$</button>
+                <button class="quiz-option" data-option="D">$12$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Dari dalam ke luar: $g(2) = 5$, lalu $f(5) = 10$. Jebakan $7$ adalah $(g \circ f)(2) = g(4)$ — urutan terbalik!</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="pk-s2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Invers dari $f(x) = 3x - 6$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$f^{-1}(x) = \frac{x-6}{3}$</button>
+                <button class="quiz-option" data-option="B">$f^{-1}(x) = \frac{x+6}{3}$</button>
+                <button class="quiz-option" data-option="C">$f^{-1}(x) = 3x+6$</button>
+                <button class="quiz-option" data-option="D">$f^{-1}(x) = \frac{1}{3x-6}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Tulis $y=3x-6$, tukar: $x = 3y-6$, selesaikan: $y = \frac{x+6}{3}$. Cek: $f(4) = 6$ dan $f^{-1}(6) = 4$ ✓</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="pk-s3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Jika $\log 2 = 0{,}301$ dan $\log 3 = 0{,}477$, maka $\log 6 = $ …</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0{,}778$</button>
+                <button class="quiz-option" data-option="B">$0{,}176$</button>
+                <button class="quiz-option" data-option="C">$0{,}602$</button>
+                <button class="quiz-option" data-option="D">$1{,}431$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$6 = 2 \times 3$, dan log perkalian menjadi penjumlahan: $0{,}301 + 0{,}477 = 0{,}778$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="pk-s4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Jumlah $10$ suku pertama deret $2 + 5 + 8 + \cdots$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$155$</button>
+                <button class="quiz-option" data-option="B">$145$</button>
+                <button class="quiz-option" data-option="C">$160$</button>
+                <button class="quiz-option" data-option="D">$150$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$a=2$, $b=3$: $S_{10} = \frac{10}{2}\big(2(2) + 9(3)\big) = 5(31) = 155$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="pk-s5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Nilai $\displaystyle\lim_{x \to 1} \frac{x^2-1}{x-1}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0$</button>
+                <button class="quiz-option" data-option="B">$1$</button>
+                <button class="quiz-option" data-option="C">$2$</button>
+                <button class="quiz-option" data-option="D">tak terdefinisi</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Faktorkan: $\frac{(x-1)(x+1)}{x-1} = x+1 \to 2$. Fungsinya memang tak terdefinisi <em>di</em> $x=1$, tapi limitnya tetap ada — persis yang kamu lihat di Penjelajah Limit.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="pk-s6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Jumlah deret geometri tak hingga $8 + 4 + 2 + 1 + \cdots$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$16$</button>
+                <button class="quiz-option" data-option="B">$12$</button>
+                <button class="quiz-option" data-option="C">$24$</button>
+                <button class="quiz-option" data-option="D">tak hingga</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$a=8$, $r=\frac12$ (dan $|r|&lt;1$): $S_\infty = \frac{8}{1-\frac12} = 16$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+          </div>
+
+          <!-- SULIT -->
+          <div class="tier-panel" data-tier="sulit">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="pk-x1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Jika $f(x) = x^2 - 1$ dan $g(x) = x + 2$, maka $(f \circ g)(x) = $ …</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x^2 + 4x + 3$</button>
+                <button class="quiz-option" data-option="B">$x^2 + 4x + 4$</button>
+                <button class="quiz-option" data-option="C">$x^2 + 1$</button>
+                <button class="quiz-option" data-option="D">$x^2 + x + 1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$f(g(x)) = (x+2)^2 - 1 = x^2 + 4x + 4 - 1 = x^2 + 4x + 3$. Jangan lupa mengurangi $1$ setelah menjabarkan.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="pk-x2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Nilai dari ${}^{2}\!\log 5 \cdot {}^{5}\!\log 8$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$13$</button>
+                <button class="quiz-option" data-option="D">$40$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rantai logaritma runtuh: ${}^{2}\!\log 5 \cdot {}^{5}\!\log 8 = {}^{2}\!\log 8 = 3$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="pk-x3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Nilai $\displaystyle\lim_{x \to \infty} \frac{3x^2 + 2x}{x^2 - 5}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0$</button>
+                <button class="quiz-option" data-option="B">$3$</button>
+                <button class="quiz-option" data-option="C">tak hingga</button>
+                <button class="quiz-option" data-option="D">$-\frac{2}{5}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Bagi semuanya dengan $x^2$: $\frac{3 + \frac{2}{x}}{1 - \frac{5}{x^2}} \to \frac{3+0}{1-0} = 3$. Pintasannya: bandingkan koefisien pangkat tertinggi.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="pk-x4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Barisan aritmetika memiliki $U_3 = 11$ dan $U_7 = 23$. Nilai $U_{10}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$32$</button>
+                <button class="quiz-option" data-option="B">$29$</button>
+                <button class="quiz-option" data-option="C">$35$</button>
+                <button class="quiz-option" data-option="D">$30$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Dari $U_3$ ke $U_7$ ada $4$ langkah: $4b = 23-11 = 12 \Rightarrow b=3$. Lalu $a = 11 - 2(3) = 5$, sehingga $U_{10} = 5 + 9(3) = 32$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="pk-x5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Nilai dari $\displaystyle\sum_{k=1}^{20} k$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$190$</button>
+                <button class="quiz-option" data-option="B">$210$</button>
+                <button class="quiz-option" data-option="C">$400$</button>
+                <button class="quiz-option" data-option="D">$220$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rumus Gauss: $\frac{n(n+1)}{2} = \frac{20 \cdot 21}{2} = 210$. (Jebakan $190$ adalah jumlah sampai $19$.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="pk-x6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Nilai $\displaystyle\lim_{x \to 2} \frac{x^2-4}{x^2-x-2}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{4}{3}$</button>
+                <button class="quiz-option" data-option="B">$1$</button>
+                <button class="quiz-option" data-option="C">$2$</button>
+                <button class="quiz-option" data-option="D">$0$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Bentuk $\frac00$ → faktorkan keduanya: $\frac{(x-2)(x+2)}{(x-2)(x+1)} = \frac{x+2}{x+1} \to \frac{4}{3}$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+          </div>
+
+          <!-- OLIMPIADE -->
+          <div class="tier-panel" data-tier="olimpiade">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="pk-o1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Fungsi $f$ memenuhi $f(x) + f(1-x) = 4$ untuk setiap $x$. Nilai $f\!\left(\tfrac14\right) + f\!\left(\tfrac34\right)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$8$</button>
+                <button class="quiz-option" data-option="D">tak dapat ditentukan</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Lihat strukturnya: $\tfrac34 = 1 - \tfrac14$. Substitusi $x=\tfrac14$ langsung memberi $f\!\left(\tfrac14\right) + f\!\left(\tfrac34\right) = 4$ — tanpa perlu tahu rumus $f$ sama sekali.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="pk-o2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Jika $f(x) + 3f\!\left(\dfrac{1}{x}\right) = 4x$ untuk setiap $x \neq 0$, nilai $f(1)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4$</button>
+                <button class="quiz-option" data-option="B">$1$</button>
+                <button class="quiz-option" data-option="C">$0$</button>
+                <button class="quiz-option" data-option="D">$2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Titik tetap: di $x=1$, kebetulan $\frac1x = 1$ juga. Persamaannya runtuh menjadi $4f(1) = 4$, jadi $f(1) = 1$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="pk-o3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Nilai dari $\displaystyle\sum_{k=1}^{10} k^2$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$385$</button>
+                <button class="quiz-option" data-option="B">$285$</button>
+                <button class="quiz-option" data-option="C">$505$</button>
+                <button class="quiz-option" data-option="D">$220$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\frac{n(n+1)(2n+1)}{6} = \frac{10 \cdot 11 \cdot 21}{6} = 385$. (Jebakan $285$ adalah jumlah sampai $k=9$.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="pk-o4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Nilai dari ${}^{2}\!\log 3 \cdot {}^{3}\!\log 4 \cdot {}^{4}\!\log 5 \cdot {}^{5}\!\log 8$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$8$</button>
+                <button class="quiz-option" data-option="B">$15$</button>
+                <button class="quiz-option" data-option="C">$3$</button>
+                <button class="quiz-option" data-option="D">$120$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rantainya runtuh seperti deret teleskopik — yang tersisa basis pertama dan numerus terakhir: ${}^{2}\!\log 8 = 3$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="pk-o5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Deret geometri tak hingga bersuku pertama $3$ memiliki jumlah $9$. Rasionya adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{1}{3}$</button>
+                <button class="quiz-option" data-option="B">$\frac{3}{4}$</button>
+                <button class="quiz-option" data-option="C">$\frac{2}{3}$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{2}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$S_\infty = \frac{a}{1-r} \Rightarrow 9 = \frac{3}{1-r} \Rightarrow 1-r = \frac13 \Rightarrow r = \frac23$ (memenuhi $|r|&lt;1$ ✓).</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="pk-o6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Nilai $\displaystyle\lim_{x \to 0} \frac{\sin 3x}{x}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3$</button>
+                <button class="quiz-option" data-option="B">$1$</button>
+                <button class="quiz-option" data-option="C">$0$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{3}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Tulis ulang: $3 \cdot \frac{\sin 3x}{3x}$. Karena $\lim_{u\to0}\frac{\sin u}{u} = 1$, hasilnya $3 \cdot 1 = 3$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="pk-o7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Jumlah $n$ suku pertama suatu deret adalah $S_n = n^2 + 2n$. Suku ke-$5$ deret itu adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$9$</button>
+                <button class="quiz-option" data-option="B">$13$</button>
+                <button class="quiz-option" data-option="C">$35$</button>
+                <button class="quiz-option" data-option="D">$11$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kunci: $U_n = S_n - S_{n-1}$. Maka $U_5 = S_5 - S_4 = (25+10) - (16+8) = 35 - 24 = 11$. (Jebakan $35$ adalah $S_5$, bukan $U_5$.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="pk-o8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Nilai $\displaystyle\lim_{h \to 0} \frac{(2+h)^2 - 4}{h}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0$</button>
+                <button class="quiz-option" data-option="B">$2$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">tak terdefinisi</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jabarkan: $\frac{4 + 4h + h^2 - 4}{h} = \frac{h(4+h)}{h} = 4+h \to 4$. Perhatikan: ini persis definisi turunan $f'(2)$ untuk $f(x)=x^2$ — kamu baru saja menghitung turunan pertamamu. Selamat datang di gerbang Kalkulus!</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Fondasi prakalkulusmu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-pager">
+        <a class="pager-card" href="geometri.html"><span>← Sebelumnya</span><strong>Geometri</strong></a>
+        <a class="pager-card next" href="olimpiade.html"><span>Selanjutnya →</span><strong>Peta Jalan Olimpiade</strong></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+        <p>Belajar Matematika dari konsep dasar sampai persiapan olimpiade, untuk pelajar SMA, mahasiswa, dan umum.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Materi</h4>
+          <a href="aljabar.html">Aljabar</a>
+          <a href="trigonometri.html">Trigonometri</a>
+          <a href="geometri.html">Geometri</a>
+          <a href="prakalkulus.html">Prakalkulus</a>
+          <a href="olimpiade.html">Matematika Olimpiade</a>
+          <a href="fisika.html">Fisika (Segera)</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tentang</h4>
+          <span>Khusni Academy</span>
+          <span>Dibuat untuk pelajar Indonesia</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Khusni Academy.</span>
+      <span>Dibuat dengan ♥ untuk kemajuan Matematika Indonesia.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" aria-label="Kembali ke atas">↑</button>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

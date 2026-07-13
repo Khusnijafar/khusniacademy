@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initUnitCircle();
   initParabola();
   initGeoAngle();
+  initLimitLab();
   initKatex();
 });
 
@@ -1104,5 +1105,159 @@ function initGeoAngle() {
   ['pointerup', 'pointercancel'].forEach(ev =>
     svg.addEventListener(ev, () => { dragKey = null; }));
 
+  render();
+}
+
+/* ==========================================================================
+   SIMULASI 4 — Penjelajah Limit (prakalkulus.html)
+   f(x) = (x^2 - 1)/(x - 1): bolong di x = 1, tetapi limitnya 2.
+   ========================================================================== */
+function initLimitLab() {
+  const host = document.getElementById('widget-limit');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const W = 360, H = 300, PAD = 30;
+  const XMIN = -1, XMAX = 3, YMIN = -1, YMAX = 4;
+  const A = 1, L = 2;
+  const px = x => PAD + (x - XMIN) / (XMAX - XMIN) * (W - 2 * PAD);
+  const py = y => PAD + (YMAX - y) / (YMAX - YMIN) * (H - 2 * PAD);
+  const isHole = x => Math.abs(x - A) < 1e-9;
+
+  const fmtId = (v, d) => {
+    const r = Number(v).toFixed(d).replace(/\.?0+$/, '');
+    return (r === '' || r === '-' ? '0' : r).replace('-', '\u2212').replace('.', ',');
+  };
+
+  /* --- Bangun SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + W + ' ' + H,
+    role: 'img',
+    'aria-label': 'Grafik f(x) = (x kuadrat dikurang 1) per (x dikurang 1), bolong di x sama dengan 1'
+  });
+
+  for (let x = XMIN; x <= XMAX; x++) {
+    if (x !== 0) svgEl('line', { x1: px(x), y1: PAD, x2: px(x), y2: H - PAD, class: 'pb-grid' }, svg);
+  }
+  for (let y = YMIN; y <= YMAX; y++) {
+    if (y !== 0) svgEl('line', { x1: PAD, y1: py(y), x2: W - PAD, y2: py(y), class: 'pb-grid' }, svg);
+  }
+  svgEl('line', { x1: PAD, y1: py(0), x2: W - PAD, y2: py(0), class: 'pb-axis' }, svg);
+  svgEl('line', { x1: px(0), y1: PAD, x2: px(0), y2: H - PAD, class: 'pb-axis' }, svg);
+  [['x', W - 14, py(0) - 7], ['y', px(0) + 9, PAD + 6],
+   ['1', px(1) - 3, py(0) + 14], ['2', px(0) - 14, py(2) + 4]].forEach(t => {
+    const lbl = svgEl('text', { x: t[1], y: t[2], class: 'w-lbl' }, svg);
+    lbl.textContent = t[0];
+  });
+
+  /* Garis y = x + 1 (nilai f untuk x != 1) */
+  svgEl('line', {
+    x1: px(XMIN), y1: py(XMIN + 1), x2: px(XMAX), y2: py(XMAX + 1), class: 'pb-curve'
+  }, svg);
+
+  const gx = svgEl('line', { class: 'lm-guide' }, svg);
+  const gy = svgEl('line', { class: 'lm-guide' }, svg);
+  const pt = svgEl('circle', { r: 6, class: 'lm-pt' }, svg);
+  svgEl('circle', { cx: px(A), cy: py(L), r: 5.5, class: 'lm-hole' }, svg);
+
+  /* --- Kontrol --- */
+  const controls = elDiv('widget-controls');
+  const row = elDiv('ctrl-row');
+  const lab = document.createElement('label');
+  lab.setAttribute('for', 'lm-x');
+  lab.textContent = 'Geser x mendekati 1';
+  const out = document.createElement('output');
+  row.appendChild(lab); row.appendChild(out);
+  controls.appendChild(row);
+
+  const slider = document.createElement('input');
+  slider.type = 'range';
+  slider.min = '0'; slider.max = '2'; slider.step = '0.001'; slider.value = '0.5';
+  slider.id = 'lm-x';
+  slider.setAttribute('aria-label', 'Nilai x');
+  controls.appendChild(slider);
+
+  const chips = elDiv('chips');
+  [0.9, 0.99, 0.999, 1, 1.001, 1.01, 1.1].forEach(v => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.dataset.x = String(v);
+    b.textContent = fmtId(v, 3);
+    b.addEventListener('click', () => { slider.value = String(v); render(); });
+    chips.appendChild(b);
+  });
+  controls.appendChild(chips);
+
+  const readout = elDiv('readout',
+    '<div><span>x</span><b data-r="x"></b></div>' +
+    '<div><span>f(x)</span><b data-r="fx"></b></div>' +
+    '<div><span>Jarak x ke 1</span><b data-r="dx"></b></div>' +
+    '<div><span>Jarak f(x) ke 2</span><b data-r="dy"></b></div>');
+  controls.appendChild(readout);
+
+  const badgeWrap = elDiv('');
+  badgeWrap.innerHTML = '<span class="disc-badge gold" data-r="badge" hidden></span>';
+  controls.appendChild(badgeWrap);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  function render() {
+    const x = parseFloat(slider.value);
+    const hole = isHole(x);
+    const fx = hole ? null : (x * x - 1) / (x - 1);
+
+    out.textContent = 'x = ' + fmtId(x, 3);
+    q('[data-r="x"]').textContent = fmtId(x, 3);
+
+    const badge = q('[data-r="badge"]');
+    if (hole) {
+      [gx, gy, pt].forEach(el => el.setAttribute('display', 'none'));
+      q('[data-r="fx"]').textContent = 'tak terdefinisi';
+      q('[data-r="dx"]').textContent = '0';
+      q('[data-r="dy"]').textContent = '\u2014';
+      badge.hidden = false;
+      badge.textContent = 'f(1) tak terdefinisi \u00b7 limitnya tetap 2';
+      note.textContent = 'Tepat di x = 1, penyebutnya nol \u2014 titiknya bolong. Tapi limit tidak peduli nilai di titik itu, hanya nilai di sekitarnya. Geser sedikit ke kiri atau kanan.';
+    } else {
+      [gx, gy, pt].forEach(el => el.removeAttribute('display'));
+      const X = px(x), Y = py(fx);
+      pt.setAttribute('cx', X.toFixed(1));
+      pt.setAttribute('cy', Y.toFixed(1));
+      gx.setAttribute('x1', X.toFixed(1)); gx.setAttribute('y1', Y.toFixed(1));
+      gx.setAttribute('x2', X.toFixed(1)); gx.setAttribute('y2', py(0).toFixed(1));
+      gy.setAttribute('x1', X.toFixed(1)); gy.setAttribute('y1', Y.toFixed(1));
+      gy.setAttribute('x2', px(0).toFixed(1)); gy.setAttribute('y2', Y.toFixed(1));
+
+      q('[data-r="fx"]').textContent = fmtId(fx, 3);
+      q('[data-r="dx"]').textContent = fmtId(Math.abs(x - A), 3);
+      q('[data-r="dy"]').textContent = fmtId(Math.abs(fx - L), 3);
+      badge.hidden = true;
+      const d = Math.abs(x - A);
+      note.textContent = d < 0.02
+        ? 'Perhatikan: jarak f(x) ke 2 selalu sama persis dengan jarak x ke 1. Sedekat apa pun kamu mau, f(x) bisa dibuat sedekat itu ke 2 \u2014 itulah arti lim f(x) = 2.'
+        : (x < A
+          ? 'Kamu mendekat dari kiri. Makin dekat x ke 1, makin dekat f(x) ke 2.'
+          : 'Kamu mendekat dari kanan. Perhatikan f(x) menuju angka yang sama: 2.');
+    }
+
+    chips.querySelectorAll('.chip').forEach(ch => {
+      ch.classList.toggle('active', Math.abs(Number(ch.dataset.x) - x) < 1e-9);
+    });
+  }
+
+  slider.addEventListener('input', render);
   render();
 }
