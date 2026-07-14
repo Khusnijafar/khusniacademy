@@ -147,24 +147,68 @@ function initTierTabs() {
   });
 }
 
-/* ---------- Mesin kuis interaktif (v2: progres tersimpan + ulangi) ---------- */
+/* ---------- Mesin kuis interaktif (v3: PG, PG kompleks, Benar-Salah) ---------- */
 function initQuizEngine() {
   document.querySelectorAll('.quiz-card').forEach(card => {
     const qid = card.dataset.qid;
+    const type = card.dataset.type || 'single';
+    const key = qid ? 'ka:quiz:' + qid : null;
+    const saved = key ? KAStore.get(key, null) : null;
+    const panelOf = () => card.closest('.tier-panel');
 
-    card.querySelectorAll('.quiz-option').forEach(opt => {
-      opt.addEventListener('click', () => {
-        if (card.dataset.answered === 'true') return;
-        applyAnswer(card, opt.dataset.option);
-        if (qid) KAStore.set('ka:quiz:' + qid, opt.dataset.option);
-        refreshPanel(card.closest('.tier-panel'));
+    if (type === 'multi') {
+      card.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          if (card.dataset.answered === 'true') return;
+          opt.classList.toggle('selected');
+        });
       });
-    });
+      const btn = card.querySelector('.quiz-check');
+      if (btn) btn.addEventListener('click', () => {
+        if (card.dataset.answered === 'true') return;
+        const picked = Array.from(card.querySelectorAll('.quiz-option.selected'))
+          .map(o => o.dataset.option);
+        if (!picked.length) return;
+        applyMulti(card, picked);
+        if (key) KAStore.set(key, picked);
+        refreshPanel(panelOf());
+      });
+      if (Array.isArray(saved) && saved.length) applyMulti(card, saved);
 
-    // Pulihkan jawaban yang tersimpan dari kunjungan sebelumnya
-    if (qid) {
-      const saved = KAStore.get('ka:quiz:' + qid, null);
-      if (saved) applyAnswer(card, saved);
+    } else if (type === 'tf') {
+      card.querySelectorAll('.tf-row').forEach(row => {
+        row.querySelectorAll('.tf-btn').forEach(b => {
+          b.addEventListener('click', () => {
+            if (card.dataset.answered === 'true') return;
+            row.querySelectorAll('.tf-btn').forEach(x => x.classList.toggle('picked', x === b));
+          });
+        });
+      });
+      const btn = card.querySelector('.quiz-check');
+      if (btn) btn.addEventListener('click', () => {
+        if (card.dataset.answered === 'true') return;
+        const rows = Array.from(card.querySelectorAll('.tf-row'));
+        const picked = rows.map(r => {
+          const b = r.querySelector('.tf-btn.picked');
+          return b ? b.dataset.tf : '';
+        });
+        if (picked.some(p => !p)) return;
+        applyTF(card, picked);
+        if (key) KAStore.set(key, picked);
+        refreshPanel(panelOf());
+      });
+      if (Array.isArray(saved) && saved.length) applyTF(card, saved);
+
+    } else {
+      card.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          if (card.dataset.answered === 'true') return;
+          applyAnswer(card, opt.dataset.option);
+          if (key) KAStore.set(key, opt.dataset.option);
+          refreshPanel(panelOf());
+        });
+      });
+      if (typeof saved === 'string' && saved) applyAnswer(card, saved);
     }
   });
 
@@ -180,11 +224,71 @@ function initQuizEngine() {
   });
 }
 
+function showFeedback(card, isCorrect) {
+  const feedback = card.querySelector('.quiz-feedback');
+  if (!feedback) return;
+  feedback.hidden = false;
+  feedback.classList.remove('is-correct', 'is-incorrect');
+  feedback.classList.add(isCorrect ? 'is-correct' : 'is-incorrect');
+  const label = feedback.querySelector('strong');
+  if (label) label.textContent = isCorrect ? 'Benar!' : 'Belum tepat';
+}
+
+function answerSet(card) {
+  return (card.dataset.answer || '').split(',').map(s => s.trim()).filter(Boolean);
+}
+
+function applyMulti(card, picked) {
+  const correct = answerSet(card);
+  const chosen = new Set(picked);
+  card.dataset.answered = 'true';
+  const isCorrect = correct.length === chosen.size && correct.every(c => chosen.has(c));
+  card.dataset.correct = String(isCorrect);
+
+  card.querySelectorAll('.quiz-option').forEach(o => {
+    o.disabled = true;
+    o.classList.remove('selected');
+    const inAns = correct.indexOf(o.dataset.option) !== -1;
+    const took = chosen.has(o.dataset.option);
+    if (inAns && took) o.classList.add('correct');
+    else if (inAns) o.classList.add('reveal-correct');
+    else if (took) o.classList.add('incorrect');
+  });
+  const btn = card.querySelector('.quiz-check');
+  if (btn) btn.disabled = true;
+  showFeedback(card, isCorrect);
+}
+
+function applyTF(card, picked) {
+  const rows = Array.from(card.querySelectorAll('.tf-row'));
+  card.dataset.answered = 'true';
+  let allRight = true;
+
+  rows.forEach((row, i) => {
+    const ans = row.dataset.answer;
+    const got = picked[i];
+    const right = got === ans;
+    if (!right) allRight = false;
+    row.classList.add(right ? 'right' : 'wrong');
+    row.querySelectorAll('.tf-btn').forEach(b => {
+      b.disabled = true;
+      b.classList.toggle('picked', b.dataset.tf === got);
+      if (b.dataset.tf === ans) b.classList.add('correct');
+      else if (b.dataset.tf === got) b.classList.add('incorrect');
+    });
+  });
+
+  card.dataset.correct = String(allRight);
+  const btn = card.querySelector('.quiz-check');
+  if (btn) btn.disabled = true;
+  showFeedback(card, allRight);
+}
+
 function applyAnswer(card, chosen) {
   const correct = card.dataset.answer;
-  const feedback = card.querySelector('.quiz-feedback');
   card.dataset.answered = 'true';
   const isCorrect = chosen === correct;
+  card.dataset.correct = String(isCorrect);
 
   card.querySelectorAll('.quiz-option').forEach(o => {
     o.disabled = true;
@@ -195,23 +299,27 @@ function applyAnswer(card, chosen) {
     }
   });
 
-  if (feedback) {
-    feedback.hidden = false;
-    feedback.classList.remove('is-correct', 'is-incorrect');
-    feedback.classList.add(isCorrect ? 'is-correct' : 'is-incorrect');
-    const label = feedback.querySelector('strong');
-    if (label) label.textContent = isCorrect ? 'Benar!' : 'Belum tepat';
-  }
+  showFeedback(card, isCorrect);
 }
 
 function resetCard(card) {
   delete card.dataset.answered;
+  delete card.dataset.correct;
   const qid = card.dataset.qid;
   if (qid) KAStore.remove('ka:quiz:' + qid);
+
   card.querySelectorAll('.quiz-option').forEach(o => {
     o.disabled = false;
-    o.classList.remove('correct', 'incorrect', 'reveal-correct');
+    o.classList.remove('correct', 'incorrect', 'reveal-correct', 'selected');
   });
+  card.querySelectorAll('.tf-row').forEach(r => r.classList.remove('right', 'wrong'));
+  card.querySelectorAll('.tf-btn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('picked', 'correct', 'incorrect');
+  });
+  const chk = card.querySelector('.quiz-check');
+  if (chk) chk.disabled = false;
+
   const fb = card.querySelector('.quiz-feedback');
   if (fb) {
     fb.hidden = true;
@@ -225,10 +333,7 @@ function refreshPanel(panel) {
   if (!panel) return;
   const cards = panel.querySelectorAll('.quiz-card');
   const answered = panel.querySelectorAll('.quiz-card[data-answered="true"]');
-  let correctCount = 0;
-  answered.forEach(c => {
-    if (c.querySelector('.quiz-option.correct')) correctCount++;
-  });
+  const correctCount = panel.querySelectorAll('.quiz-card[data-correct="true"]').length;
 
   const scoreEl = panel.querySelector('.tier-score strong');
   if (scoreEl) scoreEl.textContent = correctCount + '/' + cards.length;
@@ -334,39 +439,39 @@ function initScrollSpy() {
   map.forEach((_, sec) => io.observe(sec));
 }
 
-/* ---------- Checklist kesiapan Olimpiade ---------- */
+/* ---------- Checklist kesiapan (Olimpiade / TKA) ---------- */
 function initChecklist() {
-  const wrap = document.querySelector('[data-checklist]');
-  if (!wrap) return;
+  document.querySelectorAll('[data-checklist]').forEach(wrap => {
+    const key = 'ka:check:' + (wrap.dataset.checklist || 'default');
+    const saved = KAStore.get(key, {});
+    const items = wrap.querySelectorAll('.check-item input[type="checkbox"]');
+    if (!items.length) return;
 
-  const key = 'ka:check:' + (wrap.dataset.checklist || 'default');
-  const saved = KAStore.get(key, {});
-  const items = wrap.querySelectorAll('.check-item input[type="checkbox"]');
+    const update = () => {
+      let done = 0;
+      items.forEach(i => {
+        const li = i.closest('.check-item');
+        if (li) li.classList.toggle('done', i.checked);
+        if (i.checked) done++;
+      });
+      const count = wrap.querySelector('[data-check-count]');
+      if (count) count.textContent = done + '/' + items.length;
+      const bar = wrap.querySelector('.check-progress i');
+      if (bar) bar.style.width = (items.length ? (done / items.length) * 100 : 0) + '%';
+      const msg = wrap.querySelector('[data-check-msg]');
+      if (msg) msg.hidden = done !== items.length;
+    };
 
-  const update = () => {
-    let done = 0;
     items.forEach(i => {
-      const li = i.closest('.check-item');
-      if (li) li.classList.toggle('done', i.checked);
-      if (i.checked) done++;
+      if (saved[i.dataset.check]) i.checked = true;
+      i.addEventListener('change', () => {
+        saved[i.dataset.check] = i.checked;
+        KAStore.set(key, saved);
+        update();
+      });
     });
-    const count = wrap.querySelector('[data-check-count]');
-    if (count) count.textContent = done + '/' + items.length;
-    const bar = wrap.querySelector('.check-progress i');
-    if (bar) bar.style.width = (items.length ? (done / items.length) * 100 : 0) + '%';
-    const msg = wrap.querySelector('[data-check-msg]');
-    if (msg) msg.hidden = done !== items.length;
-  };
-
-  items.forEach(i => {
-    if (saved[i.dataset.check]) i.checked = true;
-    i.addEventListener('change', () => {
-      saved[i.dataset.check] = i.checked;
-      KAStore.set(key, saved);
-      update();
-    });
+    update();
   });
-  update();
 }
 
 /* ---------- Util SVG ---------- */

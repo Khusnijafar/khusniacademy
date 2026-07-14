@@ -1316,3 +1316,118 @@ svg text.gc-lbl { font-family: var(--font-mono); font-size: 12px; font-weight: 6
   .hero-actions .btn { width: 100%; }
   .readout { grid-template-columns: 1fr 1fr; }
 }
+
+/* ---------- Panel TKA: tab per domain ---------- */
+.tier-tab[data-tier="bilangan"].active { color: var(--signal); border-color: var(--signal); background: var(--signal-soft); }
+.tier-tab[data-tier="aljabar"].active { color: var(--tier-mudah); border-color: var(--tier-mudah); background: var(--tier-mudah-soft); }
+.tier-tab[data-tier="geometri"].active { color: var(--tier-sedang); border-color: var(--tier-sedang); background: var(--tier-sedang-soft); }
+.tier-tab[data-tier="data"].active { color: var(--tier-sulit); border-color: var(--tier-sulit); background: var(--tier-sulit-soft); }
+.tier-panel[data-tier="bilangan"] .tier-progress i { background: var(--signal); }
+.tier-panel[data-tier="aljabar"] .tier-progress i { background: var(--tier-mudah); }
+.tier-panel[data-tier="geometri"] .tier-progress i { background: var(--tier-sedang); }
+.tier-panel[data-tier="data"] .tier-progress i { background: var(--tier-sulit); }
+
+/* ---------- Format soal TKA ---------- */
+.quiz-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--chalk-mute);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-full);
+  padding: 0.2rem 0.6rem;
+  margin-bottom: 0.9rem;
+}
+.quiz-tag.multi { color: var(--tier-sedang); border-color: rgba(240,169,78,0.35); }
+.quiz-tag.tf { color: var(--tier-sulit); border-color: rgba(199,147,255,0.35); }
+.quiz-tag.cukup { color: var(--medal); border-color: rgba(226,172,63,0.35); }
+
+.quiz-options.stack { grid-template-columns: 1fr; }
+.quiz-option.selected {
+  border-color: var(--signal);
+  background: var(--signal-soft);
+  color: var(--chalk);
+}
+.quiz-option.selected::before { content: '\2713\00a0\00a0'; color: var(--signal); font-weight: 700; }
+
+.quiz-figure { margin: 0 0 1.2rem; overflow-x: auto; }
+.quiz-figure .math-table { margin: 0; font-size: 0.84rem; }
+.quiz-figure .math-table th, .quiz-figure .math-table td { padding: 0.45rem 0.6rem; }
+
+.quiz-check {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--signal);
+  border: 1.5px solid var(--signal);
+  background: var(--signal-soft);
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--r-full);
+  transition: opacity 0.15s ease;
+}
+.quiz-check:hover:not(:disabled) { opacity: 0.82; }
+.quiz-check:disabled { opacity: 0.4; cursor: default; }
+
+/* Tabel Benar-Salah */
+.tf-list {
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.tf-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--ink-line-soft);
+  background: var(--ink);
+  transition: background 0.15s ease;
+}
+.tf-row:last-child { border-bottom: 0; }
+.tf-row p { margin: 0; font-size: 0.92rem; color: var(--chalk-dim); flex: 1; min-width: 0; }
+.tf-row.right { background: var(--correct-soft); }
+.tf-row.wrong { background: var(--incorrect-soft); }
+.tf-btns { display: flex; gap: 0.4rem; flex-shrink: 0; }
+.tf-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--chalk-mute);
+  border: 1.5px solid var(--ink-line);
+  border-radius: var(--r-full);
+  padding: 0.35rem 0.75rem;
+  transition: all 0.15s ease;
+}
+.tf-btn:hover:not(:disabled) { border-color: var(--chalk-mute); color: var(--chalk); }
+.tf-btn.picked { border-color: var(--signal); color: var(--signal); background: var(--signal-soft); }
+.tf-btn.correct { border-color: var(--correct); color: var(--correct); background: var(--correct-soft); }
+.tf-btn.incorrect { border-color: var(--incorrect); color: var(--incorrect); background: var(--incorrect-soft); }
+.tf-btn:disabled { cursor: default; }
+
+/* Kartu domain TKA */
+.badge.new { color: var(--tier-mudah); border-color: rgba(62,207,142,0.3); background: var(--tier-mudah-soft); }
+.domain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.domain-card { display: flex; gap: 1rem; align-items: flex-start; }
+.domain-card .dnum {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  width: 34px; height: 34px;
+  flex-shrink: 0;
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--signal);
+  border: 1px solid rgba(79,157,255,0.3);
+  background: var(--signal-soft);
+}
+.domain-card h4 { margin-bottom: 0.25rem; }
+.domain-card p { font-size: 0.88rem; margin-bottom: 0.5rem; }
+.domain-card .dmeta { font-family: var(--font-mono); font-size: 0.7rem; color: var(--chalk-mute); }
+
+@media (max-width: 768px) {
+  .domain-grid { grid-template-columns: 1fr; }
+  .tf-row { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+}
