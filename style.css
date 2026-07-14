@@ -1572,3 +1572,12 @@ svg text.gc-lbl { font-family: var(--font-mono); font-size: 12px; font-weight: 6
   .nav-drop-menu a em { display: none; }
   .nav-drop-soon { padding: 0.5rem 0.9rem; }
 }
+
+/* ---------- Panel TKA Lanjut: domain Kalkulus ---------- */
+.tier-tab[data-tier="kalkulus"].active { color: var(--medal); border-color: var(--medal); background: var(--medal-soft); }
+.tier-panel[data-tier="kalkulus"] .tier-progress i { background: var(--medal); }
+
+/* Matriks & rumus panjang di dalam opsi kuis */
+.quiz-option .katex { white-space: normal; }
+.quiz-options.wide { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 620px) { .quiz-options.wide { grid-template-columns: 1fr; } }

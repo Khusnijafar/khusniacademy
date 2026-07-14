@@ -91,35 +91,46 @@ function initNavToggle() {
   });
 }
 
-/* ---------- Menu Materi (dropdown yang bisa tumbuh) ---------- */
+/* ---------- Menu dropdown navbar (bisa lebih dari satu) ---------- */
 function initNavMenu() {
-  document.querySelectorAll('.nav-drop').forEach(drop => {
+  const drops = Array.from(document.querySelectorAll('.nav-drop'));
+  if (!drops.length) return;
+
+  const setOpen = (drop, on) => {
+    drop.classList.toggle('open', on);
+    const b = drop.querySelector('.nav-drop-btn');
+    if (b) b.setAttribute('aria-expanded', String(on));
+  };
+  const closeAll = except => drops.forEach(d => {
+    if (d !== except) setOpen(d, false);
+  });
+
+  drops.forEach(drop => {
     const btn = drop.querySelector('.nav-drop-btn');
     if (!btn) return;
 
-    // Tandai pemicu sebagai aktif bila halaman ini ada di dalam menunya
+    // Tandai pemicu aktif bila halaman ini ada di dalam menunya
     if (drop.querySelector('a.active')) btn.classList.add('active');
-
-    const setOpen = on => {
-      drop.classList.toggle('open', on);
-      btn.setAttribute('aria-expanded', String(on));
-    };
 
     btn.addEventListener('click', e => {
       e.stopPropagation();
-      setOpen(!drop.classList.contains('open'));
+      const willOpen = !drop.classList.contains('open');
+      closeAll(drop);
+      setOpen(drop, willOpen);
     });
 
     drop.addEventListener('keydown', e => {
       if (e.key === 'Escape' && drop.classList.contains('open')) {
-        setOpen(false);
+        setOpen(drop, false);
         btn.focus();
       }
     });
+  });
 
-    document.addEventListener('click', e => {
-      if (!drop.contains(e.target)) setOpen(false);
-    });
+  // Klik di luar semua dropdown menutup semuanya
+  document.addEventListener('click', e => {
+    const inside = e.target && e.target.closest && e.target.closest('.nav-drop');
+    if (!inside) closeAll(null);
   });
 }
 
