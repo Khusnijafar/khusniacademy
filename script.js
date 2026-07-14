@@ -44,6 +44,7 @@ const REDUCE_MOTION = !!(window.matchMedia &&
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavToggle();
+  initNavMenu();
   initNavScrolled();
   initScrollProgress();
   initBackToTop();
@@ -70,6 +71,11 @@ function initNavToggle() {
     links.classList.remove('open');
     toggle.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
+    links.querySelectorAll('.nav-drop.open').forEach(d => {
+      d.classList.remove('open');
+      const b = d.querySelector('.nav-drop-btn');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
   };
 
   toggle.addEventListener('click', () => {
@@ -82,6 +88,38 @@ function initNavToggle() {
 
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && links.classList.contains('open')) close();
+  });
+}
+
+/* ---------- Menu Materi (dropdown yang bisa tumbuh) ---------- */
+function initNavMenu() {
+  document.querySelectorAll('.nav-drop').forEach(drop => {
+    const btn = drop.querySelector('.nav-drop-btn');
+    if (!btn) return;
+
+    // Tandai pemicu sebagai aktif bila halaman ini ada di dalam menunya
+    if (drop.querySelector('a.active')) btn.classList.add('active');
+
+    const setOpen = on => {
+      drop.classList.toggle('open', on);
+      btn.setAttribute('aria-expanded', String(on));
+    };
+
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      setOpen(!drop.classList.contains('open'));
+    });
+
+    drop.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && drop.classList.contains('open')) {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+
+    document.addEventListener('click', e => {
+      if (!drop.contains(e.target)) setOpen(false);
+    });
   });
 }
 
