@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initParabola();
   initGeoAngle();
   initLimitLab();
+  initMatrixLab();
   initKatex();
 });
 
@@ -1413,5 +1414,235 @@ function initLimitLab() {
   }
 
   slider.addEventListener('input', render);
+  render();
+}
+
+/* ==========================================================================
+   SIMULASI 5 — Matriks sebagai Transformasi (matriks.html)
+   Matriks 2x2 [[a,b],[c,d]] mengubah bidang; det = luas jajaran genjang.
+   ========================================================================== */
+function initMatrixLab() {
+  const host = document.getElementById('widget-matriks');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const SIZE = 340, CX = 170, CY = 170, U = 42; // U px per satuan
+  const RANGE = 3.5;
+  const sx = x => CX + x * U;
+  const sy = y => CY - y * U;
+  const clamp = v => Math.max(-RANGE, Math.min(RANGE, v));
+  const snap = v => {
+    const r = Math.round(v * 2) / 2;
+    return Math.abs(v - r) < 0.12 ? r : Math.round(v * 100) / 100;
+  };
+  const fmt = v => {
+    let s = String(Math.round(v * 100) / 100);
+    if (s === '-0') s = '0';
+    return s.replace('-', '\u2212');
+  };
+
+  // Keadaan awal: sedikit geser (shear) supaya menarik
+  let a = 1, b = 1, c = 0, d = 1.5;
+
+  /* --- SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + SIZE + ' ' + SIZE,
+    role: 'img',
+    'aria-label': 'Bidang koordinat memperlihatkan matriks 2x2 mengubah persegi satuan menjadi jajaran genjang'
+  });
+  // grid
+  for (let i = -4; i <= 4; i++) {
+    if (i !== 0) {
+      svgEl('line', { x1: sx(i), y1: sy(-4), x2: sx(i), y2: sy(4), class: 'pb-grid' }, svg);
+      svgEl('line', { x1: sx(-4), y1: sy(i), x2: sx(4), y2: sy(i), class: 'pb-grid' }, svg);
+    }
+  }
+  svgEl('line', { x1: sx(-4), y1: sy(0), x2: sx(4), y2: sy(0), class: 'pb-axis' }, svg);
+  svgEl('line', { x1: sx(0), y1: sy(-4), x2: sx(0), y2: sy(4), class: 'pb-axis' }, svg);
+
+  // persegi satuan asli (bayangan referensi)
+  svgEl('rect', { x: sx(0), y: sy(1), width: U, height: U, class: 'mx-square' }, svg);
+
+  // jajaran genjang hasil (diisi warna sesuai tanda determinan)
+  const para = svgEl('polygon', { class: 'mx-para pos', points: '' }, svg);
+
+  // panah marker (definisi sekali)
+  const defs = svgEl('defs', {}, svg);
+  const mk = (id, cls) => {
+    const m = svgEl('marker', { id, markerWidth: 9, markerHeight: 9, refX: 6, refY: 3, orient: 'auto' }, defs);
+    svgEl('path', { d: 'M0,0 L6,3 L0,6 Z', class: cls }, m).setAttribute('fill', 'currentColor');
+    return m;
+  };
+  mk('mx-arrow-i', 'ai'); mk('mx-arrow-j', 'aj');
+
+  const vecI = svgEl('line', { class: 'mx-vec-i', 'marker-end': 'url(#mx-arrow-i)' }, svg);
+  const vecJ = svgEl('line', { class: 'mx-vec-j', 'marker-end': 'url(#mx-arrow-j)' }, svg);
+  vecI.style.color = 'var(--signal)'; vecJ.style.color = 'var(--medal)';
+  const dotI = svgEl('circle', { r: 7, fill: 'var(--signal)', stroke: 'var(--ink)', 'stroke-width': 2, style: 'cursor:grab' }, svg);
+  const dotJ = svgEl('circle', { r: 7, fill: 'var(--medal)', stroke: 'var(--ink)', 'stroke-width': 2, style: 'cursor:grab' }, svg);
+  const lblI = svgEl('text', { class: 'mx-vlbl i', 'text-anchor': 'middle' }, svg);
+  const lblJ = svgEl('text', { class: 'mx-vlbl j', 'text-anchor': 'middle' }, svg);
+  lblI.textContent = '\u00ee'; lblJ.textContent = '\u0135';
+
+  /* --- Kontrol --- */
+  const controls = elDiv('widget-controls');
+
+  const chips = elDiv('chips');
+  const presets = [
+    ['Identitas', 1, 0, 0, 1],
+    ['Rotasi 90\u00b0', 0, -1, 1, 0],
+    ['Regang 2\u00d7', 2, 0, 0, 2],
+    ['Geser', 1, 1, 0, 1],
+    ['Singular', 1, 2, 1, 2]
+  ];
+  presets.forEach(p => {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'chip'; btn.textContent = p[0];
+    btn.addEventListener('click', () => { a = p[1]; b = p[2]; c = p[3]; d = p[4]; syncSliders(); render(); });
+    chips.appendChild(btn);
+  });
+  controls.appendChild(chips);
+
+  // empat slider a,b,c,d
+  const sliders = {};
+  const mkSlider = (key, val, labelHtml) => {
+    const row = elDiv('ctrl-row');
+    row.innerHTML = '<label>' + labelHtml + '</label><output></output>';
+    const inp = document.createElement('input');
+    inp.type = 'range'; inp.min = '-3'; inp.max = '3'; inp.step = '0.25'; inp.value = String(val);
+    inp.setAttribute('aria-label', 'elemen ' + key);
+    inp.addEventListener('input', () => {
+      const v = parseFloat(inp.value);
+      if (key === 'a') a = v; else if (key === 'b') b = v; else if (key === 'c') c = v; else d = v;
+      render();
+    });
+    sliders[key] = inp;
+    controls.appendChild(row);
+    controls.appendChild(inp);
+    row.querySelector('output').dataset.k = key;
+  };
+  mkSlider('a', a, 'a <span style="color:var(--chalk-mute)">(kolom \u00ee, atas)</span>');
+  mkSlider('c', c, 'c <span style="color:var(--chalk-mute)">(kolom \u00ee, bawah)</span>');
+  mkSlider('b', b, 'b <span style="color:var(--chalk-mute)">(kolom \u0135, atas)</span>');
+  mkSlider('d', d, 'd <span style="color:var(--chalk-mute)">(kolom \u0135, bawah)</span>');
+
+  const readout = elDiv('readout',
+    '<div><span>Determinan (ad \u2212 bc)</span><b data-r="det"></b></div>' +
+    '<div><span>Luas jajaran genjang</span><b data-r="area"></b></div>' +
+    '<div><span>Orientasi</span><b data-r="ori"></b></div>');
+  controls.appendChild(readout);
+
+  const badgeWrap = elDiv('');
+  badgeWrap.innerHTML = '<span class="disc-badge" data-r="badge" hidden></span>';
+  controls.appendChild(badgeWrap);
+
+  const legend = elDiv('legend',
+    '<span><i class="dot" style="background:var(--signal)"></i>\u00ee = kolom 1</span>' +
+    '<span><i class="dot" style="background:var(--medal)"></i>\u0135 = kolom 2</span>');
+  legend.style.marginTop = '0.9rem';
+  controls.appendChild(legend);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  function syncSliders() {
+    ['a', 'b', 'c', 'd'].forEach(k => {
+      const v = k === 'a' ? a : k === 'b' ? b : k === 'c' ? c : d;
+      if (sliders[k]) sliders[k].value = String(v);
+    });
+  }
+
+  function render() {
+    const ix = sx(a), iy = sy(c);   // kolom 1 = (a,c)
+    const jx = sx(b), jy = sy(d);   // kolom 2 = (b,d)
+    const ox = sx(0), oy = sy(0);
+    const tipX = sx(a + b), tipY = sy(c + d);
+
+    para.setAttribute('points',
+      ox + ',' + oy + ' ' + ix + ',' + iy + ' ' + tipX + ',' + tipY + ' ' + jx + ',' + jy);
+
+    vecI.setAttribute('x1', ox); vecI.setAttribute('y1', oy);
+    vecI.setAttribute('x2', ix); vecI.setAttribute('y2', iy);
+    vecJ.setAttribute('x1', ox); vecJ.setAttribute('y1', oy);
+    vecJ.setAttribute('x2', jx); vecJ.setAttribute('y2', jy);
+    dotI.setAttribute('cx', ix); dotI.setAttribute('cy', iy);
+    dotJ.setAttribute('cx', jx); dotJ.setAttribute('cy', jy);
+    lblI.setAttribute('x', ix + (a >= 0 ? 13 : -13)); lblI.setAttribute('y', iy + (c > 0 ? 16 : -8));
+    lblJ.setAttribute('x', jx + (b >= 0 ? 13 : -13)); lblJ.setAttribute('y', jy + (d > 0 ? 16 : -8));
+
+    const det = a * d - b * c;
+    const flat = Math.abs(det) < 0.02;
+    para.setAttribute('class', 'mx-para ' + (flat ? 'flat' : det > 0 ? 'pos' : 'neg'));
+
+    q('[data-r="det"]').textContent = fmt(det);
+    q('[data-r="area"]').textContent = fmt(Math.abs(det)) + ' satuan\u00b2';
+    q('[data-r="ori"]').textContent = flat ? '\u2014' : det > 0 ? 'terjaga' : 'terbalik (cermin)';
+
+    const badge = q('[data-r="badge"]');
+    if (flat) {
+      badge.hidden = false;
+      badge.className = 'disc-badge';
+      badge.style.color = 'var(--incorrect)';
+      badge.style.borderColor = 'rgba(255,107,107,0.35)';
+      badge.style.background = 'var(--incorrect-soft)';
+      badge.textContent = 'det = 0 \u00b7 matriks SINGULAR (tak punya invers)';
+    } else {
+      badge.hidden = true;
+    }
+
+    note.textContent = flat
+      ? 'Kedua kolom segaris, jadi persegi satuan gepeng menjadi ruas garis \u2014 luasnya nol. Di sinilah det = 0 dan invers tidak ada: transformasi "meremukkan" bidang dan tak bisa dibalik.'
+      : det < 0
+        ? 'Determinan negatif: jajaran genjang "terbalik" \u2014 \u0135 kini berada di sisi searah jarum jam dari \u00ee. Orientasi bidang tercermin, dan |det| tetap mengukur luasnya.'
+        : 'Seret titik biru (\u00ee) dan emas (\u0135), atau geser slider a, b, c, d. Perhatikan: luas jajaran genjang selalu sama dengan |determinan|.';
+
+    // update output tiap slider
+    controls.querySelectorAll('output[data-k]').forEach(o => {
+      const k = o.dataset.k;
+      const v = k === 'a' ? a : k === 'b' ? b : k === 'c' ? c : d;
+      o.textContent = fmt(v);
+    });
+  }
+
+  /* --- Seret î / ĵ --- */
+  let drag = null;
+  const svgXY = e => {
+    const r = svg.getBoundingClientRect();
+    if (!r.width) return null;
+    return { x: (e.clientX - r.left) * (SIZE / r.width), y: (e.clientY - r.top) * (SIZE / r.height) };
+  };
+  const toUnit = p => ({ x: clamp(snap((p.x - CX) / U)), y: clamp(snap((CY - p.y) / U)) });
+
+  svg.addEventListener('pointerdown', e => {
+    const p = svgXY(e); if (!p) return;
+    const di = Math.hypot(p.x - sx(a), p.y - sy(c));
+    const dj = Math.hypot(p.x - sx(b), p.y - sy(d));
+    if (Math.min(di, dj) > 26) return;
+    drag = di <= dj ? 'i' : 'j';
+    try { svg.setPointerCapture(e.pointerId); } catch (err) {}
+    const u = toUnit(p);
+    if (drag === 'i') { a = u.x; c = u.y; } else { b = u.x; d = u.y; }
+    syncSliders(); render(); e.preventDefault();
+  });
+  svg.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const p = svgXY(e); if (!p) return;
+    const u = toUnit(p);
+    if (drag === 'i') { a = u.x; c = u.y; } else { b = u.x; d = u.y; }
+    syncSliders(); render();
+  });
+  ['pointerup', 'pointercancel'].forEach(ev => svg.addEventListener(ev, () => { drag = null; }));
+
   render();
 }

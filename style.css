@@ -1581,3 +1581,23 @@ svg text.gc-lbl { font-family: var(--font-mono); font-size: 12px; font-weight: 6
 .quiz-option .katex { white-space: normal; }
 .quiz-options.wide { grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 620px) { .quiz-options.wide { grid-template-columns: 1fr; } }
+
+/* ---------- Simulasi 5: Matriks sebagai Transformasi ---------- */
+.mx-square { fill: none; stroke: var(--chalk-mute); stroke-width: 1.5; stroke-dasharray: 4 4; opacity: 0.55; }
+.mx-para { stroke-width: 2; }
+.mx-para.pos { fill: rgba(79,157,255,0.16); stroke: var(--signal); }
+.mx-para.neg { fill: rgba(226,172,63,0.16); stroke: var(--medal); }
+.mx-para.flat { fill: none; stroke: var(--incorrect); stroke-width: 2.5; }
+.mx-vec-i { stroke: var(--signal); stroke-width: 3; stroke-linecap: round; }
+.mx-vec-j { stroke: var(--medal); stroke-width: 3; stroke-linecap: round; }
+svg text.mx-vlbl { font-family: var(--font-mono); font-size: 12px; font-weight: 700; }
+svg text.mx-vlbl.i { fill: var(--signal); }
+svg text.mx-vlbl.j { fill: var(--medal); }
+.mx-matrix {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: var(--font-mono); font-size: 1.05rem; color: var(--chalk);
+  margin-bottom: 0.9rem;
+}
+.mx-bracket { font-size: 2.4rem; line-height: 1; color: var(--chalk-mute); font-weight: 200; }
+.mx-grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.15rem 0.9rem; }
+.mx-grid2 b { font-weight: 600; text-align: center; min-width: 2.4ch; }

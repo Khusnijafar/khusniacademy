@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matriks — Khusni Academy</title>
+<meta name="description" content="Pengenalan Matriks: ordo & jenis matriks, operasi dasar, perkalian matriks, determinan & invers 2×2, penyelesaian SPLDV dengan matriks, simulasi transformasi interaktif, bekal olimpiade (Teorema Cayley-Hamilton, sifat determinan, pola pangkat matriks), dan latihan soal bertingkat dari Mudah sampai Olimpiade.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#090d17">
+<link rel="canonical" href="https://khusniacademy.netlify.app/matriks.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matriks — Khusni Academy">
+<meta property="og:description" content="Ordo & jenis matriks, operasi, perkalian, determinan & invers, penyelesaian SPLDV, dan bekal olimpiade Cayley-Hamilton — dengan latihan soal bertingkat.">
+<meta property="og:url" content="https://khusniacademy.netlify.app/matriks.html">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Matriks — Khusni Academy">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f9dff'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia, serif' font-weight='700' fill='%23090d17' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<a class="skip-link" href="#konten">Langsung ke konten</a>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <div class="nav-drop">
+        <button class="nav-drop-btn active" type="button" aria-expanded="false" aria-haspopup="true">Materi<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label">Tersedia</span>
+          <a href="aljabar.html"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, bekal olimpiade</em></a>
+          <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap</em></a>
+          <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran, Heron &amp; kuasa titik</em></a>
+          <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, limit</em></a>
+          <a href="matriks.html" class="active"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
+          <div class="nav-drop-sep"></div>
+          <span class="nav-drop-label">Segera Hadir</span>
+          <span class="nav-drop-soon">Statistika &amp; Peluang <i>Segera</i></span>
+          <span class="nav-drop-soon">Kalkulus <i>Segera</i></span>
+        </div>
+      </div>
+      <div class="nav-drop">
+        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-haspopup="true">TKA<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label">Persiapan TKA</span>
+          <a href="tka.html"><strong>Matematika Umum</strong><em>4 domain, 25 indikator, 25 soal latihan</em></a>
+          <a href="tka-lanjut.html"><strong>Matematika Lanjut</strong><em>Matriks, vektor, lingkaran, transformasi, limit</em></a>
+        </div>
+      </div>
+      <a href="olimpiade.html">Olimpiade</a>
+    </div>
+    <div class="nav-cta">
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero" id="konten">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><span>/</span><a href="index.html#materi">Materi</a><span>/</span><span>Matriks</span></div>
+    <span class="eyebrow">Materi · Tersedia</span>
+    <h1>Matriks</h1>
+    <p class="hero-sub">Sebuah tabel bilangan yang diperlakukan sebagai satu objek — dan dengannya, seluruh sistem persamaan bisa ditulis, dikalikan, bahkan dibalik dalam <em class="accent-word">satu baris</em>.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container lesson-layout">
+    <aside class="lesson-nav">
+      <div class="lesson-nav-title">Isi Materi</div>
+      <a href="#pendahuluan">Pendahuluan</a>
+      <a href="#pengenalan">Pengenalan Matriks</a>
+      <a href="#operasi">Operasi Dasar</a>
+      <a href="#perkalian">Perkalian Matriks</a>
+      <a href="#determinan">Determinan &amp; Invers</a>
+      <a href="#spldv">Penerapan: SPLDV</a>
+      <a href="#menuju-olimpiade">Menuju Olimpiade</a>
+      <a href="#bedah-soal">Bedah Soal</a>
+      <a href="#latihan">Latihan Soal</a>
+    </aside>
+
+    <div class="lesson">
+
+      <div class="lesson-section" id="pendahuluan">
+        <h2>Pendahuluan</h2>
+        <p>Bayangkan kamu harus menyimpan harga tiga produk di lima toko — lima belas angka yang saling berkaitan. Menuliskannya satu per satu merepotkan. Matriks menawarkan cara yang lebih rapi: <strong>susun angka-angka itu dalam tabel</strong>, lalu perlakukan seluruh tabel sebagai <em>satu</em> objek yang bisa dijumlah, dikali, dan dibalik.</p>
+        <p>Kekuatan sesungguhnya baru terasa saat matriks bertemu sistem persamaan: apa yang biasanya butuh berbaris-baris eliminasi bisa diringkas menjadi $\mathbf{x} = A^{-1}\mathbf{b}$. Dari komputer grafis, ekonomi, sampai kecerdasan buatan — semuanya berjalan di atas matriks.</p>
+        <div class="box">
+          <span class="box-label">Peta Belajar Halaman Ini</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Perkalian adalah jantungnya</strong> — kuasai aturan "baris ketemu kolom" sampai otomatis; hampir semua konsep lanjut bertumpu padanya.</li>
+            <li><strong>Urutan itu penting</strong> — tidak seperti bilangan biasa, $AB$ dan $BA$ umumnya berbeda. Ini sumber jebakan sekaligus keindahan.</li>
+            <li><strong>Kejar "kenapa"-nya</strong> — rumus invers dan Cayley-Hamilton di sini diberi alasannya, bukan sekadar dihafal.</li>
+            <li><strong>Naik bertahap di latihan</strong> — dari Mudah sampai Olimpiade; ulangi tingkat yang skornya belum penuh.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="pengenalan">
+        <h2>Pengenalan Matriks</h2>
+        <p>Matriks adalah susunan bilangan dalam <strong>baris</strong> dan <strong>kolom</strong>, diapit tanda kurung. Ukurannya disebut <strong>ordo</strong>, ditulis $(\text{baris}) \times (\text{kolom})$.</p>
+        <div class="box formula">
+          <span class="box-label">Ordo &amp; Elemen</span>
+          $$A = \begin{pmatrix} a_{11} &amp; a_{12} &amp; a_{13} \\ a_{21} &amp; a_{22} &amp; a_{23} \end{pmatrix} \quad\text{berordo } 2 \times 3$$
+        </div>
+        <p>Setiap bilangan disebut <strong>elemen</strong>, ditandai $a_{ij}$: $i$ nomor baris, $j$ nomor kolom. Jadi $a_{21}$ berada di baris ke-$2$, kolom ke-$1$. <em class="accent-word">Baris dulu, kolom kemudian</em> — urutan yang sama seperti membaca alamat.</p>
+
+        <h3>Beberapa Jenis Penting</h3>
+        <ul>
+          <li><strong>Matriks persegi</strong> — banyak baris $=$ banyak kolom (misalnya $2\times2$). Hanya matriks persegi yang punya determinan dan invers.</li>
+          <li><strong>Matriks identitas</strong> $I$ — diagonalnya $1$, sisanya $0$. Ia adalah "angka $1$"-nya dunia matriks: $AI = IA = A$.</li>
+          <li><strong>Matriks nol</strong> $O$ — semua elemennya $0$; berperan seperti angka $0$.</li>
+          <li><strong>Transpos</strong> $A^{T}$ — menukar baris menjadi kolom. Elemen $a_{ij}$ berpindah ke posisi $a_{ji}$.</li>
+        </ul>
+        <div class="box example">
+          <span class="box-label">Contoh — Transpos</span>
+          <p style="margin-bottom:0;">$\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}^{T} = \begin{pmatrix} 1 &amp; 3 \\ 2 &amp; 4 \end{pmatrix}$ — baris pertama $(1,2)$ menjadi kolom pertama.</p>
+        </div>
+
+        <h3>Kesamaan Dua Matriks</h3>
+        <p>Dua matriks disebut <strong>sama</strong> jika ordonya sama <em>dan</em> semua elemen seletaknya sama. Sifat sederhana ini adalah alat ampuh: satu persamaan matriks memecah menjadi beberapa persamaan biasa sekaligus.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Jika $\begin{pmatrix} x+1 &amp; 3 \\ y &amp; 5 \end{pmatrix} = \begin{pmatrix} 4 &amp; 3 \\ 2 &amp; 5 \end{pmatrix}$, tentukan $x$ dan $y$.</p>
+          <p style="margin-bottom:0;">Samakan posisi demi posisi: $x + 1 = 4 \Rightarrow x = 3$, dan $y = 2$.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="operasi">
+        <h2>Operasi Dasar</h2>
+        <h3>Penjumlahan &amp; Pengurangan</h3>
+        <p>Dilakukan <strong>elemen demi elemen</strong>, dan hanya bisa jika kedua matriks <em>berordo sama</em>. Kalau ordonya beda, operasi ini tak terdefinisi.</p>
+        <div class="box formula">
+          <span class="box-label">Penjumlahan</span>
+          $$\begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} + \begin{pmatrix} p &amp; q \\ r &amp; s \end{pmatrix} = \begin{pmatrix} a+p &amp; b+q \\ c+r &amp; d+s \end{pmatrix}$$
+        </div>
+        <p>Berbeda dengan perkalian nanti, penjumlahan matriks <strong>komutatif</strong> ($A + B = B + A$) dan asosiatif — sama nyaman seperti menjumlah bilangan biasa.</p>
+
+        <h3>Perkalian dengan Skalar</h3>
+        <p>Mengalikan matriks dengan sebuah bilangan berarti mengalikan <strong>setiap</strong> elemennya dengan bilangan itu.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$3\begin{pmatrix} 1 &amp; -2 \\ 0 &amp; 4 \end{pmatrix} = \begin{pmatrix} 3 &amp; -6 \\ 0 &amp; 12 \end{pmatrix}$ — tidak ada elemen yang terlewat.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="perkalian">
+        <h2>Perkalian Matriks</h2>
+        <p>Inilah operasi yang paling berbeda dari intuisi — dan paling penting. Aturannya satu: <strong>baris matriks kiri bertemu kolom matriks kanan</strong>, dikalikan berpasangan lalu dijumlahkan.</p>
+        <div class="box formula">
+          <span class="box-label">Perkalian</span>
+          $$\begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}\begin{pmatrix} p &amp; q \\ r &amp; s \end{pmatrix} = \begin{pmatrix} ap+br &amp; aq+bs \\ cp+dr &amp; cq+ds \end{pmatrix}$$
+        </div>
+        <p>Untuk versi paling berguna — matriks $\times$ vektor kolom — hasilnya persis <em class="accent-word">ruas kiri sebuah sistem persamaan</em>:</p>
+        <div class="box formula">
+          <span class="box-label">Matriks × Vektor</span>
+          $$\begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}\begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} ax + by \\ cx + dy \end{pmatrix}$$
+        </div>
+        <p>Itulah jembatan diam-diam antara matriks dan SPLDV yang akan kita seberangi sebentar lagi.</p>
+
+        <h3>Syarat Ukuran</h3>
+        <p>Perkalian $A \times B$ hanya bisa jika <strong>banyak kolom $A$ = banyak baris $B$</strong>. Hasilnya berordo (baris $A$) $\times$ (kolom $B$). Kalau syarat ini tak terpenuhi, perkaliannya tak terdefinisi — periksa ukuran <em>sebelum</em> menghitung.</p>
+
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">$\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\begin{pmatrix} 2 &amp; 0 \\ 1 &amp; 3 \end{pmatrix} = ?$</p>
+          <p style="margin-bottom:0.15rem;">Baris $1$ × kolom $1$: $1(2)+2(1) = 4$. &nbsp; Baris $1$ × kolom $2$: $1(0)+2(3) = 6$.</p>
+          <p style="margin-bottom:0.15rem;">Baris $2$ × kolom $1$: $3(2)+4(1) = 10$. &nbsp; Baris $2$ × kolom $2$: $3(0)+4(3) = 12$.</p>
+          <p style="margin-bottom:0;">Hasilnya $\begin{pmatrix} 4 &amp; 6 \\ 10 &amp; 12 \end{pmatrix}$.</p>
+        </div>
+
+        <div class="box warn">
+          <span class="box-label">Awas, Jebakan Besar!</span>
+          <ul>
+            <li><strong>Perkalian matriks tidak komutatif</strong>: umumnya $AB \neq BA$. Menukar urutan mengubah hasil — bahkan bisa membuat salah satunya tak terdefinisi.</li>
+            <li>Karena itu, aturan aljabar biasa bisa gagal: $(A+B)^2 \neq A^2 + 2AB + B^2$ (lihat bagian olimpiade).</li>
+            <li>Perkalian dengan identitas tidak mengubah apa pun: $AI = IA = A$.</li>
+            <li>Hati-hati: $AB = O$ <em>tidak</em> menjamin $A = O$ atau $B = O$ — dua matriks tak-nol bisa berkalikan menjadi nol.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="determinan">
+        <h2>Determinan &amp; Invers</h2>
+        <p>Setiap matriks persegi punya satu bilangan penanda bernama <strong>determinan</strong>. Untuk matriks $2\times2$:</p>
+        <div class="box formula">
+          <span class="box-label">Determinan 2×2</span>
+          $$A = \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} \;\Longrightarrow\; \det A = ad - bc$$
+        </div>
+        <p>Determinan menjawab pertanyaan penting: <em class="accent-word">apakah matriks ini bisa dibalik?</em> Jika $\det A = 0$, matriks disebut <strong>singular</strong> dan tidak punya invers. Jika $\det A \neq 0$:</p>
+        <div class="box formula">
+          <span class="box-label">Invers 2×2</span>
+          $$A^{-1} = \frac{1}{ad - bc}\begin{pmatrix} d &amp; -b \\ -c &amp; a \end{pmatrix}$$
+        </div>
+        <p>Cara mengingatnya rapi: <strong>tukar</strong> $a$ dan $d$, <strong>balik tanda</strong> $b$ dan $c$, lalu bagi dengan determinan. Invers adalah "pembatal": $A A^{-1} = A^{-1} A = I$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Tentukan invers $A = \begin{pmatrix} 4 &amp; 7 \\ 1 &amp; 2 \end{pmatrix}$.</p>
+          <p style="margin-bottom:0;">$\det A = 8 - 7 = 1$, jadi $A^{-1} = \begin{pmatrix} 2 &amp; -7 \\ -1 &amp; 4 \end{pmatrix}$. Cek: $A A^{-1} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$ ✓</p>
+        </div>
+        <p>Untuk matriks $3\times3$, determinan bisa dihitung dengan <strong>aturan Sarrus</strong> (menyalin dua kolom pertama ke kanan, lalu menjumlahkan hasil kali diagonal turun dikurangi diagonal naik). Inversnya lebih panjang, tapi prinsipnya sama: ada bila determinannya tak nol.</p>
+
+        <h3>Apa Arti Determinan? Lihat Sendiri</h3>
+        <p>Determinan bukan sekadar rumus $ad - bc$ — ia punya makna geometris yang indah. Setiap matriks $2\times2$ <strong>mentransformasi bidang</strong>: ia memindahkan vektor basis $\hat{\imath} = (1,0)$ ke kolom pertama $(a, c)$ dan $\hat{\jmath} = (0,1)$ ke kolom kedua $(b, d)$. Persegi satuan berubah menjadi jajaran genjang — dan <em class="accent-word">luas jajaran genjang itu tepat sama dengan $|\det|$</em>. Ketika $\det = 0$, jajaran genjang gepeng menjadi garis: di situlah matriks kehilangan inversnya.</p>
+
+        <div class="widget-card reveal" id="widget-matriks">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Matriks sebagai Transformasi</h3>
+            <p>Seret ujung vektor $\hat{\imath}$ (biru) dan $\hat{\jmath}$ (emas), atau geser slider $a, b, c, d$. Amati bagaimana persegi satuan berubah menjadi jajaran genjang, dan bagaimana luasnya selalu sama dengan $|\det|$. Coba preset <strong>Singular</strong> untuk melihat determinan runtuh menjadi nol!</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="spldv">
+        <h2>Penerapan: Menyelesaikan SPLDV</h2>
+        <p>Sekarang jembatannya kita seberangi. Sistem persamaan linear dua variabel</p>
+        <div class="box formula">
+          <span class="box-label">Sistem</span>
+          $$\begin{cases} ax + by = p \\ cx + dy = q \end{cases} \;\Longleftrightarrow\; \underbrace{\begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}}_{A}\underbrace{\begin{pmatrix} x \\ y \end{pmatrix}}_{\mathbf{x}} = \underbrace{\begin{pmatrix} p \\ q \end{pmatrix}}_{\mathbf{b}}$$
+        </div>
+        <p>Karena $A\mathbf{x} = \mathbf{b}$, kalikan kedua ruas dengan $A^{-1}$ <strong>dari kiri</strong> — dan solusinya langsung muncul:</p>
+        <div class="box formula"><span class="box-label">Kunci</span>$$\mathbf{x} = A^{-1}\mathbf{b}$$</div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Selesaikan $\begin{cases} 2x + 3y = 13 \\ x + 2y = 8 \end{cases}$ dengan matriks.</p>
+          <p style="margin-bottom:0.15rem;">$A = \begin{pmatrix} 2 &amp; 3 \\ 1 &amp; 2 \end{pmatrix}$, $\det A = 1$, jadi $A^{-1} = \begin{pmatrix} 2 &amp; -3 \\ -1 &amp; 2 \end{pmatrix}$.</p>
+          <p style="margin-bottom:0;">$\begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 2 &amp; -3 \\ -1 &amp; 2 \end{pmatrix}\begin{pmatrix} 13 \\ 8 \end{pmatrix} = \begin{pmatrix} 2 \\ 3 \end{pmatrix}$. Jadi $x = 2$, $y = 3$. Cek: $2(2)+3(3) = 13$ ✓</p>
+        </div>
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>Kalikan invers dari <strong>kiri</strong>: dari $A\mathbf{x} = \mathbf{b}$ diperoleh $\mathbf{x} = A^{-1}\mathbf{b}$, bukan $\mathbf{b}A^{-1}$ (yang bahkan tak terdefinisi ukurannya).</li>
+            <li>Jika $\det A = 0$, sistem tak punya solusi tunggal — bisa tak punya solusi, atau punya tak hingga banyak.</li>
+            <li>Urutan entri hasil mengikuti urutan variabel: baris atas $x$, baris bawah $y$.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="menuju-olimpiade">
+        <h2>Menuju Matriks Olimpiade</h2>
+        <p>Di level kompetisi, matriks berhenti sekadar dihitung dan mulai <em class="accent-word">ditalari</em>. Empat perkakas berikut membuka hampir semua soalnya.</p>
+
+        <h3>1. Aljabar yang Tidak Komutatif</h3>
+        <p>Karena $AB \neq BA$, rumus aljabar yang kamu hafal harus ditulis ulang dengan hati-hati:</p>
+        <div class="box formula">
+          <span class="box-label">Ekspansi yang Benar</span>
+          $$(A+B)^2 = A^2 + AB + BA + B^2 \quad(\textbf{bukan } A^2 + 2AB + B^2)$$
+        </div>
+        <p>Suku $AB$ dan $BA$ tak bisa digabung menjadi $2AB$ kecuali kebetulan $A$ dan $B$ komutatif. Kesalahan menggabungkannya adalah jebakan nomor satu di soal matriks.</p>
+
+        <h3>2. Teorema Cayley-Hamilton (untuk 2×2)</h3>
+        <p>Inilah permata halaman ini. Setiap matriks $2\times2$ memenuhi persamaannya sendiri:</p>
+        <div class="box formula">
+          <span class="box-label">Cayley-Hamilton 2×2</span>
+          $$A^2 = (\operatorname{tr}A)\,A - (\det A)\,I$$
+        </div>
+        <p>dengan $\operatorname{tr}A = a + d$ (jejak, jumlah diagonal utama). Maknanya luar biasa: <strong>$A^2$ selalu bisa ditulis ulang sebagai kombinasi $A$ dan $I$</strong> — sehingga pangkat setinggi apa pun bisa "diturunkan" tanpa perkalian berulang. Bonus: bila $\det A \neq 0$, membagi persamaan itu dengan $A$ memberi $A^{-1} = \dfrac{1}{\det A}\big((\operatorname{tr}A)\,I - A\big)$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Untuk $A = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}$: $\operatorname{tr}A = 5$, $\det A = -2$.</p>
+          <p style="margin-bottom:0;">Maka $A^2 = 5A - (-2)I = 5A + 2I$. Verifikasi: $A^2 = \begin{pmatrix} 7 &amp; 10 \\ 15 &amp; 22 \end{pmatrix}$, sedangkan $5A + 2I = \begin{pmatrix} 5 &amp; 10 \\ 15 &amp; 20 \end{pmatrix} + \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 2 \end{pmatrix} = \begin{pmatrix} 7 &amp; 10 \\ 15 &amp; 22 \end{pmatrix}$ ✓</p>
+        </div>
+
+        <h3>3. Sifat-Sifat Determinan</h3>
+        <p>Determinan bukan sekadar syarat invers — ia mematuhi aturan indah yang menyelesaikan soal tanpa perhitungan panjang:</p>
+        <div class="box formula">
+          <span class="box-label">Wajib Hafal</span>
+          $$\det(AB) = \det A \cdot \det B \qquad \det(A^{-1}) = \frac{1}{\det A} \qquad \det(kA) = k^{\,n}\det A$$
+        </div>
+        <p>dengan $n$ ukuran matriks (untuk $2\times2$, $\det(kA) = k^2 \det A$; untuk $3\times3$, $k^3$). Yang terakhir sering mengejutkan: mengalikan matriks dengan $k$ mengalikan determinannya dengan $k^n$, bukan sekadar $k$ — sebab <em>setiap baris</em> ikut terskala.</p>
+
+        <h3>4. Pola Pangkat &amp; Periodisitas</h3>
+        <p>Beberapa matriks punya pola pangkat yang cantik. Matriks <strong>segitiga</strong> tumbuh linear:</p>
+        <div class="box formula"><span class="box-label">Pola Segitiga</span>$$\begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}^{n} = \begin{pmatrix} 1 &amp; n \\ 0 &amp; 1 \end{pmatrix}$$</div>
+        <p>Sementara matriks <strong>rotasi</strong> bersifat periodik — mengulang setelah sejumlah pangkat. Misalnya rotasi $90^\circ$, $\begin{pmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{pmatrix}$, memenuhi $A^4 = I$: pangkatnya berputar dengan periode $4$. Untuk pangkat besar, cukup lihat sisa pembagian eksponen oleh periodenya.</p>
+
+        <div class="box recap">
+          <span class="box-label">Bekal Olimpiade</span>
+          <ul>
+            <li>Ingat urutan: $AB \neq BA$, dan $(A+B)^2 = A^2 + AB + BA + B^2$.</li>
+            <li>Pangkat matriks $2\times2$? Pakai Cayley-Hamilton: $A^2 = (\operatorname{tr}A)A - (\det A)I$.</li>
+            <li>Soal berbau determinan? Curigai $\det(AB) = \det A \det B$, $\det(A^{-1}) = 1/\det A$, dan $\det(kA) = k^n \det A$.</li>
+            <li>Matriks singular $\Leftrightarrow \det = 0$ — pintu masuk banyak persamaan.</li>
+            <li>Pangkat besar? Cari pola (segitiga tumbuh linear) atau periodisitas (rotasi berputar).</li>
+            <li>Uji semuanya di tab <strong>Olimpiade</strong> pada latihan di bawah.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="bedah-soal">
+        <h2>Bedah Soal: Cara Berpikir Kompetisi</h2>
+        <p>Kerangka empat langkah — Pahami, Kenali Struktur, Kerjakan Rapi, Periksa — kini kita jalankan pada dua soal matriks.</p>
+
+        <h3>Bedah Soal 1 — Sistem lewat Invers</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Sebuah tempat parkir mencatat dua transaksi: $3$ mobil dan $2$ motor membayar Rp21.000; sedangkan $1$ mobil dan $4$ motor membayar Rp17.000. Dengan matriks, tentukan tarif satu mobil dan satu motor.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> dua persamaan, dua tarif tak diketahui. Misalkan tarif mobil $x$ dan motor $y$ (dalam ribuan). Strukturnya SPLDV — tulis sebagai $A\mathbf{x} = \mathbf{b}$ lalu kalikan invers.</p>
+        <p><strong>Kerjakan:</strong> sistemnya $3x + 2y = 21$ dan $x + 4y = 17$, jadi $A = \begin{pmatrix} 3 &amp; 2 \\ 1 &amp; 4 \end{pmatrix}$ dengan $\det A = 12 - 2 = 10$.</p>
+        <div class="box formula">
+          <span class="box-label">Perhitungan</span>
+          $$\begin{pmatrix} x \\ y \end{pmatrix} = \frac{1}{10}\begin{pmatrix} 4 &amp; -2 \\ -1 &amp; 3 \end{pmatrix}\begin{pmatrix} 21 \\ 17 \end{pmatrix} = \frac{1}{10}\begin{pmatrix} 84 - 34 \\ -21 + 51 \end{pmatrix} = \frac{1}{10}\begin{pmatrix} 50 \\ 30 \end{pmatrix} = \begin{pmatrix} 5 \\ 3 \end{pmatrix}$$
+        </div>
+        <p><strong>Periksa:</strong> tarif mobil Rp5.000, motor Rp3.000. Uji transaksi kedua: $1(5.000) + 4(3.000) = 17.000$ ✓ — cocok. Jadi mobil Rp5.000 dan motor Rp3.000. ✓</p>
+
+        <h3>Bedah Soal 2 — Pangkat Tinggi via Cayley-Hamilton</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Diketahui $A = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}$. Hitung $A^4$ tanpa melakukan empat kali perkalian matriks.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> menghitung $A^4$ langsung berarti tiga perkalian yang rawan salah. Karena ini $2\times2$, Cayley-Hamilton memangkasnya drastis.</p>
+        <p><strong>Kerjakan:</strong> $\operatorname{tr}A = 4$ dan $\det A = 4 - 1 = 3$, sehingga $A^2 = 4A - 3I$. Kuadratkan hubungan ini:</p>
+        <div class="box formula">
+          <span class="box-label">Perhitungan</span>
+          $$A^4 = (4A - 3I)^2 = 16A^2 - 24A + 9I = 16(4A - 3I) - 24A + 9I = 40A - 39I$$
+        </div>
+        <p>Maka $A^4 = 40\begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix} - 39\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \begin{pmatrix} 41 &amp; 40 \\ 40 &amp; 41 \end{pmatrix}$.</p>
+        <p><strong>Periksa lewat jalan langsung:</strong> $A^2 = \begin{pmatrix} 5 &amp; 4 \\ 4 &amp; 5 \end{pmatrix}$, lalu $A^4 = (A^2)^2 = \begin{pmatrix} 41 &amp; 40 \\ 40 &amp; 41 \end{pmatrix}$ — sama persis. Dua jalan, satu jawaban. ✓</p>
+
+        <div class="box recap">
+          <span class="box-label">Menulis Solusi ala Babak Esai</span>
+          <ul>
+            <li>Nyatakan sistem sebagai $A\mathbf{x} = \mathbf{b}$ secara eksplisit sebelum menghitung invers — penguji ingin melihat strukturnya.</li>
+            <li>Saat memakai Cayley-Hamilton, tuliskan $\operatorname{tr}A$ dan $\det A$ lebih dulu, lalu turunkan persamaannya langkah demi langkah.</li>
+            <li>Jaga urutan perkalian — sebutkan "dikalikan dari kiri" saat memakai invers.</li>
+            <li>Selalu tutup dengan verifikasi: substitusikan kembali, atau hitung ulang lewat jalan kedua.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="latihan">
+        <h2>Latihan Soal Bertingkat</h2>
+        <p>Empat tingkat kesulitan — dari Mudah sampai Olimpiade. Klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
+        <p class="quiz-note">Progres tersimpan otomatis di peramban ini — tekan "Ulangi" untuk mencoba lagi dari awal.</p>
+
+        <div data-tier-group>
+          <div class="tier-tabs">
+            <button class="tier-tab active" data-tier="mudah"><span class="dot"></span>Mudah</button>
+            <button class="tier-tab" data-tier="sedang"><span class="dot"></span>Sedang</button>
+            <button class="tier-tab" data-tier="sulit"><span class="dot"></span>Sulit</button>
+            <button class="tier-tab" data-tier="olimpiade"><span class="dot"></span>Olimpiade</button>
+          </div>
+
+          <!-- MUDAH -->
+          <div class="tier-panel active" data-tier="mudah">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="mtx-m1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Matriks $A = \begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \end{pmatrix}$ berordo…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3 \times 2$</button>
+                <button class="quiz-option" data-option="B">$2 \times 3$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Ordo $=$ (banyak baris) $\times$ (banyak kolom). Ada $2$ baris dan $3$ kolom, jadi ordonya $2 \times 3$ — baris dulu, kolom kemudian.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="mtx-m2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Pada matriks $A = \begin{pmatrix} 3 &amp; -1 \\ 5 &amp; 2 \end{pmatrix}$, nilai elemen $a_{21}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$-1$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$2$</button>
+                <button class="quiz-option" data-option="D">$3$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$a_{21}$ berarti baris ke-$2$, kolom ke-$1$ — yaitu $5$. (Jebakan $-1$ adalah $a_{12}$: baris $1$, kolom $2$.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="mtx-m3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Transpos dari $\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\begin{pmatrix} 4 &amp; 3 \\ 2 &amp; 1 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="B">$\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="C">$\begin{pmatrix} 1 &amp; 3 \\ 2 &amp; 4 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="D">$\begin{pmatrix} 2 &amp; 1 \\ 4 &amp; 3 \end{pmatrix}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Transpos menukar baris menjadi kolom: baris pertama $(1,2)$ menjadi kolom pertama, sehingga hasilnya $\begin{pmatrix} 1 &amp; 3 \\ 2 &amp; 4 \end{pmatrix}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="mtx-m4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">$\begin{pmatrix} 2 &amp; 1 \\ 0 &amp; 3 \end{pmatrix} + \begin{pmatrix} 1 &amp; 4 \\ 5 &amp; -1 \end{pmatrix} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\begin{pmatrix} 3 &amp; 5 \\ 5 &amp; 2 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="B">$\begin{pmatrix} 3 &amp; 5 \\ 5 &amp; 4 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="C">$\begin{pmatrix} 2 &amp; 4 \\ 0 &amp; -3 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="D">$\begin{pmatrix} 3 &amp; 5 \\ 5 &amp; -2 \end{pmatrix}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Penjumlahan elemen demi elemen: $\begin{pmatrix} 2+1 &amp; 1+4 \\ 0+5 &amp; 3+(-1) \end{pmatrix} = \begin{pmatrix} 3 &amp; 5 \\ 5 &amp; 2 \end{pmatrix}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="mtx-m5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">$3\begin{pmatrix} 1 &amp; -2 \\ 0 &amp; 4 \end{pmatrix} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\begin{pmatrix} 3 &amp; -2 \\ 0 &amp; 4 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="B">$\begin{pmatrix} 4 &amp; 1 \\ 3 &amp; 7 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="C">$\begin{pmatrix} 3 &amp; -6 \\ 0 &amp; 12 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="D">$\begin{pmatrix} 3 &amp; -6 \\ 3 &amp; 12 \end{pmatrix}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Perkalian skalar mengalikan <em>setiap</em> elemen dengan $3$: $\begin{pmatrix} 3 &amp; -6 \\ 0 &amp; 12 \end{pmatrix}$. Jebakan A: hanya sebagian elemen dikalikan.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="mtx-m6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Determinan dari $\begin{pmatrix} 4 &amp; 3 \\ 2 &amp; 5 \end{pmatrix}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$14$</button>
+                <button class="quiz-option" data-option="B">$26$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$20$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\det = ad - bc = 4(5) - 3(2) = 20 - 6 = 14$. (Jebakan $26$ adalah $ad + bc$.)</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+          </div>
+
+          <!-- SEDANG -->
+          <div class="tier-panel" data-tier="sedang">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="mtx-s1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">$\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\begin{pmatrix} 2 &amp; 0 \\ 1 &amp; 3 \end{pmatrix} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\begin{pmatrix} 2 &amp; 0 \\ 3 &amp; 12 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="B">$\begin{pmatrix} 4 &amp; 6 \\ 10 &amp; 12 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="C">$\begin{pmatrix} 4 &amp; 6 \\ 6 &amp; 12 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="D">$\begin{pmatrix} 3 &amp; 2 \\ 4 &amp; 7 \end{pmatrix}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Baris ketemu kolom: baris $1$ × kolom $1 = 1(2)+2(1)=4$; baris $1$ × kolom $2 = 1(0)+2(3)=6$; baris $2$ × kolom $1 = 3(2)+4(1)=10$; baris $2$ × kolom $2 = 3(0)+4(3)=12$. Hasil $\begin{pmatrix} 4 &amp; 6 \\ 10 &amp; 12 \end{pmatrix}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="mtx-s2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Jika $\begin{pmatrix} x+1 &amp; 3 \\ y &amp; 5 \end{pmatrix} = \begin{pmatrix} 4 &amp; 3 \\ 2 &amp; 5 \end{pmatrix}$, maka $x + y = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$7$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kesamaan matriks: samakan posisi seletak. $x + 1 = 4 \Rightarrow x = 3$, dan $y = 2$. Maka $x + y = 5$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="mtx-s3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Invers dari $A = \begin{pmatrix} 3 &amp; 5 \\ 1 &amp; 2 \end{pmatrix}$ adalah…</p></div>
+              <div class="quiz-options wide">
+                <button class="quiz-option" data-option="A">$\begin{pmatrix} 2 &amp; -5 \\ -1 &amp; 3 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="B">$\begin{pmatrix} 2 &amp; 5 \\ 1 &amp; 3 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="C">$\begin{pmatrix} 3 &amp; -5 \\ -1 &amp; 2 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="D">$\begin{pmatrix} -2 &amp; 5 \\ 1 &amp; -3 \end{pmatrix}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\det A = 3(2) - 5(1) = 1$. Tukar $a$ dan $d$, balik tanda $b$ dan $c$, bagi determinan: $A^{-1} = \begin{pmatrix} 2 &amp; -5 \\ -1 &amp; 3 \end{pmatrix}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="mtx-s4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Jika $A = \begin{pmatrix} 5 &amp; -2 \\ 3 &amp; 1 \end{pmatrix}$ dan $I$ matriks identitas $2\times2$, maka $A \cdot I = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="B">$\begin{pmatrix} 5 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="C">$\begin{pmatrix} 6 &amp; -2 \\ 3 &amp; 2 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="D">$\begin{pmatrix} 5 &amp; -2 \\ 3 &amp; 1 \end{pmatrix}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Identitas adalah "angka $1$"-nya matriks: $A \cdot I = A$, tak berubah sama sekali. Jadi hasilnya $\begin{pmatrix} 5 &amp; -2 \\ 3 &amp; 1 \end{pmatrix}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="mtx-s5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Matriks $\begin{pmatrix} k &amp; 3 \\ 2 &amp; 8 \end{pmatrix}$ tidak memiliki invers (singular) jika $k = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{3}{4}$</button>
+                <button class="quiz-option" data-option="B">$\frac{4}{3}$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$\frac{3}{8}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Singular berarti $\det = 0$: $8k - 6 = 0 \Rightarrow k = \frac{6}{8} = \frac{3}{4}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="mtx-s6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Jika $A = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}$, maka $A^2 = A \cdot A = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\begin{pmatrix} 1 &amp; 4 \\ 9 &amp; 16 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="B">$\begin{pmatrix} 7 &amp; 10 \\ 15 &amp; 22 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="C">$\begin{pmatrix} 2 &amp; 4 \\ 6 &amp; 8 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="D">$\begin{pmatrix} 7 &amp; 10 \\ 15 &amp; 16 \end{pmatrix}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$A^2$ berarti $A$ dikali $A$ (bukan mengkuadratkan tiap elemen!). Baris $1$: $[1(1)+2(3),\ 1(2)+2(4)] = [7, 10]$; baris $2$: $[3(1)+4(3),\ 3(2)+4(4)] = [15, 22]$. Jebakan A: mengkuadratkan elemen satu per satu — itu salah.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+          </div>
+
+          <!-- SULIT -->
+          <div class="tier-panel" data-tier="sulit">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="mtx-x1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Sistem $\begin{cases} 2x + 3y = 13 \\ x + 2y = 8 \end{cases}$ diselesaikan dengan invers matriks. Nilai $x \cdot y$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$6$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$8$</button>
+                <button class="quiz-option" data-option="D">$12$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$A = \begin{pmatrix} 2 &amp; 3 \\ 1 &amp; 2 \end{pmatrix}$, $\det = 1$, $A^{-1} = \begin{pmatrix} 2 &amp; -3 \\ -1 &amp; 2 \end{pmatrix}$. Maka $x = 2(13)-3(8) = 2$ dan $y = -13 + 2(8) = 3$, sehingga $x \cdot y = 6$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="mtx-x2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Diketahui $A = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}$ dan $B = \begin{pmatrix} 1 &amp; 0 \\ 1 &amp; 1 \end{pmatrix}$. Nilai $AB - BA = \dots$</p></div>
+              <div class="quiz-options wide">
+                <button class="quiz-option" data-option="A">$\begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="B">$\begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="C">$\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="D">$\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$AB = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}$ dan $BA = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}$, jadi $AB - BA = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \neq O$. Inilah bukti nyata bahwa $AB \neq BA$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="mtx-x3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Jika $\det A = 5$, maka $\det(A^{-1}) = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{1}{5}$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$-5$</button>
+                <button class="quiz-option" data-option="D">$25$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Sifat determinan: $\det(A^{-1}) = \dfrac{1}{\det A} = \dfrac{1}{5}$. (Masuk akal, sebab $\det A \cdot \det(A^{-1}) = \det I = 1$.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="mtx-x4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Diketahui $A = \begin{pmatrix} 2 &amp; 1 \\ 3 &amp; 0 \end{pmatrix}$ dan $B = \begin{pmatrix} 1 &amp; -1 \\ 2 &amp; 4 \end{pmatrix}$. Nilai $\det(A + B)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0$</button>
+                <button class="quiz-option" data-option="B">$3$</button>
+                <button class="quiz-option" data-option="C">$20$</button>
+                <button class="quiz-option" data-option="D">$12$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$A + B = \begin{pmatrix} 3 &amp; 0 \\ 5 &amp; 4 \end{pmatrix}$, jadi $\det(A+B) = 3(4) - 0(5) = 12$. Catatan: $\det(A+B) \neq \det A + \det B$ — di sini $\det A = -3$ dan $\det B = 6$, jumlahnya $3 \neq 12$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="mtx-x5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Matriks $X$ berordo $2\times2$ memenuhi $\begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 3 \end{pmatrix} X = \begin{pmatrix} 4 &amp; 2 \\ 9 &amp; 6 \end{pmatrix}$. Matriks $X$ adalah…</p></div>
+              <div class="quiz-options wide">
+                <button class="quiz-option" data-option="A">$\begin{pmatrix} 8 &amp; 4 \\ 27 &amp; 18 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="B">$\begin{pmatrix} 2 &amp; 1 \\ 3 &amp; 2 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="C">$\begin{pmatrix} 2 &amp; 2 \\ 3 &amp; 3 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="D">$\begin{pmatrix} 4 &amp; 1 \\ 3 &amp; 6 \end{pmatrix}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Dari $AX = B$ diperoleh $X = A^{-1}B$. Untuk matriks diagonal, $A^{-1} = \begin{pmatrix} 1/2 &amp; 0 \\ 0 &amp; 1/3 \end{pmatrix}$, jadi tiap baris $B$ dibagi diagonalnya: baris atas $\div 2$, baris bawah $\div 3$, menghasilkan $\begin{pmatrix} 2 &amp; 1 \\ 3 &amp; 2 \end{pmatrix}$. (Jebakan A: mengalikan, bukan membagi.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="mtx-x6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Diketahui $A$ berordo $2\times2$ dengan $\det A = 5$. Nilai $\det(2A)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$20$</button>
+                <button class="quiz-option" data-option="B">$10$</button>
+                <button class="quiz-option" data-option="C">$40$</button>
+                <button class="quiz-option" data-option="D">$5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Sifat $\det(kA) = k^n \det A$ dengan $n = 2$ (ordo matriks). Jadi $\det(2A) = 2^2 \cdot 5 = 4 \cdot 5 = 20$ — bukan $2 \cdot 5 = 10$, karena <em>kedua baris</em> ikut terskala.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+          </div>
+
+          <!-- OLIMPIADE -->
+          <div class="tier-panel" data-tier="olimpiade">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="mtx-o1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Matriks $A = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}$ memenuhi $A^2 = \dots$ (dalam bentuk $A$ dan $I$).</p></div>
+              <div class="quiz-options wide">
+                <button class="quiz-option" data-option="A">$5A + 2I$</button>
+                <button class="quiz-option" data-option="B">$5A - 2I$</button>
+                <button class="quiz-option" data-option="C">$5A + 4I$</button>
+                <button class="quiz-option" data-option="D">$-2A + 5I$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Cayley-Hamilton: $A^2 = (\operatorname{tr}A)A - (\det A)I$. Di sini $\operatorname{tr}A = 1 + 4 = 5$ dan $\det A = 1(4) - 2(3) = -2$, jadi $A^2 = 5A - (-2)I = 5A + 2I$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="mtx-o2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Nilai dari $\begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}^{10}$ adalah…</p></div>
+              <div class="quiz-options wide">
+                <button class="quiz-option" data-option="A">$\begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="B">$\begin{pmatrix} 1 &amp; 10 \\ 0 &amp; 1 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="C">$\begin{pmatrix} 10 &amp; 10 \\ 0 &amp; 10 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="D">$\begin{pmatrix} 1 &amp; 1024 \\ 0 &amp; 1 \end{pmatrix}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Matriks segitiga ini tumbuh linear: $\begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}^{n} = \begin{pmatrix} 1 &amp; n \\ 0 &amp; 1 \end{pmatrix}$. Untuk $n = 10$, hasilnya $\begin{pmatrix} 1 &amp; 10 \\ 0 &amp; 1 \end{pmatrix}$. (Jebakan D: mengira elemennya dipangkatkan.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="mtx-o3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Matriks $A$ berordo $3\times3$ dengan $\det A = 2$. Nilai $\det(3A)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$18$</button>
+                <button class="quiz-option" data-option="B">$27$</button>
+                <button class="quiz-option" data-option="C">$54$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\det(kA) = k^n \det A$ dengan $n = 3$ (ordo $3\times3$). Jadi $\det(3A) = 3^3 \cdot 2 = 27 \cdot 2 = 54$. Ketiga baris terskala, sehingga faktornya $3^3$, bukan $3$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="mtx-o4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Matriks $A$ dan $B$ berordo $2\times2$ dengan $\det A = 2$ dan $\det B = 8$. Nilai $\det(A^2 B^{-1})$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{1}{2}$</button>
+                <button class="quiz-option" data-option="B">$2$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{4}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Gabungkan sifat determinan: $\det(A^2 B^{-1}) = \dfrac{(\det A)^2}{\det B} = \dfrac{2^2}{8} = \dfrac{4}{8} = \dfrac{1}{2}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="mtx-o5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Matriks $X$ memenuhi $X\begin{pmatrix} 2 &amp; 1 \\ 3 &amp; 2 \end{pmatrix} = \begin{pmatrix} 5 &amp; 3 \\ 8 &amp; 5 \end{pmatrix}$. Matriks $X$ adalah…</p></div>
+              <div class="quiz-options wide">
+                <button class="quiz-option" data-option="A">$\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="B">$\begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="C">$\begin{pmatrix} 1 &amp; 2 \\ 1 &amp; 1 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="D">$\begin{pmatrix} 3 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Perhatikan urutan: $XA = B$, jadi kalikan $A^{-1}$ dari <strong>kanan</strong>: $X = BA^{-1}$. Dengan $A = \begin{pmatrix} 2 &amp; 1 \\ 3 &amp; 2 \end{pmatrix}$, $\det = 1$, $A^{-1} = \begin{pmatrix} 2 &amp; -1 \\ -3 &amp; 2 \end{pmatrix}$. Maka $X = \begin{pmatrix} 5 &amp; 3 \\ 8 &amp; 5 \end{pmatrix}\begin{pmatrix} 2 &amp; -1 \\ -3 &amp; 2 \end{pmatrix} = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}$. Kalau invers dikalikan dari kiri, hasilnya salah — urutan menentukan!</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="mtx-o6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Untuk matriks persegi $A$ dan $B$ yang <strong>tidak</strong> komutatif, bentuk $(A + B)^2$ sama dengan…</p></div>
+              <div class="quiz-options wide">
+                <button class="quiz-option" data-option="A">$A^2 + 2AB + B^2$</button>
+                <button class="quiz-option" data-option="B">$A^2 + B^2$</button>
+                <button class="quiz-option" data-option="C">$A^2 + AB + BA + B^2$</button>
+                <button class="quiz-option" data-option="D">$A^2 + 2BA + B^2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jabarkan hati-hati: $(A+B)^2 = (A+B)(A+B) = A^2 + AB + BA + B^2$. Karena $AB \neq BA$, suku $AB$ dan $BA$ <em>tidak</em> boleh digabung menjadi $2AB$ — itulah bedanya dari aljabar bilangan biasa.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="mtx-o7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Matriks $A \neq I$ memenuhi $A^2 = A$. Nilai $\det A$ yang mungkin adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0$</button>
+                <button class="quiz-option" data-option="B">$1$</button>
+                <button class="quiz-option" data-option="C">$0$ atau $1$</button>
+                <button class="quiz-option" data-option="D">$-1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Ambil determinan kedua ruas: $\det(A^2) = \det A$, yaitu $(\det A)^2 = \det A$, sehingga $\det A = 0$ atau $1$. Tapi jika $\det A = 1$, maka $A$ punya invers, dan dari $A^2 = A$ kalikan $A^{-1}$ diperoleh $A = I$ — bertentangan dengan $A \neq I$. Maka satu-satunya kemungkinan $\det A = 0$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="mtx-o8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Diketahui matriks rotasi $A = \begin{pmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{pmatrix}$. Bilangan bulat positif terkecil $n$ sehingga $A^{n} = I$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$8$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$A$ merotasi $90^\circ$. Hitung: $A^2 = \begin{pmatrix} -1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} = -I$, lalu $A^4 = (A^2)^2 = (-I)^2 = I$. Karena $A^1, A^2, A^3 \neq I$, pangkat terkecil adalah $n = 4$ — sesuai empat kali rotasi $90^\circ$ menjadi $360^\circ$ (kembali ke semula).</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Fondasi matriksmu siap dipakai — lanjutkan ke <a href="tka-lanjut.html" style="color:var(--medal);font-weight:700;">TKA Matematika Lanjut</a> yang menuntut matriks di banyak soalnya, atau ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a>.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-pager">
+        <a class="pager-card" href="prakalkulus.html"><span>← Sebelumnya</span><strong>Prakalkulus</strong></a>
+        <a class="pager-card next" href="tka.html"><span>Selanjutnya →</span><strong>Persiapan TKA</strong></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+        <p>Belajar Matematika dari konsep dasar sampai persiapan olimpiade, untuk pelajar SMA, mahasiswa, dan umum.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Materi</h4>
+          <a href="aljabar.html">Aljabar</a>
+          <a href="trigonometri.html">Trigonometri</a>
+          <a href="geometri.html">Geometri</a>
+          <a href="prakalkulus.html">Prakalkulus</a>
+          <a href="matriks.html">Matriks</a>
+        </div>
+        <div class="footer-col">
+          <h4>Persiapan</h4>
+          <a href="tka.html">TKA Matematika Umum</a>
+          <a href="tka-lanjut.html">TKA Matematika Lanjut</a>
+          <a href="olimpiade.html">Matematika Olimpiade</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tentang</h4>
+          <span>Khusni Academy</span>
+          <span>Dibuat untuk pelajar Indonesia</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Khusni Academy.</span>
+      <span>I have learned that I still have a lot to learn</span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" aria-label="Kembali ke atas">↑</button>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
