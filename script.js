@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGeoAngle();
   initLimitLab();
   initMatrixLab();
+  initVectorLab();
   initKatex();
 });
 
@@ -1641,6 +1642,217 @@ function initMatrixLab() {
     const u = toUnit(p);
     if (drag === 'i') { a = u.x; c = u.y; } else { b = u.x; d = u.y; }
     syncSliders(); render();
+  });
+  ['pointerup', 'pointercancel'].forEach(ev => svg.addEventListener(ev, () => { drag = null; }));
+
+  render();
+}
+
+/* ==========================================================================
+   SIMULASI 6 — Laboratorium Vektor (vektor.html)
+   Seret ujung u dan v: resultan (aturan jajaran genjang), dot product,
+   sudut antara, dan deteksi tegak lurus.
+   ========================================================================== */
+function initVectorLab() {
+  const host = document.getElementById('widget-vektor');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const SIZE = 340, CX = 170, CY = 170, U = 28;
+  const sx = x => CX + x * U;
+  const sy = y => CY - y * U;
+  const clamp = v => Math.max(-4, Math.min(4, v));
+  const snapHalf = v => Math.round(v * 2) / 2;
+  const fmt = v => {
+    let s = String(Math.round(v * 100) / 100);
+    if (s === '-0') s = '0';
+    return s.replace('-', '\u2212').replace('.', ',');
+  };
+  const pair = (x, y) => '(' + fmt(x) + ', ' + fmt(y) + ')';
+
+  // Keadaan awal
+  let ux = 3, uy = 1, vx = 1, vy = 3;
+
+  /* --- SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + SIZE + ' ' + SIZE,
+    role: 'img',
+    'aria-label': 'Bidang koordinat dengan dua vektor yang bisa diseret beserta resultannya'
+  });
+  for (let i = -5; i <= 5; i++) {
+    if (i !== 0) {
+      svgEl('line', { x1: sx(i), y1: sy(-5.5), x2: sx(i), y2: sy(5.5), class: 'pb-grid' }, svg);
+      svgEl('line', { x1: sx(-5.5), y1: sy(i), x2: sx(5.5), y2: sy(i), class: 'pb-grid' }, svg);
+    }
+  }
+  svgEl('line', { x1: 0, y1: sy(0), x2: SIZE, y2: sy(0), class: 'pb-axis' }, svg);
+  svgEl('line', { x1: sx(0), y1: 0, x2: sx(0), y2: SIZE, class: 'pb-axis' }, svg);
+
+  const defs = svgEl('defs', {}, svg);
+  const mkArrow = id => {
+    const m = svgEl('marker', { id, markerWidth: 9, markerHeight: 9, refX: 6, refY: 3, orient: 'auto' }, defs);
+    const p = svgEl('path', { d: 'M0,0 L6,3 L0,6 Z' }, m);
+    p.setAttribute('fill', 'currentColor');
+  };
+  mkArrow('vx-a-u'); mkArrow('vx-a-v'); mkArrow('vx-a-r');
+
+  const guide1 = svgEl('line', { class: 'vx-guide' }, svg);
+  const guide2 = svgEl('line', { class: 'vx-guide' }, svg);
+  const resLn = svgEl('line', { class: 'vx-res', 'marker-end': 'url(#vx-a-r)' }, svg);
+  const uLn = svgEl('line', { class: 'vx-u', 'marker-end': 'url(#vx-a-u)' }, svg);
+  const vLn = svgEl('line', { class: 'vx-v', 'marker-end': 'url(#vx-a-v)' }, svg);
+  resLn.style.color = 'var(--tier-mudah)';
+  uLn.style.color = 'var(--signal)';
+  vLn.style.color = 'var(--medal)';
+  const dotU = svgEl('circle', { r: 7, fill: 'var(--signal)', stroke: 'var(--ink)', 'stroke-width': 2, style: 'cursor:grab' }, svg);
+  const dotV = svgEl('circle', { r: 7, fill: 'var(--medal)', stroke: 'var(--ink)', 'stroke-width': 2, style: 'cursor:grab' }, svg);
+  const lblU = svgEl('text', { class: 'vx-lbl u', 'text-anchor': 'middle' }, svg);
+  const lblV = svgEl('text', { class: 'vx-lbl v', 'text-anchor': 'middle' }, svg);
+  const lblR = svgEl('text', { class: 'vx-lbl r', 'text-anchor': 'middle' }, svg);
+  lblU.textContent = 'u'; lblV.textContent = 'v'; lblR.textContent = 'u+v';
+
+  /* --- Kontrol --- */
+  const controls = elDiv('widget-controls');
+
+  const chips = elDiv('chips');
+  const presets = [
+    ['3-4-5', 3, 0, 0, 4],
+    ['Tegak Lurus', 2, 1, -1, 2],
+    ['Sudut 120\u00b0', 2, 0, -1, 1.7320508],
+    ['Berlawanan', 3, 1, -3, -1]
+  ];
+  presets.forEach(p => {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'chip'; btn.textContent = p[0];
+    btn.addEventListener('click', () => { ux = p[1]; uy = p[2]; vx = p[3]; vy = p[4]; render(); });
+    chips.appendChild(btn);
+  });
+  controls.appendChild(chips);
+
+  const readout = elDiv('readout',
+    '<div><span>Vektor u</span><b data-r="u"></b></div>' +
+    '<div><span>Vektor v</span><b data-r="v"></b></div>' +
+    '<div><span>Resultan u + v</span><b data-r="res"></b></div>' +
+    '<div><span>Panjang |u + v|</span><b data-r="mag"></b></div>' +
+    '<div><span>Dot product u \u00b7 v</span><b data-r="dot"></b></div>' +
+    '<div><span>Sudut antara u, v</span><b data-r="ang"></b></div>');
+  controls.appendChild(readout);
+
+  const badgeWrap = elDiv('');
+  badgeWrap.innerHTML = '<span class="disc-badge gold" data-r="badge" hidden></span>';
+  controls.appendChild(badgeWrap);
+
+  const legend = elDiv('legend',
+    '<span><i class="dot" style="background:var(--signal)"></i>u</span>' +
+    '<span><i class="dot" style="background:var(--medal)"></i>v</span>' +
+    '<span><i class="dot" style="background:var(--tier-mudah)"></i>resultan u+v</span>');
+  legend.style.marginTop = '0.9rem';
+  controls.appendChild(legend);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  function render() {
+    const rx = ux + vx, ry = uy + vy;
+    const ox = sx(0), oy = sy(0);
+
+    uLn.setAttribute('x1', ox); uLn.setAttribute('y1', oy);
+    uLn.setAttribute('x2', sx(ux)); uLn.setAttribute('y2', sy(uy));
+    vLn.setAttribute('x1', ox); vLn.setAttribute('y1', oy);
+    vLn.setAttribute('x2', sx(vx)); vLn.setAttribute('y2', sy(vy));
+    dotU.setAttribute('cx', sx(ux)); dotU.setAttribute('cy', sy(uy));
+    dotV.setAttribute('cx', sx(vx)); dotV.setAttribute('cy', sy(vy));
+
+    const magR = Math.hypot(rx, ry);
+    const showRes = magR > 1e-9;
+    resLn.setAttribute('display', showRes ? '' : 'none');
+    lblR.setAttribute('display', showRes ? '' : 'none');
+    if (showRes) {
+      resLn.setAttribute('x1', ox); resLn.setAttribute('y1', oy);
+      resLn.setAttribute('x2', sx(rx)); resLn.setAttribute('y2', sy(ry));
+      lblR.setAttribute('x', sx(rx) + (rx >= 0 ? 18 : -18));
+      lblR.setAttribute('y', sy(ry) + (ry >= 0 ? -8 : 16));
+    }
+    guide1.setAttribute('x1', sx(ux)); guide1.setAttribute('y1', sy(uy));
+    guide1.setAttribute('x2', sx(rx)); guide1.setAttribute('y2', sy(ry));
+    guide2.setAttribute('x1', sx(vx)); guide2.setAttribute('y1', sy(vy));
+    guide2.setAttribute('x2', sx(rx)); guide2.setAttribute('y2', sy(ry));
+
+    lblU.setAttribute('x', sx(ux) + (ux >= 0 ? 14 : -14));
+    lblU.setAttribute('y', sy(uy) + (uy >= 0 ? -8 : 16));
+    lblV.setAttribute('x', sx(vx) + (vx >= 0 ? 14 : -14));
+    lblV.setAttribute('y', sy(vy) + (vy >= 0 ? -8 : 16));
+
+    const dot = ux * vx + uy * vy;
+    const mu = Math.hypot(ux, uy);
+    const mv = Math.hypot(vx, vy);
+    const hasBoth = mu > 1e-9 && mv > 1e-9;
+
+    q('[data-r="u"]').textContent = pair(ux, uy);
+    q('[data-r="v"]').textContent = pair(vx, vy);
+    q('[data-r="res"]').textContent = pair(rx, ry);
+    q('[data-r="mag"]').textContent = fmt(magR);
+    q('[data-r="dot"]').textContent = fmt(dot);
+    q('[data-r="ang"]').textContent = hasBoth
+      ? String(Math.round(Math.acos(Math.max(-1, Math.min(1, dot / (mu * mv)))) * 180 / Math.PI * 10) / 10).replace('.', ',') + '\u00b0'
+      : '\u2014';
+
+    const perp = hasBoth && Math.abs(dot) < 1e-9;
+    const badge = q('[data-r="badge"]');
+    badge.hidden = !perp;
+    if (perp) badge.textContent = 'u \u22a5 v \u00b7 dot product = 0';
+
+    const cross = ux * vy - uy * vx;
+    note.textContent = !hasBoth
+      ? 'Salah satu vektor sedang nol \u2014 vektor nol tidak punya arah. Seret titiknya menjauh dari titik asal.'
+      : !showRes
+        ? 'Resultannya nol! Dua vektor sama besar dan berlawanan arah saling meniadakan \u2014 kondisi seimbang.'
+        : perp
+          ? 'Tegak lurus! Saat u \u22a5 v, berlaku |u+v|\u00b2 = |u|\u00b2 + |v|\u00b2 \u2014 Pythagoras hidup kembali dalam bahasa vektor.'
+          : Math.abs(cross) < 1e-9
+            ? (dot > 0
+              ? 'Searah: resultannya memanjang di garis yang sama, |u+v| = |u| + |v|.'
+              : 'Berlawanan arah pada satu garis: panjangnya saling mengurangi, |u+v| = | |u| \u2212 |v| |.')
+            : 'Seret ujung panah biru (u) dan emas (v). Resultan hijau adalah diagonal jajaran genjang \u2014 itulah aturan jajaran genjang.';
+  }
+
+  /* --- Seret --- */
+  let drag = null;
+  const svgXY = e => {
+    const r = svg.getBoundingClientRect();
+    if (!r.width) return null;
+    return { x: (e.clientX - r.left) * (SIZE / r.width), y: (e.clientY - r.top) * (SIZE / r.height) };
+  };
+  const toUnit = p => ({ x: clamp(snapHalf((p.x - CX) / U)), y: clamp(snapHalf((CY - p.y) / U)) });
+
+  svg.addEventListener('pointerdown', e => {
+    const p = svgXY(e); if (!p) return;
+    const du = Math.hypot(p.x - sx(ux), p.y - sy(uy));
+    const dv = Math.hypot(p.x - sx(vx), p.y - sy(vy));
+    if (Math.min(du, dv) > 26) return;
+    drag = du <= dv ? 'u' : 'v';
+    try { svg.setPointerCapture(e.pointerId); } catch (err) {}
+    const t = toUnit(p);
+    if (drag === 'u') { ux = t.x; uy = t.y; } else { vx = t.x; vy = t.y; }
+    render(); e.preventDefault();
+  });
+  svg.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const p = svgXY(e); if (!p) return;
+    const t = toUnit(p);
+    if (drag === 'u') { ux = t.x; uy = t.y; } else { vx = t.x; vy = t.y; }
+    render();
   });
   ['pointerup', 'pointercancel'].forEach(ev => svg.addEventListener(ev, () => { drag = null; }));
 

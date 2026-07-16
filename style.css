@@ -1601,3 +1601,13 @@ svg text.mx-vlbl.j { fill: var(--medal); }
 .mx-bracket { font-size: 2.4rem; line-height: 1; color: var(--chalk-mute); font-weight: 200; }
 .mx-grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.15rem 0.9rem; }
 .mx-grid2 b { font-weight: 600; text-align: center; min-width: 2.4ch; }
+
+/* ---------- Simulasi 6: Laboratorium Vektor ---------- */
+.vx-u { stroke: var(--signal); stroke-width: 3; stroke-linecap: round; }
+.vx-v { stroke: var(--medal); stroke-width: 3; stroke-linecap: round; }
+.vx-res { stroke: var(--tier-mudah); stroke-width: 3; stroke-linecap: round; }
+.vx-guide { stroke: var(--chalk-mute); stroke-width: 1.5; stroke-dasharray: 4 4; opacity: 0.55; }
+svg text.vx-lbl { font-family: var(--font-mono); font-size: 12px; font-weight: 700; }
+svg text.vx-lbl.u { fill: var(--signal); }
+svg text.vx-lbl.v { fill: var(--medal); }
+svg text.vx-lbl.r { fill: var(--tier-mudah); }

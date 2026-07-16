@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vektor — Khusni Academy</title>
+<meta name="description" content="Pengenalan Vektor: komponen &amp; notasi, resultan dengan aturan segitiga dan jajaran genjang, dot product &amp; sudut antara vektor, vektor di ruang 3D, perbandingan vektor, bekal olimpiade (proyeksi, ekspansi |u+v|², kolinearitas, luas via determinan), laboratorium vektor interaktif, dan latihan soal bertingkat dari Mudah sampai Olimpiade.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#090d17">
+<link rel="canonical" href="https://khusniacademy.netlify.app/vektor.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vektor — Khusni Academy">
+<meta property="og:description" content="Komponen, resultan, dot product, vektor 3D, perbandingan vektor, dan bekal olimpiade — dengan laboratorium vektor interaktif serta latihan soal bertingkat.">
+<meta property="og:url" content="https://khusniacademy.netlify.app/vektor.html">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vektor — Khusni Academy">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f9dff'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia, serif' font-weight='700' fill='%23090d17' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<a class="skip-link" href="#konten">Langsung ke konten</a>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <div class="nav-drop">
+        <button class="nav-drop-btn active" type="button" aria-expanded="false" aria-haspopup="true">Materi<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label">Tersedia</span>
+          <a href="aljabar.html"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, bekal olimpiade</em></a>
+          <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap</em></a>
+          <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran, Heron &amp; kuasa titik</em></a>
+          <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, limit</em></a>
+          <a href="matriks.html"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
+          <a href="vektor.html" class="active"><strong>Vektor</strong><em>Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
+          <div class="nav-drop-sep"></div>
+          <span class="nav-drop-label">Segera Hadir</span>
+          <span class="nav-drop-soon">Statistika &amp; Peluang <i>Segera</i></span>
+          <span class="nav-drop-soon">Kalkulus <i>Segera</i></span>
+        </div>
+      </div>
+      <div class="nav-drop">
+        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-haspopup="true">TKA<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label">Persiapan TKA</span>
+          <a href="tka.html"><strong>Matematika Umum</strong><em>4 domain, 25 indikator, 25 soal latihan</em></a>
+          <a href="tka-lanjut.html"><strong>Matematika Lanjut</strong><em>Matriks, vektor, lingkaran, transformasi, limit</em></a>
+        </div>
+      </div>
+      <a href="olimpiade.html">Olimpiade</a>
+    </div>
+    <div class="nav-cta">
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero" id="konten">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><span>/</span><a href="index.html#materi">Materi</a><span>/</span><span>Vektor</span></div>
+    <span class="eyebrow">Materi · Tersedia</span>
+    <h1>Vektor</h1>
+    <p class="hero-sub">Bilangan biasa hanya menjawab "berapa". Vektor menjawab dua-duanya sekaligus: <em class="accent-word">berapa, dan ke mana</em> — bahasa alami untuk gerak, gaya, dan segala yang punya arah.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container lesson-layout">
+    <aside class="lesson-nav">
+      <div class="lesson-nav-title">Isi Materi</div>
+      <a href="#pendahuluan">Pendahuluan</a>
+      <a href="#konsep">Konsep Dasar</a>
+      <a href="#operasi">Operasi Vektor</a>
+      <a href="#dot">Dot Product</a>
+      <a href="#ruang">Vektor di Ruang (3D)</a>
+      <a href="#perbandingan">Perbandingan Vektor</a>
+      <a href="#menuju-olimpiade">Menuju Olimpiade</a>
+      <a href="#bedah-soal">Bedah Soal</a>
+      <a href="#latihan">Latihan Soal</a>
+    </aside>
+
+    <div class="lesson">
+
+      <div class="lesson-section" id="pendahuluan">
+        <h2>Pendahuluan</h2>
+        <p>Suhu, massa, dan harga cukup diwakili satu angka — besaran seperti itu disebut <strong>skalar</strong>. Tapi coba jelaskan angin: "20 km/jam" saja tidak cukup; ke <em>mana</em> arahnya menentukan segalanya. Besaran yang membawa <strong>panjang sekaligus arah</strong> itulah <strong>vektor</strong>.</p>
+        <p>GPS di ponselmu menghitung perpindahan sebagai vektor. Mesin game menggerakkan karakter dengan vektor kecepatan. Fisika menjumlahkan gaya-gaya sebagai vektor. Dan di ujian — dari TKA Matematika Lanjut sampai olimpiade — vektor adalah alat yang mengubah soal geometri panjang menjadi beberapa baris aljabar.</p>
+        <div class="box">
+          <span class="box-label">Peta Belajar Halaman Ini</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Kuasai satu mantra:</strong> "ujung dikurangi pangkal" — $\vec{AB} = B - A$. Separuh kesalahan vektor lahir dari menukar urutan ini.</li>
+            <li><strong>Mainkan resultannya</strong> — Laboratorium Vektor di bab Operasi membuat aturan jajaran genjang terlihat, bukan sekadar dihafal.</li>
+            <li><strong>Dot product adalah pisau lipat</strong> — satu operasi untuk sudut, tegak lurus, proyeksi, dan panjang.</li>
+            <li><strong>Naik bertahap di latihan</strong> — dari Mudah sampai Olimpiade; ulangi tingkat yang skornya belum penuh.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="konsep">
+        <h2>Konsep Dasar</h2>
+        <p>Vektor digambar sebagai <strong>anak panah</strong>: panjang panah mewakili besarnya, arah panah mewakili arahnya. Di bidang koordinat, vektor ditulis lewat <strong>komponen</strong>-nya — seberapa jauh ia melangkah mendatar dan menegak:</p>
+        <div class="box formula">
+          <span class="box-label">Notasi Komponen</span>
+          $$\vec{v} = \begin{pmatrix} x \\ y \end{pmatrix} \quad\text{atau}\quad \vec{v} = (x,\ y)$$
+        </div>
+        <p>Vektor yang pangkalnya di titik asal $O$ dan ujungnya di titik $P$ disebut <strong>vektor posisi</strong> titik $P$ — komponennya persis koordinat $P$. Dari sini lahir rumus terpenting bab ini:</p>
+        <div class="box formula">
+          <span class="box-label">Ujung Dikurangi Pangkal</span>
+          $$\vec{AB} = B - A$$
+        </div>
+        <p>Vektor dari $A$ <em>ke</em> $B$ adalah koordinat <strong>ujung</strong> ($B$) dikurangi koordinat <strong>pangkal</strong> ($A$). Bukan sebaliknya — $\vec{BA} = -\vec{AB}$ menunjuk arah berlawanan.</p>
+
+        <h3>Panjang &amp; Vektor Satuan</h3>
+        <p>Panjang (besar) vektor dihitung dengan Pythagoras, dan setiap vektor tak-nol bisa "dinormalkan" menjadi <strong>vektor satuan</strong> — vektor sepanjang $1$ yang searah dengannya:</p>
+        <div class="box formula">
+          <span class="box-label">Panjang &amp; Satuan</span>
+          $$|\vec{v}| = \sqrt{x^2 + y^2} \qquad\qquad \hat{v} = \frac{\vec{v}}{|\vec{v}|}$$
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Diketahui $A(2, 3)$ dan $B(7, 15)$. Tentukan $\vec{AB}$ dan panjangnya.</p>
+          <p style="margin-bottom:0;">$\vec{AB} = B - A = (7-2,\ 15-3) = (5, 12)$, dan $|\vec{AB}| = \sqrt{25 + 144} = \sqrt{169} = 13$ — tripel Pythagoras $5$–$12$–$13$.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="operasi">
+        <h2>Operasi Vektor</h2>
+        <h3>Penjumlahan: Dua Aturan, Satu Hasil</h3>
+        <p>Secara komponen, penjumlahan vektor sederhana: jumlahkan seletak, $(x_1, y_1) + (x_2, y_2) = (x_1 + x_2,\ y_1 + y_2)$. Secara geometris ada dua cara memandangnya:</p>
+        <ul>
+          <li><strong>Aturan segitiga</strong> — sambungkan pangkal $\vec{v}$ ke ujung $\vec{u}$; resultannya menutup segitiga dari pangkal $\vec{u}$ ke ujung $\vec{v}$. Cocok untuk perjalanan berantai: "jalan ke timur, lalu ke utara".</li>
+          <li><strong>Aturan jajaran genjang</strong> — tempatkan $\vec{u}$ dan $\vec{v}$ sepangkal; resultannya adalah <em class="accent-word">diagonal jajaran genjang</em> yang mereka bentuk. Cocok untuk dua gaya yang menarik satu benda bersamaan.</li>
+        </ul>
+
+        <div class="widget-card reveal" id="widget-vektor">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Laboratorium Vektor</h3>
+            <p>Seret ujung panah $\vec{u}$ (biru) dan $\vec{v}$ (emas) — resultan hijau selalu menjadi diagonal jajaran genjangnya. Amati dot product dan sudutnya berubah. Coba preset <strong>3-4-5</strong> untuk memicu lencana tegak lurus, atau <strong>Berlawanan</strong> untuk melihat dua vektor saling meniadakan!</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+
+        <h3>Pengurangan &amp; Perkalian Skalar</h3>
+        <p><strong>Pengurangan</strong> adalah penjumlahan dengan lawan arah: $\vec{u} - \vec{v} = \vec{u} + (-\vec{v})$ — secara komponen, kurangkan seletak. <strong>Perkalian skalar</strong> $k\vec{v}$ mengalikan setiap komponen dengan $k$: panjangnya menjadi $|k|$ kali, arahnya tetap bila $k &gt; 0$ dan berbalik bila $k &lt; 0$.</p>
+        <div class="box formula">
+          <span class="box-label">Kesejajaran</span>
+          $$\vec{u} \parallel \vec{v} \iff \vec{v} = k\,\vec{u} \ \text{untuk suatu skalar } k \neq 0$$
+        </div>
+        <p>Dua vektor sejajar tepat ketika yang satu adalah kelipatan yang lain — komponen-komponennya <em>sebanding</em>. Inilah alat utama menguji tiga titik segaris nanti.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$\vec{u} = (1, 2)$ dan $\vec{v} = (3, 1)$, maka $\vec{u} + \vec{v} = (4, 3)$ dengan $|\vec{u} + \vec{v}| = \sqrt{16+9} = 5$. Coba bentuk konfigurasi ini di laboratorium di atas!</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="dot">
+        <h2>Dot Product (Perkalian Titik)</h2>
+        <p>Bagaimana mengalikan dua anak panah? Salah satu jawabannya menghasilkan <em>skalar</em> — dan diam-diam menyimpan informasi <strong>sudut</strong> di antara keduanya:</p>
+        <div class="box formula">
+          <span class="box-label">Dua Wajah Dot Product</span>
+          $$\vec{u} \cdot \vec{v} = x_1 x_2 + y_1 y_2 \qquad\Longleftrightarrow\qquad \vec{u} \cdot \vec{v} = |\vec{u}|\,|\vec{v}| \cos\theta$$
+        </div>
+        <p>Wajah kiri mudah dihitung; wajah kanan penuh makna. Menyamakan keduanya memberi rumus sudut antara dua vektor:</p>
+        <div class="box formula"><span class="box-label">Sudut Antara</span>$$\cos\theta = \frac{\vec{u} \cdot \vec{v}}{|\vec{u}|\,|\vec{v}|}$$</div>
+        <p>Karena $\cos\theta$ yang menentukan tandanya, <strong>tanda dot product langsung membaca jenis sudutnya</strong>: positif $\Rightarrow$ lancip, negatif $\Rightarrow$ tumpul, dan yang paling berguna —</p>
+        <div class="box formula"><span class="box-label">Uji Tegak Lurus</span>$$\vec{u} \perp \vec{v} \iff \vec{u} \cdot \vec{v} = 0$$</div>
+        <div class="box example">
+          <span class="box-label">Contoh 1 — Tegak Lurus</span>
+          <p style="margin-bottom:0;">$\vec{u} = (2, 1)$ dan $\vec{v} = (-1, 2)$: $\vec{u} \cdot \vec{v} = -2 + 2 = 0$ — keduanya tegak lurus. (Ini persis preset <strong>Tegak Lurus</strong> di laboratorium: coba, dan lencananya menyala.)</p>
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh 2 — Sudut</span>
+          <p style="margin-bottom:0;">$\vec{u} = (1, 1)$ dan $\vec{v} = (0, 1)$: $\cos\theta = \dfrac{1}{\sqrt{2} \cdot 1} = \dfrac{1}{\sqrt2}$, jadi $\theta = 45^\circ$.</p>
+        </div>
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>Hasil dot product adalah <strong>skalar</strong> (satu bilangan), bukan vektor — jangan menuliskan hasilnya berkomponen.</li>
+            <li>$\vec{u} \cdot \vec{v} = 0$ menyimpulkan tegak lurus hanya bila <em>keduanya tak-nol</em>; vektor nol tegak lurus "dengan apa pun" secara hampa.</li>
+            <li>Rumus sudut butuh <em>kedua</em> panjang di penyebut — lupa salah satunya adalah kesalahan paling umum.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="ruang">
+        <h2>Vektor di Ruang (3D)</h2>
+        <p>Kabar baiknya: naik ke dimensi tiga <em>tidak</em> mengubah satu pun aturan — hanya menambah satu komponen. Penjumlahan tetap seletak, kesejajaran tetap kelipatan, dot product tinggal menambah suku $z_1 z_2$, dan Pythagoras memanjang satu suku:</p>
+        <div class="box formula">
+          <span class="box-label">Panjang di 3D</span>
+          $$|\vec{v}| = \sqrt{x^2 + y^2 + z^2}$$
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$\vec{v} = (1, 2, 2)$ memiliki panjang $|\vec{v}| = \sqrt{1 + 4 + 4} = \sqrt{9} = 3$.</p>
+        </div>
+        <p>Panggung utama vektor 3D adalah <strong>balok</strong>. Dua jenis diagonalnya mudah dibedakan lewat komponen: <strong>diagonal bidang</strong> menyusuri satu sisi sehingga <em>salah satu komponennya nol</em>; <strong>diagonal ruang</strong> menembus bagian dalam balok sehingga <em class="accent-word">ketiga komponennya tak-nol</em>. Sebuah balok punya tepat $4$ diagonal ruang. Pembahasan bergambar plus soal aslinya ada di <a href="tka-lanjut.html#vektor">Bekal Vektor TKA Matematika Lanjut</a>.</p>
+      </div>
+
+      <div class="lesson-section" id="perbandingan">
+        <h2>Perbandingan Vektor: Membagi Ruas Garis</h2>
+        <p>Di mana letak titik $P$ yang membagi ruas $AB$ dengan perbandingan $AP : PB = m : n$? Vektor posisi menjawabnya dalam satu rumus:</p>
+        <div class="box formula">
+          <span class="box-label">Rumus Pembagian</span>
+          $$AP : PB = m : n \;\Longrightarrow\; P = \frac{n \cdot A + m \cdot B}{m + n}$$
+        </div>
+        <p>Perhatikan polanya yang <em class="accent-word">menyilang</em>: koefisien $n$ (bagian dekat $B$) justru menempel pada $A$, dan $m$ menempel pada $B$. Intuisinya: makin besar $m$ (makin jauh dari $A$), makin besar bobot $B$ — titiknya tertarik ke sana. Kasus istimewa $m = n$ memberi <strong>titik tengah</strong> $P = \frac{A + B}{2}$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">$A(0,0)$, $B(9,6)$, dan $P$ membagi $AB$ dengan $AP : PB = 2 : 1$. Tentukan $P$.</p>
+          <p style="margin-bottom:0;">$P = \dfrac{1 \cdot A + 2 \cdot B}{3} = \dfrac{(0,0) + (18,12)}{3} = (6, 4)$. Masuk akal: $P$ berada dua pertiga perjalanan dari $A$ menuju $B$.</p>
+        </div>
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>Jebakan nomor satu: <strong>menukar $m$ dan $n$</strong>. Selalu cek kasar — kalau $AP : PB = 2 : 1$, maka $P$ harus lebih <em>dekat ke $B$</em>.</li>
+            <li>Rumus ini bekerja per koordinat, di 2D maupun 3D — tak ada yang berubah.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="menuju-olimpiade">
+        <h2>Menuju Vektor Olimpiade</h2>
+        <p>Empat perkakas berikut mengubah vektor dari materi hitung menjadi senjata pembuktian.</p>
+
+        <h3>1. Proyeksi: Bayangan Satu Vektor pada yang Lain</h3>
+        <p>Seberapa panjang "bayangan" $\vec{u}$ jika disorot tegak lurus ke arah $\vec{v}$? Itulah proyeksi:</p>
+        <div class="box formula">
+          <span class="box-label">Proyeksi</span>
+          $$\text{proyeksi skalar} = \frac{\vec{u} \cdot \vec{v}}{|\vec{v}|} \qquad\quad \text{proyeksi ortogonal (vektor)} = \frac{\vec{u} \cdot \vec{v}}{|\vec{v}|^2}\,\vec{v}$$
+        </div>
+        <p>Skalar untuk <em>panjang</em> bayangannya; versi vektor untuk bayangan lengkap dengan arahnya. Pembaginya selalu milik $\vec{v}$ — vektor yang <em>menjadi layar</em>.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">Proyeksi skalar $\vec{u} = (2, 6)$ pada $\vec{v} = (3, 4)$: $\dfrac{6 + 24}{5} = \dfrac{30}{5} = 6$.</p>
+        </div>
+
+        <h3>2. Ekspansi $|\vec{u} \pm \vec{v}|^2$: Aturan Kosinus Terselubung</h3>
+        <p>Kuadratkan panjang lewat dot product — karena $|\vec{w}|^2 = \vec{w} \cdot \vec{w}$:</p>
+        <div class="box formula">
+          <span class="box-label">Identitas Emas</span>
+          $$|\vec{u} \pm \vec{v}|^2 = |\vec{u}|^2 \pm 2\,\vec{u} \cdot \vec{v} + |\vec{v}|^2$$
+        </div>
+        <p>Inilah jembatan antara <em>panjang</em> dan <em>sudut</em>: begitu dua panjang dan satu sudut diketahui, panjang resultan langsung keluar — aturan kosinus dalam pakaian vektor.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$|\vec{u}| = |\vec{v}| = 2$ dengan sudut $120^\circ$: $\vec{u} \cdot \vec{v} = 2 \cdot 2 \cdot (-\tfrac12) = -2$, sehingga $|\vec{u}+\vec{v}|^2 = 4 - 4 + 4 = 4$, jadi $|\vec{u}+\vec{v}| = 2$. (Preset <strong>Sudut 120°</strong> di laboratorium memperagakan persis kasus ini.)</p>
+        </div>
+
+        <h3>3. Vektor Posisi: Titik Berat &amp; Kolinearitas</h3>
+        <p>Memperlakukan titik sebagai vektor posisi membuat geometri jadi aljabar. Dua hasil yang paling sering dipakai:</p>
+        <div class="box formula">
+          <span class="box-label">Dua Senjata</span>
+          $$G = \frac{A + B + C}{3} \ \text{(titik berat segitiga)} \qquad A, B, C \ \text{segaris} \iff \vec{AB} = k\,\vec{AC}$$
+        </div>
+        <p>Uji kolinearitas tinggal memeriksa kesebandingan komponen — tanpa menggambar apa pun.</p>
+
+        <h3>4. Luas lewat Determinan</h3>
+        <p>Dua vektor $\vec{u} = (x_1, y_1)$ dan $\vec{v} = (x_2, y_2)$ yang sepangkal membentang sebuah segitiga. Luasnya:</p>
+        <div class="box formula">
+          <span class="box-label">Luas Segitiga</span>
+          $$L = \tfrac{1}{2}\,\bigl|\,x_1 y_2 - x_2 y_1\,\bigr|$$
+        </div>
+        <p>Kenali bentuk $x_1 y_2 - x_2 y_1$? Itu <strong>determinan matriks $2\times2$</strong> yang kolom-kolomnya $\vec{u}$ dan $\vec{v}$ — dan di <a href="matriks.html#determinan">simulasi Matriks</a> kamu sudah melihat $|\det|$ adalah luas jajaran genjang. Segitiga tinggal separuhnya. Dua bab, satu ide.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$\vec{u} = (4, 1)$ dan $\vec{v} = (2, 3)$: $L = \tfrac12|4 \cdot 3 - 2 \cdot 1| = \tfrac12 \cdot 10 = 5$ satuan luas.</p>
+        </div>
+
+        <div class="box recap">
+          <span class="box-label">Bekal Olimpiade</span>
+          <ul>
+            <li>Selalu mulai dari "ujung dikurangi pangkal": $\vec{AB} = B - A$.</li>
+            <li>Soal sudut atau tegak lurus? Dot product: $\cos\theta = \frac{\vec{u}\cdot\vec{v}}{|\vec{u}||\vec{v}|}$, dan $\perp \iff$ dot $= 0$.</li>
+            <li>Soal panjang resultan dengan sudut? Ekspansi $|\vec{u}\pm\vec{v}|^2 = |\vec{u}|^2 \pm 2\vec{u}\cdot\vec{v} + |\vec{v}|^2$.</li>
+            <li>Pembagian ruas $m:n$? Rumus menyilang $P = \frac{nA + mB}{m+n}$; titik tengah $= \frac{A+B}{2}$.</li>
+            <li>Tiga titik segaris $\iff \vec{AB} = k\,\vec{AC}$; luas segitiga $= \tfrac12|x_1y_2 - x_2y_1|$.</li>
+            <li>Uji semuanya di tab <strong>Olimpiade</strong> pada latihan di bawah.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="bedah-soal">
+        <h2>Bedah Soal: Cara Berpikir Kompetisi</h2>
+        <p>Kerangka empat langkah — Pahami, Kenali Struktur, Kerjakan Rapi, Periksa — kita jalankan pada dua soal vektor.</p>
+
+        <h3>Bedah Soal 1 — Pembagian Ruas Garis</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Titik $P$ membagi ruas garis dari $A(1, 2)$ ke $B(7, 11)$ dengan perbandingan $AP : PB = 2 : 1$. Tentukan koordinat $P$.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> $m : n = 2 : 1$, jadi $P$ menempuh dua pertiga jalan — ia harus lebih dekat ke $B$. Strukturnya rumus pembagian menyilang.</p>
+        <div class="box formula">
+          <span class="box-label">Perhitungan</span>
+          $$P = \frac{1 \cdot A + 2 \cdot B}{2 + 1} = \frac{(1, 2) + (14, 22)}{3} = \frac{(15, 24)}{3} = (5,\ 8)$$
+        </div>
+        <p><strong>Periksa lewat definisi:</strong> $\vec{AP} = P - A = (4, 6)$ dan $\vec{PB} = B - P = (2, 3)$. Benar bahwa $\vec{AP} = 2\,\vec{PB}$ — searah (bertanda sama, jadi $P$ memang <em>di antara</em> $A$ dan $B$) dan rasionya tepat $2 : 1$. ✓</p>
+
+        <h3>Bedah Soal 2 — Tegak Lurus di Ruang</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Diketahui $\vec{u} = (1, 2, 2)$ dan $\vec{v} = (2, -2, m)$ saling tegak lurus. Tentukan $m$, lalu hitung $|\vec{u} + \vec{v}|$.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> "tegak lurus" langsung berteriak <em>dot product nol</em>. Setelah $m$ ketemu, panjang resultan bisa lewat dua jalan — kesempatan emas untuk saling mengecek.</p>
+        <p><strong>Kerjakan:</strong> $\vec{u} \cdot \vec{v} = 2 - 4 + 2m = 0 \Rightarrow m = 1$, sehingga $\vec{v} = (2, -2, 1)$. Panjangnya: $|\vec{u}| = \sqrt{9} = 3$ dan $|\vec{v}| = \sqrt{4+4+1} = 3$ — kembar!</p>
+        <div class="box formula">
+          <span class="box-label">Jalan 1 — Lewat Identitas</span>
+          $$|\vec{u}+\vec{v}|^2 = |\vec{u}|^2 + 2\underbrace{\vec{u}\cdot\vec{v}}_{0} + |\vec{v}|^2 = 9 + 9 = 18 \;\Rightarrow\; |\vec{u}+\vec{v}| = 3\sqrt{2}$$
+        </div>
+        <p><strong>Periksa — Jalan 2, hitung langsung:</strong> $\vec{u} + \vec{v} = (3, 0, 3)$, maka $|\vec{u}+\vec{v}| = \sqrt{9 + 0 + 9} = \sqrt{18} = 3\sqrt2$. Dua jalan, satu jawaban — dan bentuknya elok: dua vektor sepanjang $3$ yang tegak lurus menghasilkan diagonal "persegi" sepanjang $3\sqrt2$. ✓</p>
+
+        <div class="box recap">
+          <span class="box-label">Menulis Solusi ala Babak Esai</span>
+          <ul>
+            <li>Deklarasikan vektor posisimu di awal ("misalkan $\vec{a}, \vec{b}$ vektor posisi $A, B$") sebelum menghitung.</li>
+            <li>Saat memakai rumus pembagian, tuliskan $m : n$-nya eksplisit — penguji mencari kesadaran arah rasio.</li>
+            <li>Klaim tegak lurus harus lewat dot product $= 0$, bukan dari gambar.</li>
+            <li>Tutup dengan verifikasi: substitusi balik, atau tempuh jalan kedua seperti di atas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="latihan">
+        <h2>Latihan Soal Bertingkat</h2>
+        <p>Empat tingkat kesulitan — dari Mudah sampai Olimpiade. Klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
+        <p class="quiz-note">Progres tersimpan otomatis di peramban ini — tekan "Ulangi" untuk mencoba lagi dari awal.</p>
+
+        <div data-tier-group>
+          <div class="tier-tabs">
+            <button class="tier-tab active" data-tier="mudah"><span class="dot"></span>Mudah</button>
+            <button class="tier-tab" data-tier="sedang"><span class="dot"></span>Sedang</button>
+            <button class="tier-tab" data-tier="sulit"><span class="dot"></span>Sulit</button>
+            <button class="tier-tab" data-tier="olimpiade"><span class="dot"></span>Olimpiade</button>
+          </div>
+
+          <!-- MUDAH -->
+          <div class="tier-panel active" data-tier="mudah">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="vk-m1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Diketahui $A(1, 2)$ dan $B(4, 6)$. Vektor $\vec{AB} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(3, 4)$</button>
+                <button class="quiz-option" data-option="B">$(5, 8)$</button>
+                <button class="quiz-option" data-option="C">$(-3, -4)$</button>
+                <button class="quiz-option" data-option="D">$(4, 3)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Ujung dikurangi pangkal: $\vec{AB} = B - A = (4-1,\ 6-2) = (3, 4)$. Jebakan C adalah $\vec{BA}$ (arah terbalik), dan B adalah $A + B$ — penjumlahan, bukan selisih.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="vk-m2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Panjang vektor $\vec{v} = (6, 8)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$14$</button>
+                <button class="quiz-option" data-option="B">$7$</button>
+                <button class="quiz-option" data-option="C">$10$</button>
+                <button class="quiz-option" data-option="D">$\sqrt{14}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$|\vec{v}| = \sqrt{6^2 + 8^2} = \sqrt{100} = 10$ — kelipatan tripel $3$–$4$–$5$. Jebakan A: menjumlahkan komponen ($6+8$), bukan Pythagoras.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="vk-m3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">$\vec{u} = (2, 3)$ dan $\vec{v} = (1, -1)$. Maka $\vec{u} + \vec{v} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(3, 4)$</button>
+                <button class="quiz-option" data-option="B">$(3, 2)$</button>
+                <button class="quiz-option" data-option="C">$(1, 4)$</button>
+                <button class="quiz-option" data-option="D">$(2, -3)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jumlahkan seletak: $(2+1,\ 3+(-1)) = (3, 2)$. Jebakan C adalah $\vec{u} - \vec{v}$ — perhatikan tanda negatif pada komponen kedua $\vec{v}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="vk-m4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Jika $\vec{u} = (2, -1)$, maka $3\vec{u} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(6, 3)$</button>
+                <button class="quiz-option" data-option="B">$(5, 2)$</button>
+                <button class="quiz-option" data-option="C">$(6, -1)$</button>
+                <button class="quiz-option" data-option="D">$(6, -3)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kalikan <em>setiap</em> komponen: $3(2, -1) = (6, -3)$. Jebakan C hanya mengalikan komponen pertama; jebakan A menghilangkan tanda negatif.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="vk-m5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Vektor satuan yang searah dengan $\vec{v} = (3, 4)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(3, 4)$</button>
+                <button class="quiz-option" data-option="B">$\left(\frac{3}{5}, \frac{4}{5}\right)$</button>
+                <button class="quiz-option" data-option="C">$(1, 1)$</button>
+                <button class="quiz-option" data-option="D">$\left(\frac{4}{5}, \frac{3}{5}\right)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$|\vec{v}| = 5$, jadi $\hat{v} = \frac{\vec{v}}{5} = \left(\frac35, \frac45\right)$ — panjangnya kini $1$, arahnya tak berubah. Jebakan D menukar urutan komponen (arahnya berbeda!).</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="vk-m6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">$\vec{u} = (5, 2)$ dan $\vec{v} = (3, 7)$. Maka $\vec{u} - \vec{v} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(2, -5)$</button>
+                <button class="quiz-option" data-option="B">$(-2, 5)$</button>
+                <button class="quiz-option" data-option="C">$(8, 9)$</button>
+                <button class="quiz-option" data-option="D">$(2, 5)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kurangkan seletak: $(5-3,\ 2-7) = (2, -5)$. Jebakan B adalah $\vec{v} - \vec{u}$ (urutan terbalik), dan D lupa tanda negatifnya.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+          </div>
+
+          <!-- SEDANG -->
+          <div class="tier-panel" data-tier="sedang">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="vk-s1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Panjang vektor $\vec{v} = (2, 3, 6)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$11$</button>
+                <button class="quiz-option" data-option="B">$7$</button>
+                <button class="quiz-option" data-option="C">$\sqrt{11}$</button>
+                <button class="quiz-option" data-option="D">$5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pythagoras 3D: $|\vec{v}| = \sqrt{4 + 9 + 36} = \sqrt{49} = 7$ — tripel indah $2$–$3$–$6$–$7$. Jebakan A menjumlahkan komponen begitu saja.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="vk-s2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Vektor $\vec{u} = (2, 3)$ dan $\vec{v} = (6, k)$ sejajar. Nilai $k$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$9$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$12$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Sejajar $\iff \vec{v} = k\vec{u}$ — komponennya sebanding. Dari $6 = 3 \times 2$, faktornya $3$, jadi $k = 3 \times 3 = 9$. Cek: $(6, 9) = 3(2, 3)$ ✓</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="vk-s3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Nilai $\vec{u} \cdot \vec{v}$ untuk $\vec{u} = (3, -2)$ dan $\vec{v} = (4, 5)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$22$</button>
+                <button class="quiz-option" data-option="B">$-2$</button>
+                <button class="quiz-option" data-option="C">$2$</button>
+                <button class="quiz-option" data-option="D">$7$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\vec{u}\cdot\vec{v} = 3(4) + (-2)(5) = 12 - 10 = 2$. Jebakan A ($12+10$) lupa tanda negatif. Karena hasilnya positif, sudut keduanya lancip.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="vk-s4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Vektor $(2, m)$ tegak lurus terhadap $(3, -1)$. Nilai $m$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$-6$</button>
+                <button class="quiz-option" data-option="B">$\frac{2}{3}$</button>
+                <button class="quiz-option" data-option="C">$3$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Tegak lurus $\iff$ dot product $= 0$: $2(3) + m(-1) = 0 \Rightarrow 6 - m = 0 \Rightarrow m = 6$. Cek: $(2,6)\cdot(3,-1) = 6 - 6 = 0$ ✓</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="vk-s5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Titik tengah ruas garis dari $A(2, -1)$ ke $B(6, 7)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(8, 6)$</button>
+                <button class="quiz-option" data-option="B">$(2, 4)$</button>
+                <button class="quiz-option" data-option="C">$(4, 3)$</button>
+                <button class="quiz-option" data-option="D">$(3, 4)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Titik tengah $= \frac{A+B}{2} = \left(\frac{2+6}{2}, \frac{-1+7}{2}\right) = (4, 3)$. Jebakan A lupa dibagi dua; D menukar urutan koordinat.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="vk-s6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Diketahui $A(1, 0, 2)$ dan $B(3, 2, 4)$. Panjang $\vec{AB}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2\sqrt{3}$</button>
+                <button class="quiz-option" data-option="B">$12$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$3\sqrt{2}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\vec{AB} = B - A = (2, 2, 2)$, lalu $|\vec{AB}| = \sqrt{4+4+4} = \sqrt{12} = 2\sqrt3$. Jebakan B berhenti di $|\vec{AB}|^2 = 12$ tanpa diakar.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+          </div>
+
+          <!-- SULIT -->
+          <div class="tier-panel" data-tier="sulit">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="vk-x1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Vektor $\vec{u}$ dan $\vec{v}$ saling tegak lurus dengan $|\vec{u}| = 6$ dan $|\vec{v}| = 8$. Nilai $|\vec{u} + \vec{v}|$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$14$</button>
+                <button class="quiz-option" data-option="B">$10$</button>
+                <button class="quiz-option" data-option="C">$2$</button>
+                <button class="quiz-option" data-option="D">$\sqrt{14}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Tegak lurus $\Rightarrow \vec{u}\cdot\vec{v} = 0$, sehingga $|\vec{u}+\vec{v}|^2 = 36 + 0 + 64 = 100 \Rightarrow 10$. Pythagoras dalam bahasa vektor — persis pelajaran lencana di Laboratorium Vektor. Jebakan A: panjang tidak boleh dijumlahkan langsung kecuali searah.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="vk-x2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Proyeksi skalar $\vec{u} = (4, 2)$ pada $\vec{v} = (3, 4)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4$</button>
+                <button class="quiz-option" data-option="B">$20$</button>
+                <button class="quiz-option" data-option="C">$5$</button>
+                <button class="quiz-option" data-option="D">$2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\dfrac{\vec{u}\cdot\vec{v}}{|\vec{v}|} = \dfrac{12 + 8}{5} = \dfrac{20}{5} = 4$. Jebakan B berhenti di dot product-nya; C adalah $|\vec{v}|$ — pembaginya, bukan hasilnya.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="vk-x3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Sudut antara $\vec{u} = (1, 0)$ dan $\vec{v} = (1, \sqrt{3})$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$30^\circ$</button>
+                <button class="quiz-option" data-option="B">$45^\circ$</button>
+                <button class="quiz-option" data-option="C">$60^\circ$</button>
+                <button class="quiz-option" data-option="D">$90^\circ$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\cos\theta = \dfrac{1(1) + 0(\sqrt3)}{1 \cdot 2} = \dfrac12 \Rightarrow \theta = 60^\circ$. Ingat $|\vec{v}| = \sqrt{1+3} = 2$ — lupa mengakar penyebut adalah kesalahan klasik di sini.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="vk-x4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Titik $P$ membagi ruas dari $A(2, 1)$ ke $B(8, 10)$ dengan $AP : PB = 1 : 2$. Koordinat $P$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(6, 7)$</button>
+                <button class="quiz-option" data-option="B">$(5, 4)$</button>
+                <button class="quiz-option" data-option="C">$(3, 4)$</button>
+                <button class="quiz-option" data-option="D">$(4, 4)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rumus menyilang dengan $m:n = 1:2$: $P = \dfrac{2A + 1B}{3} = \dfrac{(4+8,\ 2+10)}{3} = (4, 4)$. Cek arah: rasio $1:2$ berarti $P$ lebih dekat ke $A$ ✓. Jebakan A adalah hasil rasio terbalik ($2:1$).</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="vk-x5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Vektor $(1, 2, 2)$ tegak lurus terhadap $(2, k, -3)$. Nilai $k$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$-2$</button>
+                <button class="quiz-option" data-option="B">$2$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">$1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Dot product nol: $1(2) + 2k + 2(-3) = 0 \Rightarrow 2 + 2k - 6 = 0 \Rightarrow k = 2$. Aturan yang sama persis dengan 2D — dimensi ketiga cuma menambah satu suku.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="vk-x6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Segitiga dibentang oleh vektor $\vec{u} = (3, 1)$ dan $\vec{v} = (1, 3)$ dari titik yang sama. Luas segitiga itu adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$8$</button>
+                <button class="quiz-option" data-option="B">$10$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">$5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$L = \tfrac12|x_1y_2 - x_2y_1| = \tfrac12|3(3) - 1(1)| = \tfrac12 \cdot 8 = 4$. Jebakan A lupa faktor $\tfrac12$ (itu luas jajaran genjangnya — alias $|\det|$, seperti di simulasi Matriks!).</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+          </div>
+
+          <!-- OLIMPIADE -->
+          <div class="tier-panel" data-tier="olimpiade">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="vk-o1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Vektor satuan $\vec{u}$ dan $\vec{v}$ membentuk sudut $120^\circ$. Nilai $|\vec{u} + \vec{v}|$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$1$</button>
+                <button class="quiz-option" data-option="B">$\sqrt{2}$</button>
+                <button class="quiz-option" data-option="C">$\sqrt{3}$</button>
+                <button class="quiz-option" data-option="D">$2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\vec{u}\cdot\vec{v} = 1 \cdot 1 \cdot \cos 120^\circ = -\tfrac12$, jadi $|\vec{u}+\vec{v}|^2 = 1 - 1 + 1 = 1 \Rightarrow 1$. Hasil elok: dua vektor satuan bersudut $120^\circ$ menghasilkan resultan satuan pula — bertiga mereka membentuk segitiga sama sisi arah.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="vk-o2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Diketahui $|\vec{u}| = 5$, $|\vec{v}| = 3$, dan $\vec{u} \cdot \vec{v} = 9$. Nilai $|\vec{u} - \vec{v}|$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\sqrt{34}$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$16$</button>
+                <button class="quiz-option" data-option="D">$2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$|\vec{u}-\vec{v}|^2 = |\vec{u}|^2 - 2\vec{u}\cdot\vec{v} + |\vec{v}|^2 = 25 - 18 + 9 = 16 \Rightarrow 4$. Jebakan C berhenti di kuadratnya; A ($\sqrt{34}$) lupa suku silang $-2\vec{u}\cdot\vec{v}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="vk-o3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Panjang proyeksi $\vec{u} = (7, 1)$ pada $\vec{v} = (3, 4)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$25$</button>
+                <button class="quiz-option" data-option="B">$7$</button>
+                <button class="quiz-option" data-option="C">$5$</button>
+                <button class="quiz-option" data-option="D">$\sqrt{50}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\dfrac{\vec{u}\cdot\vec{v}}{|\vec{v}|} = \dfrac{21 + 4}{5} = \dfrac{25}{5} = 5$. Jebakan A adalah dot product-nya; D adalah $|\vec{u}| = \sqrt{50}$ — panjang vektor aslinya, bukan bayangannya.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="vk-o4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Titik $A(1, 2)$, $B(3, 6)$, dan $C(6, k)$ terletak segaris. Nilai $k$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$10$</button>
+                <button class="quiz-option" data-option="B">$12$</button>
+                <button class="quiz-option" data-option="C">$9$</button>
+                <button class="quiz-option" data-option="D">$14$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Segaris $\iff \vec{AB} \parallel \vec{AC}$. $\vec{AB} = (2, 4)$ dan $\vec{AC} = (5, k-2)$; kesebandingan: $\frac{5}{2} = \frac{k-2}{4} \Rightarrow k - 2 = 10 \Rightarrow k = 12$. Cek: $\vec{AC} = (5, 10) = 2{,}5\,\vec{AB}$ ✓</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="vk-o5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Titik berat segitiga dengan titik sudut $A(1, 2)$, $B(5, 4)$, dan $C(3, 9)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(9, 15)$</button>
+                <button class="quiz-option" data-option="B">$(4, 5)$</button>
+                <button class="quiz-option" data-option="C">$(3, 4)$</button>
+                <button class="quiz-option" data-option="D">$(3, 5)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$G = \dfrac{A+B+C}{3} = \left(\dfrac{1+5+3}{3}, \dfrac{2+4+9}{3}\right) = (3, 5)$. Jebakan A lupa dibagi tiga.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="vk-o6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Diketahui $|\vec{u}| = 3$, $|\vec{v}| = 5$, dan sudut antara keduanya $60^\circ$. Nilai $|\vec{u} + \vec{v}|$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$7$</button>
+                <button class="quiz-option" data-option="B">$8$</button>
+                <button class="quiz-option" data-option="C">$\sqrt{34}$</button>
+                <button class="quiz-option" data-option="D">$2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\vec{u}\cdot\vec{v} = 3 \cdot 5 \cdot \cos 60^\circ = \tfrac{15}{2}$, jadi $|\vec{u}+\vec{v}|^2 = 9 + 15 + 25 = 49 \Rightarrow 7$. Tripel manis $3$–$5$–$7$ untuk sudut $60^\circ$! Jebakan B ($3+5$) hanya sah bila searah; C lupa suku silangnya.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="vk-o7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Diketahui $|\vec{u}| = 6$ dan $|\vec{v}| = 4$. Nilai $(\vec{u} + \vec{v}) \cdot (\vec{u} - \vec{v})$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$52$</button>
+                <button class="quiz-option" data-option="B">$20$</button>
+                <button class="quiz-option" data-option="C">$10$</button>
+                <button class="quiz-option" data-option="D">$2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jabarkan: $(\vec{u}+\vec{v})\cdot(\vec{u}-\vec{v}) = |\vec{u}|^2 - \vec{u}\cdot\vec{v} + \vec{v}\cdot\vec{u} - |\vec{v}|^2 = |\vec{u}|^2 - |\vec{v}|^2$ — suku silangnya saling melenyap (dot product komutatif!). Hasilnya $36 - 16 = 20$, <em>tanpa perlu tahu sudutnya sama sekali</em>. Bandingkan dengan matriks: $(A+B)(A-B)$ TIDAK menyederhana begini karena $AB \neq BA$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="vk-o8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Tiga vektor satuan $\vec{u}, \vec{v}, \vec{w}$ memenuhi $\vec{u} + \vec{v} + \vec{w} = \vec{0}$. Nilai $\vec{u}\cdot\vec{v} + \vec{u}\cdot\vec{w} + \vec{v}\cdot\vec{w}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0$</button>
+                <button class="quiz-option" data-option="B">$-1$</button>
+                <button class="quiz-option" data-option="C">$-\frac{3}{2}$</button>
+                <button class="quiz-option" data-option="D">$-\frac{1}{2}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kuadratkan jumlahnya: $0 = |\vec{u}+\vec{v}+\vec{w}|^2 = |\vec{u}|^2+|\vec{v}|^2+|\vec{w}|^2 + 2(\vec{u}\cdot\vec{v}+\vec{u}\cdot\vec{w}+\vec{v}\cdot\vec{w}) = 3 + 2S$, sehingga $S = -\tfrac32$. Trik "kuadratkan lalu jabarkan" ini adalah senjata olimpiade sejati. (Jebakan D adalah nilai <em>tiap pasang</em> dot product — soal menanyakan jumlah ketiganya.)</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Vektormu siap bertanding — lanjutkan ke <a href="tka-lanjut.html" style="color:var(--medal);font-weight:700;">TKA Matematika Lanjut</a> yang menguji vektor di tiga indikatornya, atau ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a>.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-pager">
+        <a class="pager-card" href="matriks.html"><span>← Sebelumnya</span><strong>Matriks</strong></a>
+        <a class="pager-card next" href="tka.html"><span>Selanjutnya →</span><strong>Persiapan TKA</strong></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+        <p>Belajar Matematika dari konsep dasar sampai persiapan olimpiade, untuk pelajar SMA, mahasiswa, dan umum.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Materi</h4>
+          <a href="aljabar.html">Aljabar</a>
+          <a href="trigonometri.html">Trigonometri</a>
+          <a href="geometri.html">Geometri</a>
+          <a href="prakalkulus.html">Prakalkulus</a>
+          <a href="matriks.html">Matriks</a>
+          <a href="vektor.html">Vektor</a>
+        </div>
+        <div class="footer-col">
+          <h4>Persiapan</h4>
+          <a href="tka.html">TKA Matematika Umum</a>
+          <a href="tka-lanjut.html">TKA Matematika Lanjut</a>
+          <a href="olimpiade.html">Matematika Olimpiade</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tentang</h4>
+          <span>Khusni Academy</span>
+          <span>Dibuat untuk pelajar Indonesia</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Khusni Academy.</span>
+      <span>I have learned that I still have a lot to learn</span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" aria-label="Kembali ke atas">↑</button>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
