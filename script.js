@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLimitLab();
   initMatrixLab();
   initVectorLab();
+  initDataLab();
   initKatex();
 });
 
@@ -1852,6 +1853,182 @@ function initVectorLab() {
     const p = svgXY(e); if (!p) return;
     const t = toUnit(p);
     if (drag === 'u') { ux = t.x; uy = t.y; } else { vx = t.x; vy = t.y; }
+    render();
+  });
+  ['pointerup', 'pointercancel'].forEach(ev => svg.addEventListener(ev, () => { drag = null; }));
+
+  render();
+}
+
+/* ==========================================================================
+   SIMULASI 7 — Laboratorium Data (statistika.html)
+   Seret titik data pada garis bilangan: rata-rata (biru) mengejar pencilan,
+   median (emas) bergeming. Menunjukkan ketahanan median.
+   ========================================================================== */
+function initDataLab() {
+  const host = document.getElementById('widget-statistika');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const W = 340, H = 200, L = 24, R = 316, BASE = 150, MINV = 0, MAXV = 20;
+  const sx = v => L + v * ((R - L) / (MAXV - MINV));
+  const clamp = v => Math.max(MINV, Math.min(MAXV, v));
+  const fmt = v => {
+    let s = String(Math.round(v * 100) / 100);
+    if (s === '-0') s = '0';
+    return s.replace('-', '\u2212').replace('.', ',');
+  };
+
+  let data = [1, 3, 4, 4, 6, 7, 10];
+
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + W + ' ' + H, role: 'img',
+    'aria-label': 'Garis bilangan dengan titik data yang bisa diseret, penanda rata-rata dan median'
+  });
+  // sumbu + tik
+  svgEl('line', { x1: L, y1: BASE, x2: R, y2: BASE, class: 'st-axis' }, svg);
+  for (let t = 0; t <= 20; t += 5) {
+    svgEl('line', { x1: sx(t), y1: BASE, x2: sx(t), y2: BASE + 6, class: 'st-tick' }, svg);
+    const lbl = svgEl('text', { x: sx(t), y: BASE + 20, class: 'st-ticklbl' }, svg);
+    lbl.textContent = String(t);
+  }
+
+  const meanLn = svgEl('line', { class: 'st-meanline', y1: 34, y2: BASE }, svg);
+  const medLn = svgEl('line', { class: 'st-medianline', y1: 34, y2: BASE }, svg);
+  const meanLbl = svgEl('text', { class: 'st-meanlbl', y: 28 }, svg);
+  const medLbl = svgEl('text', { class: 'st-medianlbl', y: 28 }, svg);
+  meanLbl.textContent = '\u0078\u0304'; // x̄
+  medLbl.textContent = 'Med';
+
+  const dotG = svgEl('g', {}, svg);
+  let dotPos = []; // {i, cx, cy}
+
+  /* --- Kontrol --- */
+  const controls = elDiv('widget-controls');
+  const chips = elDiv('chips');
+  const presets = [
+    ['Simetris', [2, 3, 4, 5, 6, 7, 8]],
+    ['Ada Pencilan', [2, 3, 4, 4, 5, 6, 18]],
+    ['Menumpuk', [5, 5, 5, 6, 6, 7, 8]],
+    ['Merata', [1, 4, 7, 10, 13, 16, 19]]
+  ];
+  presets.forEach(p => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = p[0];
+    b.addEventListener('click', () => { data = p[1].slice(); render(); });
+    chips.appendChild(b);
+  });
+  controls.appendChild(chips);
+
+  const readout = elDiv('readout',
+    '<div><span>Rata-rata (x\u0304)</span><b data-r="mean"></b></div>' +
+    '<div><span>Median</span><b data-r="med"></b></div>' +
+    '<div><span>Modus</span><b data-r="mod"></b></div>' +
+    '<div><span>Jangkauan</span><b data-r="range"></b></div>');
+  controls.appendChild(readout);
+
+  const legend = elDiv('legend',
+    '<span><i class="dot" style="background:var(--signal)"></i>rata-rata</span>' +
+    '<span><i class="dot" style="background:var(--medal)"></i>median</span>');
+  legend.style.marginTop = '0.9rem';
+  controls.appendChild(legend);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  const median = arr => {
+    const s = arr.slice().sort((x, y) => x - y);
+    const n = s.length, m = Math.floor(n / 2);
+    return n % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+  };
+  const modus = arr => {
+    const freq = {};
+    arr.forEach(v => { freq[v] = (freq[v] || 0) + 1; });
+    let max = 0;
+    for (const k in freq) if (freq[k] > max) max = freq[k];
+    if (max <= 1) return null;
+    return Object.keys(freq).filter(k => freq[k] === max).map(Number).sort((a, b) => a - b);
+  };
+
+  function render() {
+    const n = data.length;
+    const mean = data.reduce((a, b) => a + b, 0) / n;
+    const med = median(data);
+    const mo = modus(data);
+    const rng = Math.max.apply(null, data) - Math.min.apply(null, data);
+
+    // titik data (tumpuk yang bernilai sama)
+    dotG.innerHTML = '';
+    dotPos = [];
+    const seen = {};
+    data.forEach((v, i) => {
+      const level = seen[v] || 0;
+      seen[v] = level + 1;
+      const cx = sx(v), cy = BASE - 10 - level * 15;
+      const c = svgEl('circle', { cx, cy, r: 6, class: 'st-dot' }, dotG);
+      c.dataset.i = i;
+      dotPos.push({ i, cx, cy });
+    });
+
+    meanLn.setAttribute('x1', sx(mean)); meanLn.setAttribute('x2', sx(mean));
+    medLn.setAttribute('x1', sx(med)); medLn.setAttribute('x2', sx(med));
+    meanLbl.setAttribute('x', sx(mean));
+    medLbl.setAttribute('x', sx(med));
+    // Hindari tumpang tindih label saat rata-rata ≈ median
+    if (Math.abs(sx(mean) - sx(med)) < 22) {
+      meanLbl.setAttribute('y', 20); medLbl.setAttribute('y', 30);
+    } else {
+      meanLbl.setAttribute('y', 28); medLbl.setAttribute('y', 28);
+    }
+
+    q('[data-r="mean"]').textContent = fmt(mean);
+    q('[data-r="med"]').textContent = fmt(med);
+    q('[data-r="mod"]').textContent = mo ? mo.map(fmt).join(', ') : '\u2014 (tak ada)';
+    q('[data-r="range"]').textContent = fmt(rng);
+
+    const gap = mean - med;
+    note.textContent = Math.abs(gap) < 0.5
+      ? 'Rata-rata dan median hampir berimpit \u2014 tanda data cukup simetris, tanpa pencilan yang menarik ke satu sisi.'
+      : gap > 0
+        ? 'Rata-rata berada di kanan median: ada nilai besar (pencilan tinggi) yang menyeret rata-rata. Median bergeming \u2014 itulah kenapa median lebih tahan pencilan.'
+        : 'Rata-rata berada di kiri median: ada nilai kecil yang menyeret rata-rata ke bawah. Perhatikan median tetap di tempatnya.';
+  }
+
+  /* --- Seret titik --- */
+  let drag = null;
+  const svgXY = e => {
+    const r = svg.getBoundingClientRect();
+    if (!r.width) return null;
+    return { x: (e.clientX - r.left) * (W / r.width), y: (e.clientY - r.top) * (H / r.height) };
+  };
+  svg.addEventListener('pointerdown', e => {
+    const p = svgXY(e); if (!p) return;
+    let best = null, bd = 1e9;
+    dotPos.forEach(d => {
+      const dist = Math.hypot(p.x - d.cx, p.y - d.cy);
+      if (dist < bd) { bd = dist; best = d; }
+    });
+    if (!best || bd > 22) return;
+    drag = best.i;
+    try { svg.setPointerCapture(e.pointerId); } catch (err) {}
+    data[drag] = clamp(Math.round((p.x - L) / ((R - L) / (MAXV - MINV))));
+    render(); e.preventDefault();
+  });
+  svg.addEventListener('pointermove', e => {
+    if (drag === null) return;
+    const p = svgXY(e); if (!p) return;
+    data[drag] = clamp(Math.round((p.x - L) / ((R - L) / (MAXV - MINV))));
     render();
   });
   ['pointerup', 'pointercancel'].forEach(ev => svg.addEventListener(ev, () => { drag = null; }));

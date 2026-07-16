@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statistika &amp; Peluang — Khusni Academy</title>
+<meta name="description" content="Statistika &amp; Peluang: penyajian data, ukuran pemusatan (rata-rata, median, modus) dan penyebaran (kuartil, jangkauan), aturan pencacahan (permutasi &amp; kombinasi), peluang kejadian tunggal &amp; majemuk, bekal olimpiade (nilai harapan, inklusi-eksklusi, binomial), laboratorium data interaktif, dan latihan soal bertingkat dari Mudah sampai Olimpiade.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#090d17">
+<link rel="canonical" href="https://khusniacademy.netlify.app/statistika.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Statistika &amp; Peluang — Khusni Academy">
+<meta property="og:description" content="Penyajian data, ukuran pemusatan &amp; penyebaran, aturan pencacahan, peluang tunggal &amp; majemuk, dan bekal olimpiade — dengan laboratorium data interaktif serta latihan soal bertingkat.">
+<meta property="og:url" content="https://khusniacademy.netlify.app/statistika.html">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Statistika &amp; Peluang — Khusni Academy">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f9dff'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia, serif' font-weight='700' fill='%23090d17' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<a class="skip-link" href="#konten">Langsung ke konten</a>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <div class="nav-drop">
+        <button class="nav-drop-btn active" type="button" aria-expanded="false" aria-haspopup="true">Materi<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label">Tersedia</span>
+          <a href="aljabar.html"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, bekal olimpiade</em></a>
+          <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap</em></a>
+          <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran, Heron &amp; kuasa titik</em></a>
+          <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, limit</em></a>
+          <a href="matriks.html"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
+          <a href="vektor.html"><strong>Vektor</strong><em>Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
+          <a href="statistika.html" class="active"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan, pencacahan &amp; peluang</em></a>
+          <div class="nav-drop-sep"></div>
+          <span class="nav-drop-label">Segera Hadir</span>
+          <span class="nav-drop-soon">Kalkulus <i>Segera</i></span>
+        </div>
+      </div>
+      <div class="nav-drop">
+        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-haspopup="true">TKA<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label">Persiapan TKA</span>
+          <a href="tka.html"><strong>Matematika Umum</strong><em>4 domain, 25 indikator, 25 soal latihan</em></a>
+          <a href="tka-lanjut.html"><strong>Matematika Lanjut</strong><em>Matriks, vektor, lingkaran, transformasi, limit</em></a>
+        </div>
+      </div>
+      <a href="olimpiade.html">Olimpiade</a>
+    </div>
+    <div class="nav-cta">
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero" id="konten">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><span>/</span><a href="index.html#materi">Materi</a><span>/</span><span>Statistika &amp; Peluang</span></div>
+    <span class="eyebrow">Materi · Tersedia</span>
+    <h1>Statistika &amp; Peluang</h1>
+    <p class="hero-sub">Dua cabang, satu misi: <em class="accent-word">menjinakkan ketidakpastian</em>. Statistika merangkum data yang sudah terjadi; peluang menakar apa yang mungkin terjadi.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container lesson-layout">
+    <aside class="lesson-nav">
+      <div class="lesson-nav-title">Isi Materi</div>
+      <a href="#pendahuluan">Pendahuluan</a>
+      <a href="#penyajian">Penyajian Data</a>
+      <a href="#pemusatan">Ukuran Pemusatan</a>
+      <a href="#penyebaran">Ukuran Penyebaran</a>
+      <a href="#pencacahan">Aturan Pencacahan</a>
+      <a href="#peluang">Peluang</a>
+      <a href="#menuju-olimpiade">Menuju Olimpiade</a>
+      <a href="#bedah-soal">Bedah Soal</a>
+      <a href="#latihan">Latihan Soal</a>
+    </aside>
+
+    <div class="lesson">
+
+      <div class="lesson-section" id="pendahuluan">
+        <h2>Pendahuluan</h2>
+        <p>Setiap hari kita dikepung angka: nilai ujian sekelas, harga yang naik-turun, ramalan cuaca "70% hujan". <strong>Statistika</strong> memberi alat untuk merangkum tumpukan data menjadi satu-dua bilangan yang bercerita, sementara <strong>peluang</strong> memberi bahasa untuk berkata seberapa yakin kita tentang masa depan.</p>
+        <p>Keduanya bersaudara: peluang adalah teori yang memberi tahu <em>apa yang seharusnya terjadi</em>, dan statistika adalah praktik yang membaca <em>apa yang benar-benar terjadi</em>. Di ujian — domain keempat TKA maupun olimpiade — inilah bab yang paling dekat dengan dunia nyata.</p>
+        <div class="box">
+          <span class="box-label">Peta Belajar Halaman Ini</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Pemusatan vs penyebaran</strong> — rata-rata memberitahu "di mana pusat data", penyebaran memberitahu "seberapa lebar". Keduanya perlu.</li>
+            <li><strong>Mainkan datanya</strong> — Laboratorium Data memperlihatkan mengapa median lebih tahan pencilan daripada rata-rata.</li>
+            <li><strong>Cacah dulu, baru berpeluang</strong> — banyak soal peluang sebenarnya soal pencacahan yang menyamar.</li>
+            <li><strong>Naik bertahap di latihan</strong> — dari Mudah sampai Olimpiade; ulangi tingkat yang skornya belum penuh.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="penyajian">
+        <h2>Penyajian Data</h2>
+        <p>Sebelum dihitung, data perlu <em>disajikan</em>. Tiga diagram yang paling sering muncul, masing-masing punya tugasnya:</p>
+        <ul>
+          <li><strong>Diagram batang</strong> — membandingkan kategori yang terpisah (penjualan tiap produk, jumlah siswa tiap kelas). Tinggi batang $=$ nilainya.</li>
+          <li><strong>Diagram garis</strong> — memperlihatkan <em>perubahan sepanjang waktu</em> (suhu harian, lulusan tiap tahun). Kemiringan garis menceritakan naik-turunnya.</li>
+          <li><strong>Diagram lingkaran</strong> — memperlihatkan <em>proporsi</em> terhadap keseluruhan. Satu lingkaran penuh $= 100\% = 360^\circ$, jadi tiap kategori memakan sudut $\dfrac{\text{nilai}}{\text{total}} \times 360^\circ$.</li>
+        </ul>
+        <div class="box example">
+          <span class="box-label">Contoh — Diagram Lingkaran</span>
+          <p style="margin-bottom:0;">Dari $200$ siswa, $50$ memilih basket. Sudut juringnya $= \dfrac{50}{200} \times 360^\circ = 90^\circ$, dan persentasenya $\dfrac{50}{200} \times 100\% = 25\%$.</p>
+        </div>
+        <div class="box warn">
+          <span class="box-label">Awas Membaca Grafik!</span>
+          <ul>
+            <li>Kata kunci penentu: <strong>"selalu naik"</strong> menuntut kenaikan di <em>setiap</em> langkah — satu langkah datar/turun sudah merobohkannya. (Jebakan favorit soal diagram garis.)</li>
+            <li>Perhatikan skala sumbu; batang yang "dua kali lebih tinggi" belum tentu bernilai dua kali lipat kalau sumbunya tak mulai dari nol.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="pemusatan">
+        <h2>Ukuran Pemusatan</h2>
+        <p>Bagaimana meringkas ratusan angka menjadi satu bilangan "khas"? Ada tiga jawaban, masing-masing bermakna beda:</p>
+        <div class="box formula">
+          <span class="box-label">Tiga Ukuran Pusat</span>
+          $$\bar{x} = \frac{\text{jumlah semua data}}{\text{banyak data}} \qquad \text{Median} = \text{nilai tengah (data terurut)} \qquad \text{Modus} = \text{paling sering muncul}$$
+        </div>
+        <ul>
+          <li><strong>Rata-rata</strong> — memperhitungkan setiap nilai, jadi paling informatif, tapi <em>sensitif terhadap pencilan</em>: satu angka ekstrem bisa menariknya jauh.</li>
+          <li><strong>Median</strong> — hanya peduli posisi tengah, jadi <em>tahan pencilan</em>. Untuk $n$ genap, ambil rata-rata dua nilai tengah.</li>
+          <li><strong>Modus</strong> — nilai terpopuler; data bisa punya lebih dari satu modus, atau tak punya sama sekali.</li>
+        </ul>
+        <p>Trik terpenting rata-rata: <strong>jumlah data $= \bar{x} \times n$</strong>. Dari sinilah nilai yang hilang bisa dikejar mundur.</p>
+
+        <div class="widget-card reveal" id="widget-statistika">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Laboratorium Data: Rata-rata vs Median</h3>
+            <p>Seret titik-titik data pada garis bilangan. Garis biru (rata-rata) dan emas (median) bergerak mengikutinya. Tarik satu titik jauh ke kanan menjadi <strong>pencilan</strong> — perhatikan rata-rata ikut terseret sementara median hampir tak bergeming. Coba juga preset <strong>Ada Pencilan</strong>!</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+
+        <div class="box example">
+          <span class="box-label">Contoh — Mengejar Nilai Hilang</span>
+          <p style="margin-bottom:0.3rem;">Rata-rata $5$ ulangan adalah $80$. Empat di antaranya $75, 82, 78, 85$. Berapa nilai kelima?</p>
+          <p style="margin-bottom:0;">Jumlah seharusnya $= 80 \times 5 = 400$. Jumlah empat yang diketahui $= 320$, jadi nilai kelima $= 400 - 320 = 80$.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="penyebaran">
+        <h2>Ukuran Penyebaran</h2>
+        <p>Dua kelas bisa punya rata-rata sama persis tapi berperangai jauh berbeda — satu seragam, satu penuh nilai ekstrem. Yang membedakan adalah <strong>penyebaran</strong>: seberapa jauh data tersebar dari pusatnya.</p>
+        <ul>
+          <li><strong>Jangkauan</strong> $= x_{\max} - x_{\min}$. Ukuran paling sederhana, tapi hanya melihat dua nilai ujung.</li>
+          <li><strong>Kuartil</strong> membelah data terurut menjadi empat bagian sama banyak: $Q_1$ (bawah), $Q_2$ (median), $Q_3$ (atas).</li>
+          <li><strong>Jangkauan antarkuartil (JAK)</strong> $= Q_3 - Q_1$ — rentang "50% data tengah", jauh lebih tahan pencilan daripada jangkauan biasa.</li>
+        </ul>
+        <div class="box formula">
+          <span class="box-label">Kuartil</span>
+          $$Q_1 = \text{median paruh bawah} \qquad Q_3 = \text{median paruh atas} \qquad \text{JAK} = Q_3 - Q_1$$
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Data terurut: $2, 4, 5, 7, 8, 10, 11, 13$ ($n = 8$).</p>
+          <p style="margin-bottom:0.15rem;">Median $= \frac{7+8}{2} = 7{,}5$. Paruh bawah $\{2,4,5,7\} \Rightarrow Q_1 = \frac{4+5}{2} = 4{,}5$. Paruh atas $\{8,10,11,13\} \Rightarrow Q_3 = \frac{10+11}{2} = 10{,}5$.</p>
+          <p style="margin-bottom:0;">$\text{JAK} = 10{,}5 - 4{,}5 = 6$.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="pencacahan">
+        <h2>Aturan Pencacahan</h2>
+        <p>Sebelum menghitung peluang, kita harus bisa <em>mencacah</em> — menghitung banyak kemungkinan tanpa mendaftar satu per satu. Dua aturan induk:</p>
+        <div class="box formula">
+          <span class="box-label">Dua Aturan Induk</span>
+          $$\text{Penjumlahan: pilihan "A \emph{atau} B"} \Rightarrow +  \qquad\qquad \text{Perkalian: tahap "A \emph{lalu} B"} \Rightarrow \times$$
+        </div>
+        <p>"Naik bus <em>atau</em> kereta" $\Rightarrow$ jumlahkan pilihannya. "Pilih baju <em>lalu</em> celana" $\Rightarrow$ kalikan. Dari aturan perkalian lahir dua alat besar:</p>
+        <div class="box formula">
+          <span class="box-label">Permutasi &amp; Kombinasi</span>
+          $$P(n, r) = \frac{n!}{(n-r)!} \qquad\qquad C(n, r) = \frac{n!}{r!\,(n-r)!}$$
+        </div>
+        <p>Pembeda tunggalnya: <strong>apakah urutan penting?</strong></p>
+        <ul>
+          <li><strong>Permutasi</strong> — urutan <em>penting</em>: susunan juara 1-2-3, menempati kursi berbeda, menyusun huruf. Juara "Ani-Budi" beda dari "Budi-Ani".</li>
+          <li><strong>Kombinasi</strong> — urutan <em>tidak penting</em>: memilih tim, mengambil kartu, memilih wakil. Tim "{Ani, Budi}" sama dengan "{Budi, Ani}".</li>
+        </ul>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.2rem;"><strong>Permutasi:</strong> menyusun $3$ dari $5$ orang dalam barisan $= P(5,3) = 5 \times 4 \times 3 = 60$ cara.</p>
+          <p style="margin-bottom:0;"><strong>Kombinasi:</strong> memilih $2$ wakil dari $6$ orang $= C(6,2) = \dfrac{6 \times 5}{2} = 15$ cara.</p>
+        </div>
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>Ragu permutasi atau kombinasi? Tanya: kalau dua pilihan ditukar tempatnya, apakah menghasilkan hal yang <em>berbeda</em>? Ya $\Rightarrow$ permutasi; tidak $\Rightarrow$ kombinasi.</li>
+            <li>Menyusun huruf dengan <strong>huruf kembar</strong>: bagi dengan faktorial banyaknya huruf yang sama. "BUKU" $= \frac{4!}{2!} = 12$ (dua huruf U).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="peluang">
+        <h2>Peluang</h2>
+        <p>Peluang sebuah kejadian mengukur seberapa mungkin ia terjadi, dengan nilai selalu antara $0$ (mustahil) dan $1$ (pasti):</p>
+        <div class="box formula">
+          <span class="box-label">Rumus Inti</span>
+          $$P(A) = \frac{n(A)}{n(S)} = \frac{\text{banyak hasil yang diinginkan}}{\text{banyak semua hasil}}$$
+        </div>
+        <p>Karena nilainya terkurung di $[0, 1]$, kamu bisa langsung mencoret opsi jawaban yang negatif atau lebih dari $1$. Tiga aturan memperluas rumus ini:</p>
+        <div class="box formula">
+          <span class="box-label">Tiga Aturan</span>
+          $$P(A') = 1 - P(A) \qquad P(A \cup B) = P(A) + P(B) - P(A \cap B) \qquad P(A \cap B) = P(A)\,P(B)\ \text{(saling bebas)}$$
+        </div>
+        <ul>
+          <li><strong>Komplemen</strong> — "peluang tidak terjadi". Sangat ampuh untuk soal ber-frasa <em>"minimal satu"</em>: hitung peluang <em>tak satu pun</em>, lalu kurangkan dari $1$.</li>
+          <li><strong>Gabungan</strong> — untuk "A atau B"; kurangi irisan agar tak terhitung dua kali (inklusi-eksklusi).</li>
+          <li><strong>Kejadian bebas</strong> — hasil satu tak memengaruhi yang lain (dua dadu, koin berkali-kali): kalikan peluangnya.</li>
+        </ul>
+        <div class="box warn">
+          <span class="box-label">Jebakan Terbesar: Dengan atau Tanpa Pengembalian</span>
+          <p style="margin-bottom:0;">Kalau benda yang diambil <strong>tidak dikembalikan</strong>, peluang pengambilan berikutnya berubah karena <em>penyebutnya berkurang</em>. "Dua bola merah dari kotak berisi $4$ merah &amp; $6$ putih" $= \frac{4}{10} \times \frac{3}{9}$ — bukan $\frac{4}{10} \times \frac{4}{10}$. Baca baik-baik apakah benda dikembalikan!</p>
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh — Kekuatan Komplemen</span>
+          <p style="margin-bottom:0;">Sebuah koin dilempar $3$ kali. Peluang muncul <em>minimal satu</em> angka $= 1 - P(\text{semua gambar}) = 1 - \left(\tfrac12\right)^3 = 1 - \tfrac18 = \tfrac78$. Menghitung langsung berarti menjumlah banyak kasus; komplemen memangkasnya jadi satu langkah.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="menuju-olimpiade">
+        <h2>Menuju Statistika &amp; Peluang Olimpiade</h2>
+        <p>Empat perkakas berikut memisahkan penghitung biasa dari pemecah soal kompetisi.</p>
+
+        <h3>1. Nilai Harapan (Ekspektasi)</h3>
+        <p>Kalau sebuah percobaan diulang berkali-kali, berapa nilai rata-rata yang bisa <em>diharapkan</em>? Jumlahkan tiap hasil dikali peluangnya:</p>
+        <div class="box formula">
+          <span class="box-label">Nilai Harapan</span>
+          $$E(X) = \sum x_i \cdot P(x_i)$$
+        </div>
+        <p>Inilah jantung teori permainan dan asuransi: menakar "adil"-nya sebuah taruhan.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">Sebuah dadu dilempar sekali; kamu menerima uang sebesar (mata dadu) $\times$ Rp1.000. Nilai harapannya $= \dfrac{1+2+3+4+5+6}{6} \times 1000 = 3{,}5 \times 1000 = \text{Rp3.500}$.</p>
+        </div>
+
+        <h3>2. Inklusi–Eksklusi</h3>
+        <p>Untuk mencacah gabungan yang tumpang tindih, tambahkan tiap himpunan lalu kurangi irisannya agar tak dihitung ganda:</p>
+        <div class="box formula">
+          <span class="box-label">Dua Himpunan</span>
+          $$|A \cup B| = |A| + |B| - |A \cap B|$$
+        </div>
+        <p>Dipadu komplemen, ia menjawab "berapa yang tak termasuk keduanya": $n - |A \cup B|$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">Dari $100$ siswa, $60$ suka Matematika, $45$ suka Fisika, $25$ suka keduanya. Yang tak suka keduanya $= 100 - (60 + 45 - 25) = 100 - 80 = 20$ siswa.</p>
+        </div>
+
+        <h3>3. Peluang Binomial</h3>
+        <p>Percobaan yang sama diulang $n$ kali, tiap kali "berhasil" berpeluang $p$. Peluang tepat $k$ keberhasilan:</p>
+        <div class="box formula">
+          <span class="box-label">Binomial</span>
+          $$P(X = k) = C(n, k)\, p^k (1-p)^{n-k}$$
+        </div>
+        <p>Faktor $C(n,k)$ menghitung <em>berapa cara</em> keberhasilan itu tersebar di antara percobaan.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">Koin adil dilempar $4$ kali. Peluang tepat $2$ angka $= C(4,2)\left(\tfrac12\right)^2\left(\tfrac12\right)^2 = 6 \times \tfrac{1}{16} = \tfrac{6}{16} = \tfrac38$.</p>
+        </div>
+
+        <h3>4. Trik "Kuadratkan &amp; Komplemen"</h3>
+        <p>Dua refleks yang menyelesaikan soal-soal tersulit. <strong>Komplemen</strong> mengubah "minimal satu" yang berkasus banyak menjadi "tak ada" yang satu langkah. Dan untuk peluang lewat pencacahan rumit, sering lebih cepat menghitung <em>ruang sampel</em> penuh lalu mencacah kejadian yang <em>menarik</em>.</p>
+        <div class="box example">
+          <span class="box-label">Contoh — Komplemen pada Pengambilan</span>
+          <p style="margin-bottom:0;">Dari $10$ lampu ($3$ rusak), diambil $2$ acak. Peluang <em>minimal satu</em> rusak $= 1 - P(\text{keduanya bagus}) = 1 - \dfrac{7}{10} \cdot \dfrac{6}{9} = 1 - \dfrac{7}{15} = \dfrac{8}{15}$.</p>
+        </div>
+
+        <div class="box recap">
+          <span class="box-label">Bekal Olimpiade</span>
+          <ul>
+            <li>Soal "taruhan adil" atau "rata-rata jangka panjang"? Nilai harapan $E(X) = \sum x_i P(x_i)$.</li>
+            <li>Gabungan tumpang tindih? Inklusi-eksklusi $|A \cup B| = |A| + |B| - |A \cap B|$; yang di luar $= n - |A \cup B|$.</li>
+            <li>"Tepat $k$ dari $n$"? Binomial $C(n,k)p^k(1-p)^{n-k}$.</li>
+            <li>"Minimal satu"? Hampir selalu pakai komplemen $1 - P(\text{tak ada})$.</li>
+            <li>Tanpa pengembalian? Penyebut berkurang tiap pengambilan.</li>
+            <li>Uji semuanya di tab <strong>Olimpiade</strong> pada latihan di bawah.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="bedah-soal">
+        <h2>Bedah Soal: Cara Berpikir Kompetisi</h2>
+        <p>Kerangka empat langkah — Pahami, Kenali Struktur, Kerjakan Rapi, Periksa — kita jalankan pada dua soal.</p>
+
+        <h3>Bedah Soal 1 — Rata-rata Gabungan</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Kelas A berisi $20$ siswa dengan rata-rata nilai $75$; kelas B berisi $30$ siswa dengan rata-rata $80$. Berapa rata-rata gabungan kedua kelas?</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> jebakannya menggoda kita menjawab $\frac{75+80}{2} = 77{,}5$ — tapi itu salah, karena kedua kelas <em>tak sama banyak</em>. Rata-rata gabungan harus menimbang jumlah siswa. Kuncinya kembali ke definisi: rata-rata $= \frac{\text{jumlah total}}{\text{banyak total}}$.</p>
+        <div class="box formula">
+          <span class="box-label">Perhitungan</span>
+          $$\bar{x} = \frac{20 \times 75 + 30 \times 80}{20 + 30} = \frac{1500 + 2400}{50} = \frac{3900}{50} = 78$$
+        </div>
+        <p><strong>Periksa kewajaran:</strong> hasilnya $78$ — condong ke $80$ (kelas B), masuk akal karena kelas B lebih banyak siswanya. Kalau jawabanmu tepat $77{,}5$, itu tanda kamu lupa menimbang. ✓</p>
+
+        <h3>Bedah Soal 2 — Peluang lewat Komplemen</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Sebuah kotak berisi $7$ bola bagus dan $3$ bola cacat. Diambil $3$ bola sekaligus secara acak. Berapa peluang terambil <em>minimal satu</em> bola cacat?</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> "minimal satu" berkasus banyak (tepat 1, tepat 2, tepat 3 cacat). Frasa itu adalah lampu hijau untuk <strong>komplemen</strong>: lawannya "tak ada cacat sama sekali" hanya satu kasus. Struktur pencacahan: pilih $3$ dari $10$, urutan tak penting $\Rightarrow$ kombinasi.</p>
+        <p><strong>Kerjakan:</strong> total cara $= C(10, 3) = 120$. Cara memilih $3$ bola <em>semuanya bagus</em> (dari $7$ bagus) $= C(7, 3) = 35$.</p>
+        <div class="box formula">
+          <span class="box-label">Perhitungan</span>
+          $$P(\text{minimal 1 cacat}) = 1 - P(\text{semua bagus}) = 1 - \frac{C(7,3)}{C(10,3)} = 1 - \frac{35}{120} = 1 - \frac{7}{24} = \frac{17}{24}$$
+        </div>
+        <p><strong>Periksa kewajaran:</strong> $\frac{17}{24} \approx 0{,}71$ — cukup besar, masuk akal karena hampir sepertiga bola cacat dan kita mengambil tiga. Jawaban terkurung rapi di $[0,1]$. ✓</p>
+
+        <div class="box recap">
+          <span class="box-label">Menulis Solusi ala Babak Esai</span>
+          <ul>
+            <li>Untuk rata-rata gabungan, tuliskan "jumlah total dibagi banyak total" secara eksplisit — hindari pintasan yang salah.</li>
+            <li>Saat memakai komplemen, sebutkan kejadian lawannya dengan jelas ("lawannya: tak ada yang cacat") sebelum menghitung.</li>
+            <li>Nyatakan apakah urutan penting untuk membenarkan pilihan permutasi/kombinasi.</li>
+            <li>Tutup dengan uji kewajaran: peluang di $[0,1]$, dan arah rata-rata gabungan condong ke kelompok yang lebih besar.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="latihan">
+        <h2>Latihan Soal Bertingkat</h2>
+        <p>Empat tingkat kesulitan — dari Mudah sampai Olimpiade. Klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
+        <p class="quiz-note">Progres tersimpan otomatis di peramban ini — tekan "Ulangi" untuk mencoba lagi dari awal.</p>
+
+        <div data-tier-group>
+          <div class="tier-tabs">
+            <button class="tier-tab active" data-tier="mudah"><span class="dot"></span>Mudah</button>
+            <button class="tier-tab" data-tier="sedang"><span class="dot"></span>Sedang</button>
+            <button class="tier-tab" data-tier="sulit"><span class="dot"></span>Sulit</button>
+            <button class="tier-tab" data-tier="olimpiade"><span class="dot"></span>Olimpiade</button>
+          </div>
+
+          <!-- MUDAH -->
+          <div class="tier-panel active" data-tier="mudah">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-m1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Rata-rata dari data $4, 6, 8, 10, 12$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$8$</button>
+                <button class="quiz-option" data-option="B">$10$</button>
+                <button class="quiz-option" data-option="C">$40$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\bar{x} = \dfrac{4+6+8+10+12}{5} = \dfrac{40}{5} = 8$. Jebakan C berhenti di jumlahnya ($40$) tanpa membaginya dengan banyak data.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-m2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Median dari data $3, 7, 2, 9, 5$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$5$</button>
+                <button class="quiz-option" data-option="B">$7$</button>
+                <button class="quiz-option" data-option="C">$2$</button>
+                <button class="quiz-option" data-option="D">$9$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Urutkan dulu: $2, 3, 5, 7, 9$. Nilai tengahnya (data ke-$3$ dari $5$) adalah $5$. Lupa mengurutkan adalah kesalahan paling umum di soal median.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-m3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Modus dari data $4, 5, 5, 6, 7, 5, 8$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$5$</button>
+                <button class="quiz-option" data-option="B">$6$</button>
+                <button class="quiz-option" data-option="C">$7$</button>
+                <button class="quiz-option" data-option="D">$4$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Modus $=$ nilai yang paling sering muncul. Angka $5$ muncul tiga kali, lebih sering dari yang lain — jadi modusnya $5$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-m4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Jangkauan dari data $12, 5, 8, 20, 15$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$15$</button>
+                <button class="quiz-option" data-option="B">$20$</button>
+                <button class="quiz-option" data-option="C">$8$</button>
+                <button class="quiz-option" data-option="D">$25$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jangkauan $= x_{\max} - x_{\min} = 20 - 5 = 15$. Jebakan B adalah nilai terbesarnya saja.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-m5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Sebuah dadu dilempar sekali. Peluang muncul mata dadu bernilai genap adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{1}{2}$</button>
+                <button class="quiz-option" data-option="B">$\frac{1}{3}$</button>
+                <button class="quiz-option" data-option="C">$\frac{1}{6}$</button>
+                <button class="quiz-option" data-option="D">$\frac{2}{3}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Angka genap pada dadu: $\{2, 4, 6\}$ — ada $3$ dari $6$ hasil. Jadi $P = \dfrac{3}{6} = \dfrac{1}{2}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-m6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Peluang besok hujan adalah $0{,}3$. Peluang besok <strong>tidak</strong> hujan adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0{,}7$</button>
+                <button class="quiz-option" data-option="B">$0{,}3$</button>
+                <button class="quiz-option" data-option="C">$1$</button>
+                <button class="quiz-option" data-option="D">$0{,}5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Komplemen: $P(A') = 1 - P(A) = 1 - 0{,}3 = 0{,}7$. Peluang suatu kejadian dan lawannya selalu berjumlah $1$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+          </div>
+
+          <!-- SEDANG -->
+          <div class="tier-panel" data-tier="sedang">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-s1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Rata-rata $5$ bilangan adalah $7$. Jika empat di antaranya $6, 8, 5, 9$, bilangan kelima adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$7$</button>
+                <button class="quiz-option" data-option="B">$6$</button>
+                <button class="quiz-option" data-option="C">$8$</button>
+                <button class="quiz-option" data-option="D">$9$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jumlah seharusnya $= 7 \times 5 = 35$. Jumlah empat yang diketahui $= 6+8+5+9 = 28$, jadi bilangan kelima $= 35 - 28 = 7$. Inilah trik "jumlah $= \bar{x} \times n$".</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-s2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Median dari data $4, 8, 6, 10, 12, 7$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$7{,}5$</button>
+                <button class="quiz-option" data-option="B">$7$</button>
+                <button class="quiz-option" data-option="C">$8$</button>
+                <button class="quiz-option" data-option="D">$6{,}5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Urutkan: $4, 6, 7, 8, 10, 12$. Karena $n = 6$ (genap), median $=$ rata-rata dua nilai tengah $= \dfrac{7 + 8}{2} = 7{,}5$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-s3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Banyak cara menyusun $3$ orang dari $5$ orang untuk berbaris (urutan diperhatikan) adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$60$</button>
+                <button class="quiz-option" data-option="B">$10$</button>
+                <button class="quiz-option" data-option="C">$125$</button>
+                <button class="quiz-option" data-option="D">$20$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Berbaris $\Rightarrow$ urutan penting $\Rightarrow$ permutasi: $P(5,3) = 5 \times 4 \times 3 = 60$. Jebakan B adalah $C(5,3) = 10$ — itu jika urutan tak penting.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-s4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Banyak cara memilih $2$ wakil dari $6$ orang (tanpa jabatan khusus) adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$15$</button>
+                <button class="quiz-option" data-option="B">$30$</button>
+                <button class="quiz-option" data-option="C">$36$</button>
+                <button class="quiz-option" data-option="D">$12$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Memilih tanpa jabatan $\Rightarrow$ urutan tak penting $\Rightarrow$ kombinasi: $C(6,2) = \dfrac{6 \times 5}{2} = 15$. Jebakan B adalah $P(6,2) = 30$ (jika ada jabatan berbeda).</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-s5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Sebuah kotak berisi $5$ bola merah dan $3$ bola biru. Diambil satu bola acak. Peluang terambil bola merah adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{5}{8}$</button>
+                <button class="quiz-option" data-option="B">$\frac{3}{8}$</button>
+                <button class="quiz-option" data-option="C">$\frac{5}{3}$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{2}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Total bola $= 5 + 3 = 8$, yang merah $5$. Jadi $P(\text{merah}) = \dfrac{5}{8}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-s6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Sebuah kedai menyediakan $3$ jenis makanan dan $4$ jenis minuman. Banyak paket (1 makanan + 1 minuman) yang bisa dibuat adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$12$</button>
+                <button class="quiz-option" data-option="B">$7$</button>
+                <button class="quiz-option" data-option="C">$34$</button>
+                <button class="quiz-option" data-option="D">$24$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Tahap berurutan (pilih makanan <em>lalu</em> minuman) $\Rightarrow$ aturan perkalian: $3 \times 4 = 12$. Jebakan B menjumlahkan ($3+4$) — itu untuk pilihan "atau", bukan "lalu".</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+          </div>
+
+          <!-- SULIT -->
+          <div class="tier-panel" data-tier="sulit">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-x1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Kelas A ($20$ siswa) memiliki rata-rata $75$, kelas B ($30$ siswa) memiliki rata-rata $80$. Rata-rata gabungan kedua kelas adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$78$</button>
+                <button class="quiz-option" data-option="B">$77{,}5$</button>
+                <button class="quiz-option" data-option="C">$78{,}5$</button>
+                <button class="quiz-option" data-option="D">$77$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rata-rata gabungan menimbang jumlah siswa: $\dfrac{20(75) + 30(80)}{50} = \dfrac{1500 + 2400}{50} = 78$. Jebakan B ($77{,}5$) adalah rata-rata dari dua rata-rata — salah karena kedua kelas tak sama banyak.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-x2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Data terurut: $2, 4, 5, 7, 8, 10, 11, 13$. Jangkauan antarkuartil ($Q_3 - Q_1$) adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$6$</button>
+                <button class="quiz-option" data-option="B">$5{,}5$</button>
+                <button class="quiz-option" data-option="C">$7$</button>
+                <button class="quiz-option" data-option="D">$4{,}5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$n = 8$: median $= \frac{7+8}{2}$. Paruh bawah $\{2,4,5,7\} \Rightarrow Q_1 = \frac{4+5}{2} = 4{,}5$; paruh atas $\{8,10,11,13\} \Rightarrow Q_3 = \frac{10+11}{2} = 10{,}5$. JAK $= 10{,}5 - 4{,}5 = 6$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-x3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Banyak susunan huruf berbeda dari kata "BUKU" adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$12$</button>
+                <button class="quiz-option" data-option="B">$24$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$4$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kata "BUKU" punya $4$ huruf dengan huruf U kembar ($2$ buah). Susunan berbeda $= \dfrac{4!}{2!} = \dfrac{24}{2} = 12$. Jebakan B ($24 = 4!$) lupa membagi karena huruf kembar.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-x4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Dua buah dadu dilempar bersamaan. Peluang muncul angka $6$ pada <strong>kedua</strong> dadu adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{1}{36}$</button>
+                <button class="quiz-option" data-option="B">$\frac{1}{12}$</button>
+                <button class="quiz-option" data-option="C">$\frac{2}{12}$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{6}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Dua dadu saling bebas, jadi kalikan: $P = \dfrac{1}{6} \times \dfrac{1}{6} = \dfrac{1}{36}$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-x5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Kotak berisi $4$ bola merah dan $6$ bola putih. Diambil $2$ bola berturut-turut <strong>tanpa pengembalian</strong>. Peluang keduanya merah adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{2}{15}$</button>
+                <button class="quiz-option" data-option="B">$\frac{4}{25}$</button>
+                <button class="quiz-option" data-option="C">$\frac{2}{25}$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{5}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Tanpa pengembalian, penyebut berkurang: $P = \dfrac{4}{10} \times \dfrac{3}{9} = \dfrac{12}{90} = \dfrac{2}{15}$. Jebakan B ($\frac{4}{10} \times \frac{4}{10}$) keliru menganggap ada pengembalian.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-x6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Sebuah koin dilempar $3$ kali. Peluang muncul <strong>minimal satu</strong> angka adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{7}{8}$</button>
+                <button class="quiz-option" data-option="B">$\frac{1}{8}$</button>
+                <button class="quiz-option" data-option="C">$\frac{3}{8}$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{2}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pakai komplemen: $P(\text{minimal 1 angka}) = 1 - P(\text{semua gambar}) = 1 - \left(\frac12\right)^3 = 1 - \frac18 = \frac78$. Jebakan B adalah peluang lawannya.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+          </div>
+
+          <!-- OLIMPIADE -->
+          <div class="tier-panel" data-tier="olimpiade">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-o1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Sebuah dadu dilempar sekali. Kamu menerima uang sebesar (mata dadu) $\times$ Rp1.000. Nilai harapan uang yang diterima adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">Rp3.500</button>
+                <button class="quiz-option" data-option="B">Rp3.000</button>
+                <button class="quiz-option" data-option="C">Rp3.600</button>
+                <button class="quiz-option" data-option="D">Rp6.000</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$E(X) = \sum x_i P(x_i) = \dfrac{1+2+3+4+5+6}{6} \times 1000 = 3{,}5 \times 1000 = \text{Rp3.500}$. Tiap mata dadu berpeluang sama $\frac16$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-o2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Dari $100$ siswa, $60$ suka Matematika, $45$ suka Fisika, dan $25$ suka keduanya. Banyak siswa yang tidak suka keduanya adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$20$</button>
+                <button class="quiz-option" data-option="B">$30$</button>
+                <button class="quiz-option" data-option="C">$15$</button>
+                <button class="quiz-option" data-option="D">$10$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Inklusi-eksklusi: yang suka minimal satu $= 60 + 45 - 25 = 80$. Maka yang tak suka keduanya $= 100 - 80 = 20$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-o3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Sebuah koin adil dilempar $4$ kali. Peluang muncul <strong>tepat</strong> $2$ angka adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{3}{8}$</button>
+                <button class="quiz-option" data-option="B">$\frac{1}{4}$</button>
+                <button class="quiz-option" data-option="C">$\frac{1}{2}$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{6}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Binomial: $P(X=2) = C(4,2)\left(\frac12\right)^2\left(\frac12\right)^2 = 6 \times \frac{1}{16} = \frac{6}{16} = \frac38$. Faktor $C(4,2) = 6$ menghitung posisi kedua angka itu.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-o4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Banyak cara $5$ orang duduk mengelilingi meja bundar adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$24$</button>
+                <button class="quiz-option" data-option="B">$120$</button>
+                <button class="quiz-option" data-option="C">$60$</button>
+                <button class="quiz-option" data-option="D">$12$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Permutasi siklis: karena rotasi dianggap sama, banyak susunan $= (n-1)! = (5-1)! = 24$. Jebakan B ($5! = 120$) adalah susunan berbaris lurus, bukan melingkar.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-o5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Peluang seorang siswa lulus Matematika $0{,}7$, dan lulus <em>kedua</em> mapel (Matematika &amp; Fisika) $0{,}5$. Peluang lulus Fisika jika diketahui ia lulus Matematika adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{5}{7}$</button>
+                <button class="quiz-option" data-option="B">$0{,}5$</button>
+                <button class="quiz-option" data-option="C">$0{,}7$</button>
+                <button class="quiz-option" data-option="D">$\frac{7}{10}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Peluang bersyarat: $P(F \mid M) = \dfrac{P(F \cap M)}{P(M)} = \dfrac{0{,}5}{0{,}7} = \dfrac{5}{7}$. "Jika diketahui ia lulus Matematika" mempersempit ruang sampel ke siswa yang lulus Matematika saja.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-o6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Dari $8$ orang akan dipilih ketua, wakil, dan sekretaris (jabatan berbeda). Banyak susunan pengurus yang mungkin adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$336$</button>
+                <button class="quiz-option" data-option="B">$56$</button>
+                <button class="quiz-option" data-option="C">$512$</button>
+                <button class="quiz-option" data-option="D">$168$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jabatan berbeda $\Rightarrow$ urutan penting $\Rightarrow$ permutasi: $P(8,3) = 8 \times 7 \times 6 = 336$. Jebakan B adalah $C(8,3) = 56$ — itu jika ketiganya berjabatan sama.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-o7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Dari $10$ lampu yang $3$ di antaranya rusak, diambil $2$ lampu secara acak. Peluang <strong>minimal satu</strong> lampu rusak adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{8}{15}$</button>
+                <button class="quiz-option" data-option="B">$\frac{7}{15}$</button>
+                <button class="quiz-option" data-option="C">$\frac{1}{3}$</button>
+                <button class="quiz-option" data-option="D">$\frac{2}{5}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Komplemen: $P(\text{min. 1 rusak}) = 1 - P(\text{keduanya bagus}) = 1 - \dfrac{7}{10} \times \dfrac{6}{9} = 1 - \dfrac{42}{90} = 1 - \dfrac{7}{15} = \dfrac{8}{15}$. Jebakan B adalah peluang keduanya bagus.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-o8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Dua buah dadu dilempar bersamaan. Peluang jumlah kedua mata dadu merupakan bilangan <strong>prima</strong> adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{5}{12}$</button>
+                <button class="quiz-option" data-option="B">$\frac{1}{2}$</button>
+                <button class="quiz-option" data-option="C">$\frac{7}{18}$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{3}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Ruang sampel $36$. Jumlah yang prima: $2, 3, 5, 7, 11$ dengan cara berturut-turut $1, 2, 4, 6, 2 = 15$ cara. Jadi $P = \dfrac{15}{36} = \dfrac{5}{12}$. Ingat: $1$ bukan prima, dan jumlah maksimum $12$ (jadi $13$ mustahil).</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Statistika &amp; peluangmu siap diuji — lanjutkan ke <a href="tka.html" style="color:var(--medal);font-weight:700;">TKA Matematika Umum</a> yang menguji domain ini di lima indikatornya, atau ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a>.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-pager">
+        <a class="pager-card" href="vektor.html"><span>← Sebelumnya</span><strong>Vektor</strong></a>
+        <a class="pager-card next" href="tka.html"><span>Selanjutnya →</span><strong>Persiapan TKA</strong></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+        <p>Belajar Matematika dari konsep dasar sampai persiapan olimpiade, untuk pelajar SMA, mahasiswa, dan umum.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Materi</h4>
+          <a href="aljabar.html">Aljabar</a>
+          <a href="trigonometri.html">Trigonometri</a>
+          <a href="geometri.html">Geometri</a>
+          <a href="prakalkulus.html">Prakalkulus</a>
+          <a href="matriks.html">Matriks</a>
+          <a href="vektor.html">Vektor</a>
+          <a href="statistika.html">Statistika &amp; Peluang</a>
+        </div>
+        <div class="footer-col">
+          <h4>Persiapan</h4>
+          <a href="tka.html">TKA Matematika Umum</a>
+          <a href="tka-lanjut.html">TKA Matematika Lanjut</a>
+          <a href="olimpiade.html">Matematika Olimpiade</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tentang</h4>
+          <span>Khusni Academy</span>
+          <span>Dibuat untuk pelajar Indonesia</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Khusni Academy.</span>
+      <span>I have learned that I still have a lot to learn</span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" aria-label="Kembali ke atas">↑</button>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

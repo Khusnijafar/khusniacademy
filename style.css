@@ -1611,3 +1611,13 @@ svg text.vx-lbl { font-family: var(--font-mono); font-size: 12px; font-weight: 7
 svg text.vx-lbl.u { fill: var(--signal); }
 svg text.vx-lbl.v { fill: var(--medal); }
 svg text.vx-lbl.r { fill: var(--tier-mudah); }
+
+/* ---------- Simulasi 7: Laboratorium Data (rata-rata vs median) ---------- */
+.st-axis { stroke: var(--ink-line); stroke-width: 2; }
+.st-tick { stroke: var(--ink-line); stroke-width: 1.5; }
+svg text.st-ticklbl { font-family: var(--font-mono); font-size: 11px; fill: var(--chalk-mute); text-anchor: middle; }
+.st-dot { fill: var(--chalk-dim); stroke: var(--ink); stroke-width: 2; cursor: grab; }
+.st-meanline { stroke: var(--signal); stroke-width: 2.5; stroke-dasharray: 5 4; }
+.st-medianline { stroke: var(--medal); stroke-width: 2.5; }
+svg text.st-meanlbl { font-family: var(--font-mono); font-size: 12px; font-weight: 700; fill: var(--signal); text-anchor: middle; }
+svg text.st-medianlbl { font-family: var(--font-mono); font-size: 12px; font-weight: 700; fill: var(--medal); text-anchor: middle; }
