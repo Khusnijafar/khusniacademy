@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalkulus — Khusni Academy</title>
+<meta name="description" content="Kalkulus: turunan dari definisi limit, aturan pangkat, hasil kali, hasil bagi &amp; rantai, aplikasi turunan (garis singgung, naik-turun, optimasi), integral tak tentu &amp; tentu, luas daerah, bekal olimpiade, laboratorium turunan interaktif, dan latihan soal bertingkat dari Mudah sampai Olimpiade.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#090d17">
+<link rel="canonical" href="https://khusniacademy.netlify.app/kalkulus.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kalkulus — Khusni Academy">
+<meta property="og:description" content="Turunan dari definisi limit sampai integral &amp; luas daerah, aplikasi optimasi, dan bekal olimpiade — dengan laboratorium turunan interaktif serta latihan soal bertingkat.">
+<meta property="og:url" content="https://khusniacademy.netlify.app/kalkulus.html">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kalkulus — Khusni Academy">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f9dff'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia, serif' font-weight='700' fill='%23090d17' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<a class="skip-link" href="#konten">Langsung ke konten</a>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <div class="nav-drop">
+        <button class="nav-drop-btn active" type="button" aria-expanded="false" aria-haspopup="true">Materi<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label">Tersedia</span>
+          <a href="aljabar.html"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, bekal olimpiade</em></a>
+          <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap</em></a>
+          <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran, Heron &amp; kuasa titik</em></a>
+          <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, limit</em></a>
+          <a href="limit.html"><strong>Limit</strong><em>Konsep &amp; sifat, aljabar, trigonometri, tak hingga &amp; asimtot</em></a>
+          <a href="matriks.html"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
+          <a href="vektor.html"><strong>Vektor</strong><em>Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
+          <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan, pencacahan &amp; peluang</em></a>
+          <a href="kalkulus.html" class="active"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral &amp; luas daerah</em></a>
+        </div>
+      </div>
+      <div class="nav-drop">
+        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-haspopup="true">TKA<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label">Persiapan TKA</span>
+          <a href="tka.html"><strong>Matematika Umum</strong><em>4 domain, 25 indikator, 25 soal latihan</em></a>
+          <a href="tka-lanjut.html"><strong>Matematika Lanjut</strong><em>Matriks, vektor, lingkaran, transformasi, limit</em></a>
+        </div>
+      </div>
+      <a href="olimpiade.html">Olimpiade</a>
+    </div>
+    <div class="nav-cta">
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero" id="konten">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><span>/</span><a href="index.html#materi">Materi</a><span>/</span><span>Kalkulus</span></div>
+    <span class="eyebrow">Materi · Tersedia</span>
+    <h1>Kalkulus</h1>
+    <p class="hero-sub">Matematika tentang <em class="accent-word">perubahan</em>. Dua pertanyaan besarnya — seberapa <strong>cepat</strong> sesuatu berubah, dan seberapa <strong>banyak</strong> yang terkumpul — dijawab oleh turunan dan integral, lalu disatukan oleh satu teorema agung.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container lesson-layout">
+    <aside class="lesson-nav">
+      <div class="lesson-nav-title">Isi Materi</div>
+      <a href="#pendahuluan">Pendahuluan</a>
+      <a href="#turunan">Turunan: Definisi &amp; Aturan</a>
+      <a href="#teknik">Hasil Kali, Bagi &amp; Rantai</a>
+      <a href="#aplikasi">Aplikasi Turunan</a>
+      <a href="#integral">Integral Tak Tentu</a>
+      <a href="#integral-tentu">Integral Tentu &amp; Luas</a>
+      <a href="#menuju-olimpiade">Menuju Olimpiade</a>
+      <a href="#bedah-soal">Bedah Soal</a>
+      <a href="#latihan">Latihan Soal</a>
+    </aside>
+
+    <div class="lesson">
+
+      <div class="lesson-section" id="pendahuluan">
+        <h2>Pendahuluan</h2>
+        <p>Kecepatan mobil di spidometer bukan "jarak dibagi waktu" perjalanan penuh — ia laju <em>pada detik itu juga</em>. Bagaimana mengukur laju sesaat, padahal "sesaat" berarti selang waktu nol? Jawabannya: <strong>limit</strong> — dan begitu limit dikuasai, lahirlah <strong>turunan</strong>. Kebalikannya, menjumlahkan perubahan kecil tanpa henti menjadi total yang utuh, melahirkan <strong>integral</strong>.</p>
+        <p>Inilah mapel pamungkas Khusni Academy — muara tempat semua sungai bertemu: limit menjadi fondasi turunan, aljabar menjadi bahasa perhitungannya, dan geometri memberi maknanya (kemiringan dan luas).</p>
+        <p class="quiz-note" style="margin:0.6rem 0 1rem;">Belum mantap dengan limit? Selesaikan dulu halaman <a href="limit.html">Limit</a> — khususnya bentuk $\frac00$ dan pola $\frac{x^n - 1}{x - 1} \to n$ yang sebentar lagi menjelma menjadi turunan.</p>
+        <div class="box">
+          <span class="box-label">Peta Belajar Halaman Ini</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Turunan = kemiringan garis singgung</strong> — mainkan Laboratorium Turunan sampai kalimat itu terasa jelas, bukan sekadar hafalan.</li>
+            <li><strong>Satu syarat sakti:</strong> $f'(x) = 0$ — kunci semua soal maksimum-minimum.</li>
+            <li><strong>Integral adalah turunan yang dibalik</strong> — dan selalu bisa diperiksa dengan menurunkan kembali.</li>
+            <li><strong>Naik bertahap di latihan</strong> — dari Mudah sampai Olimpiade; ulangi tingkat yang skornya belum penuh.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="turunan">
+        <h2>Turunan: Definisi &amp; Aturan Dasar</h2>
+        <p>Kemiringan antara dua titik pada kurva mudah dihitung: $\frac{\Delta y}{\Delta x}$. Turunan bertanya lebih tajam: berapa kemiringannya saat kedua titik itu <em>menyatu</em>? Di sinilah limit tampil:</p>
+        <div class="box formula">
+          <span class="box-label">Definisi Turunan</span>
+          $$f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}$$
+        </div>
+        <p>Maknanya rangkap dua: <strong>kemiringan garis singgung</strong> kurva di titik itu, sekaligus <strong>laju perubahan sesaat</strong>. Mari hitung satu dari definisi — untuk $f(x) = x^2$:</p>
+        <div class="box example">
+          <span class="box-label">Contoh — Dari Definisi</span>
+          <p style="margin-bottom:0;">$f'(x) = \displaystyle\lim_{h \to 0} \frac{(x+h)^2 - x^2}{h} = \lim_{h \to 0} \frac{2xh + h^2}{h} = \lim_{h \to 0}\,(2x + h) = 2x$.</p>
+        </div>
+        <p>Dan ingat pola dari halaman Limit: $\displaystyle\lim_{x \to 1}\frac{x^n - 1}{x - 1} = n$? Itu <em class="accent-word">persis turunan $x^n$ di titik $x = 1$</em> — benih yang kini bertunas menjadi aturan paling penting:</p>
+        <div class="box formula">
+          <span class="box-label">Aturan Dasar</span>
+          $$\frac{d}{dx}\,x^n = n\,x^{\,n-1} \qquad \frac{d}{dx}\,k = 0 \qquad (kf)' = k\,f' \qquad (f \pm g)' = f' \pm g'$$
+          $$\frac{d}{dx}\sin x = \cos x \qquad\qquad \frac{d}{dx}\cos x = -\sin x$$
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$f(x) = 3x^4 - 2x + 5 \;\Rightarrow\; f'(x) = 12x^3 - 2$. Pangkat turun satu, koefisien terkalikan pangkat lama, konstanta lenyap.</p>
+        </div>
+
+        <div class="widget-card reveal" id="widget-turunan">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Laboratorium Turunan</h3>
+            <p>Geser titik biru di sepanjang kurva (atau pakai slider) — garis singgung emas mengikutinya, dan panel menampilkan gradien $f'(x)$ secara langsung. Perhatikan tanda gradien saat kurva naik dan turun, lalu cari posisi ketika garis singgungnya <strong>mendatar sempurna</strong>: lencana titik stasioner akan menyala. Coba juga preset <strong>Kubik</strong> — ia punya puncak <em>dan</em> lembah!</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="teknik">
+        <h2>Aturan Hasil Kali, Hasil Bagi &amp; Rantai</h2>
+        <p>Fungsi jarang datang sendirian — mereka berkalikan, berbagi, dan bersarang. Tiga aturan menaklukkan ketiganya:</p>
+        <div class="box formula">
+          <span class="box-label">Tiga Aturan Lanjut</span>
+          $$(u\,v)' = u'v + u\,v' \qquad\quad \left(\frac{u}{v}\right)' = \frac{u'v - u\,v'}{v^2} \qquad\quad \big[f(g(x))\big]' = f'(g(x)) \cdot g'(x)$$
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh — Hasil Kali</span>
+          <p style="margin-bottom:0;">$\dfrac{d}{dx}\big(x^2 \sin x\big) = 2x \sin x + x^2 \cos x$ — turunkan yang kiri kali yang kanan utuh, <em>plus</em> sebaliknya.</p>
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh — Rantai</span>
+          <p style="margin-bottom:0;">$\dfrac{d}{dx}(2x + 1)^5 = 5(2x+1)^4 \cdot \underbrace{2}_{\text{turunan dalam}} = 10(2x+1)^4$. Kupas dari luar ke dalam — dan <strong>jangan lupakan turunan bagian dalamnya</strong>.</p>
+        </div>
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>Hasil bagi punya <strong>urutan</strong>: $u'v - uv'$ (yang atas diturunkan dulu). Menukarnya membalik tanda seluruh jawaban.</li>
+            <li>Jebakan rantai nomor satu: berhenti di $5(2x+1)^4$ tanpa mengalikan turunan dalam ($2$).</li>
+            <li>$(uv)' \neq u'v'$ — turunan hasil kali <em>bukan</em> hasil kali turunan.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="aplikasi">
+        <h2>Aplikasi Turunan</h2>
+        <h3>Persamaan Garis Singgung</h3>
+        <p>Karena $f'(a)$ adalah gradien di $x = a$, persamaan garis singgungnya langsung jadi:</p>
+        <div class="box formula"><span class="box-label">Garis Singgung di $(a, f(a))$</span>$$y - f(a) = f'(a)\,(x - a)$$</div>
+
+        <h3>Naik, Turun &amp; Titik Stasioner</h3>
+        <p>Tanda turunan membaca arah kurva — persis seperti yang kamu saksikan di Laboratorium Turunan:</p>
+        <div class="box formula">
+          <span class="box-label">Membaca Tanda $f'$</span>
+          $$f'(x) &gt; 0 \Rightarrow \text{naik} \qquad f'(x) &lt; 0 \Rightarrow \text{turun} \qquad f'(x) = 0 \Rightarrow \text{titik stasioner}$$
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$f(x) = x^3 - 3x$ (preset <strong>Kubik</strong> di laboratorium, dikali $\tfrac12$): $f'(x) = 3x^2 - 3 = 3(x-1)(x+1)$. Naik saat $x &lt; -1$ atau $x &gt; 1$; turun di antaranya. Stasioner di $x = \pm1$: puncak lokal di $x = -1$, lembah lokal di $x = 1$ — cocokkan dengan yang kamu lihat di widget!</p>
+        </div>
+        <p>Di titik stasioner, kurva berhenti sejenak sebelum (mungkin) berbalik arah — karena itulah <strong>nilai maksimum/minimum selalu diburu lewat $f'(x) = 0$</strong>. Menentukan jenisnya: periksa perubahan tanda $f'$ (naik→turun = maksimum; turun→naik = minimum), atau pakai uji turunan kedua di bab olimpiade.</p>
+        <div class="box example">
+          <span class="box-label">Contoh — Optimasi Sederhana</span>
+          <p style="margin-bottom:0;">Persegi panjang berkeliling $20$: bila lebar $x$, luas $L = x(10 - x) = 10x - x^2$. $L' = 10 - 2x = 0 \Rightarrow x = 5$ — persegi $5 \times 5$ dengan luas maksimum $25$. Dari semua persegi panjang sekeliling, <em>persegi</em> selalu juara luas.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="integral">
+        <h2>Integral Tak Tentu</h2>
+        <p>Sekarang balikkan pertanyaannya: diketahui turunannya, fungsi apa asalnya? Proses "mundur" ini disebut <strong>anti-turunan</strong> atau integral tak tentu:</p>
+        <div class="box formula">
+          <span class="box-label">Aturan Pangkat Terbalik</span>
+          $$\int x^n\,dx = \frac{x^{\,n+1}}{n+1} + C \quad (n \neq -1) \qquad\quad \int \cos x\,dx = \sin x + C \qquad \int \sin x\,dx = -\cos x + C$$
+        </div>
+        <p>Pangkat naik satu, lalu dibagi pangkat baru — kebalikan persis dari menurunkan. Dan konstanta $+C$ itu wajib: $x^2$, $x^2 + 7$, dan $x^2 - 100$ semuanya berturunan $2x$, jadi jawaban mundurnya adalah <em>satu keluarga</em> fungsi.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">$\displaystyle\int (6x^2 - 4x + 1)\,dx = 2x^3 - 2x^2 + x + C$.</p>
+          <p style="margin-bottom:0;"><strong>Periksa dengan menurunkan kembali:</strong> $\frac{d}{dx}(2x^3 - 2x^2 + x + C) = 6x^2 - 4x + 1$ ✓ — setiap integral membawa alat verifikasinya sendiri!</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="integral-tentu">
+        <h2>Integral Tentu &amp; Luas Daerah</h2>
+        <p>Beri integral batas bawah dan atas, dan ia berubah menjadi <em>bilangan</em> — luas daerah di bawah kurva. Jembatan penghitungnya adalah teorema paling agung di bab ini:</p>
+        <div class="box formula">
+          <span class="box-label">Teorema Dasar Kalkulus</span>
+          $$\int_a^b f(x)\,dx = F(b) - F(a), \qquad \text{dengan } F' = f$$
+        </div>
+        <p>Luas — hasil menjumlah tak hingga banyak pias tipis — ternyata cukup dihitung lewat <em>anti-turunan di dua ujungnya</em>. Turunan dan integral resmi menjadi sepasang operasi yang saling membalikkan.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">Luas di bawah $y = 2x$ dari $x = 0$ sampai $3$: $\displaystyle\int_0^3 2x\,dx = \big[x^2\big]_0^3 = 9$. Cek geometris: daerah itu segitiga beralas $3$ dan tinggi $6$, luasnya $\tfrac12(3)(6) = 9$ ✓ — kalkulus dan geometri sepakat.</p>
+        </div>
+        <h3>Luas Antara Dua Kurva</h3>
+        <div class="box formula"><span class="box-label">Rumus</span>$$L = \int_a^b \big(\,\text{kurva atas} - \text{kurva bawah}\,\big)\,dx$$</div>
+        <p>dengan $a$ dan $b$ absis titik potong kedua kurva. Daerah di <em>bawah</em> sumbu-X bernilai integral negatif — pakai selisih "atas dikurang bawah" (atau tanda mutlak) agar luasnya tetap positif.</p>
+      </div>
+
+      <div class="lesson-section" id="menuju-olimpiade">
+        <h2>Menuju Kalkulus Olimpiade</h2>
+        <p>Empat perkakas yang mengubah aturan-aturan tadi menjadi senjata.</p>
+
+        <h3>1. Syarat Menyinggung lewat Diskriminan</h3>
+        <p>Garis menyinggung parabola ⟺ persamaan potongnya punya <strong>tepat satu akar</strong> ⟺ diskriminan nol. Dua bab lama (persamaan kuadrat + turunan) bertemu di sini.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">Garis $y = 2x + c$ menyinggung $y = x^2$: samakan, $x^2 - 2x - c = 0$, lalu $D = 4 + 4c = 0 \Rightarrow c = -1$. Cek lewat turunan: gradien $2$ tercapai saat $f'(x) = 2x = 2 \Rightarrow x = 1$, titik $(1,1)$, dan garis $y = 2x - 1$ memang melewatinya ✓</p>
+        </div>
+
+        <h3>2. Uji Turunan Kedua</h3>
+        <div class="box formula"><span class="box-label">Penentu Jenis Stasioner</span>$$f''(a) &gt; 0 \Rightarrow \text{minimum lokal} \qquad\qquad f''(a) &lt; 0 \Rightarrow \text{maksimum lokal}$$</div>
+        <p>Intuisinya: $f'' &gt; 0$ berarti kurva "menengadah" (cekung ke atas) — titik datarnya pasti lembah. Contoh: $f(x) = x^3 - 3x$, $f''(x) = 6x$; di $x = 1$: $f'' = 6 &gt; 0$ ⟹ minimum lokal, di $x = -1$: $f'' = -6 &lt; 0$ ⟹ maksimum lokal — persis bentuk Kubik di laboratorium.</p>
+
+        <h3>3. Optimasi Bercerita</h3>
+        <p>Soal cerita maksimum-minimum selalu tunduk pada resep tiga langkah:</p>
+        <div class="box recap">
+          <span class="box-label">Resep Optimasi</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>1. Modelkan</strong> — nyatakan besaran yang dioptimalkan sebagai fungsi <em>satu</em> variabel (pakai kendala untuk mengeliminasi variabel lain).</li>
+            <li><strong>2. Turunkan</strong> — selesaikan $f'(x) = 0$.</li>
+            <li><strong>3. Pastikan</strong> — uji jenisnya (tanda $f'$ atau $f''$) dan cek kewajaran nilai pada konteksnya.</li>
+          </ul>
+        </div>
+
+        <h3>4. Gerak: Posisi, Kecepatan, Percepatan</h3>
+        <p>Turunan berantai membaca gerak: dari posisi $s(t)$, <strong>kecepatan</strong> $v = s'(t)$ dan <strong>percepatan</strong> $a = v'(t) = s''(t)$. Benda "berhenti sesaat" ⟺ $v = 0$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$s(t) = t^2 - 4t + 3$: kecepatan $v = 2t - 4$, berhenti saat $t = 2$; percepatan $a = 2$ konstan — gerak parabola sempurna.</p>
+        </div>
+
+        <div class="box recap">
+          <span class="box-label">Bekal Olimpiade</span>
+          <ul>
+            <li>Maks/min? Buru $f'(x) = 0$, tentukan jenis lewat tanda $f'$ atau $f''$.</li>
+            <li>Menyinggung? Dua jalan: diskriminan nol, atau samakan gradien $f'(a)$ — dan keduanya harus sepakat.</li>
+            <li>Soal cerita: modelkan → turunkan → pastikan. Jangan lupa menjawab <em>besaran yang ditanya</em>, bukan sekadar $x$-nya.</li>
+            <li>Gerak: $v = s'$, $a = s''$; "berhenti" berarti $v = 0$.</li>
+            <li>Integral selalu bisa dicek: turunkan kembali hasilnya.</li>
+            <li>Uji semuanya di tab <strong>Olimpiade</strong> pada latihan di bawah.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="bedah-soal">
+        <h2>Bedah Soal: Cara Berpikir Kompetisi</h2>
+        <p>Kerangka empat langkah — Pahami, Kenali Struktur, Kerjakan Rapi, Periksa — kita jalankan pada dua soal.</p>
+
+        <h3>Bedah Soal 1 — Garis Singgung</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Tentukan persamaan garis singgung kurva $y = x^3 - 3x + 2$ di titik berabsis $x = 2$.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> butuh dua bahan — titik singgungnya dan gradiennya. Keduanya dari fungsi yang sama: $f(2)$ dan $f'(2)$.</p>
+        <p><strong>Kerjakan:</strong> $f(2) = 8 - 6 + 2 = 4$, jadi titiknya $(2, 4)$. Gradien: $f'(x) = 3x^2 - 3$, sehingga $f'(2) = 9$.</p>
+        <div class="box formula">
+          <span class="box-label">Perhitungan</span>
+          $$y - 4 = 9(x - 2) \;\Longrightarrow\; y = 9x - 14$$
+        </div>
+        <p><strong>Periksa — dengan cara yang lebih dalam:</strong> selisih kurva dan garis adalah $x^3 - 3x + 2 - (9x - 14) = x^3 - 12x + 16$. Faktorkan: $(x - 2)^2(x + 4)$ — akar $x = 2$ muncul <em class="accent-word">dobel</em>! Akar ganda persis makna aljabar dari "menyinggung": kurva dan garis tak sekadar berpotongan di sana, mereka <em>menempel</em>. ✓</p>
+
+        <h3>Bedah Soal 2 — Luas Daerah</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Hitung luas daerah yang dibatasi kurva $y = 4x - x^2$ dan sumbu-X.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> tentukan dulu batasnya — di mana kurva memotong sumbu-X: $x(4 - x) = 0 \Rightarrow x = 0$ dan $x = 4$. Parabola terbuka ke bawah, jadi di antara keduanya kurva berada <em>di atas</em> sumbu: integral langsung sah.</p>
+        <div class="box formula">
+          <span class="box-label">Perhitungan</span>
+          $$L = \int_0^4 (4x - x^2)\,dx = \Big[\,2x^2 - \tfrac{x^3}{3}\,\Big]_0^4 = 32 - \tfrac{64}{3} = \tfrac{32}{3}$$
+        </div>
+        <p><strong>Periksa kewajaran:</strong> puncak parabola di $x = 2$ setinggi $4$, jadi daerah itu termuat dalam kotak $4 \times 4 = 16$. Hasil kita $\tfrac{32}{3} \approx 10{,}67$ — tepat $\tfrac{2}{3}$ dari kotaknya. Dan memang: parabola <em>selalu</em> mengisi $\tfrac23$ kotak pembatasnya — fakta yang sudah diketahui Archimedes dua milenium sebelum kalkulus lahir. ✓</p>
+
+        <div class="box recap">
+          <span class="box-label">Menulis Solusi ala Babak Esai</span>
+          <ul>
+            <li>Untuk garis singgung, tuliskan kedua bahan ($f(a)$ dan $f'(a)$) secara eksplisit sebelum merakit persamaannya.</li>
+            <li>Untuk luas, tentukan dan <em>tuliskan</em> batas integrasi dari titik potong — jangan langsung mengintegral.</li>
+            <li>Sebutkan uji jenis stasioner yang kamu pakai (tanda $f'$ atau nilai $f''$).</li>
+            <li>Tutup dengan verifikasi: turunkan kembali integralmu, atau uji kewajaran luas terhadap kotak pembatas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="latihan">
+        <h2>Latihan Soal Bertingkat</h2>
+        <p>Empat tingkat kesulitan — dari Mudah sampai Olimpiade. Klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
+        <p class="quiz-note">Progres tersimpan otomatis di peramban ini — tekan "Ulangi" untuk mencoba lagi dari awal.</p>
+
+        <div data-tier-group>
+          <div class="tier-tabs">
+            <button class="tier-tab active" data-tier="mudah"><span class="dot"></span>Mudah</button>
+            <button class="tier-tab" data-tier="sedang"><span class="dot"></span>Sedang</button>
+            <button class="tier-tab" data-tier="sulit"><span class="dot"></span>Sulit</button>
+            <button class="tier-tab" data-tier="olimpiade"><span class="dot"></span>Olimpiade</button>
+          </div>
+
+          <!-- MUDAH -->
+          <div class="tier-panel active" data-tier="mudah">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="kl-m1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Turunan dari $f(x) = x^3$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3x^2$</button>
+                <button class="quiz-option" data-option="B">$x^2$</button>
+                <button class="quiz-option" data-option="C">$3x$</button>
+                <button class="quiz-option" data-option="D">$\frac{x^4}{4}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Aturan pangkat: $\frac{d}{dx}x^n = nx^{n-1}$, jadi $3x^2$ — pangkat turun ke depan, lalu berkurang satu. (Jebakan D adalah <em>integralnya</em>, arah yang terbalik.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="kl-m2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Jika $f(x) = 5x^2 - 3x$, maka $f'(x) = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$10x$</button>
+                <button class="quiz-option" data-option="B">$5x - 3$</button>
+                <button class="quiz-option" data-option="C">$10x - 3$</button>
+                <button class="quiz-option" data-option="D">$10x + 3$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Turunkan suku demi suku: $5x^2 \to 10x$ dan $-3x \to -3$. Hasil: $10x - 3$. Jebakan A lupa suku liniernya ikut diturunkan.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="kl-m3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Turunan dari fungsi konstan $f(x) = 7$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$7$</button>
+                <button class="quiz-option" data-option="B">$0$</button>
+                <button class="quiz-option" data-option="C">$1$</button>
+                <button class="quiz-option" data-option="D">$7x$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Konstanta tidak berubah — laju perubahannya nol. Grafiknya garis mendatar: gradiennya $0$ di mana-mana.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="kl-m4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">$\displaystyle\int 2x\,dx = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$2x^2 + C$</button>
+                <button class="quiz-option" data-option="C">$x^2$</button>
+                <button class="quiz-option" data-option="D">$x^2 + C$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Anti-turunan: fungsi apa yang berturunan $2x$? Jawab $x^2$ — plus $C$, karena semua $x^2 + \text{konstanta}$ berturunan sama. Jebakan C melupakan $+C$; jebakan A malah <em>menurunkan</em>.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="kl-m5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Turunan dari $\sin x$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$-\cos x$</button>
+                <button class="quiz-option" data-option="B">$\cos x$</button>
+                <button class="quiz-option" data-option="C">$-\sin x$</button>
+                <button class="quiz-option" data-option="D">$\tan x$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\frac{d}{dx}\sin x = \cos x$ (tanpa minus). Yang bertanda minus adalah $\frac{d}{dx}\cos x = -\sin x$ — urutan siklusnya: $\sin \to \cos \to -\sin \to -\cos \to \sin$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="kl-m6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Gradien garis singgung kurva $f(x) = x^2 - 4x + 1$ di titik berabsis $x = 3$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$-2$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Gradien singgung $= f'(3)$. Dari $f'(x) = 2x - 4$: $f'(3) = 2$. (Jebakan D adalah $f(3) = -2$… bukan, $f(3) = 9-12+1 = -2$; nilai fungsi ≠ gradien!)</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+          </div>
+
+          <!-- SEDANG -->
+          <div class="tier-panel" data-tier="sedang">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="kl-s1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Turunan dari $f(x) = (3x + 1)^4$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4(3x+1)^3$</button>
+                <button class="quiz-option" data-option="B">$12(3x+1)^3$</button>
+                <button class="quiz-option" data-option="C">$12(3x+1)^4$</button>
+                <button class="quiz-option" data-option="D">$3(3x+1)^3$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Aturan rantai: $4(3x+1)^3 \times 3 = 12(3x+1)^3$. Jebakan A adalah kesalahan klasik — lupa mengalikan turunan bagian dalam ($3$).</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="kl-s2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Dengan aturan hasil kali, turunan $f(x) = x^2(x + 3)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3x^2 + 6x$</button>
+                <button class="quiz-option" data-option="B">$2x$</button>
+                <button class="quiz-option" data-option="C">$3x^2 + 3$</button>
+                <button class="quiz-option" data-option="D">$2x(x + 3)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$(uv)' = u'v + uv' = 2x(x+3) + x^2(1) = 3x^2 + 6x$. Jebakan D berhenti di suku pertama saja. Cek lewat penjabaran: $f = x^3 + 3x^2 \Rightarrow f' = 3x^2 + 6x$ ✓</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="kl-s3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Fungsi $f(x) = x^2 - 6x$ naik pada interval…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x &lt; 3$</button>
+                <button class="quiz-option" data-option="B">$x &gt; 6$</button>
+                <button class="quiz-option" data-option="C">$x &gt; 3$</button>
+                <button class="quiz-option" data-option="D">semua $x$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Naik ⟺ $f'(x) &gt; 0$: dari $2x - 6 &gt; 0$ diperoleh $x &gt; 3$. Parabola terbuka ke atas mulai menanjak setelah melewati puncaknya di $x = 3$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="kl-s4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Titik stasioner $f(x) = x^3 - 12x$ terjadi di…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x = 2$ saja</button>
+                <button class="quiz-option" data-option="B">$x = 0$</button>
+                <button class="quiz-option" data-option="C">$x = \pm 4$</button>
+                <button class="quiz-option" data-option="D">$x = \pm 2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$f'(x) = 3x^2 - 12 = 0 \Rightarrow x^2 = 4 \Rightarrow x = \pm2$ — <strong>dua</strong> titik: puncak di $x=-2$, lembah di $x=2$. Jebakan A membuang akar negatif tanpa alasan.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="kl-s5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">$\displaystyle\int (6x^2 - 4)\,dx = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$12x$</button>
+                <button class="quiz-option" data-option="B">$6x^3 - 4x + C$</button>
+                <button class="quiz-option" data-option="C">$2x^3 - 4x + C$</button>
+                <button class="quiz-option" data-option="D">$2x^3 - 4 + C$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\int 6x^2 = \frac{6x^3}{3} = 2x^3$ dan $\int(-4) = -4x$. Hasil: $2x^3 - 4x + C$. Periksa: turunannya $6x^2 - 4$ ✓. Jebakan B lupa membagi $3$; D lupa konstanta menjadi $-4x$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="kl-s6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">$\displaystyle\int_0^2 3x^2\,dx = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$8$</button>
+                <button class="quiz-option" data-option="B">$12$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$4$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Teorema Dasar Kalkulus: $\big[x^3\big]_0^2 = 8 - 0 = 8$. Anti-turunan dulu, baru batas atas dikurangi batas bawah.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+          </div>
+
+          <!-- SULIT -->
+          <div class="tier-panel" data-tier="sulit">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="kl-x1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Persamaan garis singgung kurva $y = x^2 - 3x$ di titik $(2, -2)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$y = x - 2$</button>
+                <button class="quiz-option" data-option="B">$y = x - 4$</button>
+                <button class="quiz-option" data-option="C">$y = 2x - 4$</button>
+                <button class="quiz-option" data-option="D">$y = x + 4$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Gradien: $f'(x) = 2x - 3$, $f'(2) = 1$. Garis: $y + 2 = 1(x - 2) \Rightarrow y = x - 4$. Cek titik: $2 - 4 = -2$ ✓</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="kl-x2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Turunan dari $f(x) = \dfrac{2x + 1}{x - 1}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\dfrac{-3}{(x-1)^2}$</button>
+                <button class="quiz-option" data-option="B">$\dfrac{3}{(x-1)^2}$</button>
+                <button class="quiz-option" data-option="C">$\dfrac{2}{(x-1)^2}$</button>
+                <button class="quiz-option" data-option="D">$\dfrac{4x - 1}{(x-1)^2}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Aturan hasil bagi: $\dfrac{u'v - uv'}{v^2} = \dfrac{2(x-1) - (2x+1)(1)}{(x-1)^2} = \dfrac{-3}{(x-1)^2}$. Jebakan B lahir dari menukar urutan $u'v - uv'$ — tandanya terbalik.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="kl-x3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Nilai maksimum fungsi $f(x) = -x^2 + 4x + 1$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$1$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$5$</button>
+                <button class="quiz-option" data-option="D">$2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$f'(x) = -2x + 4 = 0 \Rightarrow x = 2$ (parabola terbuka ke bawah ⟹ maksimum). Nilainya $f(2) = -4 + 8 + 1 = 5$. Jebakan D menjawab $x$-nya, bukan nilai maksimumnya!</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="kl-x4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Luas daerah antara kurva $y = x$ dan $y = x^2$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{1}{2}$</button>
+                <button class="quiz-option" data-option="B">$\frac{1}{3}$</button>
+                <button class="quiz-option" data-option="C">$\frac{1}{12}$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{6}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Titik potong: $x = x^2 \Rightarrow x = 0, 1$; di antaranya garis $y = x$ di atas. $L = \int_0^1 (x - x^2)dx = \left[\frac{x^2}{2} - \frac{x^3}{3}\right]_0^1 = \frac12 - \frac13 = \frac16$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="kl-x5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Posisi benda: $s(t) = t^3 - 6t^2 + 9t$. Benda berhenti sesaat ($v = 0$) pada…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$t = 1$ saja</button>
+                <button class="quiz-option" data-option="B">$t = 1$ dan $t = 3$</button>
+                <button class="quiz-option" data-option="C">$t = 3$ saja</button>
+                <button class="quiz-option" data-option="D">$t = 0$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$v = s'(t) = 3t^2 - 12t + 9 = 3(t-1)(t-3) = 0 \Rightarrow t = 1$ dan $t = 3$ — benda berhenti <em>dua kali</em>: sekali di puncak, sekali sebelum berbalik lagi.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="kl-x6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Turunan kedua dari $f(x) = x^4 - 2x^3$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4x^3 - 6x^2$</button>
+                <button class="quiz-option" data-option="B">$12x^2 - 12$</button>
+                <button class="quiz-option" data-option="C">$12x^2 - 12x$</button>
+                <button class="quiz-option" data-option="D">$24x - 12$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Turunkan dua kali: $f' = 4x^3 - 6x^2$, lalu $f'' = 12x^2 - 12x$. Jebakan A berhenti di turunan pertama; D kebablasan ke turunan ketiga.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+          </div>
+
+          <!-- OLIMPIADE -->
+          <div class="tier-panel" data-tier="olimpiade">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="kl-o1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Garis $y = mx$ menyinggung kurva $y = x^2 + 4$. Nilai $m$ yang memenuhi adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$m = \pm 4$</button>
+                <button class="quiz-option" data-option="B">$m = 4$ saja</button>
+                <button class="quiz-option" data-option="C">$m = \pm 2$</button>
+                <button class="quiz-option" data-option="D">$m = \pm 8$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Samakan: $x^2 - mx + 4 = 0$. Menyinggung ⟺ $D = 0$: $m^2 - 16 = 0 \Rightarrow m = \pm4$. Dari titik asal ada <em>dua</em> garis singgung — satu miring kanan, satu miring kiri. Cek via turunan: $2x = m$ dan substitusi konsisten ✓</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="kl-o2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Nilai minimum lokal dari $f(x) = x^3 - 3x$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$-2$</button>
+                <button class="quiz-option" data-option="C">$0$</button>
+                <button class="quiz-option" data-option="D">$-1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$f' = 3x^2 - 3 = 0 \Rightarrow x = \pm1$. Uji turunan kedua: $f'' = 6x$; di $x = 1$: $f'' = 6 &gt; 0$ ⟹ minimum. Nilainya $f(1) = 1 - 3 = -2$. Jebakan D menjawab absisnya. (Bentuknya persis preset Kubik di laboratorium!)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="kl-o3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">$\displaystyle\int_1^3 (2x + 1)\,dx = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$8$</button>
+                <button class="quiz-option" data-option="B">$12$</button>
+                <button class="quiz-option" data-option="C">$10$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\big[x^2 + x\big]_1^3 = (9 + 3) - (1 + 1) = 10$. Cek geometris: daerah trapesium dengan sisi sejajar $f(1)=3$ dan $f(3)=7$, lebar $2$: $\frac{3+7}{2}\times2 = 10$ ✓</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="kl-o4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Sebuah kandang persegi panjang menempel pada tembok, sehingga hanya <strong>tiga sisi</strong> yang perlu dipagari. Tersedia pagar $40$ m. Luas maksimum kandang itu adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$100\ \text{m}^2$</button>
+                <button class="quiz-option" data-option="B">$200\ \text{m}^2$</button>
+                <button class="quiz-option" data-option="C">$400\ \text{m}^2$</button>
+                <button class="quiz-option" data-option="D">$150\ \text{m}^2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Misal sisi tegak lurus tembok $= x$: pagar $2x + p = 40 \Rightarrow p = 40 - 2x$, luas $L = x(40 - 2x)$. $L' = 40 - 4x = 0 \Rightarrow x = 10$, $L = 10 \times 20 = 200$. (Jebakan A memakai empat sisi — soalnya cuma tiga!)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="kl-o5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Banyaknya titik stasioner fungsi $f(x) = x^4 - 8x^2$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$1$</button>
+                <button class="quiz-option" data-option="B">$2$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">$3$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$f' = 4x^3 - 16x = 4x(x^2 - 4) = 0 \Rightarrow x = 0, \pm2$ — <strong>tiga</strong> titik: dua lembah ($x = \pm2$) dan satu puncak lokal ($x = 0$), bentuk huruf W.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="kl-o6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Dari selembar karton persegi bersisi $12$ cm, keempat sudutnya dipotong persegi bersisi $x$ lalu dilipat menjadi kotak tanpa tutup. Volume maksimum kotak itu adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$128\ \text{cm}^3$</button>
+                <button class="quiz-option" data-option="B">$144\ \text{cm}^3$</button>
+                <button class="quiz-option" data-option="C">$108\ \text{cm}^3$</button>
+                <button class="quiz-option" data-option="D">$96\ \text{cm}^3$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$V = x(12 - 2x)^2$. $V' = (12-2x)(12 - 6x) = 0 \Rightarrow x = 2$ (pilihan $x = 6$ memberi volume nol). $V(2) = 2 \times 8^2 = 128$. Klasik abadi soal optimasi!</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="kl-o7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Fungsi $f(x) = ax^3 + bx^2$ memiliki titik stasioner di $(1, -1)$. Nilai $a \cdot b$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$6$</button>
+                <button class="quiz-option" data-option="B">$-6$</button>
+                <button class="quiz-option" data-option="C">$-1$</button>
+                <button class="quiz-option" data-option="D">$5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Dua syarat: melalui titik itu, $a + b = -1$; dan stasioner di sana, $f'(1) = 3a + 2b = 0$. Eliminasi: $a = 2$, $b = -3$. Cek: $f = 2x^3 - 3x^2$, $f' = 6x(x-1) = 0$ di $x=1$ ✓ dan $f(1) = -1$ ✓. Jadi $ab = -6$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="kl-o8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Luas daerah yang dibatasi kurva $y = x^2$ dan $y = 2x - x^2$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$1$</button>
+                <button class="quiz-option" data-option="B">$\frac{2}{3}$</button>
+                <button class="quiz-option" data-option="C">$\frac{1}{3}$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{6}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Titik potong: $x^2 = 2x - x^2 \Rightarrow 2x^2 = 2x \Rightarrow x = 0, 1$. Di antaranya kurva $2x - x^2$ di atas. $L = \int_0^1 (2x - 2x^2)dx = \left[x^2 - \frac{2x^3}{3}\right]_0^1 = 1 - \frac23 = \frac13$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai — dan seluruh sembilan mapel Khusni Academy telah kamu jelajahi!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Muara berikutnya: <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a>, atau uji seluruh bekalmu di <a href="tka-lanjut.html" style="color:var(--medal);font-weight:700;">TKA Matematika Lanjut</a>.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-pager">
+        <a class="pager-card" href="statistika.html"><span>← Sebelumnya</span><strong>Statistika &amp; Peluang</strong></a>
+        <a class="pager-card next" href="tka.html"><span>Selanjutnya →</span><strong>Persiapan TKA</strong></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+        <p>Belajar Matematika dari konsep dasar sampai persiapan olimpiade, untuk pelajar SMA, mahasiswa, dan umum.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Materi</h4>
+          <a href="aljabar.html">Aljabar</a>
+          <a href="trigonometri.html">Trigonometri</a>
+          <a href="geometri.html">Geometri</a>
+          <a href="prakalkulus.html">Prakalkulus</a>
+          <a href="limit.html">Limit</a>
+          <a href="matriks.html">Matriks</a>
+          <a href="vektor.html">Vektor</a>
+          <a href="statistika.html">Statistika &amp; Peluang</a>
+          <a href="kalkulus.html">Kalkulus</a>
+        </div>
+        <div class="footer-col">
+          <h4>Persiapan</h4>
+          <a href="tka.html">TKA Matematika Umum</a>
+          <a href="tka-lanjut.html">TKA Matematika Lanjut</a>
+          <a href="olimpiade.html">Matematika Olimpiade</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tentang</h4>
+          <span>Khusni Academy</span>
+          <span>Dibuat untuk pelajar Indonesia</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Khusni Academy.</span>
+      <span>I have learned that I still have a lot to learn</span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" aria-label="Kembali ke atas">↑</button>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1621,3 +1621,13 @@ svg text.st-ticklbl { font-family: var(--font-mono); font-size: 11px; fill: var(
 .st-medianline { stroke: var(--medal); stroke-width: 2.5; }
 svg text.st-meanlbl { font-family: var(--font-mono); font-size: 12px; font-weight: 700; fill: var(--signal); text-anchor: middle; }
 svg text.st-medianlbl { font-family: var(--font-mono); font-size: 12px; font-weight: 700; fill: var(--medal); text-anchor: middle; }
+
+/* ---------- Simulasi 8: Penjelajah Asimtot ---------- */
+.as-curve { fill: none; stroke: var(--signal); stroke-width: 2.5; }
+.as-va { stroke: var(--incorrect); stroke-width: 2; stroke-dasharray: 6 4; }
+.as-ha { stroke: var(--medal); stroke-width: 2; stroke-dasharray: 6 4; }
+.as-hole { fill: var(--ink); stroke: var(--signal); stroke-width: 2.5; }
+
+/* ---------- Simulasi 9: Laboratorium Turunan ---------- */
+.kl-curve { fill: none; stroke: var(--signal); stroke-width: 2.5; }
+.kl-tangent { stroke: var(--medal); stroke-width: 2.5; }

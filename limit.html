@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Limit — Khusni Academy</title>
+<meta name="description" content="Limit Fungsi: konsep &amp; sifat-sifat limit, limit fungsi aljabar (substitusi, faktorisasi, rasionalisasi), limit fungsi trigonometri, limit menuju tak hingga, asimtot datar-tegak-miring, bekal olimpiade (kali sekawan, teorema apit, kontinuitas), penjelajah asimtot interaktif, dan latihan soal bertingkat dari Mudah sampai Olimpiade.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#090d17">
+<link rel="canonical" href="https://khusniacademy.netlify.app/limit.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Limit — Khusni Academy">
+<meta property="og:description" content="Konsep &amp; sifat limit, limit aljabar &amp; trigonometri, limit tak hingga, dan asimtot — dengan penjelajah asimtot interaktif serta latihan soal bertingkat.">
+<meta property="og:url" content="https://khusniacademy.netlify.app/limit.html">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Limit — Khusni Academy">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f9dff'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia, serif' font-weight='700' fill='%23090d17' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<a class="skip-link" href="#konten">Langsung ke konten</a>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <div class="nav-drop">
+        <button class="nav-drop-btn active" type="button" aria-expanded="false" aria-haspopup="true">Materi<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label">Tersedia</span>
+          <a href="aljabar.html"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, bekal olimpiade</em></a>
+          <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap</em></a>
+          <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran, Heron &amp; kuasa titik</em></a>
+          <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, limit</em></a>
+          <a href="limit.html" class="active"><strong>Limit</strong><em>Konsep &amp; sifat, aljabar, trigonometri, tak hingga &amp; asimtot</em></a>
+          <a href="matriks.html"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
+          <a href="vektor.html"><strong>Vektor</strong><em>Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
+          <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan, pencacahan &amp; peluang</em></a>
+          <a href="kalkulus.html"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral &amp; luas daerah</em></a>
+        </div>
+      </div>
+      <div class="nav-drop">
+        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-haspopup="true">TKA<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label">Persiapan TKA</span>
+          <a href="tka.html"><strong>Matematika Umum</strong><em>4 domain, 25 indikator, 25 soal latihan</em></a>
+          <a href="tka-lanjut.html"><strong>Matematika Lanjut</strong><em>Matriks, vektor, lingkaran, transformasi, limit</em></a>
+        </div>
+      </div>
+      <a href="olimpiade.html">Olimpiade</a>
+    </div>
+    <div class="nav-cta">
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero" id="konten">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><span>/</span><a href="index.html#materi">Materi</a><span>/</span><span>Limit</span></div>
+    <span class="eyebrow">Materi · Tersedia</span>
+    <h1>Limit</h1>
+    <p class="hero-sub">Pertanyaan paling halus dalam matematika: bukan "berapa nilainya <em>di</em> titik itu", melainkan <em class="accent-word">"nilai apa yang didekatinya"</em>. Dari jawaban itu lahir seluruh kalkulus.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container lesson-layout">
+    <aside class="lesson-nav">
+      <div class="lesson-nav-title">Isi Materi</div>
+      <a href="#pendahuluan">Pendahuluan</a>
+      <a href="#konsep">Konsep &amp; Sifat Limit</a>
+      <a href="#aljabar">Limit Fungsi Aljabar</a>
+      <a href="#trigonometri">Limit Trigonometri</a>
+      <a href="#takhingga">Limit Tak Hingga</a>
+      <a href="#asimtot">Asimtot</a>
+      <a href="#menuju-olimpiade">Menuju Olimpiade</a>
+      <a href="#bedah-soal">Bedah Soal</a>
+      <a href="#latihan">Latihan Soal</a>
+    </aside>
+
+    <div class="lesson">
+
+      <div class="lesson-section" id="pendahuluan">
+        <h2>Pendahuluan</h2>
+        <p>Bayangkan berjalan menuju sebuah pintu tapi tiap langkah hanya menempuh <em>separuh</em> sisa jaraknya. Kamu tak pernah benar-benar tiba — tapi semua orang tahu ke mana kamu <em>menuju</em>. Itulah gagasan limit: nilai yang <strong>didekati</strong> sebuah fungsi, terlepas dari apakah nilai itu benar-benar tercapai.</p>
+        <p>Gagasan sehalus ini ternyata fondasi terbesar matematika modern: turunan, integral, dan seluruh kalkulus dibangun di atasnya. Di ujian, limit menghuni TKA Matematika Lanjut (empat indikator penuh) sampai olimpiade.</p>
+        <p class="quiz-note" style="margin:0.6rem 0 1rem;">Perkenalan intuitifnya — lengkap dengan <strong>Penjelajah Limit</strong> interaktif yang memperagakan pendekatan dari kiri dan kanan — ada di <a href="prakalkulus.html#limit">bab Limit Prakalkulus</a>. Halaman ini melanjutkannya sampai tuntas.</p>
+        <div class="box">
+          <span class="box-label">Peta Belajar Halaman Ini</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Satu refleks pembuka:</strong> substitusi dulu. Bentuk $\frac{0}{0}$ bukan jalan buntu — ia <em>sinyal</em> untuk memfaktorkan atau merasionalkan.</li>
+            <li><strong>Tiga keluarga teknik</strong> — aljabar ($\frac00$), trigonometri ($\frac{\sin ax}{x}$), dan tak hingga (pangkat tertinggi) — masing-masing dapat babnya sendiri.</li>
+            <li><strong>Asimtot adalah limit yang digambar</strong> — Penjelajah Asimtot di bab kelima membuatnya terlihat, termasuk kasus "berlubang".</li>
+            <li><strong>Naik bertahap di latihan</strong> — dari Mudah sampai Olimpiade; ulangi tingkat yang skornya belum penuh.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="konsep">
+        <h2>Konsep &amp; Sifat Limit</h2>
+        <p>Notasi $\displaystyle\lim_{x \to a} f(x) = L$ dibaca: "saat $x$ mendekati $a$, nilai $f(x)$ mendekati $L$." Kuncinya: yang ditanya adalah <em>tujuan</em>, bukan <em>nilai di titik itu</em> — $f(a)$ bahkan boleh tak terdefinisi.</p>
+        <div class="box example">
+          <span class="box-label">Contoh — Fungsi Berlubang</span>
+          <p style="margin-bottom:0.3rem;">$f(x) = \dfrac{x^2 - 1}{x - 1}$ tak terdefinisi di $x = 1$ (bentuk $\frac00$). Tapi untuk $x \neq 1$, $f(x) = \dfrac{(x-1)(x+1)}{x-1} = x + 1$.</p>
+          <p style="margin-bottom:0;">Jadi saat $x$ mendekati $1$ dari mana pun, $f(x)$ mendekati $2$: $\displaystyle\lim_{x\to1} f(x) = 2$ — meski di titik itu sendiri grafiknya <em>berlubang</em>.</p>
+        </div>
+        <p>Karena "mendekati" bisa dari dua arah, ada <strong>limit kiri</strong> ($x \to a^-$) dan <strong>limit kanan</strong> ($x \to a^+$). Keduanya harus sepakat:</p>
+        <div class="box formula">
+          <span class="box-label">Syarat Keberadaan Limit</span>
+          $$\lim_{x \to a} f(x) \ \text{ada} \iff \lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x)$$
+        </div>
+        <p>Inilah persis yang diperagakan Penjelajah Limit di Prakalkulus: dua titik merayap dari kiri dan kanan — limit ada hanya bila keduanya bertemu.</p>
+
+        <h3>Sifat-Sifat Limit</h3>
+        <p>Limit "menghormati" operasi aljabar — asalkan tiap limit penyusunnya ada:</p>
+        <div class="box formula">
+          <span class="box-label">Sifat-Sifat (misal $\lim f = F$, $\lim g = G$)</span>
+          $$\lim\,[f \pm g] = F \pm G \qquad \lim\,[f \cdot g] = F \cdot G \qquad \lim\frac{f}{g} = \frac{F}{G}\ (G \neq 0)$$
+          $$\lim\,[k \cdot f] = k\,F \qquad \lim\,[f]^n = F^{\,n}$$
+        </div>
+        <p>Konsekuensi praktisnya besar: untuk fungsi "jinak" (polinomial, dan rasional dengan penyebut tak nol), limit cukup dihitung dengan <strong>substitusi langsung</strong>.</p>
+        <div class="box recap">
+          <span class="box-label">Refleks Pertama Setiap Soal Limit</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Substitusikan dulu.</strong> Kalau hasilnya bilangan biasa — selesai, itu jawabannya.</li>
+            <li>Kalau hasilnya $\dfrac{0}{0}$ — jangan panik dan jangan jawab "tak ada". Itu <em class="accent-word">bentuk tak tentu</em>: sinyal bahwa pembilang dan penyebut berbagi faktor yang harus dicoret dulu. Tekniknya di bab berikut.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="aljabar">
+        <h2>Limit Fungsi Aljabar</h2>
+        <p>Tiga strategi berurutan — selalu coba dari yang paling ringan:</p>
+
+        <h3>Strategi 1 — Substitusi Langsung</h3>
+        <p>$\displaystyle\lim_{x \to 2}(x^2 + 3x) = 4 + 6 = 10$. Tak semua soal menyembunyikan jebakan; jika penyebut tak nol, substitusi adalah jawaban lengkapnya.</p>
+
+        <h3>Strategi 2 — Faktorisasi (untuk $\frac00$)</h3>
+        <p>Bentuk $\frac00$ berarti $(x - a)$ bersembunyi di pembilang <em>dan</em> penyebut. Faktorkan, coret, lalu substitusi ulang:</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$\displaystyle\lim_{x \to 3} \frac{x^2 - 9}{x - 3} = \lim_{x \to 3} \frac{(x-3)(x+3)}{x-3} = \lim_{x \to 3}\,(x + 3) = 6$.</p>
+        </div>
+
+        <h3>Strategi 3 — Rasionalisasi (bentuk akar)</h3>
+        <p>Bila ada akar, kalikan dengan <strong>sekawan</strong>-nya agar selisih kuadrat memunculkan faktor yang bisa dicoret:</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">$\displaystyle\lim_{x \to 0} \frac{\sqrt{x + 4} - 2}{x} \times \frac{\sqrt{x+4}+2}{\sqrt{x+4}+2} = \lim_{x \to 0} \frac{x + 4 - 4}{x(\sqrt{x+4}+2)}$</p>
+          <p style="margin-bottom:0;">$= \displaystyle\lim_{x \to 0} \frac{1}{\sqrt{x+4}+2} = \frac{1}{2 + 2} = \frac{1}{4}$.</p>
+        </div>
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>$\frac00$ <strong>bukan berarti limitnya tak ada</strong> — justru hampir selalu ada, tinggal disederhanakan. (Yang benar-benar bermasalah adalah $\frac{k}{0}$ dengan $k \neq 0$: nilainya meledak.)</li>
+            <li>Pencoretan $(x-a)$ sah karena dalam limit $x$ hanya <em>mendekati</em> $a$, tak pernah sama dengannya — jadi faktor itu tak pernah nol.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="trigonometri">
+        <h2>Limit Fungsi Trigonometri</h2>
+        <p>Untuk sudut kecil (dalam radian), $\sin x$ nyaris tak terbedakan dari $x$ sendiri — fakta yang dibuktikan lewat <em>teorema apit</em> dengan mengurung luas juring di antara dua segitiga. Dari satu fakta itu mengalir seluruh keluarga rumus:</p>
+        <div class="box formula">
+          <span class="box-label">Wajib Hafal (semua untuk $x \to 0$)</span>
+          $$\lim \frac{\sin ax}{x} = a \qquad \lim \frac{\sin ax}{bx} = \lim \frac{\tan ax}{bx} = \frac{a}{b} \qquad \lim \frac{\sin ax}{\sin bx} = \frac{a}{b}$$
+        </div>
+        <p>Campuran $\sin$ dan $\tan$ pun tunduk pada pola yang sama: yang bertahan hanyalah <strong>koefisien-koefisien $x$</strong>-nya. Dan satu identitas membuka semua soal $1 - \cos$:</p>
+        <div class="box formula">
+          <span class="box-label">Kunci $1 - \cos$</span>
+          $$1 - \cos ax = 2\sin^2\!\left(\frac{ax}{2}\right) \;\Longrightarrow\; \lim_{x \to 0}\frac{1 - \cos ax}{x^2} = \frac{a^2}{2}$$
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh 1</span>
+          <p style="margin-bottom:0;">$\displaystyle\lim_{x \to 0} \frac{\sin 5x}{2x} = \frac{5}{2}$ — langsung dari rumus $\frac{a}{b}$.</p>
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh 2 — Limit Tidak Menuju Nol? Geser!</span>
+          <p style="margin-bottom:0.3rem;">$\displaystyle\lim_{x \to 2} \frac{\sin(3x - 6)}{x - 2}$: rumus di atas menuntut variabel menuju $0$, jadi misalkan $u = x - 2$ (maka $u \to 0$).</p>
+          <p style="margin-bottom:0;">$= \displaystyle\lim_{u \to 0} \frac{\sin 3u}{u} = 3$.</p>
+        </div>
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>Rumus-rumus ini <strong>hanya berlaku saat variabelnya $\to 0$</strong>. Limit menuju angka lain? Geser dulu dengan substitusi $u = x - c$.</li>
+            <li><strong>Jangan "mencoret sin".</strong> $\frac{\sin 4x}{\sin 2x} = 2$ bukan karena sin-nya dicoret, melainkan karena $\frac{\sin 4x}{x} \cdot \frac{x}{\sin 2x} = \frac{4}{2}$. Pembenaran yang salah akan menyesatkanmu di soal campuran.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="takhingga">
+        <h2>Limit Menuju Tak Hingga</h2>
+        <p>Sekarang $x$ tidak mendekati sebuah titik, melainkan membesar tanpa batas. Untuk fungsi rasional, yang menang adalah <strong>pangkat tertinggi</strong> — suku-suku lain menjadi remah yang tak berarti:</p>
+        <div class="box formula">
+          <span class="box-label">Aturan Cepat: $\lim\limits_{x \to \infty} \dfrac{ax^n + \dots}{bx^m + \dots}$</span>
+          $$n = m \Rightarrow \frac{a}{b} \qquad\quad n &lt; m \Rightarrow 0 \qquad\quad n &gt; m \Rightarrow \pm\infty$$
+        </div>
+        <p>Pembenarannya rapi: bagi pembilang dan penyebut dengan pangkat tertinggi, lalu gunakan fakta $\frac{1}{x} \to 0$. Contoh: $\displaystyle\lim_{x\to\infty}\frac{3x^2+2x}{6x^2-1} = \lim \frac{3 + \frac2x}{6 - \frac1{x^2}} = \frac{3}{6} = \frac12$.</p>
+
+        <h3>Bentuk $\infty - \infty$ dengan Akar</h3>
+        <p>Selisih dua raksasa bisa bernilai kecil dan tak jelas — kalikan sekawannya agar selisih kuadratnya bicara:</p>
+        <div class="box formula">
+          <span class="box-label">Pola Emas</span>
+          $$\lim_{x \to \infty}\left(\sqrt{x^2 + bx + c} - x\right) = \frac{b}{2}$$
+        </div>
+        <p>Hanya koefisien $x$ di bawah akar yang menentukan; konstanta $c$ tak berdaya. (Turunannya lengkap di bab olimpiade.)</p>
+
+        <h3>Limit yang <em>Hasilnya</em> Tak Hingga</h3>
+        <p>Kebalikan situasi: $x$ menuju titik biasa, tapi <em>nilai fungsinya</em> yang meledak. Ini terjadi saat penyebut menuju $0$ sementara pembilang tidak — misalnya $\displaystyle\lim_{x \to 2^+} \frac{3}{x - 2} = +\infty$. Ledakan seperti inilah yang, di atas grafik, menggambar <strong>asimtot tegak</strong> — jembatan langsung ke bab berikutnya.</p>
+      </div>
+
+      <div class="lesson-section" id="asimtot">
+        <h2>Asimtot</h2>
+        <p>Asimtot adalah <strong>limit yang dilukis</strong>: garis yang didekati kurva tanpa pernah benar-benar disentuhnya. Tiga jenisnya, masing-masing lahir dari satu jenis limit:</p>
+        <div class="box formula">
+          <span class="box-label">Tiga Jenis Asimtot</span>
+          $$\textbf{Datar: } y = L \text{ bila } \lim_{x\to\pm\infty} f(x) = L \qquad\quad \textbf{Tegak: } x = c \text{ bila } \lim_{x\to c} f(x) = \pm\infty$$
+        </div>
+        <p>Untuk fungsi rasional, resepnya konkret:</p>
+        <ul>
+          <li><strong>Asimtot datar</strong> — pakai aturan pangkat tertinggi dari bab sebelumnya. $f(x) = \frac{4x-1}{2x+3}$ punya asimtot datar $y = \frac42 = 2$.</li>
+          <li><strong>Asimtot tegak</strong> — kandidatnya <em>akar penyebut</em>… tapi hanya yang <strong>bukan</strong> akar pembilang. Kalau faktornya tercoret oleh pembilang, yang muncul bukan asimtot melainkan <em class="accent-word">lubang</em>.</li>
+        </ul>
+        <div class="box example">
+          <span class="box-label">Contoh — Lubang vs Asimtot</span>
+          <p style="margin-bottom:0;">$f(x) = \dfrac{x^2 - 4}{x - 2} = x + 2$ (untuk $x \neq 2$). Penyebut nol di $x = 2$, tapi pembilangnya juga — limitnya <em>ada</em> ($= 4$), jadi $x = 2$ hanyalah lubang, <strong>bukan</strong> asimtot tegak.</p>
+        </div>
+
+        <div class="widget-card reveal" id="widget-asimtot">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Penjelajah Asimtot</h3>
+            <p>Geser koefisien $a, b, c, d$ dari $f(x) = \dfrac{ax + b}{cx + d}$ dan saksikan asimtot tegak $x = -\frac{d}{c}$ (merah) serta datar $y = \frac{a}{c}$ (emas) ikut berpindah — kurvanya menempel makin dekat tapi tak pernah menyentuh. Lalu coba preset <strong>Berlubang</strong>: saat $ad - bc = 0$, seluruh kurva runtuh menjadi garis datar dengan satu lubang!</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+
+        <h3>Asimtot Miring</h3>
+        <p>Bila derajat pembilang <strong>tepat satu lebih tinggi</strong> dari penyebut, kurva mendekati sebuah <em>garis miring</em>. Cara menemukannya: bagi bersusun — hasil baginya adalah asimtotnya, sisanya melenyap di ketakhinggaan.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$f(x) = \dfrac{x^2 + 3x + 5}{x + 1}$. Karena $x^2 + 3x + 5 = (x+1)(x+2) + 3$, maka $f(x) = x + 2 + \dfrac{3}{x+1}$. Suku $\frac{3}{x+1} \to 0$, jadi asimtot miringnya $y = x + 2$.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="menuju-olimpiade">
+        <h2>Menuju Limit Olimpiade</h2>
+        <p>Empat perkakas yang memisahkan penghafal rumus dari pemecah soal.</p>
+
+        <h3>1. Kali Sekawan di Ketakhinggaan</h3>
+        <p>Bentuk $\infty - \infty$ dijinakkan dengan sekawan:</p>
+        <div class="box formula">
+          <span class="box-label">Turunan Pola $b/2$</span>
+          $$\sqrt{x^2 + bx} - x = \frac{(x^2 + bx) - x^2}{\sqrt{x^2+bx} + x} = \frac{bx}{\sqrt{x^2+bx} + x} \;\xrightarrow{x\to\infty}\; \frac{b}{1 + 1} = \frac{b}{2}$$
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$\displaystyle\lim_{x\to\infty}\left(\sqrt{x^2 + 6x} - x\right) = \frac{6}{2} = 3$.</p>
+        </div>
+
+        <h3>2. Teorema Apit</h3>
+        <p>Bila $g(x) \le f(x) \le h(x)$ dan kedua pengapitnya menuju nilai yang <em>sama</em>, $f$ tak punya pilihan — ia ikut terjepit ke sana:</p>
+        <div class="box formula"><span class="box-label">Teorema Apit</span>$$g \le f \le h \ \text{dan}\ \lim g = \lim h = L \;\Longrightarrow\; \lim f = L$$</div>
+        <div class="box example">
+          <span class="box-label">Contoh Klasik</span>
+          <p style="margin-bottom:0;">$\displaystyle\lim_{x \to 0} x^2 \sin\frac{1}{x}$: nilai $\sin\frac1x$ berosilasi liar, tapi selalu terkurung: $-x^2 \le x^2\sin\frac1x \le x^2$. Kedua pengapit menuju $0$, jadi limitnya $\mathbf{0}$. (Pola yang sama membuktikan $\frac{\sin x}{x} \to 0$ saat $x \to \infty$.)</p>
+        </div>
+
+        <h3>3. Substitusi Variabel: Trig Bertemu Aljabar</h3>
+        <p>Soal tersulit menggabungkan keduanya. Resepnya: geser variabel agar menuju nol, <em>lalu</em> faktorkan bagian aljabarnya.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">$\displaystyle\lim_{x \to 3} \frac{\sin(x - 3)}{x^2 - 9}$. Misalkan $u = x - 3$, dan faktorkan $x^2 - 9 = (x-3)(x+3) = u(u + 6)$:</p>
+          <p style="margin-bottom:0;">$= \displaystyle\lim_{u \to 0} \frac{\sin u}{u} \cdot \frac{1}{u + 6} = 1 \cdot \frac{1}{6} = \frac{1}{6}$.</p>
+        </div>
+
+        <h3>4. Kontinuitas: Limit Bertemu Nilai</h3>
+        <p>Fungsi <strong>kontinu</strong> di $x = a$ bila tiga hal terpenuhi: $f(a)$ ada, $\lim_{x\to a} f(x)$ ada, dan <em>keduanya sama</em>. Soal khasnya: mencari konstanta penambal lubang.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$f(x) = \frac{x^2-4}{x-2}$ untuk $x \neq 2$, dan $f(2) = k$. Agar kontinu di $x = 2$: $k = \lim_{x\to2}\frac{x^2-4}{x-2} = \lim (x+2) = 4$. Nilai $k = 4$ persis "menambal" lubangnya.</p>
+        </div>
+
+        <div class="box recap">
+          <span class="box-label">Bekal Olimpiade</span>
+          <ul>
+            <li>Substitusi dulu; $\frac00$ = sinyal faktorkan/rasionalkan, bukan "tak ada".</li>
+            <li>$\infty - \infty$ dengan akar? Kali sekawan: $\sqrt{x^2+bx+c} - x \to \frac{b}{2}$.</li>
+            <li>Fungsi berosilasi terkurung? Teorema apit.</li>
+            <li>Trig menuju $x \to c \neq 0$? Geser $u = x - c$, lalu faktorkan aljabarnya.</li>
+            <li>Asimtot tegak = akar penyebut yang <em>bukan</em> akar pembilang; kalau tercoret, itu lubang.</li>
+            <li>Kontinu di $a$ ⟺ $f(a) = \lim_{x\to a} f(x)$ — dan keduanya ada.</li>
+            <li>Uji semuanya di tab <strong>Olimpiade</strong> pada latihan di bawah.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="bedah-soal">
+        <h2>Bedah Soal: Cara Berpikir Kompetisi</h2>
+        <p>Kerangka empat langkah — Pahami, Kenali Struktur, Kerjakan Rapi, Periksa — kita jalankan pada dua soal.</p>
+
+        <h3>Bedah Soal 1 — Bentuk $\frac00$ dengan Akar</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Hitung $\displaystyle\lim_{x \to 4} \frac{\sqrt{x} - 2}{x - 4}$.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> substitusi memberi $\frac{2-2}{4-4} = \frac00$ — sinyal kerja. Ada akar, jadi strukturnya rasionalisasi.</p>
+        <div class="box formula">
+          <span class="box-label">Perhitungan</span>
+          $$\lim_{x \to 4} \frac{\sqrt{x} - 2}{x - 4} \cdot \frac{\sqrt{x} + 2}{\sqrt{x} + 2} = \lim_{x \to 4} \frac{x - 4}{(x-4)(\sqrt{x} + 2)} = \lim_{x \to 4} \frac{1}{\sqrt{x} + 2} = \frac{1}{4}$$
+        </div>
+        <p><strong>Periksa — jalan kedua:</strong> kenali $x - 4$ sebagai selisih kuadrat dari $\sqrt x$: $x - 4 = (\sqrt{x} - 2)(\sqrt{x} + 2)$. Coret langsung dengan pembilang: $\frac{1}{\sqrt x + 2} \to \frac14$. Dua jalan, satu jawaban. ✓</p>
+
+        <h3>Bedah Soal 2 — Peta Asimtot Lengkap</h3>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Tentukan semua asimtot dan lubang dari $f(x) = \dfrac{2x^2 - 8}{x^2 - x - 2}$.</p>
+        </div>
+        <p><strong>Pahami &amp; kenali:</strong> fungsi rasional — resepnya faktorkan dua-duanya dulu, karena nasib tiap akar penyebut (asimtot atau lubang) bergantung pada pembilang.</p>
+        <div class="box formula">
+          <span class="box-label">Faktorkan</span>
+          $$f(x) = \frac{2(x-2)(x+2)}{(x-2)(x+1)}$$
+        </div>
+        <p><strong>Kerjakan:</strong> akar penyebut: $x = 2$ dan $x = -1$.</p>
+        <p>Faktor $(x - 2)$ <em>tercoret</em> oleh pembilang → di $x = 2$ ada <strong>lubang</strong>, bukan asimtot. Ordinatnya dari fungsi tersederhana $g(x) = \frac{2(x+2)}{x+1}$: $g(2) = \frac{2 \cdot 4}{3} = \frac{8}{3}$ — lubang di $\left(2, \frac83\right)$. Sementara $x = -1$ tak tercoret → <strong>asimtot tegak $x = -1$</strong>. Derajat pembilang $=$ penyebut → <strong>asimtot datar $y = \frac{2}{1} = 2$</strong>.</p>
+        <p><strong>Periksa lewat limit:</strong> $\displaystyle\lim_{x\to2} f(x) = \frac{2(4)}{3} = \frac83$ — <em>berhingga</em>, mengonfirmasi lubang ✓. Sementara $\displaystyle\lim_{x\to-1^+} f(x)$ meledak (penyebut $\to 0$, pembilang $\to 2 \neq 0$) — mengonfirmasi asimtot ✓. Dan persis inilah perilaku yang bisa kamu saksikan di Penjelajah Asimtot dengan preset <strong>Berlubang</strong>. ✓</p>
+
+        <div class="box recap">
+          <span class="box-label">Menulis Solusi ala Babak Esai</span>
+          <ul>
+            <li>Awali dengan substitusi dan <em>sebutkan</em> bentuk tak tentunya ("diperoleh $\frac00$, maka…") — penguji mencari kesadaran itu.</li>
+            <li>Saat menggeser variabel, deklarasikan substitusinya eksplisit: "misalkan $u = x - 3$, maka $u \to 0$".</li>
+            <li>Untuk asimtot, tunjukkan pemeriksaan pembilang di tiap akar penyebut — itulah yang membedakan lubang dari asimtot.</li>
+            <li>Tutup dengan verifikasi: jalan kedua, atau uji limit pada hasilmu.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="latihan">
+        <h2>Latihan Soal Bertingkat</h2>
+        <p>Empat tingkat kesulitan — dari Mudah sampai Olimpiade. Klik salah satu pilihan jawaban untuk melihat apakah jawabanmu benar beserta pembahasannya.</p>
+        <p class="quiz-note">Progres tersimpan otomatis di peramban ini — tekan "Ulangi" untuk mencoba lagi dari awal.</p>
+
+        <div data-tier-group>
+          <div class="tier-tabs">
+            <button class="tier-tab active" data-tier="mudah"><span class="dot"></span>Mudah</button>
+            <button class="tier-tab" data-tier="sedang"><span class="dot"></span>Sedang</button>
+            <button class="tier-tab" data-tier="sulit"><span class="dot"></span>Sulit</button>
+            <button class="tier-tab" data-tier="olimpiade"><span class="dot"></span>Olimpiade</button>
+          </div>
+
+          <!-- MUDAH -->
+          <div class="tier-panel active" data-tier="mudah">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="lm-m1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">$\displaystyle\lim_{x \to 2}\,(3x + 1) = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$7$</button>
+                <button class="quiz-option" data-option="B">$6$</button>
+                <button class="quiz-option" data-option="C">$5$</button>
+                <button class="quiz-option" data-option="D">$8$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Fungsi linear jinak — substitusi langsung: $3(2) + 1 = 7$. Tidak semua limit menyimpan jebakan!</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="lm-m2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">$\displaystyle\lim_{x \to 3} \frac{x^2 - 9}{x - 3} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0$</button>
+                <button class="quiz-option" data-option="B">tak ada</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$3$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Substitusi memberi $\frac00$ — sinyal memfaktorkan: $\frac{(x-3)(x+3)}{x-3} = x+3 \to 6$. Jebakan B: $\frac00$ bukan berarti limitnya tak ada!</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="lm-m3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">$\displaystyle\lim_{x \to 0} \frac{\sin 4x}{x} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$1$</button>
+                <button class="quiz-option" data-option="D">$\frac{1}{4}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rumus dasar: $\lim\limits_{x\to0}\dfrac{\sin ax}{x} = a = 4$. Untuk $x$ kecil, $\sin 4x \approx 4x$ — koefisiennya yang bertahan.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="lm-m4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">$\displaystyle\lim_{x \to \infty} \frac{2x + 5}{x - 1} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\infty$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$-5$</button>
+                <button class="quiz-option" data-option="D">$2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pangkat tertinggi sama ($x^1$) → limit $=$ rasio koefisiennya $= \frac21 = 2$. Suku $+5$ dan $-1$ menjadi remah tak berarti saat $x$ raksasa.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="lm-m5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">$\displaystyle\lim_{x \to 1} \frac{x^2 + 2x - 3}{x - 1} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">tak ada</button>
+                <button class="quiz-option" data-option="D">$2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Bentuk $\frac00$: faktorkan $x^2+2x-3 = (x+3)(x-1)$, coret, lalu substitusi: $x + 3 \to 4$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="lm-m6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Asimtot tegak dari $f(x) = \dfrac{3}{x - 5}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x = 5$</button>
+                <button class="quiz-option" data-option="B">$y = 5$</button>
+                <button class="quiz-option" data-option="C">$x = 3$</button>
+                <button class="quiz-option" data-option="D">$y = 0$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Penyebut nol di $x = 5$ sementara pembilang $3 \neq 0$ — fungsinya meledak: asimtot tegak $x = 5$. (Jebakan D adalah asimtot <em>datar</em>-nya, yang juga dimiliki fungsi ini.)</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+          </div>
+
+          <!-- SEDANG -->
+          <div class="tier-panel" data-tier="sedang">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="lm-s1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">$\displaystyle\lim_{x \to 0} \frac{\sqrt{x + 9} - 3}{x} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{1}{3}$</button>
+                <button class="quiz-option" data-option="B">$\frac{1}{6}$</button>
+                <button class="quiz-option" data-option="C">$0$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rasionalisasi: kali sekawan $\sqrt{x+9}+3$ memberi $\dfrac{x}{x(\sqrt{x+9}+3)} = \dfrac{1}{\sqrt{x+9}+3} \to \dfrac{1}{3+3} = \dfrac16$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="lm-s2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">$\displaystyle\lim_{x \to 0} \frac{\tan 3x}{\sin 6x} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{1}{2}$</button>
+                <button class="quiz-option" data-option="B">$2$</button>
+                <button class="quiz-option" data-option="C">$18$</button>
+                <button class="quiz-option" data-option="D">$1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Campuran $\tan$ dan $\sin$ tunduk pada pola koefisien: $\dfrac{\tan 3x}{\sin 6x} \to \dfrac{3}{6} = \dfrac12$. (Formalnya: $\frac{\tan 3x}{x} \cdot \frac{x}{\sin 6x} = \frac{3}{6}$.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="lm-s3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">$\displaystyle\lim_{x \to \infty} \frac{3x^2 + 2x}{6x^2 - 1} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3$</button>
+                <button class="quiz-option" data-option="B">$0$</button>
+                <button class="quiz-option" data-option="C">$\frac{1}{2}$</button>
+                <button class="quiz-option" data-option="D">$2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pangkat tertinggi sama ($x^2$): limit $= \frac{3}{6} = \frac12$. Bagilah pembilang-penyebut dengan $x^2$ untuk melihat suku lain runtuh ke nol.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="lm-s4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">$\displaystyle\lim_{x \to 0} \frac{1 - \cos 2x}{x^2} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$\frac{1}{2}$</button>
+                <button class="quiz-option" data-option="D">$2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rumus $\lim\dfrac{1-\cos ax}{x^2} = \dfrac{a^2}{2}$ dengan $a = 2$: hasilnya $\dfrac{4}{2} = 2$. Asalnya identitas $1 - \cos 2x = 2\sin^2 x$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="lm-s5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Asimtot datar dari $f(x) = \dfrac{4x - 1}{2x + 3}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$y = 4$</button>
+                <button class="quiz-option" data-option="B">$x = -\frac{3}{2}$</button>
+                <button class="quiz-option" data-option="C">$y = 2$</button>
+                <button class="quiz-option" data-option="D">$y = -\frac{1}{3}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Asimtot datar $= \lim_{x\to\infty} f(x) = \frac{4}{2} = 2$, jadi $y = 2$. Jebakan B adalah asimtot <em>tegak</em>-nya. (Coba bentuk fungsi serupa di Penjelajah Asimtot!)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="lm-s6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">$\displaystyle\lim_{x \to 2} \frac{x^3 - 8}{x - 2} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$12$</button>
+                <button class="quiz-option" data-option="B">$8$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$4$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Selisih kubik: $x^3 - 8 = (x-2)(x^2 + 2x + 4)$. Coret, lalu substitusi: $4 + 4 + 4 = 12$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+          </div>
+
+          <!-- SULIT -->
+          <div class="tier-panel" data-tier="sulit">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="lm-x1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">$\displaystyle\lim_{x \to \infty} \left(\sqrt{x^2 + 4x} - x\right) = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4$</button>
+                <button class="quiz-option" data-option="B">$2$</button>
+                <button class="quiz-option" data-option="C">$0$</button>
+                <button class="quiz-option" data-option="D">$\infty$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pola $\sqrt{x^2+bx} - x \to \frac{b}{2}$ dengan $b = 4$: hasilnya $2$. Kali sekawan bila ingin membuktikannya. Jebakan A lupa dibagi dua.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="lm-x2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">$\displaystyle\lim_{x \to 5} \frac{x - 5}{\sqrt{x} - \sqrt{5}} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2\sqrt{5}$</button>
+                <button class="quiz-option" data-option="B">$\sqrt{5}$</button>
+                <button class="quiz-option" data-option="C">$0$</button>
+                <button class="quiz-option" data-option="D">$10$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kenali $x - 5 = (\sqrt x - \sqrt5)(\sqrt x + \sqrt5)$ — selisih kuadrat dari akar. Coret dengan penyebut: tersisa $\sqrt x + \sqrt 5 \to 2\sqrt5$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="lm-x3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">$\displaystyle\lim_{x \to 2} \frac{\sin(3x - 6)}{x - 2} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0$</button>
+                <button class="quiz-option" data-option="B">$1$</button>
+                <button class="quiz-option" data-option="C">$3$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Limit tidak menuju nol — geser: $u = x - 2 \Rightarrow \sin(3u)/u \to 3$. Rumus $\frac{\sin ax}{x} = a$ baru sah setelah variabelnya menuju $0$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="lm-x4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Banyaknya asimtot tegak dari $f(x) = \dfrac{x - 1}{x^2 - 1}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$0$</button>
+                <button class="quiz-option" data-option="B">$2$</button>
+                <button class="quiz-option" data-option="C">$3$</button>
+                <button class="quiz-option" data-option="D">$1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$f = \dfrac{x-1}{(x-1)(x+1)}$: faktor $(x-1)$ tercoret → $x = 1$ hanyalah <em>lubang</em>. Asimtot tegak sejati tinggal $x = -1$ — jadi <strong>satu</strong> buah. Jebakan B menghitung semua akar penyebut tanpa memeriksa pembilang.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="lm-x5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">$\displaystyle\lim_{x \to 0} \frac{\sin 5x \cdot \tan 2x}{x^2} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$7$</button>
+                <button class="quiz-option" data-option="B">$10$</button>
+                <button class="quiz-option" data-option="C">$\frac{5}{2}$</button>
+                <button class="quiz-option" data-option="D">$3$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pisahkan: $\dfrac{\sin 5x}{x} \cdot \dfrac{\tan 2x}{x} \to 5 \times 2 = 10$. Koefisien-koefisien berkalikan, bukan berjumlah (jebakan A).</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="lm-x6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Asimtot miring dari $f(x) = \dfrac{x^2 + 3x + 5}{x + 1}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$y = x$</button>
+                <button class="quiz-option" data-option="B">$y = x + 3$</button>
+                <button class="quiz-option" data-option="C">$y = x + 2$</button>
+                <button class="quiz-option" data-option="D">$x = -1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Bagi bersusun: $x^2 + 3x + 5 = (x+1)(x+2) + 3$, jadi $f(x) = x + 2 + \frac{3}{x+1}$. Sisa $\frac{3}{x+1} \to 0$, tinggal asimtot miring $y = x + 2$. (Jebakan D adalah asimtot tegaknya.)</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+          </div>
+
+          <!-- OLIMPIADE -->
+          <div class="tier-panel" data-tier="olimpiade">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">↺ Ulangi</button>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="lm-o1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">$\displaystyle\lim_{x \to \infty} \left(\sqrt{x^2 + 8x + 3} - x\right) = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4$</button>
+                <button class="quiz-option" data-option="B">$8$</button>
+                <button class="quiz-option" data-option="C">$3$</button>
+                <button class="quiz-option" data-option="D">$0$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pola $\sqrt{x^2+bx+c} - x \to \frac{b}{2} = \frac82 = 4$. Konstanta $+3$ tak berdaya di ketakhinggaan — hanya koefisien $x$ yang menentukan.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="lm-o2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">$\displaystyle\lim_{x \to 0}\, x^2 \sin\frac{1}{x} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$1$</button>
+                <button class="quiz-option" data-option="B">$0$</button>
+                <button class="quiz-option" data-option="C">tak ada</button>
+                <button class="quiz-option" data-option="D">$\infty$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Teorema apit: $-x^2 \le x^2\sin\frac1x \le x^2$, dan kedua pengapit menuju $0$ — fungsinya terjepit ikut ke $0$. Osilasi liar $\sin\frac1x$ tak berdaya melawan faktor $x^2$ yang meredam.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="lm-o3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">$\displaystyle\lim_{x \to 3} \frac{\sin(x - 3)}{x^2 - 9} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$1$</button>
+                <button class="quiz-option" data-option="B">$\frac{1}{3}$</button>
+                <button class="quiz-option" data-option="C">$\frac{1}{6}$</button>
+                <button class="quiz-option" data-option="D">$0$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Geser $u = x-3$ dan faktorkan $x^2-9 = u(u+6)$: $\dfrac{\sin u}{u} \cdot \dfrac{1}{u+6} \to 1 \cdot \dfrac16 = \dfrac16$. Trig dan aljabar diselesaikan bersamaan.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="lm-o4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Fungsi $f(x) = \dfrac{x^2 - 4}{x - 2}$ untuk $x \neq 2$, dan $f(2) = k$. Agar $f$ kontinu di $x = 2$, nilai $k$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$0$</button>
+                <button class="quiz-option" data-option="D">tak mungkin kontinu</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kontinu berarti $f(2) = \lim_{x\to2} f(x)$. Limitnya: $\frac{(x-2)(x+2)}{x-2} = x + 2 \to 4$, jadi $k = 4$ — nilai yang persis menambal lubang.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="lm-o5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">$\displaystyle\lim_{x \to 0} \frac{1 - \cos 6x}{x \sin 3x} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$12$</button>
+                <button class="quiz-option" data-option="C">$3$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Untuk $x$ kecil: $1 - \cos 6x \approx \frac{36}{2}x^2 = 18x^2$ dan $x\sin 3x \approx 3x^2$. Rasionya $\frac{18}{3} = 6$. (Formalnya: $\frac{1-\cos6x}{x^2} \cdot \frac{x}{\sin3x} = 18 \cdot \frac13$.)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="lm-o6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">$\displaystyle\lim_{x \to \infty}\, x\left(\sqrt{x^2 + 1} - x\right) = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{1}{2}$</button>
+                <button class="quiz-option" data-option="B">$1$</button>
+                <button class="quiz-option" data-option="C">$0$</button>
+                <button class="quiz-option" data-option="D">$\infty$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Bentuk $\infty \cdot 0$ yang licik. Kali sekawan pada kurungnya: $x \cdot \dfrac{1}{\sqrt{x^2+1}+x} = \dfrac{x}{\approx 2x} \to \dfrac12$. Dua raksasa yang selisihnya menyusut secepat kebalikan $x$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="lm-o7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Fungsi $f(x) = \dfrac{ax + 3}{x - b}$ memiliki asimtot tegak $x = 2$ dan asimtot datar $y = 5$. Nilai $a + b$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3$</button>
+                <button class="quiz-option" data-option="B">$7$</button>
+                <button class="quiz-option" data-option="C">$10$</button>
+                <button class="quiz-option" data-option="D">$5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Asimtot tegak dari akar penyebut: $b = 2$. Asimtot datar dari rasio koefisien tertinggi: $a = 5$. Jadi $a + b = 7$. Persis mekanisme yang kamu mainkan di Penjelajah Asimtot — dibalik arahnya.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="lm-o8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">$\displaystyle\lim_{x \to 1} \frac{x^5 - 1}{x^2 - 1} = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$1$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$\frac{5}{2}$</button>
+                <button class="quiz-option" data-option="D">$2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Trik elegan: bagi keduanya dengan $x - 1$. Karena $\lim\limits_{x\to1}\frac{x^n-1}{x-1} = n$ (jumlah $n$ suku $x^{n-1}+\dots+1$ di $x=1$), hasilnya $\dfrac{5}{2}$. Pola $\frac{x^n-1}{x-1} \to n$ layak dihafal — ia akan kembali sebagai turunan di Kalkulus.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Limitmu siap diuji — lanjutkan ke <a href="tka-lanjut.html" style="color:var(--medal);font-weight:700;">TKA Matematika Lanjut</a> yang menguji limit di empat indikatornya, atau ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a>.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-pager">
+        <a class="pager-card" href="prakalkulus.html"><span>← Sebelumnya</span><strong>Prakalkulus</strong></a>
+        <a class="pager-card next" href="matriks.html"><span>Selanjutnya →</span><strong>Matriks</strong></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+        <p>Belajar Matematika dari konsep dasar sampai persiapan olimpiade, untuk pelajar SMA, mahasiswa, dan umum.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Materi</h4>
+          <a href="aljabar.html">Aljabar</a>
+          <a href="trigonometri.html">Trigonometri</a>
+          <a href="geometri.html">Geometri</a>
+          <a href="prakalkulus.html">Prakalkulus</a>
+          <a href="limit.html">Limit</a>
+          <a href="matriks.html">Matriks</a>
+          <a href="vektor.html">Vektor</a>
+          <a href="statistika.html">Statistika &amp; Peluang</a>
+          <a href="kalkulus.html">Kalkulus</a>
+        </div>
+        <div class="footer-col">
+          <h4>Persiapan</h4>
+          <a href="tka.html">TKA Matematika Umum</a>
+          <a href="tka-lanjut.html">TKA Matematika Lanjut</a>
+          <a href="olimpiade.html">Matematika Olimpiade</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tentang</h4>
+          <span>Khusni Academy</span>
+          <span>Dibuat untuk pelajar Indonesia</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Khusni Academy.</span>
+      <span>I have learned that I still have a lot to learn</span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" aria-label="Kembali ke atas">↑</button>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

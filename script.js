@@ -61,6 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initMatrixLab();
   initVectorLab();
   initDataLab();
+  initAsimtotLab();
+  initTurunanLab();
   initKatex();
 });
 
@@ -2033,5 +2035,360 @@ function initDataLab() {
   });
   ['pointerup', 'pointercancel'].forEach(ev => svg.addEventListener(ev, () => { drag = null; }));
 
+  render();
+}
+
+/* ==========================================================================
+   SIMULASI 8 — Penjelajah Asimtot (limit.html)
+   f(x) = (ax+b)/(cx+d): asimtot tegak x = −d/c, datar y = a/c.
+   Saat ad − bc = 0 kurva runtuh menjadi garis datar berlubang.
+   ========================================================================== */
+function initAsimtotLab() {
+  const host = document.getElementById('widget-asimtot');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const SIZE = 340, CX = 170, CY = 170, U = 26;
+  const sx = x => CX + x * U;
+  const sy = y => CY - y * U;
+  const fmt = v => {
+    let s = String(Math.round(v * 100) / 100);
+    if (s === '-0') s = '0';
+    return s.replace('-', '\u2212').replace('.', ',');
+  };
+
+  let a = 2, b = 1, c = 1, d = -2;
+
+  /* --- SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + SIZE + ' ' + SIZE, role: 'img',
+    'aria-label': 'Grafik fungsi rasional dengan asimtot tegak dan datar yang bisa diubah'
+  });
+  for (let i = -6; i <= 6; i += 2) {
+    if (i !== 0) {
+      svgEl('line', { x1: sx(i), y1: sy(-6.5), x2: sx(i), y2: sy(6.5), class: 'pb-grid' }, svg);
+      svgEl('line', { x1: sx(-6.5), y1: sy(i), x2: sx(6.5), y2: sy(i), class: 'pb-grid' }, svg);
+    }
+  }
+  svgEl('line', { x1: 0, y1: sy(0), x2: SIZE, y2: sy(0), class: 'pb-axis' }, svg);
+  svgEl('line', { x1: sx(0), y1: 0, x2: sx(0), y2: SIZE, class: 'pb-axis' }, svg);
+
+  const vaLn = svgEl('line', { class: 'as-va', y1: 0, y2: SIZE }, svg);
+  const haLn = svgEl('line', { class: 'as-ha', x1: 0, x2: SIZE }, svg);
+  const curve = svgEl('path', { class: 'as-curve', d: '' }, svg);
+  const hole = svgEl('circle', { class: 'as-hole', r: 5 }, svg);
+
+  /* --- Kontrol --- */
+  const controls = elDiv('widget-controls');
+
+  const chips = elDiv('chips');
+  const presets = [
+    ['Klasik', 2, 1, 1, -2],
+    ['Hiperbola 1/x', 0, 1, 1, 0],
+    ['Berlubang', 2, 4, 1, 2],
+    ['Garis Lurus', 1, 2, 0, 2]
+  ];
+  presets.forEach(p => {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'chip'; btn.textContent = p[0];
+    btn.addEventListener('click', () => { a = p[1]; b = p[2]; c = p[3]; d = p[4]; syncSliders(); render(); });
+    chips.appendChild(btn);
+  });
+  controls.appendChild(chips);
+
+  const sliders = {};
+  const mkSlider = (key, val, labelHtml) => {
+    const row = elDiv('ctrl-row');
+    row.innerHTML = '<label>' + labelHtml + '</label><output></output>';
+    const inp = document.createElement('input');
+    inp.type = 'range'; inp.min = '-3'; inp.max = '3'; inp.step = '0.5'; inp.value = String(val);
+    inp.setAttribute('aria-label', 'koefisien ' + key);
+    inp.addEventListener('input', () => {
+      const v = parseFloat(inp.value);
+      if (key === 'a') a = v; else if (key === 'b') b = v; else if (key === 'c') c = v; else d = v;
+      render();
+    });
+    sliders[key] = inp;
+    controls.appendChild(row);
+    controls.appendChild(inp);
+    row.querySelector('output').dataset.k = key;
+  };
+  mkSlider('a', a, 'a <span style="color:var(--chalk-mute)">(pembilang ax + b)</span>');
+  mkSlider('b', b, 'b <span style="color:var(--chalk-mute)">(pembilang ax + b)</span>');
+  mkSlider('c', c, 'c <span style="color:var(--chalk-mute)">(penyebut cx + d)</span>');
+  mkSlider('d', d, 'd <span style="color:var(--chalk-mute)">(penyebut cx + d)</span>');
+
+  const readout = elDiv('readout',
+    '<div><span>Asimtot tegak</span><b data-r="va"></b></div>' +
+    '<div><span>Asimtot datar</span><b data-r="ha"></b></div>' +
+    '<div><span>Potong sumbu-Y</span><b data-r="icp"></b></div>' +
+    '<div><span>ad \u2212 bc</span><b data-r="det"></b></div>');
+  controls.appendChild(readout);
+
+  const badgeWrap = elDiv('');
+  badgeWrap.innerHTML = '<span class="disc-badge gold" data-r="badge" hidden></span>';
+  controls.appendChild(badgeWrap);
+
+  const legend = elDiv('legend',
+    '<span><i class="dot" style="background:var(--signal)"></i>kurva f(x)</span>' +
+    '<span><i class="dot" style="background:var(--incorrect)"></i>asimtot tegak</span>' +
+    '<span><i class="dot" style="background:var(--medal)"></i>asimtot datar</span>');
+  legend.style.marginTop = '0.9rem';
+  controls.appendChild(legend);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  function syncSliders() {
+    ['a', 'b', 'c', 'd'].forEach(k => {
+      const v = k === 'a' ? a : k === 'b' ? b : k === 'c' ? c : d;
+      if (sliders[k]) sliders[k].value = String(v);
+    });
+  }
+
+  function render() {
+    const dt = a * d - b * c;
+    const eps = 0.001;
+    const undef = Math.abs(c) < eps && Math.abs(d) < eps;
+    const linear = !undef && Math.abs(c) < eps;
+    const degen = Math.abs(c) >= eps && Math.abs(dt) < eps;
+    const hasAsym = Math.abs(c) >= eps && !degen;
+
+    // kurva: sampling dengan pemutusan di dekat asimtot & luar jendela
+    let dPath = '', pen = false;
+    if (!undef) {
+      for (let x = -6.5; x <= 6.5; x += 0.05) {
+        const den = c * x + d;
+        if (Math.abs(den) < 0.04) { pen = false; continue; }
+        const y = (a * x + b) / den;
+        if (Math.abs(y) > 8) { pen = false; continue; }
+        dPath += (pen ? ' L ' : ' M ') + sx(x).toFixed(1) + ' ' + sy(y).toFixed(1);
+        pen = true;
+      }
+    }
+    curve.setAttribute('d', dPath);
+    curve.setAttribute('display', dPath ? '' : 'none');
+
+    if (hasAsym) {
+      const xv = -d / c, yh = a / c;
+      vaLn.setAttribute('x1', sx(xv)); vaLn.setAttribute('x2', sx(xv));
+      haLn.setAttribute('y1', sy(yh)); haLn.setAttribute('y2', sy(yh));
+      vaLn.setAttribute('display', ''); haLn.setAttribute('display', '');
+    } else {
+      vaLn.setAttribute('display', 'none'); haLn.setAttribute('display', 'none');
+    }
+
+    if (degen) {
+      hole.setAttribute('cx', sx(-d / c)); hole.setAttribute('cy', sy(a / c));
+      hole.setAttribute('display', '');
+    } else {
+      hole.setAttribute('display', 'none');
+    }
+
+    q('[data-r="va"]').textContent = hasAsym ? 'x = ' + fmt(-d / c) : '\u2014';
+    q('[data-r="ha"]').textContent = hasAsym ? 'y = ' + fmt(a / c) : '\u2014';
+    q('[data-r="icp"]').textContent = Math.abs(d) >= eps ? '(0, ' + fmt(b / d) + ')' : '\u2014';
+    q('[data-r="det"]').textContent = fmt(dt);
+
+    const badge = q('[data-r="badge"]');
+    badge.hidden = !degen;
+    if (degen) badge.textContent = 'ad \u2212 bc = 0 \u00b7 kurva runtuh: garis datar berlubang!';
+
+    note.textContent = undef
+      ? 'Fungsi tak terdefinisi \u2014 penyebutnya nol untuk semua x. Geser c atau d menjauh dari nol.'
+      : linear
+        ? 'Tanpa asimtot: penyebutnya konstan, jadi f(x) = (ax + b)/d hanyalah garis lurus biasa. Asimtot lahir dari penyebut yang bisa menuju nol.'
+        : degen
+          ? 'Pembilang adalah kelipatan penyebut \u2014 keduanya saling tercoret, dan kurva runtuh menjadi garis datar y = a/c dengan satu lubang di x = \u2212d/c. Ini determinan lagi: ad \u2212 bc = 0!'
+          : 'Kurva menempel makin dekat ke garis putus-putus, tapi tak pernah menyentuhnya \u2014 itulah asimtot. Geser slider dan perhatikan asimtot tegak x = \u2212d/c serta datar y = a/c ikut berpindah.';
+
+    controls.querySelectorAll('output[data-k]').forEach(o => {
+      const k = o.dataset.k;
+      const v = k === 'a' ? a : k === 'b' ? b : k === 'c' ? c : d;
+      o.textContent = fmt(v);
+    });
+  }
+
+  render();
+}
+
+/* ==========================================================================
+   SIMULASI 9 — Laboratorium Turunan (kalkulus.html)
+   Geser titik di sepanjang kurva: garis singgung emas mengikuti, dan
+   gradiennya = f'(x). Saat f'(x) = 0: titik stasioner.
+   ========================================================================== */
+function initTurunanLab() {
+  const host = document.getElementById('widget-turunan');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const SIZE = 340, CX = 170, CY = 170, U = 38;
+  const sx = x => CX + x * U;
+  const sy = y => CY - y * U;
+  const clamp = v => Math.max(-4, Math.min(4, v));
+  const snap = v => Math.round(v * 4) / 4;
+  const fmt = v => {
+    let s = String(Math.round(v * 100) / 100);
+    if (s === '-0') s = '0';
+    return s.replace('-', '\u2212').replace('.', ',');
+  };
+
+  const FUNCS = {
+    'Parabola': { f: x => x * x / 2 - 2, fp: x => x },
+    'Kubik': { f: x => (x * x * x - 3 * x) / 2, fp: x => (3 * x * x - 3) / 2 },
+    'Sinus': { f: x => 2 * Math.sin(x), fp: x => 2 * Math.cos(x) }
+  };
+  let cur = 'Parabola';
+  let x0 = 1;
+
+  /* --- SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + SIZE + ' ' + SIZE, role: 'img',
+    'aria-label': 'Kurva dengan titik yang bisa digeser dan garis singgung yang mengikutinya'
+  });
+  for (let i = -4; i <= 4; i++) {
+    if (i !== 0) {
+      svgEl('line', { x1: sx(i), y1: sy(-4.4), x2: sx(i), y2: sy(4.4), class: 'pb-grid' }, svg);
+      svgEl('line', { x1: sx(-4.4), y1: sy(i), x2: sx(4.4), y2: sy(i), class: 'pb-grid' }, svg);
+    }
+  }
+  svgEl('line', { x1: 0, y1: sy(0), x2: SIZE, y2: sy(0), class: 'pb-axis' }, svg);
+  svgEl('line', { x1: sx(0), y1: 0, x2: sx(0), y2: SIZE, class: 'pb-axis' }, svg);
+
+  const tangent = svgEl('line', { class: 'kl-tangent' }, svg);
+  const curve = svgEl('path', { class: 'kl-curve', d: '' }, svg);
+  const dot = svgEl('circle', { r: 7, fill: 'var(--signal)', stroke: 'var(--ink)', 'stroke-width': 2, style: 'cursor:grab' }, svg);
+
+  /* --- Kontrol --- */
+  const controls = elDiv('widget-controls');
+
+  const chips = elDiv('chips');
+  Object.keys(FUNCS).forEach(name => {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'chip'; btn.textContent = name;
+    btn.addEventListener('click', () => { cur = name; drawCurve(); render(); });
+    chips.appendChild(btn);
+  });
+  controls.appendChild(chips);
+
+  const row = elDiv('ctrl-row');
+  row.innerHTML = '<label>posisi x <span style="color:var(--chalk-mute)">(geser titiknya juga bisa)</span></label><output></output>';
+  const slider = document.createElement('input');
+  slider.type = 'range'; slider.min = '-4'; slider.max = '4'; slider.step = '0.25'; slider.value = String(x0);
+  slider.setAttribute('aria-label', 'posisi x');
+  slider.addEventListener('input', () => { x0 = parseFloat(slider.value); render(); });
+  controls.appendChild(row);
+  controls.appendChild(slider);
+  const out = row.querySelector('output');
+
+  const readout = elDiv('readout',
+    '<div><span>Titik x</span><b data-r="x"></b></div>' +
+    '<div><span>Nilai f(x)</span><b data-r="fx"></b></div>' +
+    '<div><span>Gradien f\u2032(x)</span><b data-r="dfx"></b></div>' +
+    '<div><span>Perilaku kurva</span><b data-r="mode"></b></div>');
+  controls.appendChild(readout);
+
+  const badgeWrap = elDiv('');
+  badgeWrap.innerHTML = '<span class="disc-badge gold" data-r="badge" hidden></span>';
+  controls.appendChild(badgeWrap);
+
+  const legend = elDiv('legend',
+    '<span><i class="dot" style="background:var(--signal)"></i>kurva f(x)</span>' +
+    '<span><i class="dot" style="background:var(--medal)"></i>garis singgung</span>');
+  legend.style.marginTop = '0.9rem';
+  controls.appendChild(legend);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  function drawCurve() {
+    const f = FUNCS[cur].f;
+    let dPath = '', pen = false;
+    for (let x = -4.3; x <= 4.3; x += 0.05) {
+      const y = f(x);
+      if (Math.abs(y) > 4.6) { pen = false; continue; }
+      dPath += (pen ? ' L ' : ' M ') + sx(x).toFixed(1) + ' ' + sy(y).toFixed(1);
+      pen = true;
+    }
+    curve.setAttribute('d', dPath);
+  }
+
+  function render() {
+    const f = FUNCS[cur].f, fp = FUNCS[cur].fp;
+    const y0 = f(x0), m = fp(x0);
+
+    dot.setAttribute('cx', sx(x0));
+    dot.setAttribute('cy', sy(y0));
+    // garis singgung: melintasi seluruh jendela melalui (x0, y0) bergradien m
+    const xa = -7, xb = 7;
+    tangent.setAttribute('x1', sx(xa)); tangent.setAttribute('y1', sy(y0 + m * (xa - x0)));
+    tangent.setAttribute('x2', sx(xb)); tangent.setAttribute('y2', sy(y0 + m * (xb - x0)));
+
+    const flat = Math.abs(m) < 0.01;
+    q('[data-r="x"]').textContent = fmt(x0);
+    q('[data-r="fx"]').textContent = fmt(y0);
+    q('[data-r="dfx"]').textContent = fmt(m);
+    q('[data-r="mode"]').textContent = flat ? 'stasioner' : m > 0 ? 'naik \u2197' : 'turun \u2198';
+
+    const badge = q('[data-r="badge"]');
+    badge.hidden = !flat;
+    if (flat) badge.textContent = 'f\u2032(x) = 0 \u00b7 titik stasioner \u2014 puncak atau lembah!';
+
+    note.textContent = flat
+      ? 'Garis singgungnya mendatar sempurna: di sinilah kurva berhenti sejenak sebelum berbalik arah \u2014 kandidat nilai maksimum atau minimum. Inilah alasan syarat f\u2032(x) = 0 di soal optimasi.'
+      : m > 0
+        ? 'Gradien positif: kurva sedang menanjak. Makin curam tanjakannya, makin besar nilai f\u2032(x) \u2014 turunan adalah ukuran kecepatan naiknya.'
+        : 'Gradien negatif: kurva sedang menurun. Geser titiknya sampai garis singgung mendatar untuk menemukan titik stasioner.';
+
+    out.textContent = fmt(x0);
+    if (slider.value !== String(x0)) slider.value = String(x0);
+  }
+
+  /* --- Seret titik --- */
+  let drag = false;
+  const svgXY = e => {
+    const r = svg.getBoundingClientRect();
+    if (!r.width) return null;
+    return { x: (e.clientX - r.left) * (SIZE / r.width), y: (e.clientY - r.top) * (SIZE / r.height) };
+  };
+  svg.addEventListener('pointerdown', e => {
+    const p = svgXY(e); if (!p) return;
+    if (Math.hypot(p.x - sx(x0), p.y - sy(FUNCS[cur].f(x0))) > 28) return;
+    drag = true;
+    try { svg.setPointerCapture(e.pointerId); } catch (err) {}
+    x0 = clamp(snap((p.x - CX) / U));
+    render(); e.preventDefault();
+  });
+  svg.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const p = svgXY(e); if (!p) return;
+    x0 = clamp(snap((p.x - CX) / U));
+    render();
+  });
+  ['pointerup', 'pointercancel'].forEach(ev => svg.addEventListener(ev, () => { drag = false; }));
+
+  drawCurve();
   render();
 }
