@@ -36,18 +36,14 @@
           <div class="nav-drop-group">
             <a href="aljabar.html"><strong>Aljabar</strong><em>Persamaan &amp; pertidaksamaan, kuadrat, suku banyak, program linear</em></a>
             <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap, persamaan</em></a>
-            <a href="geometri.html" class="active"><strong>Geometri</strong><em>Kesebangunan, lingkaran &amp; persamaannya, Heron, kuasa titik</em></a>
-            <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, limit</em></a>
+            <a href="geometri.html" class="active"><strong>Geometri</strong><em>Kesebangunan, lingkaran, kuasa titik, transformasi geometri</em></a>
+            <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, model fungsi, limit</em></a>
             <a href="limit.html"><strong>Limit</strong><em>Konsep &amp; sifat, aljabar, trigonometri, tak hingga &amp; asimtot</em></a>
             <a href="matriks.html"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
             <a href="vektor.html"><strong>Vektor</strong><em>Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
             <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan &amp; penyebaran, pencacahan, peluang</em></a>
             <a href="kalkulus.html"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral, luas &amp; volume benda putar</em></a>
           </div>
-          <div class="nav-drop-sep"></div>
-          <span class="nav-drop-label">Segera Hadir</span>
-          <span class="nav-drop-soon">Transformasi Geometri <i>Segera</i></span>
-          <span class="nav-drop-soon">Model Fungsi <i>Segera</i></span>
         </div>
       </div>
       <div class="nav-drop">
@@ -88,6 +84,7 @@
       <a href="#lingkaran">Lingkaran</a>
       <a href="#lingkaran-analitik">Persamaan Lingkaran</a>
       <a href="#garis-istimewa">Garis Istimewa</a>
+      <a href="#transformasi">Transformasi Geometri</a>
       <a href="#menuju-olimpiade">Menuju Olimpiade</a>
       <a href="#bedah-soal">Bedah Soal</a>
       <a href="#latihan">Latihan Soal</a>
@@ -284,6 +281,131 @@
         </div>
       </div>
 
+      <div class="lesson-section" id="transformasi">
+        <h2>Transformasi Geometri</h2>
+        <p>Sejauh ini bangun-bangun kita <em>diam</em>. Transformasi memberi mereka gerak: sebuah aturan yang memindahkan <strong>setiap titik</strong> bidang ke tempat baru. Yang menarik, seluruh geraknya bisa diringkas menjadi rumus koordinat yang pendek — dan sebagian besar bahkan menjadi sebuah matriks.</p>
+        <p>Empat jenis dasarnya terbagi dua keluarga. <strong>Isometri</strong> — translasi, refleksi, rotasi — memindahkan bangun tanpa mengubah bentuk maupun ukurannya. <strong>Dilatasi</strong> berbeda sendiri: ia mengubah ukuran.</p>
+
+        <h3>Translasi</h3>
+        <p>Menggeser sejauh vektor $\binom{a}{b}$ — tanpa memutar, tanpa membalik:</p>
+        <div class="box formula">
+          <span class="box-label">Translasi</span>
+          $$(x, y) \;\longrightarrow\; (x + a,\; y + b)$$
+        </div>
+
+        <h3>Refleksi</h3>
+        <p>Mencerminkan terhadap sebuah garis. Hafalkan yang tujuh ini — hampir semua soal memakainya:</p>
+        <div class="table-scroll">
+          <table class="math-table">
+            <thead><tr><th>Cermin</th><th>Aturan</th></tr></thead>
+            <tbody>
+              <tr><td>sumbu-X</td><td>$(x,\, -y)$</td></tr>
+              <tr><td>sumbu-Y</td><td>$(-x,\, y)$</td></tr>
+              <tr><td>garis $y = x$</td><td>$(y,\, x)$</td></tr>
+              <tr><td>garis $y = -x$</td><td>$(-y,\, -x)$</td></tr>
+              <tr><td>titik asal $O$</td><td>$(-x,\, -y)$</td></tr>
+              <tr><td>garis $x = h$</td><td>$(2h - x,\, y)$</td></tr>
+              <tr><td>garis $y = k$</td><td>$(x,\, 2k - y)$</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Perhatikan baris ketiga baik-baik: mencerminkan terhadap $y = x$ hanya <strong>menukar</strong> kedua koordinat — tidak membalik tandanya. Kesalahan menukar-sekaligus-membalik adalah jebakan paling sering di bab ini.</p>
+
+        <h3>Rotasi</h3>
+        <p>Memutar terhadap titik asal. Kesepakatannya: sudut positif berarti <strong>berlawanan arah jarum jam</strong>.</p>
+        <div class="table-scroll">
+          <table class="math-table">
+            <thead><tr><th>Sudut</th><th>Aturan</th></tr></thead>
+            <tbody>
+              <tr><td>$90^\circ$</td><td>$(-y,\, x)$</td></tr>
+              <tr><td>$180^\circ$</td><td>$(-x,\, -y)$</td></tr>
+              <tr><td>$270^\circ$ (atau $-90^\circ$)</td><td>$(y,\, -x)$</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Rotasi $180^\circ$ ternyata memberi aturan yang sama persis dengan pencerminan terhadap titik asal — dua nama untuk gerak yang sama.</p>
+
+        <h3>Dilatasi</h3>
+        <div class="box formula">
+          <span class="box-label">Dilatasi $[O, k]$</span>
+          $$(x, y) \;\longrightarrow\; (kx,\; ky)$$
+        </div>
+        <p>Setiap panjang terkali $\lvert k \rvert$, sehingga setiap <strong>luas terkali $k^2$</strong>. Bila $k$ negatif, bangunnya diperbesar sekaligus diputar $180^\circ$.</p>
+
+        <div class="widget-card reveal" id="widget-transformasi">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Laboratorium Transformasi</h3>
+            <p>Segitiganya sengaja dibuat <strong>tidak simetris</strong>, supaya pencerminan benar-benar terlihat membalik — bukan sekadar bergeser. Garis putus-putus adalah bangun asalnya. Lalu geser tuas <strong>pengulangan</strong>: berapa kali sebuah transformasi harus diterapkan sampai bangunnya kembali persis ke tempat semula? Jawabannya berbeda-beda, dan itulah inti soal olimpiade di akhir bab ini.</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+
+        <h3>Matriks Transformasi</h3>
+        <p>Setiap transformasi yang <strong>membiarkan titik asal tetap di tempat</strong> dapat ditulis sebagai perkalian matriks:</p>
+        <div class="box formula">
+          <span class="box-label">Bentuk Matriks</span>
+          $$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}\begin{pmatrix} x \\ y \end{pmatrix}$$
+        </div>
+        <div class="table-scroll">
+          <table class="math-table">
+            <thead><tr><th>Transformasi</th><th>Matriks</th></tr></thead>
+            <tbody>
+              <tr><td>Refleksi sumbu-X</td><td>$\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}$</td></tr>
+              <tr><td>Refleksi sumbu-Y</td><td>$\begin{pmatrix} -1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$</td></tr>
+              <tr><td>Refleksi $y = x$</td><td>$\begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}$</td></tr>
+              <tr><td>Rotasi $90^\circ$</td><td>$\begin{pmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{pmatrix}$</td></tr>
+              <tr><td>Rotasi $180^\circ$</td><td>$\begin{pmatrix} -1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}$</td></tr>
+              <tr><td>Dilatasi $[O, k]$</td><td>$\begin{pmatrix} k &amp; 0 \\ 0 &amp; k \end{pmatrix}$</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Cara cepat menyusunnya: <strong>kolom pertama adalah bayangan titik $(1,0)$, kolom kedua bayangan titik $(0,1)$</strong>. Tak perlu menghafal tabel di atas kalau kamu ingat trik ini.</p>
+        <div class="box warn">
+          <span class="box-label">Pengecualian yang Penting</span>
+          <p style="margin-bottom:0;">Translasi <strong>tidak punya</strong> matriks $2\times2$. Ia menggeser titik asal, padahal perkalian matriks selalu memetakan $(0,0)$ ke $(0,0)$. Translasi itu <em>penjumlahan</em>, bukan perkalian — dan karena itu ia tak bisa digabungkan ke dalam rantai matriks begitu saja.</p>
+        </div>
+
+        <h3>Komposisi: Urutan Menentukan</h3>
+        <p>Dua transformasi berturut-turut menjadi satu transformasi baru. Dalam bentuk matriks, transformasi yang dikerjakan <strong>lebih dulu</strong> ditulis di sebelah <strong>kanan</strong>:</p>
+        <div class="box formula">
+          <span class="box-label">Komposisi</span>
+          $$T_2 \circ T_1 \;\longrightarrow\; M_2 \cdot M_1$$
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh — Urutan Betul-betul Berbeda</span>
+          <p style="margin-bottom:0.3rem;">Titik $(1,2)$ dirotasi $90^\circ$ lalu dicerminkan terhadap sumbu-X:</p>
+          <p style="margin-bottom:0.3rem;">$(1,2) \to (-2,1) \to (-2,-1)$.</p>
+          <p style="margin-bottom:0;">Dibalik urutannya — dicerminkan dulu, baru dirotasi: $(1,2) \to (1,-2) \to (2,1)$. Hasilnya <strong>tidak sama</strong>, persis seperti $AB \neq BA$ pada <a href="matriks.html#perkalian">perkalian matriks</a>.</p>
+        </div>
+
+        <h3>Luas dan Orientasi</h3>
+        <p>Determinan matriks transformasi menyimpan dua keterangan sekaligus. <strong>Besarnya</strong> adalah faktor pengali luas; <strong>tandanya</strong> memberi tahu apakah bangunnya terbalik.</p>
+        <div class="box recap">
+          <span class="box-label">Membaca Determinan</span>
+          <ul style="margin-bottom:0;">
+            <li>$\lvert \det M \rvert$ — luas bayangan dibagi luas asli. Isometri selalu $1$; dilatasi $[O,k]$ memberi $k^2$.</li>
+            <li>$\det M &gt; 0$ — orientasinya tetap (rotasi, dilatasi).</li>
+            <li>$\det M &lt; 0$ — orientasinya terbalik, tanda pasti adanya <strong>pencerminan</strong>.</li>
+            <li>$\det M = 0$ — bangunnya gepeng menjadi ruas garis; transformasinya tak bisa dibalik.</li>
+          </ul>
+        </div>
+        <p>Seluruh cerita determinan menunggu di halaman <a href="matriks.html#determinan">Matriks</a>, lengkap dengan simulasi yang memperlihatkan persegi satuan berubah menjadi jajaran genjang.</p>
+
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>Arah rotasi baku adalah <strong>berlawanan jarum jam</strong>. Soal yang menyebut "searah jarum jam" berarti sudutnya negatif.</li>
+            <li>Refleksi terhadap $y = x$ <strong>menukar</strong> koordinat; refleksi terhadap $y = -x$ menukar <em>sekaligus</em> membalik tanda. Keduanya sering tertukar.</li>
+            <li>Pada komposisi, matriks yang dikerjakan lebih dulu ada di <strong>kanan</strong>. Menuliskannya terbalik memberi jawaban yang berbeda — dan biasanya tetap terlihat "masuk akal", sehingga tak terasa salah.</li>
+            <li>Dilatasi mengalikan luas dengan $k^2$, <strong>bukan</strong> dengan $k$. Faktor $3$ berarti luasnya menjadi $9$ kali lipat.</li>
+            <li>Cermin berupa garis $x = h$ atau $y = k$ memakai rumus $2h - x$, bukan sekadar $-x$. Uji dengan satu titik bila ragu.</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="lesson-section" id="menuju-olimpiade">
         <h2>Menuju Geometri Olimpiade</h2>
         <p>Soal geometri olimpiade jarang memberi gambar yang gamblang — ia memberi <em class="accent-word">petunjuk tersembunyi</em>. Empat perkakas berikut adalah pembuka kuncinya.</p>
@@ -389,7 +511,7 @@
           <!-- MUDAH -->
           <div class="tier-panel active" data-tier="mudah">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-score">Skor <strong>0/10</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -482,13 +604,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Ruas kanan bentuk baku adalah $r^2$, bukan $r$. Jadi $r = \sqrt{25} = 5$. Jebakan A adalah kesalahan paling umum di bab ini: lupa mengakar.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+            <div class="quiz-card" data-answer="B" data-qid="geo-m9">
+              <div class="quiz-head"><span class="quiz-number">9</span><p class="quiz-question">Bayangan titik $A(2, -3)$ oleh translasi $\binom{4}{5}$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(-2, -8)$</button>
+                <button class="quiz-option" data-option="B">$(6, 2)$</button>
+                <button class="quiz-option" data-option="C">$(6, -8)$</button>
+                <button class="quiz-option" data-option="D">$(8, -15)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Translasi menjumlahkan komponennya: $(2 + 4,\; -3 + 5) = (6, 2)$. Jebakan A mengurangkan alih-alih menjumlahkan; jebakan D mengalikan.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="geo-m10">
+              <div class="quiz-head"><span class="quiz-number">10</span><p class="quiz-question">Bayangan titik $P(5, 2)$ dicerminkan terhadap sumbu-X adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(-5, 2)$</button>
+                <button class="quiz-option" data-option="B">$(2, 5)$</button>
+                <button class="quiz-option" data-option="C">$(-5, -2)$</button>
+                <button class="quiz-option" data-option="D">$(5, -2)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Mencerminkan terhadap sumbu-X hanya membalik tanda ordinatnya: $(5, -2)$. Jebakan A adalah pencerminan terhadap sumbu-Y, dan jebakan B terhadap garis $y = x$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
           </div>
 
           <!-- SEDANG -->
           <div class="tier-panel" data-tier="sedang">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-score">Skor <strong>0/10</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -581,13 +725,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Dari $A = -6$ dan $B = 4$, pusatnya $\left(-\tfrac{A}{2}, -\tfrac{B}{2}\right) = (3, -2)$. Jebakan C lupa membalik tandanya; jebakan B lupa membagi dua. (Jari-jarinya $\sqrt{9 + 4 + 12} = 5$.)</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+            <div class="quiz-card" data-answer="A" data-qid="geo-s9">
+              <div class="quiz-head"><span class="quiz-number">9</span><p class="quiz-question">Bayangan titik $B(3, 1)$ oleh rotasi $90^\circ$ berlawanan arah jarum jam dengan pusat $O$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(-1, 3)$</button>
+                <button class="quiz-option" data-option="B">$(1, -3)$</button>
+                <button class="quiz-option" data-option="C">$(-3, -1)$</button>
+                <button class="quiz-option" data-option="D">$(3, -1)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rotasi $90^\circ$ memetakan $(x, y) \to (-y, x)$, sehingga $(3,1) \to (-1, 3)$. Jebakan B adalah rotasi $-90^\circ$ (searah jarum jam), dan jebakan C rotasi $180^\circ$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="geo-s10">
+              <div class="quiz-head"><span class="quiz-number">10</span><p class="quiz-question">Bayangan titik $Q(-2, 7)$ dicerminkan terhadap garis $y = x$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(2, -7)$</button>
+                <button class="quiz-option" data-option="B">$(-7, 2)$</button>
+                <button class="quiz-option" data-option="C">$(2, 7)$</button>
+                <button class="quiz-option" data-option="D">$(7, -2)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pencerminan terhadap $y = x$ hanya <strong>menukar</strong> kedua koordinat, tanpa membalik tanda: $(-2, 7) \to (7, -2)$. Jebakan B menukar sekaligus membalik tanda — itu pencerminan terhadap $y = -x$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
           </div>
 
           <!-- SULIT -->
           <div class="tier-panel" data-tier="sulit">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-score">Skor <strong>0/10</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -680,13 +846,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Substitusikan: $25 + 1 - 20 - 2 - 20 = -16$. Nilainya negatif, jadi titik itu berada di dalam. Angka $-16$ ini persis kuasa titiknya: pusat lingkaran $(2,1)$ dengan $r = 5$, sehingga $d^2 - r^2 = 3^2 - 5^2 = -16$ ✓</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+            <div class="quiz-card" data-answer="C" data-qid="geo-x9">
+              <div class="quiz-head"><span class="quiz-number">9</span><p class="quiz-question">Sebuah segitiga berluas $12$ satuan didilatasi dengan pusat $O$ dan faktor $k = 3$. Luas bayangannya adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$36$</button>
+                <button class="quiz-option" data-option="B">$12$</button>
+                <button class="quiz-option" data-option="C">$108$</button>
+                <button class="quiz-option" data-option="D">$4$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Dilatasi mengalikan setiap panjang dengan $k$, sehingga luasnya terkali $k^2 = 9$. Jadi $12 \times 9 = 108$. Jebakan A hanya mengalikan dengan $k$ — kesalahan paling umum di bab ini. Coba lihat di simulasi: dilatasi $2\times$ membuat luas $3$ menjadi $12$, bukan $6$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="geo-x10">
+              <div class="quiz-head"><span class="quiz-number">10</span><p class="quiz-question">Matriks yang menyatakan pencerminan terhadap sumbu-Y adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="B">$\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="C">$\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$</button>
+                <button class="quiz-option" data-option="D">$\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pakai trik kolom: bayangan $(1,0)$ adalah $(-1,0)$ — itulah kolom pertama; bayangan $(0,1)$ adalah $(0,1)$ — kolom kedua. Jebakan B adalah pencerminan terhadap sumbu-X, dan jebakan D rotasi $90^\circ$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
           </div>
 
           <!-- OLIMPIADE -->
           <div class="tier-panel" data-tier="olimpiade">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/10</strong></div>
+              <div class="tier-score">Skor <strong>0/12</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -801,7 +989,29 @@
               <div class="quiz-feedback" hidden><strong></strong>Menyinggung sumbu-X berarti jarak pusat ke sumbu itu sama dengan jari-jarinya: $r = \lvert a \rvert$. Substitusikan $(2,1)$: $(2-a)^2 + (1-a)^2 = a^2$, yang menyederhana menjadi $a^2 - 6a + 5 = 0$. Menurut Vieta jumlah akarnya $6$ — jadi ada <strong>dua</strong> lingkaran yang memenuhi ($a = 1$ dan $a = 5$), bukan satu.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Fondasi geometrimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
+            <div class="quiz-card" data-answer="B" data-qid="geo-o11">
+              <div class="quiz-head"><span class="quiz-number">11</span><p class="quiz-question">Titik $(1, 2)$ dirotasi $90^\circ$ berlawanan jarum jam terhadap $O$, lalu hasilnya dicerminkan terhadap sumbu-X. Bayangan akhirnya adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(2, 1)$</button>
+                <button class="quiz-option" data-option="B">$(-2, -1)$</button>
+                <button class="quiz-option" data-option="C">$(2, -1)$</button>
+                <button class="quiz-option" data-option="D">$(-1, -2)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rotasi dulu: $(1,2) \to (-2, 1)$. Lalu cermin sumbu-X: $(-2,1) \to (-2,-1)$. Jebakan A adalah hasil bila urutannya dibalik — cermin dulu, baru rotasi — dan itu memang jawaban yang berbeda. Dalam matriks, yang dikerjakan lebih dulu ditulis di kanan.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="geo-o12">
+              <div class="quiz-head"><span class="quiz-number">12</span><p class="quiz-question">Sebuah titik dirotasi $90^\circ$ berlawanan jarum jam terhadap $O$ sebanyak $2026$ kali berturut-turut. Rotasi tunggal yang setara adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$90^\circ$</button>
+                <button class="quiz-option" data-option="B">$270^\circ$</button>
+                <button class="quiz-option" data-option="C">$180^\circ$</button>
+                <button class="quiz-option" data-option="D">kembali ke posisi semula</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Empat kali rotasi $90^\circ$ mengembalikan titik ke posisi semula, jadi yang menentukan hanyalah sisa pembagian $2026$ oleh $4$. Karena $2026 = 4(506) + 2$, hasilnya setara dua kali rotasi $90^\circ$, yaitu $180^\circ$. Sifat "kembali ke awal setelah empat langkah" itu bisa kamu lihat langsung di simulasi dengan menggeser tuas pengulangan ke $4$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 12</span> soal. Fondasi geometrimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
           </div>
         </div>
       </div>

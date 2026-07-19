@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initCircleLab();
   initVolumeLab();
   initRegionLab();
+  initTransformLab();
+  initModelLab();
   initKatex();
 });
 
@@ -3012,6 +3014,349 @@ function initRegionLab() {
       ? 'Kendala-kendalanya saling bertentangan, jadi tak ada satu pun titik yang memenuhi semuanya. Geser batasnya sampai daerahnya muncul kembali.'
       : 'Program linear tak perlu menguji seluruh daerah \u2014 cukup titik pojoknya. Di sini f = 3x + 2y mencapai ' +
         fmt(maks.f) + ' di titik ' + pt(maks.s) + '.';
+  }
+
+  render();
+}
+
+/* ==========================================================================
+   SIMULASI 14 — Laboratorium Transformasi (geometri.html)
+   Sebuah segitiga siku-siku tak simetris dipetakan oleh transformasi terpilih,
+   diulang n kali. Karena bangunnya tak simetris, pencerminan benar-benar
+   terlihat membalik. Lencana menyala saat komposisinya kembali jadi identitas.
+   ========================================================================== */
+function initTransformLab() {
+  const host = document.getElementById('widget-transformasi');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const SIZE = 340, C0 = 170, SPAN = 148;
+  const fmt = v => {
+    let t = String(Math.round(v * 100) / 100);
+    if (t === '-0') t = '0';
+    return t.replace('-', '\u2212');
+  };
+  const tp = p => '(' + fmt(p.x) + ', ' + fmt(p.y) + ')';
+
+  const ASLI = [{ x: 1, y: 1 }, { x: 4, y: 1 }, { x: 1, y: 3 }];
+  const luas = pts => Math.abs(pts.reduce((s, p, i) => {
+    const q = pts[(i + 1) % pts.length];
+    return s + p.x * q.y - q.x * p.y;
+  }, 0)) / 2;
+
+  const TRANS = [
+    { nama: 'Translasi (3, 2)', aturan: '(x + 3, y + 2)', m: null,
+      f: p => ({ x: p.x + 3, y: p.y + 2 }) },
+    { nama: 'Refleksi Sumbu-X', aturan: '(x, \u2212y)', m: [1, 0, 0, -1],
+      f: p => ({ x: p.x, y: -p.y }) },
+    { nama: 'Refleksi y = x', aturan: '(y, x)', m: [0, 1, 1, 0],
+      f: p => ({ x: p.y, y: p.x }) },
+    { nama: 'Rotasi 90\u00b0', aturan: '(\u2212y, x)', m: [0, -1, 1, 0],
+      f: p => ({ x: -p.y, y: p.x }) },
+    { nama: 'Rotasi 180\u00b0', aturan: '(\u2212x, \u2212y)', m: [-1, 0, 0, -1],
+      f: p => ({ x: -p.x, y: -p.y }) },
+    { nama: 'Dilatasi 2\u00d7', aturan: '(2x, 2y)', m: [2, 0, 0, 2],
+      f: p => ({ x: 2 * p.x, y: 2 * p.y }) }
+  ];
+  let pre = 3, n = 1;
+
+  /* --- SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + SIZE + ' ' + SIZE,
+    class: 'tf-svg',
+    role: 'img',
+    'aria-label': 'Bidang koordinat memperlihatkan sebuah segitiga beserta bayangannya setelah transformasi'
+  });
+  const gridLayer = svgEl('g', {}, svg);
+  const axisX = svgEl('line', { class: 'tf-axis' }, svg);
+  const axisY = svgEl('line', { class: 'tf-axis' }, svg);
+  const poliAsli = svgEl('polygon', { points: '', class: 'tf-asli' }, svg);
+  const poliBayangan = svgEl('polygon', { points: '', class: 'tf-bayangan' }, svg);
+  const dotLayer = svgEl('g', {}, svg);
+
+  /* --- Kontrol --- */
+  const controls = elDiv('widget-controls');
+  const chips = elDiv('chips');
+  TRANS.forEach((t, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = t.nama;
+    b.addEventListener('click', () => { pre = i; render(); });
+    chips.appendChild(b);
+  });
+  controls.appendChild(chips);
+
+  const row = elDiv('ctrl-row');
+  row.innerHTML = '<label>Diterapkan berulang</label><output></output>';
+  const slider = document.createElement('input');
+  slider.type = 'range'; slider.min = '1'; slider.max = '4'; slider.step = '1'; slider.value = '1';
+  slider.setAttribute('aria-label', 'Banyak pengulangan transformasi');
+  slider.addEventListener('input', () => { n = parseInt(slider.value, 10); render(); });
+  controls.appendChild(row);
+  controls.appendChild(slider);
+  const out = row.querySelector('output');
+
+  const readout = elDiv('readout',
+    '<div><span>Aturan</span><b data-r="aturan"></b></div>' +
+    '<div><span>Matriks</span><b data-r="matriks"></b></div>' +
+    '<div class="full"><span>Bayangan titik sudut</span><b data-r="bayangan"></b></div>' +
+    '<div><span>Luas asli</span><b data-r="luas-asli"></b></div>' +
+    '<div><span>Luas bayangan</span><b data-r="luas"></b></div>');
+  controls.appendChild(readout);
+
+  const badgeWrap = elDiv('');
+  badgeWrap.innerHTML = '<span class="disc-badge gold" data-r="badge" hidden></span>';
+  controls.appendChild(badgeWrap);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  function render() {
+    const T = TRANS[pre];
+    let img = ASLI.slice();
+    for (let i = 0; i < n; i++) img = img.map(T.f);
+
+    /* Skala otomatis agar bangun asli dan bayangannya selalu muat */
+    let R = 5;
+    ASLI.concat(img).forEach(p => { R = Math.max(R, Math.abs(p.x) + 1, Math.abs(p.y) + 1); });
+    R = Math.ceil(R);
+    const U = SPAN / R;
+    const sx = x => C0 + x * U;
+    const sy = y => C0 - y * U;
+    const step = R <= 6 ? 1 : R <= 12 ? 2 : R <= 30 ? 5 : 10;
+
+    gridLayer.innerHTML = '';
+    for (let i = -R; i <= R; i += step) {
+      if (i === 0) continue;
+      svgEl('line', { x1: sx(i), y1: sy(-R), x2: sx(i), y2: sy(R), class: 'tf-grid' }, gridLayer);
+      svgEl('line', { x1: sx(-R), y1: sy(i), x2: sx(R), y2: sy(i), class: 'tf-grid' }, gridLayer);
+    }
+    axisX.setAttribute('x1', sx(-R)); axisX.setAttribute('y1', sy(0));
+    axisX.setAttribute('x2', sx(R)); axisX.setAttribute('y2', sy(0));
+    axisY.setAttribute('x1', sx(0)); axisY.setAttribute('y1', sy(-R));
+    axisY.setAttribute('x2', sx(0)); axisY.setAttribute('y2', sy(R));
+
+    const pts = arr => arr.map(p => sx(p.x).toFixed(1) + ',' + sy(p.y).toFixed(1)).join(' ');
+    poliAsli.setAttribute('points', pts(ASLI));
+    poliBayangan.setAttribute('points', pts(img));
+    dotLayer.innerHTML = '';
+    ASLI.forEach(p => svgEl('circle', { cx: sx(p.x), cy: sy(p.y), r: 3, class: 'tf-titik asal' }, dotLayer));
+    img.forEach(p => svgEl('circle', { cx: sx(p.x), cy: sy(p.y), r: 4, class: 'tf-titik' }, dotLayer));
+
+    /* Panel */
+    out.textContent = n + '\u00d7';
+    q('[data-r="aturan"]').textContent = '(x, y) \u2192 ' + T.aturan;
+    q('[data-r="matriks"]').innerHTML = T.m
+      ? '<span class="tf-mat">' + fmt(T.m[0]) + '&nbsp;&nbsp;' + fmt(T.m[1]) + '<br>' +
+        fmt(T.m[2]) + '&nbsp;&nbsp;' + fmt(T.m[3]) + '</span>'
+      : '\u2014 bukan perkalian';
+    q('[data-r="bayangan"]').textContent = img.map(tp).join('  \u00b7  ');
+    q('[data-r="luas-asli"]').textContent = fmt(luas(ASLI));
+    q('[data-r="luas"]').textContent = fmt(luas(img));
+
+    const kembali = img.every((p, i) =>
+      Math.abs(p.x - ASLI[i].x) < 1e-9 && Math.abs(p.y - ASLI[i].y) < 1e-9);
+    const badge = q('[data-r="badge"]');
+    badge.hidden = !kembali;
+    if (kembali) badge.textContent = 'kembali ke bentuk semula \u00b7 identitas';
+
+    note.textContent = kembali
+      ? 'Diterapkan ' + n + ' kali, transformasi ini membatalkan dirinya sendiri dan bangunnya kembali persis ke tempat asal.'
+      : (T.m === null
+        ? 'Translasi menggeser tanpa mengubah bentuk, ukuran, maupun arah hadapnya \u2014 dan karena tidak mempertahankan titik asal, ia tak bisa ditulis sebagai perkalian matriks 2\u00d72.'
+        : (luas(img) === luas(ASLI)
+          ? 'Luasnya tetap ' + fmt(luas(ASLI)) + ' satuan: pencerminan dan rotasi memindahkan bangun tanpa mengubah ukurannya.'
+          : 'Setiap panjang terkali 2, sehingga luasnya terkali 2\u00b2 = 4 tiap penerapan \u2014 kini ' +
+            fmt(luas(img)) + ' satuan.'));
+  }
+
+  render();
+}
+
+/* ==========================================================================
+   SIMULASI 15 — Laboratorium Model Fungsi (prakalkulus.html)
+   Empat kumpulan data nyata. Selisih, selisih kedua, dan rasionya dihitung
+   berdampingan supaya terlihat MANA yang tetap — dari situlah keluarga
+   modelnya ditentukan, lalu parameternya dibaca balik dari data.
+   ========================================================================== */
+function initModelLab() {
+  const host = document.getElementById('widget-model');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const W = 340, H = 250, PL = 40, PR = 12, PT = 16, PB = 32;
+  const XMAX = 8;
+
+  const num = v => {
+    let t = String(Math.round(v * 1000) / 1000);
+    if (t === '-0') t = '0';
+    return t.replace('-', '\u2212').replace('.', ',');
+  };
+  const deret = a => a.length ? a.map(num).join('  \u00b7  ') : '\u2014';
+
+  const DATA = [
+    { nama: 'Sewa Skuter', ket: 'Biaya (ribu Rp) setelah x jam', y: [6, 10, 14, 18, 22, 26] },
+    { nama: 'Koloni Bakteri', ket: 'Bakteri (ribu) pada jam ke-x', y: [2, 6, 18, 54, 162, 486] },
+    { nama: 'Lintasan Bola', ket: 'Tinggi bola (m) pada detik ke-x', y: [0, 15, 20, 15, 0] },
+    { nama: 'Kadar Obat', ket: 'Kadar obat (mg) setelah x jam', y: [64, 32, 16, 8, 4, 2] }
+  ];
+  let pre = 0, nPred = 6;
+
+  function analisis(y) {
+    const d1 = [], d2 = [], r = [];
+    for (let i = 1; i < y.length; i++) d1.push(y[i] - y[i - 1]);
+    for (let i = 1; i < d1.length; i++) d2.push(d1[i] - d1[i - 1]);
+    for (let i = 1; i < y.length; i++) r.push(y[i - 1] === 0 ? NaN : y[i] / y[i - 1]);
+    const tetap = a => a.length > 0 && a.every(v => Math.abs(v - a[0]) < 1e-9);
+
+    if (tetap(d1)) {
+      const m = d1[0], c = y[0];
+      let t = 'f(x) = ' + (m === 1 ? '' : m === -1 ? '\u2212' : num(m)) + 'x';
+      if (c !== 0) t += (c > 0 ? ' + ' : ' \u2212 ') + Math.abs(c);
+      return { d1: d1, d2: d2, r: r, keluarga: 'Linear', model: t,
+        diagnosis: 'selisih tetap ' + num(m) + ' \u2192 linear',
+        f: x => m * x + c };
+    }
+    if (tetap(d2)) {
+      const a = d2[0] / 2, b = d1[0] - a, c = y[0];
+      let t = 'f(x) = ' + (a === 1 ? '' : a === -1 ? '\u2212' : num(a)) + 'x\u00b2';
+      if (b !== 0) t += (b > 0 ? ' + ' : ' \u2212 ') + (Math.abs(b) === 1 ? '' : Math.abs(b)) + 'x';
+      if (c !== 0) t += (c > 0 ? ' + ' : ' \u2212 ') + Math.abs(c);
+      return { d1: d1, d2: d2, r: r, keluarga: 'Kuadratik', model: t,
+        diagnosis: 'selisih kedua tetap ' + num(d2[0]) + ' \u2192 kuadratik',
+        f: x => a * x * x + b * x + c };
+    }
+    const a = y[0], b = r[0];
+    return { d1: d1, d2: d2, r: r, keluarga: 'Eksponensial',
+      model: 'f(x) = ' + num(a) + ' \u00b7 ' + num(b) + '\u02e3',
+      diagnosis: 'rasio tetap ' + num(b) + ' \u2192 eksponensial',
+      f: x => a * Math.pow(b, x) };
+  }
+
+  /* --- SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + W + ' ' + H,
+    class: 'mf-svg',
+    role: 'img',
+    'aria-label': 'Diagram pencar data beserta kurva model yang cocok'
+  });
+  const gridLayer = svgEl('g', {}, svg);
+  const axisX = svgEl('line', { class: 'mf-axis' }, svg);
+  const axisY = svgEl('line', { class: 'mf-axis' }, svg);
+  const curve = svgEl('path', { d: '', class: 'mf-curve' }, svg);
+  const dotLayer = svgEl('g', {}, svg);
+
+  /* --- Kontrol --- */
+  const controls = elDiv('widget-controls');
+  const chips = elDiv('chips');
+  DATA.forEach((d, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = d.nama;
+    b.addEventListener('click', () => { pre = i; render(); });
+    chips.appendChild(b);
+  });
+  controls.appendChild(chips);
+
+  const row = elDiv('ctrl-row');
+  row.innerHTML = '<label>Prediksi pada x</label><output></output>';
+  const slider = document.createElement('input');
+  slider.type = 'range'; slider.min = '0'; slider.max = String(XMAX); slider.step = '1';
+  slider.value = String(nPred);
+  slider.setAttribute('aria-label', 'Nilai x untuk prediksi');
+  slider.addEventListener('input', () => { nPred = parseInt(slider.value, 10); render(); });
+  controls.appendChild(row);
+  controls.appendChild(slider);
+  const out = row.querySelector('output');
+
+  const readout = elDiv('readout',
+    '<div class="full"><span>Data f(x)</span><b data-r="data"></b></div>' +
+    '<div class="full"><span>Selisih \u0394</span><b data-r="d1"></b></div>' +
+    '<div class="full"><span>Selisih kedua</span><b data-r="d2"></b></div>' +
+    '<div class="full"><span>Rasio</span><b data-r="rasio"></b></div>' +
+    '<div><span>Keluarga</span><b data-r="keluarga"></b></div>' +
+    '<div><span>Model</span><b data-r="model"></b></div>' +
+    '<div class="full"><span>Prediksi</span><b data-r="prediksi"></b></div>');
+  controls.appendChild(readout);
+
+  const badgeWrap = elDiv('');
+  badgeWrap.innerHTML = '<span class="disc-badge gold" data-r="badge"></span>';
+  controls.appendChild(badgeWrap);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  function render() {
+    const D = DATA[pre];
+    const A = analisis(D.y);
+
+    /* Skala: sumbu-y mengikuti data saja supaya titiknya tetap terbaca */
+    const ymin = Math.min(0, ...D.y);
+    const ymax = Math.max(...D.y) * 1.12;
+    const sx = x => PL + (x / XMAX) * (W - PL - PR);
+    const sy = y => H - PB - ((y - ymin) / (ymax - ymin)) * (H - PT - PB);
+    const muat = y => y >= ymin && y <= ymax;
+
+    gridLayer.innerHTML = '';
+    for (let i = 0; i <= XMAX; i++) {
+      svgEl('line', { x1: sx(i), y1: sy(ymin), x2: sx(i), y2: sy(ymax), class: 'mf-grid' }, gridLayer);
+    }
+    axisX.setAttribute('x1', sx(0)); axisX.setAttribute('y1', sy(0));
+    axisX.setAttribute('x2', sx(XMAX)); axisX.setAttribute('y2', sy(0));
+    axisY.setAttribute('x1', sx(0)); axisY.setAttribute('y1', sy(ymin));
+    axisY.setAttribute('x2', sx(0)); axisY.setAttribute('y2', sy(ymax));
+
+    /* Kurva model, dipotong saat keluar bingkai */
+    let d = '', turun = true;
+    for (let i = 0; i <= 160; i++) {
+      const x = XMAX * i / 160, y = A.f(x);
+      if (!muat(y)) { turun = true; continue; }
+      d += (turun ? 'M ' : ' L ') + sx(x).toFixed(1) + ' ' + sy(y).toFixed(1);
+      turun = false;
+    }
+    curve.setAttribute('d', d);
+
+    dotLayer.innerHTML = '';
+    D.y.forEach((v, i) => svgEl('circle', { cx: sx(i), cy: sy(v), r: 4, class: 'mf-dot' }, dotLayer));
+    const yp = A.f(nPred);
+    if (muat(yp)) svgEl('circle', { cx: sx(nPred), cy: sy(yp), r: 5, class: 'mf-pred' }, dotLayer);
+
+    /* Panel */
+    out.textContent = 'x = ' + nPred;
+    q('[data-r="data"]').textContent = deret(D.y);
+    q('[data-r="d1"]').textContent = deret(A.d1);
+    q('[data-r="d2"]').textContent = deret(A.d2);
+    q('[data-r="rasio"]').textContent = A.r.some(v => !isFinite(v)) ? '\u2014' : deret(A.r);
+    q('[data-r="keluarga"]').textContent = A.keluarga;
+    q('[data-r="model"]').textContent = A.model;
+    q('[data-r="prediksi"]').textContent = 'f(' + nPred + ') = ' + num(yp);
+    q('[data-r="badge"]').textContent = A.diagnosis;
+
+    const luar = nPred > D.y.length - 1;
+    note.textContent = D.ket + '. Yang membedakan ketiga keluarga bukan bentuk grafiknya, melainkan pola perubahannya \u2014 di sini ' +
+      A.diagnosis + '.' + (luar
+        ? ' Prediksi di x = ' + nPred + ' berada di luar jangkauan data, jadi ini ekstrapolasi: sahih hanya bila polanya benar-benar berlanjut.'
+        : ' Prediksi di x = ' + nPred + ' masih di dalam jangkauan data.');
   }
 
   render();

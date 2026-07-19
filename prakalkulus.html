@@ -36,18 +36,14 @@
           <div class="nav-drop-group">
             <a href="aljabar.html"><strong>Aljabar</strong><em>Persamaan &amp; pertidaksamaan, kuadrat, suku banyak, program linear</em></a>
             <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap, persamaan</em></a>
-            <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran &amp; persamaannya, Heron, kuasa titik</em></a>
-            <a href="prakalkulus.html" class="active"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, limit</em></a>
+            <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran, kuasa titik, transformasi geometri</em></a>
+            <a href="prakalkulus.html" class="active"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, model fungsi, limit</em></a>
             <a href="limit.html"><strong>Limit</strong><em>Konsep &amp; sifat, aljabar, trigonometri, tak hingga &amp; asimtot</em></a>
             <a href="matriks.html"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
             <a href="vektor.html"><strong>Vektor</strong><em>Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
             <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan &amp; penyebaran, pencacahan, peluang</em></a>
             <a href="kalkulus.html"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral, luas &amp; volume benda putar</em></a>
           </div>
-          <div class="nav-drop-sep"></div>
-          <span class="nav-drop-label">Segera Hadir</span>
-          <span class="nav-drop-soon">Transformasi Geometri <i>Segera</i></span>
-          <span class="nav-drop-soon">Model Fungsi <i>Segera</i></span>
         </div>
       </div>
       <div class="nav-drop">
@@ -86,6 +82,7 @@
       <a href="#komposisi">Komposisi &amp; Invers</a>
       <a href="#eksponen-log">Eksponen &amp; Logaritma</a>
       <a href="#barisan">Barisan &amp; Deret</a>
+      <a href="#model-fungsi">Model Fungsi</a>
       <a href="#limit">Limit</a>
       <a href="#menuju-olimpiade">Menuju Olimpiade</a>
       <a href="#bedah-soal">Bedah Soal</a>
@@ -212,6 +209,89 @@
           <p style="margin-bottom:0;">$a = 8$, $r = \tfrac{1}{2}$, jadi $S_\infty = \dfrac{8}{1 - \frac12} = 16$. Menjumlah tak hingga suku, hasilnya tetap berhingga — inilah cikal bakal ide limit.</p>
         </div>
         <p>Untuk menulis penjumlahan panjang secara ringkas, dipakai <strong>notasi sigma</strong>: $\sum_{k=1}^{n} U_k$ berarti "jumlahkan $U_k$ dari $k=1$ sampai $k=n$".</p>
+      </div>
+
+      <div class="lesson-section" id="model-fungsi">
+        <h2>Model Fungsi</h2>
+        <p>Sampai di sini fungsi selalu datang kepada kita sebagai rumus yang <em>sudah jadi</em>, tinggal dihitung. Di luar kelas, urutannya justru terbalik: yang kita punya adalah <strong>situasi</strong> atau <strong>tabel data</strong>, dan tugasnya menemukan fungsi yang menggambarkannya. Pekerjaan itulah yang disebut <em class="accent-word">pemodelan</em>.</p>
+        <p>Kabar baiknya, sebagian besar situasi sekolah cukup ditangani tiga keluarga saja — dan memilih di antara ketiganya tidak butuh tebakan.</p>
+
+        <h3>Membaca Keluarga dari Pola Perubahan</h3>
+        <p>Jangan melihat bentuk grafiknya; lihat <strong>bagaimana nilainya berubah</strong> dari satu langkah ke langkah berikutnya. Hitung selisihnya, lalu rasionya, lalu tanyakan: mana yang tetap?</p>
+        <div class="table-scroll">
+          <table class="math-table">
+            <thead><tr><th>Yang tetap</th><th>Keluarga</th><th>Bentuk</th></tr></thead>
+            <tbody>
+              <tr><td>Selisih $\Delta$</td><td>Linear</td><td>$f(x) = mx + c$</td></tr>
+              <tr><td>Selisih <em>kedua</em></td><td>Kuadratik</td><td>$f(x) = ax^2 + bx + c$</td></tr>
+              <tr><td>Rasio</td><td>Eksponensial</td><td>$f(x) = a \cdot b^x$</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dua baris pertamanya sudah kamu kenal dengan nama lain di bab <a href="#barisan">Barisan &amp; Deret</a>: <strong>barisan aritmetika</strong> tak lain adalah model linear yang hanya dilihat pada $x$ bilangan bulat, dan <strong>barisan geometri</strong> adalah model eksponensial. Beda tetap versus rasio tetap — pembeda yang sama, muncul lagi.</p>
+
+        <div class="widget-card reveal" id="widget-model">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Laboratorium Model</h3>
+            <p>Empat situasi nyata, dan untuk masing-masing <strong>selisih, selisih kedua, dan rasionya dihitung berdampingan</strong> — sehingga kamu bisa langsung melihat mana yang tetap. Dari situ keluarga modelnya ditentukan, lalu parameternya dibaca balik dari datanya sendiri. Geser tuas prediksi melewati titik data terakhir untuk merasakan apa artinya <em>ekstrapolasi</em>.</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+
+        <h3>Menyusun Modelnya</h3>
+        <p>Begitu keluarganya diketahui, parameternya bisa dibaca langsung dari data — tanpa perlu menyelesaikan sistem persamaan.</p>
+        <div class="box recap">
+          <span class="box-label">Membaca Parameter</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Linear</strong> $f(x) = mx + c$ — $m$ adalah laju perubahannya (per satuan $x$), $c$ adalah nilai awal saat $x = 0$.</li>
+            <li><strong>Kuadratik</strong> $f(x) = ax^2 + bx + c$ — nilai $a$ adalah <em>setengah</em> selisih keduanya, dan $c$ tetap nilai awalnya.</li>
+            <li><strong>Eksponensial</strong> $f(x) = a \cdot b^x$ — $a$ adalah nilai awal, $b$ adalah faktor pengali tiap langkah.</li>
+          </ul>
+        </div>
+        <div class="box warn">
+          <span class="box-label">Persen ke Faktor Pengali</span>
+          <p style="margin-bottom:0;">Ini titik tergelincir paling sering. Tumbuh $p\%$ berarti $b = 1 + \frac{p}{100}$; menyusut $p\%$ berarti $b = 1 - \frac{p}{100}$. Jadi penyusutan $20\%$ memberi $b = 0{,}8$ — <strong>bukan</strong> $0{,}2$. Angka $0{,}2$ adalah bagian yang <em>hilang</em>, sedangkan yang kita pangkatkan adalah bagian yang <em>tersisa</em>.</p>
+        </div>
+
+        <h3>Menemukan Parameter dari Dua Titik</h3>
+        <p>Bila datanya cuma dua titik, model eksponensial punya trik baku: <strong>bagi kedua persamaannya</strong>, dan $a$ lenyap dengan sendirinya.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Sebuah koloni tumbuh eksponensial. Pada jam ke-$1$ jumlahnya $12$, pada jam ke-$3$ jumlahnya $108$.</p>
+          <p style="margin-bottom:0.3rem;">$\dfrac{a b^3}{a b^1} = \dfrac{108}{12} \;\Rightarrow\; b^2 = 9 \;\Rightarrow\; b = 3$.</p>
+          <p style="margin-bottom:0;">Lalu dari $ab = 12$ diperoleh $a = 4$, sehingga $f(x) = 4 \cdot 3^x$ dan jumlah awalnya $f(0) = 4$.</p>
+        </div>
+
+        <h3>Linear Melawan Eksponensial</h3>
+        <p>Model eksponensial hampir selalu terlihat <em>kalah</em> di awal — pertumbuhannya pelan dan tak meyakinkan. Tapi berapa pun curamnya sebuah model linear, eksponensial dengan $b &gt; 1$ pasti menyusulnya, dan setelah itu tak pernah tersusul lagi.</p>
+        <div class="box example">
+          <span class="box-label">Titik Silang</span>
+          <p style="margin-bottom:0.3rem;">$f(x) = 10x + 100$ melawan $g(x) = 5 \cdot 2^x$.</p>
+          <p style="margin-bottom:0;">Di $x = 4$: $f = 140$ tapi $g = 80$ — linear jauh unggul. Di $x = 5$: $f = 150$ sedangkan $g = 160$ — sudah tersusul. Di $x = 10$: $f = 200$ sementara $g = 5120$.</p>
+        </div>
+
+        <h3>Daerah Asal yang Masuk Akal</h3>
+        <p>Model matematis tidak pernah berlaku selamanya. Situasi nyatanya memberi batas yang harus ikut dinyatakan: banyak barang tak boleh pecahan atau negatif, waktu biasanya tak boleh negatif, dan sebuah proses punya awal serta akhir.</p>
+        <p>Karena itu ada beda penting antara <strong>interpolasi</strong> — menaksir di antara data yang dimiliki, umumnya aman — dan <strong>ekstrapolasi</strong>, menaksir di luarnya, yang hanya sahih bila polanya sungguh berlanjut.</p>
+        <div class="box example">
+          <span class="box-label">Ketika Rumus Kehilangan Makna</span>
+          <p style="margin-bottom:0.3rem;">Tinggi bola pada preset <strong>Lintasan Bola</strong> dimodelkan sempurna oleh $f(x) = -5x^2 + 20x$ untuk $0 \le x \le 4$.</p>
+          <p style="margin-bottom:0;">Masukkan $x = 6$ dan rumusnya menjawab $-60$. Bolanya tentu tidak berada $60$ meter di bawah tanah — ia sudah mendarat pada detik ke-$4$. Modelnya tidak salah; ia hanya dipakai di luar jangkauannya.</p>
+        </div>
+
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>Periksa <strong>selisih dulu, baru rasio</strong>. Data yang tumbuh cepat sering langsung dikira eksponensial, padahal bisa saja kuadratik — bedanya baru ketahuan dari selisih kedua.</li>
+            <li>Selisih dan rasio hanya bermakna bila jarak antar-$x$ <strong>sama</strong>. Data pada $x = 0, 1, 4, 9$ harus ditangani lain.</li>
+            <li>Pertumbuhan $p\%$ bukan penambahan tetap. "Naik $10\%$ tiap tahun" adalah eksponensial; "naik $10$ juta tiap tahun" adalah linear.</li>
+            <li>Nilai awal $c$ atau $a$ adalah nilai saat $x = 0$ — bukan angka pertama di tabel, kecuali tabelnya memang dimulai dari $x = 0$.</li>
+            <li>Jawaban yang benar secara aljabar bisa saja mustahil secara situasi. Selalu tanyakan ulang: masuk akalkah angka ini?</li>
+          </ul>
+        </div>
       </div>
 
       <div class="lesson-section" id="limit">
@@ -373,7 +453,7 @@
           <!-- MUDAH -->
           <div class="tier-panel active" data-tier="mudah">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -444,13 +524,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Rasio $=$ suku berikutnya dibagi suku sebelumnya: $\frac{6}{2} = 3$ (dan $\frac{18}{6}=3$ ✓).</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+            <div class="quiz-card" data-answer="B" data-qid="pk-m7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Biaya sewa setelah $1, 2, 3, 4$ jam berturut-turut adalah $10, 14, 18, 22$ (ribu rupiah). Model yang tepat adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">kuadratik</button>
+                <button class="quiz-option" data-option="B">linear</button>
+                <button class="quiz-option" data-option="C">eksponensial</button>
+                <button class="quiz-option" data-option="D">logaritmik</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Selisih antar nilainya tetap: $14-10 = 18-14 = 22-18 = 4$. Selisih tetap adalah tanda pasti model linear, di sini $f(x) = 4x + 6$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="pk-m8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Banyak bakteri tiap jam tercatat $2, 6, 18, 54$. Model yang tepat adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">linear</button>
+                <button class="quiz-option" data-option="B">kuadratik</button>
+                <button class="quiz-option" data-option="C">eksponensial</button>
+                <button class="quiz-option" data-option="D">konstan</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Bukan selisihnya yang tetap, melainkan rasionya: $\tfrac{6}{2} = \tfrac{18}{6} = \tfrac{54}{18} = 3$. Rasio tetap menandai model eksponensial, yaitu $f(x) = 2 \cdot 3^x$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
           </div>
 
           <!-- SEDANG -->
           <div class="tier-panel" data-tier="sedang">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -521,13 +623,35 @@
               <div class="quiz-feedback" hidden><strong></strong>$a=8$, $r=\frac12$ (dan $|r|&lt;1$): $S_\infty = \frac{8}{1-\frac12} = 16$.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+            <div class="quiz-card" data-answer="A" data-qid="pk-s7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Sebuah taksi memasang tarif buka pintu Rp$5.000$ ditambah Rp$3.000$ per km. Model biayanya setelah $x$ km adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$f(x) = 3000x + 5000$</button>
+                <button class="quiz-option" data-option="B">$f(x) = 5000x + 3000$</button>
+                <button class="quiz-option" data-option="C">$f(x) = 8000x$</button>
+                <button class="quiz-option" data-option="D">$f(x) = 3000x$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Tarif buka pintu adalah nilai saat $x = 0$, jadi ia konstantanya; tarif per km adalah laju perubahannya, jadi ia koefisien $x$. Jebakan B menukar keduanya — periksa dengan $x = 0$: biayanya harus Rp$5.000$, bukan Rp$3.000$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="pk-s8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Nilai sebuah mesin menyusut $20\%$ tiap tahun dari harga awal Rp$50$ juta. Model nilainya setelah $x$ tahun adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$f(x) = 50(0{,}2)^x$</button>
+                <button class="quiz-option" data-option="B">$f(x) = 50(1{,}2)^x$</button>
+                <button class="quiz-option" data-option="C">$f(x) = 50 - 0{,}2x$</button>
+                <button class="quiz-option" data-option="D">$f(x) = 50(0{,}8)^x$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Menyusut $20\%$ berarti setiap tahun <strong>tersisa</strong> $80\%$, sehingga faktor pengalinya $0{,}8$. Jebakan A memakai bagian yang hilang, bukan yang tersisa. Jebakan C memodelkan penyusutan tetap Rp$0{,}2$ juta per tahun — itu linear, bukan persentase.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
           </div>
 
           <!-- SULIT -->
           <div class="tier-panel" data-tier="sulit">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -598,13 +722,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Bentuk $\frac00$ → faktorkan keduanya: $\frac{(x-2)(x+2)}{(x-2)(x+1)} = \frac{x+2}{x+1} \to \frac{4}{3}$.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+            <div class="quiz-card" data-answer="B" data-qid="pk-x7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Tinggi bola pada detik ke-$0$ sampai ke-$4$ berturut-turut adalah $0, 15, 20, 15, 0$. Model yang tepat adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">linear</button>
+                <button class="quiz-option" data-option="B">kuadratik</button>
+                <button class="quiz-option" data-option="C">eksponensial</button>
+                <button class="quiz-option" data-option="D">tidak ada model yang cocok</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Selisih pertamanya $15, 5, -5, -15$ — tidak tetap. Tetapi selisih keduanya $-10, -10, -10$ — tetap. Selisih kedua yang tetap menandai model kuadratik. Karena $a$ adalah setengah selisih kedua, $a = -5$, dan modelnya $f(x) = -5x^2 + 20x$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="pk-x8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Diberikan $f(x) = 10x + 100$ dan $g(x) = 5 \cdot 2^x$. Pada $x = 5$, manakah yang lebih besar?</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$g$ lebih besar</button>
+                <button class="quiz-option" data-option="B">$f$ lebih besar</button>
+                <button class="quiz-option" data-option="C">sama besar</button>
+                <button class="quiz-option" data-option="D">tidak dapat dibandingkan</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$f(5) = 50 + 100 = 150$, sedangkan $g(5) = 5 \cdot 32 = 160$. Model eksponensialnya baru menyusul di sekitar $x = 5$ — di $x = 4$ ia masih jauh tertinggal ($140$ lawan $80$). Begitulah cirinya: mulai pelan, lalu melewati model linear mana pun dan tak tersusul lagi.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
           </div>
 
           <!-- OLIMPIADE -->
           <div class="tier-panel" data-tier="olimpiade">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-score">Skor <strong>0/10</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -697,7 +843,29 @@
               <div class="quiz-feedback" hidden><strong></strong>Jabarkan: $\frac{4 + 4h + h^2 - 4}{h} = \frac{h(4+h)}{h} = 4+h \to 4$. Perhatikan: ini persis definisi turunan $f'(2)$ untuk $f(x)=x^2$ — kamu baru saja menghitung turunan pertamamu. Selamat datang di gerbang Kalkulus!</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Fondasi prakalkulusmu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
+            <div class="quiz-card" data-answer="B" data-qid="pk-o9">
+              <div class="quiz-head"><span class="quiz-number">9</span><p class="quiz-question">Suatu koloni tumbuh eksponensial. Pada jam ke-$1$ jumlahnya $12$ dan pada jam ke-$3$ jumlahnya $108$. Jumlah pada jam ke-$0$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$36$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Bagi kedua persamaannya supaya $a$ lenyap: $\tfrac{ab^3}{ab} = b^2 = \tfrac{108}{12} = 9$, sehingga $b = 3$. Lalu dari $ab = 12$ diperoleh $a = 4$. Jadi $f(x) = 4 \cdot 3^x$ dan $f(0) = 4$. Jebakan C mengira jumlah awal adalah setengah dari $12$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="pk-o10">
+              <div class="quiz-head"><span class="quiz-number">10</span><p class="quiz-question">Model $f(x) = -5x^2 + 20x$ cocok sempurna untuk tinggi bola pada detik ke-$0$ sampai ke-$4$. Menghitung $f(6)$ memberi $-60$. Kesimpulan yang tepat adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">bolanya berada $60$ m di bawah tanah</button>
+                <button class="quiz-option" data-option="B">modelnya salah sejak awal</button>
+                <button class="quiz-option" data-option="C">tinggi bola $60$ m</button>
+                <button class="quiz-option" data-option="D">modelnya hanya sahih selama bola masih melayang</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Setiap model punya <strong>daerah asal yang masuk akal</strong>. Bola sudah mendarat pada detik ke-$4$, sehingga rumusnya tak lagi menggambarkan apa pun sesudah itu. Modelnya tidak salah — ia hanya dipakai di luar jangkauannya. Inilah sebabnya ekstrapolasi jauh selalu perlu dicurigai, sekalipun aljabarnya rapi.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Fondasi prakalkulusmu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
           </div>
         </div>
       </div>
