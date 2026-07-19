@@ -1672,3 +1672,38 @@ svg text.st-medianlbl { font-family: var(--font-mono); font-size: 12px; font-wei
 .fr-line { stroke: var(--signal-dim); stroke-width: 1.6; stroke-dasharray: 5 4; }
 .fr-poly { fill: var(--signal-soft); stroke: var(--signal); stroke-width: 2.5; stroke-linejoin: round; }
 .fr-vertex { fill: var(--medal); }
+
+/* ==========================================================================
+   PERBAIKAN TATA LETAK — menu Materi & daftar cek TKA
+   Keduanya "sadar jumlah": aturan menyala/padam sendiri mengikuti banyaknya
+   item, jadi menambah materi baru tak butuh sentuhan CSS lagi.
+   ========================================================================== */
+
+/* --- 1. Dropdown desktop: menu berisi 6+ tautan melebar jadi dua kolom --- */
+@media (min-width: 769px) {
+  .nav-drop-menu {
+    max-height: calc(100vh - 96px);   /* layar pendek: menu menggulung, bukan terpotong */
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .nav-drop-menu:has(> a:nth-of-type(6)) {
+    width: 580px;
+    max-width: calc(100vw - 32px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0.35rem;
+    align-content: start;
+  }
+  .nav-drop-menu:has(> a:nth-of-type(6)) > .nav-drop-label,
+  .nav-drop-menu:has(> a:nth-of-type(6)) > .nav-drop-sep,
+  .nav-drop-menu:has(> a:nth-of-type(6)) > .nav-drop-soon {
+    grid-column: 1 / -1;
+  }
+  /* Jumlah tautan ganjil? Tautan terakhir melebar penuh — tak ada yang nyempil */
+  .nav-drop-menu:has(> a:nth-of-type(6)) > a:last-of-type:nth-of-type(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* --- 2. Daftar cek TKA: item terakhir yang ganjil melebar penuh --- */
+.check-grid > .check-item:last-child:nth-child(odd) { grid-column: 1 / -1; }
