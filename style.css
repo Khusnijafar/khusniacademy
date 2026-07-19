@@ -1679,28 +1679,27 @@ svg text.st-medianlbl { font-family: var(--font-mono); font-size: 12px; font-wei
    item, jadi menambah materi baru tak butuh sentuhan CSS lagi.
    ========================================================================== */
 
-/* --- 1. Dropdown desktop: menu berisi 6+ tautan melebar jadi dua kolom --- */
+/* --- 1. Dropdown desktop: grup berisi 6+ tautan melebar jadi dua kolom --- */
 @media (min-width: 769px) {
   .nav-drop-menu {
     max-height: calc(100vh - 96px);   /* layar pendek: menu menggulung, bukan terpotong */
     overflow-y: auto;
     overscroll-behavior: contain;
   }
-  .nav-drop-menu:has(> a:nth-of-type(6)) {
+  /* Cukup satu grup gemuk untuk melebarkan seluruh menu */
+  .nav-drop-menu:has(.nav-drop-group > a:nth-of-type(6)) {
     width: 580px;
     max-width: calc(100vw - 32px);
+  }
+  /* Lalu SEMUA grup di dalamnya ikut dua kolom, agar sejajar rapi */
+  .nav-drop-menu:has(.nav-drop-group > a:nth-of-type(6)) .nav-drop-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 0.35rem;
     align-content: start;
   }
-  .nav-drop-menu:has(> a:nth-of-type(6)) > .nav-drop-label,
-  .nav-drop-menu:has(> a:nth-of-type(6)) > .nav-drop-sep,
-  .nav-drop-menu:has(> a:nth-of-type(6)) > .nav-drop-soon {
-    grid-column: 1 / -1;
-  }
-  /* Jumlah tautan ganjil? Tautan terakhir melebar penuh — tak ada yang nyempil */
-  .nav-drop-menu:has(> a:nth-of-type(6)) > a:last-of-type:nth-of-type(odd) {
+  /* Anggota terakhir yang jatuh ganjil melebar penuh — tak ada yang nyempil */
+  .nav-drop-menu:has(.nav-drop-group > a:nth-of-type(6)) .nav-drop-group > a:last-child:nth-child(odd) {
     grid-column: 1 / -1;
   }
 }
