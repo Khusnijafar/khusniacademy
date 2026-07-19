@@ -33,15 +33,15 @@
         <button class="nav-drop-btn active" type="button" aria-expanded="false" aria-haspopup="true">Materi<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="nav-drop-menu">
           <span class="nav-drop-label">Tersedia</span>
-          <a href="aljabar.html"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, bekal olimpiade</em></a>
-          <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap</em></a>
-          <a href="geometri.html" class="active"><strong>Geometri</strong><em>Kesebangunan, lingkaran, Heron &amp; kuasa titik</em></a>
+          <a href="aljabar.html"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, suku banyak, bekal olimpiade</em></a>
+          <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap, persamaan</em></a>
+          <a href="geometri.html" class="active"><strong>Geometri</strong><em>Kesebangunan, lingkaran &amp; persamaannya, Heron, kuasa titik</em></a>
           <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, limit</em></a>
           <a href="limit.html"><strong>Limit</strong><em>Konsep &amp; sifat, aljabar, trigonometri, tak hingga &amp; asimtot</em></a>
           <a href="matriks.html"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
           <a href="vektor.html"><strong>Vektor</strong><em>Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
-          <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan, pencacahan &amp; peluang</em></a>
-          <a href="kalkulus.html"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral &amp; luas daerah</em></a>
+          <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan &amp; penyebaran, pencacahan, peluang</em></a>
+          <a href="kalkulus.html"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral, luas &amp; volume benda putar</em></a>
         </div>
       </div>
       <div class="nav-drop">
@@ -78,6 +78,7 @@
       <a href="#segitiga">Segitiga</a>
       <a href="#kongruen">Kongruen &amp; Sebangun</a>
       <a href="#lingkaran">Lingkaran</a>
+      <a href="#lingkaran-analitik">Persamaan Lingkaran</a>
       <a href="#garis-istimewa">Garis Istimewa</a>
       <a href="#menuju-olimpiade">Menuju Olimpiade</a>
       <a href="#bedah-soal">Bedah Soal</a>
@@ -186,6 +187,70 @@
         </div>
 
         <p>Satu fakta lagi untuk melengkapi: <strong>garis singgung</strong> lingkaran selalu tegak lurus jari-jari di titik singgungnya.</p>
+      </div>
+
+      <div class="lesson-section" id="lingkaran-analitik">
+        <h2>Persamaan Lingkaran</h2>
+        <p>Sejauh ini lingkaran kita perlakukan sebagai <em>bentuk</em>: sudut keliling, tali busur, kuasa titik. Sekarang kita letakkan ia di atas bidang koordinat dan memberinya <em class="accent-word">alamat</em> — sebuah persamaan. Begitu lingkaran punya persamaan, seluruh perkakas aljabar boleh ikut bekerja.</p>
+        <p>Titiknya cuma satu: lingkaran adalah himpunan titik yang <strong>berjarak sama</strong> dari pusat. Terjemahkan kalimat itu dengan rumus jarak, dan persamaannya langsung lahir.</p>
+        <div class="box formula">
+          <span class="box-label">Bentuk Baku</span>
+          $$(x - a)^2 + (y - b)^2 = r^2$$
+        </div>
+        <p>dengan pusat $(a, b)$ dan jari-jari $r$. Bila pusatnya di titik asal, bentuknya menyusut menjadi $x^2 + y^2 = r^2$ — Pythagoras yang menyamar.</p>
+
+        <div class="widget-card reveal" id="widget-lingkaran-analitik">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Laboratorium Lingkaran</h3>
+            <p>Geser pusat dan jari-jarinya, lalu perhatikan <strong>dua baris persamaan bergerak bersamaan</strong> — bentuk baku dan bentuk umum adalah lingkaran yang sama, hanya ditulis berbeda. Empat preset menyalakan empat keadaan istimewa yang berbeda: berpusat di titik asal, melalui titik asal, menyinggung sumbu-X, dan menyinggung sumbu-Y. Coba tebak lencananya sebelum menekan presetnya!</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+
+        <h3>Bentuk Umum</h3>
+        <p>Jabarkan bentuk baku tadi, lalu kumpulkan sukunya:</p>
+        <div class="box formula">
+          <span class="box-label">Bentuk Umum</span>
+          $$x^2 + y^2 + Ax + By + C = 0, \qquad A = -2a, \quad B = -2b, \quad C = a^2 + b^2 - r^2$$
+        </div>
+        <p>Hubungan itu bisa dibaca mundur — dan inilah yang paling sering ditanyakan:</p>
+        <div class="box formula">
+          <span class="box-label">Membaca Balik</span>
+          $$\text{pusat} = \left(-\frac{A}{2},\; -\frac{B}{2}\right) \qquad\qquad r = \sqrt{\frac{A^2}{4} + \frac{B^2}{4} - C}$$
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$x^2 + y^2 - 6x + 4y - 12 = 0$ punya $A = -6$, $B = 4$, $C = -12$. Pusatnya $\left(3, -2\right)$ dan jari-jarinya $r = \sqrt{9 + 4 + 12} = \sqrt{25} = 5$.</p>
+        </div>
+
+        <h3>Kedudukan Titik terhadap Lingkaran</h3>
+        <p>Masukkan koordinat sebuah titik ke ruas kiri bentuk umum. Tandanya langsung bercerita:</p>
+        <div class="box formula">
+          <span class="box-label">Uji Tanda</span>
+          $$x_1^2 + y_1^2 + Ax_1 + By_1 + C \;\begin{cases} &lt; 0 &amp; \text{di dalam} \\ = 0 &amp; \text{pada lingkaran} \\ &gt; 0 &amp; \text{di luar} \end{cases}$$
+        </div>
+        <p>Nilai itu bukan bilangan sembarangan — ia persis <strong>kuasa titik</strong> yang sudah kamu kenal di bab <a href="#lingkaran">Lingkaran</a>, yaitu $d^2 - r^2$. Dua bab yang tampak berjauhan ternyata menghitung besaran yang sama.</p>
+
+        <h3>Garis Singgung</h3>
+        <div class="box formula">
+          <span class="box-label">Dua Rumus Penting</span>
+          $$\text{di titik } (x_1, y_1) \text{ pada } x^2 + y^2 = r^2: \quad x\,x_1 + y\,y_1 = r^2$$
+          $$\text{dengan gradien } m: \quad y = mx \pm r\sqrt{m^2 + 1}$$
+        </div>
+        <p>Rumus pertama tampak seperti "mengganti separuh $x^2$ dengan $x_1$" — dan memang begitulah pola menghafalnya. Rumus kedua memberi <em>dua</em> garis sekaligus: satu di masing-masing sisi lingkaran, karena setiap arah kemiringan punya dua garis singgung sejajar.</p>
+
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>Ruas kanan bentuk baku adalah $r^2$, <strong>bukan</strong> $r$. Melihat $= 25$ lalu menjawab jari-jari $25$ adalah kesalahan paling sering di bab ini.</li>
+            <li>$(x + 2)^2$ berarti pusatnya $-2$, bukan $2$ — tulis ulang sebagai $(x - (-2))^2$ bila ragu.</li>
+            <li>Bentuk umum hanya sah bila koefisien $x^2$ dan $y^2$ <strong>sama</strong>. Menemui $2x^2 + 2y^2 + \dots = 0$? Bagi dulu seluruhnya dengan $2$.</li>
+            <li>Bila $\frac{A^2}{4} + \frac{B^2}{4} - C$ bernilai negatif, persamaannya <em>bukan lingkaran</em> — tak ada satu pun titik yang memenuhinya.</li>
+          </ul>
+        </div>
       </div>
 
       <div class="lesson-section" id="garis-istimewa">
@@ -316,7 +381,7 @@
           <!-- MUDAH -->
           <div class="tier-panel active" data-tier="mudah">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -387,13 +452,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Sudut sehadap pada garis sejajar selalu sama besar: $75^\circ$. ($105^\circ$ adalah pasangan sepihaknya.)</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+            <div class="quiz-card" data-answer="B" data-qid="geo-m7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Pusat lingkaran $(x - 3)^2 + (y + 2)^2 = 16$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(-3, 2)$</button>
+                <button class="quiz-option" data-option="B">$(3, -2)$</button>
+                <button class="quiz-option" data-option="C">$(3, 2)$</button>
+                <button class="quiz-option" data-option="D">$(-3, -2)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Bentuk bakunya $(x-a)^2 + (y-b)^2 = r^2$, jadi pusatnya $(a, b)$. Karena $(y + 2) = (y - (-2))$, maka $b = -2$. Jebakan A dan D membalik tanda — tulis ulang menjadi bentuk pengurangan bila ragu.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="geo-m8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Jari-jari lingkaran $x^2 + y^2 = 25$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$25$</button>
+                <button class="quiz-option" data-option="B">$12{,}5$</button>
+                <button class="quiz-option" data-option="C">$5$</button>
+                <button class="quiz-option" data-option="D">$\sqrt{5}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Ruas kanan bentuk baku adalah $r^2$, bukan $r$. Jadi $r = \sqrt{25} = 5$. Jebakan A adalah kesalahan paling umum di bab ini: lupa mengakar.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
           </div>
 
           <!-- SEDANG -->
           <div class="tier-panel" data-tier="sedang">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -464,13 +551,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Titik berat membagi garis berat $2:1$ dari titik sudut: $\frac{2}{3} \times 18 = 12$.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+            <div class="quiz-card" data-answer="D" data-qid="geo-s7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Persamaan lingkaran berpusat $(2, -1)$ dengan jari-jari $3$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(x-2)^2 + (y+1)^2 = 3$</button>
+                <button class="quiz-option" data-option="B">$(x+2)^2 + (y-1)^2 = 9$</button>
+                <button class="quiz-option" data-option="C">$(x-2)^2 + (y-1)^2 = 9$</button>
+                <button class="quiz-option" data-option="D">$(x-2)^2 + (y+1)^2 = 9$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pusat $(2, -1)$ memberi $(x - 2)^2 + (y - (-1))^2 = (x-2)^2 + (y+1)^2$, dan ruas kanannya $r^2 = 9$. Jebakan A lupa mengkuadratkan jari-jarinya; jebakan B membalik kedua tanda.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="geo-s8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Pusat lingkaran $x^2 + y^2 - 6x + 4y - 12 = 0$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(3, -2)$</button>
+                <button class="quiz-option" data-option="B">$(6, -4)$</button>
+                <button class="quiz-option" data-option="C">$(-3, 2)$</button>
+                <button class="quiz-option" data-option="D">$(-6, 4)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Dari $A = -6$ dan $B = 4$, pusatnya $\left(-\tfrac{A}{2}, -\tfrac{B}{2}\right) = (3, -2)$. Jebakan C lupa membalik tandanya; jebakan B lupa membagi dua. (Jari-jarinya $\sqrt{9 + 4 + 12} = 5$.)</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
           </div>
 
           <!-- SULIT -->
           <div class="tier-panel" data-tier="sulit">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -541,13 +650,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Garis singgung $\perp$ jari-jari, jadi segiempat $P$–singgung–pusat–singgung punya dua sudut $90^\circ$. Jumlah sudut segiempat $360^\circ$: sudut pusat $= 360^\circ - 90^\circ - 90^\circ - 40^\circ = 140^\circ$.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+            <div class="quiz-card" data-answer="B" data-qid="geo-x7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Jari-jari lingkaran $x^2 + y^2 + 4x - 6y - 3 = 0$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$16$</button>
+                <button class="quiz-option" data-option="D">$\sqrt{13}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$r = \sqrt{\tfrac{A^2}{4} + \tfrac{B^2}{4} - C} = \sqrt{\tfrac{16}{4} + \tfrac{36}{4} + 3} = \sqrt{4 + 9 + 3} = \sqrt{16} = 4$. Jebakan C berhenti sebelum mengakar. Perhatikan $-C$: karena $C = -3$, sukunya menjadi $+3$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="geo-x8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Kedudukan titik $(5, 1)$ terhadap lingkaran $x^2 + y^2 - 4x - 2y - 20 = 0$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">di dalam lingkaran</button>
+                <button class="quiz-option" data-option="B">pada lingkaran</button>
+                <button class="quiz-option" data-option="C">di luar lingkaran</button>
+                <button class="quiz-option" data-option="D">tidak dapat ditentukan</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Substitusikan: $25 + 1 - 20 - 2 - 20 = -16$. Nilainya negatif, jadi titik itu berada di dalam. Angka $-16$ ini persis kuasa titiknya: pusat lingkaran $(2,1)$ dengan $r = 5$, sehingga $d^2 - r^2 = 3^2 - 5^2 = -16$ ✓</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
           </div>
 
           <!-- OLIMPIADE -->
           <div class="tier-panel" data-tier="olimpiade">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-score">Skor <strong>0/10</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -640,7 +771,29 @@
               <div class="quiz-feedback" hidden><strong></strong>Heron: $s = 21$, $L = \sqrt{21 \cdot 8 \cdot 7 \cdot 6} = 84$. Lalu $L = rs \Rightarrow r = \frac{84}{21} = 4$. Dua perkakas olimpiade dalam satu soal.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Fondasi geometrimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
+            <div class="quiz-card" data-answer="D" data-qid="geo-o9">
+              <div class="quiz-head"><span class="quiz-number">9</span><p class="quiz-question">Persamaan garis singgung lingkaran $x^2 + y^2 = 25$ di titik $(3, 4)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4x + 3y = 25$</button>
+                <button class="quiz-option" data-option="B">$3x - 4y = 25$</button>
+                <button class="quiz-option" data-option="C">$x + y = 7$</button>
+                <button class="quiz-option" data-option="D">$3x + 4y = 25$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pakai $x\,x_1 + y\,y_1 = r^2$: $3x + 4y = 25$. Periksa dua hal — titiknya memang di lingkaran ($9 + 16 = 25$ ✓), dan gradien garisnya $-\tfrac34$ tegak lurus jari-jari yang bergradien $\tfrac43$ ✓</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="geo-o10">
+              <div class="quiz-head"><span class="quiz-number">10</span><p class="quiz-question">Sebuah lingkaran berpusat di $(a, a)$, menyinggung sumbu-X, dan melalui titik $(2, 1)$. Jumlah semua nilai $a$ yang mungkin adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$1$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$6$</button>
+                <button class="quiz-option" data-option="D">$4$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Menyinggung sumbu-X berarti jarak pusat ke sumbu itu sama dengan jari-jarinya: $r = \lvert a \rvert$. Substitusikan $(2,1)$: $(2-a)^2 + (1-a)^2 = a^2$, yang menyederhana menjadi $a^2 - 6a + 5 = 0$. Menurut Vieta jumlah akarnya $6$ — jadi ada <strong>dua</strong> lingkaran yang memenuhi ($a = 1$ dan $a = 5$), bukan satu.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Fondasi geometrimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
           </div>
         </div>
       </div>

@@ -33,15 +33,15 @@
         <button class="nav-drop-btn active" type="button" aria-expanded="false" aria-haspopup="true">Materi<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="nav-drop-menu">
           <span class="nav-drop-label">Tersedia</span>
-          <a href="aljabar.html"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, bekal olimpiade</em></a>
-          <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap</em></a>
-          <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran, Heron &amp; kuasa titik</em></a>
+          <a href="aljabar.html"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, suku banyak, bekal olimpiade</em></a>
+          <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap, persamaan</em></a>
+          <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran &amp; persamaannya, Heron, kuasa titik</em></a>
           <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, limit</em></a>
           <a href="limit.html"><strong>Limit</strong><em>Konsep &amp; sifat, aljabar, trigonometri, tak hingga &amp; asimtot</em></a>
           <a href="matriks.html"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
           <a href="vektor.html"><strong>Vektor</strong><em>Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
-          <a href="statistika.html" class="active"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan, pencacahan &amp; peluang</em></a>
-          <a href="kalkulus.html"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral &amp; luas daerah</em></a>
+          <a href="statistika.html" class="active"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan &amp; penyebaran, pencacahan, peluang</em></a>
+          <a href="kalkulus.html"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral, luas &amp; volume benda putar</em></a>
         </div>
       </div>
       <div class="nav-drop">
@@ -77,6 +77,7 @@
       <a href="#penyajian">Penyajian Data</a>
       <a href="#pemusatan">Ukuran Pemusatan</a>
       <a href="#penyebaran">Ukuran Penyebaran</a>
+      <a href="#simpangan-baku">Ragam &amp; Simpangan Baku</a>
       <a href="#pencacahan">Aturan Pencacahan</a>
       <a href="#peluang">Peluang</a>
       <a href="#menuju-olimpiade">Menuju Olimpiade</a>
@@ -140,7 +141,7 @@
           <div class="widget-head">
             <span class="widget-tag">Simulasi Interaktif</span>
             <h3>Laboratorium Data: Rata-rata vs Median</h3>
-            <p>Seret titik-titik data pada garis bilangan. Garis biru (rata-rata) dan emas (median) bergerak mengikutinya. Tarik satu titik jauh ke kanan menjadi <strong>pencilan</strong> — perhatikan rata-rata ikut terseret sementara median hampir tak bergeming. Coba juga preset <strong>Ada Pencilan</strong>!</p>
+            <p>Seret titik-titik data pada garis bilangan. Garis biru (rata-rata) dan emas (median) bergerak mengikutinya. Tarik satu titik jauh ke kanan menjadi <strong>pencilan</strong> — perhatikan rata-rata ikut terseret sementara median hampir tak bergeming. Coba juga preset <strong>Ada Pencilan</strong>! Panel kini turut menampilkan <strong>simpangan baku</strong> — bandingkan preset <strong>Menumpuk</strong> dan <strong>Ada Pencilan</strong>: rata-ratanya sama persis ($6$), tapi simpangan bakunya $1{,}07$ berbanding $5{,}04$.</p>
           </div>
           <div class="widget-mount">
             <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
@@ -171,6 +172,67 @@
           <p style="margin-bottom:0.3rem;">Data terurut: $2, 4, 5, 7, 8, 10, 11, 13$ ($n = 8$).</p>
           <p style="margin-bottom:0.15rem;">Median $= \frac{7+8}{2} = 7{,}5$. Paruh bawah $\{2,4,5,7\} \Rightarrow Q_1 = \frac{4+5}{2} = 4{,}5$. Paruh atas $\{8,10,11,13\} \Rightarrow Q_3 = \frac{10+11}{2} = 10{,}5$.</p>
           <p style="margin-bottom:0;">$\text{JAK} = 10{,}5 - 4{,}5 = 6$.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="simpangan-baku">
+        <h2>Ragam &amp; Simpangan Baku</h2>
+        <p>Jangkauan hanya melirik dua nilai ujung, dan kuartil hanya peduli posisi. Keduanya membuang informasi. Lihat dua kumpulan data ini — keduanya berisi tujuh angka dengan rata-rata yang <em>sama persis</em>, yaitu $6$:</p>
+        <div class="box">
+          <span class="box-label">Rata-rata Sama, Watak Berbeda</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>A:</strong> $5, 5, 5, 6, 6, 7, 8$ — rapat berkerumun di sekitar $6$.</li>
+            <li><strong>B:</strong> $2, 3, 4, 4, 5, 6, 18$ — berserak, dengan satu pencilan jauh.</li>
+          </ul>
+        </div>
+        <p>Rata-rata tak sanggup membedakan keduanya. Kita butuh ukuran yang memperhitungkan <em class="accent-word">jarak setiap data ke rata-ratanya</em>.</p>
+
+        <h3>Mengapa Harus Dikuadratkan?</h3>
+        <p>Gagasan pertama yang wajar: rata-ratakan saja semua simpangan $x_i - \bar{x}$. Sayangnya usaha itu selalu gagal — simpangan positif dan negatif persis saling meniadakan, sehingga jumlahnya <strong>selalu nol</strong>, untuk data apa pun. Dua jalan keluar: buang tandanya dengan nilai mutlak, atau lenyapkan tandanya dengan mengkuadratkan.</p>
+        <div class="box formula">
+          <span class="box-label">Ragam &amp; Simpangan Baku</span>
+          $$S^2 = \frac{\sum (x_i - \bar{x})^2}{n} \qquad\qquad S = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n}}$$
+        </div>
+        <p><strong>Ragam</strong> ($S^2$, disebut juga variansi) adalah rata-rata kuadrat simpangan. Karena dikuadratkan, satuannya ikut terkuadrat — data bersatuan kg menghasilkan ragam bersatuan kg². Karena itu akarnya diambil kembali: <strong>simpangan baku</strong> $S$ kembali bersatuan asli, dan bisa dibaca sebagai <em>"jarak khas sebuah data dari rata-ratanya"</em>.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Data $2, 3, 4, 5, 6, 7, 8$ dengan $\bar{x} = 5$.</p>
+          <p style="margin-bottom:0.3rem;">Simpangan: $-3, -2, -1, 0, 1, 2, 3$ — jumlahnya nol, seperti dijanjikan.</p>
+          <p style="margin-bottom:0;">Kuadratnya: $9, 4, 1, 0, 1, 4, 9$ dengan jumlah $28$. Maka $S^2 = \frac{28}{7} = 4$ dan $S = \sqrt{4} = 2$. (Inilah preset <strong>Simetris</strong> di laboratorium di atas.)</p>
+        </div>
+        <p>Kembali ke dua kumpulan tadi: A menghasilkan $S \approx 1{,}07$ sedangkan B menghasilkan $S \approx 5{,}04$ — hampir lima kali lipat, meski rata-ratanya kembar. Angka itulah yang akhirnya bisa mengatakan apa yang rata-rata bungkam soal keduanya.</p>
+
+        <h3>Simpangan Rata-rata</h3>
+        <p>Jalan keluar yang satunya — memakai nilai mutlak — melahirkan <strong>simpangan rata-rata</strong>:</p>
+        <div class="box formula">
+          <span class="box-label">Simpangan Rata-rata</span>
+          $$SR = \frac{\sum \lvert x_i - \bar{x} \rvert}{n}$$
+        </div>
+        <p>Lebih mudah dibayangkan, tapi kalah populer: nilai mutlak sulit diolah lebih lanjut secara aljabar, sementara kuadrat menurut. Itulah sebabnya simpangan baku yang menjadi standar.</p>
+
+        <h3>Jalan Pintas Menghitung Ragam</h3>
+        <p>Menghitung selisih satu per satu melelahkan bila rata-ratanya pecahan. Identitas berikut memangkasnya:</p>
+        <div class="box formula">
+          <span class="box-label">Rumus Pintas</span>
+          $$S^2 = \overline{x^2} - \left(\bar{x}\right)^2 = \frac{\sum x_i^2}{n} - \bar{x}^{\,2}$$
+        </div>
+        <p>Cukup dua besaran: rata-rata kuadrat data, dikurangi kuadrat rata-ratanya. Untuk $1, 2, 3, 4, 5$: $\overline{x^2} = \frac{55}{5} = 11$ dan $\bar{x}^2 = 9$, sehingga $S^2 = 2$ — sama persis dengan cara panjang, hanya lebih singkat.</p>
+
+        <h3>Dua Sifat yang Sering Diuji</h3>
+        <div class="box formula">
+          <span class="box-label">Geser &amp; Skala</span>
+          $$x_i + c \;\Longrightarrow\; S \text{ tetap} \qquad\qquad k\,x_i \;\Longrightarrow\; S \text{ menjadi } \lvert k \rvert S$$
+        </div>
+        <p>Menambah konstanta menggeser seluruh data <em>beserta</em> rata-ratanya, jadi jarak antar-titik tak berubah sedikit pun. Sebaliknya, mengalikan semua data merenggangkan jaraknya — dan simpangan baku ikut merenggang sebesar $\lvert k \rvert$ kali.</p>
+
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li><strong>Ragam bukan simpangan baku.</strong> Baca soalnya baik-baik — lupa mengakar (atau malah mengakar dua kali) adalah kesalahan paling sering di bab ini.</li>
+            <li>Simpangan baku <strong>tak pernah negatif</strong>. Nilainya nol hanya dalam satu keadaan: semua data persis sama.</li>
+            <li>Untuk data <em>sampel</em>, sebagian buku membagi dengan $n - 1$, bukan $n$. Di jenjang SMA yang dipakai adalah pembagi $n$ (data populasi) — ikuti konteks soalnya.</li>
+            <li>Simpangan baku jauh lebih mudah digemukkan pencilan daripada JAK, karena selisihnya <em>dikuadratkan</em>. Satu nilai ekstrem bisa melipatgandakannya, seperti preset <strong>Ada Pencilan</strong> yang membengkak ke $5{,}04$.</li>
+          </ul>
         </div>
       </div>
 
@@ -348,7 +410,7 @@
           <!-- MUDAH -->
           <div class="tier-panel active" data-tier="mudah">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -419,13 +481,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Komplemen: $P(A') = 1 - P(A) = 1 - 0{,}3 = 0{,}7$. Peluang suatu kejadian dan lawannya selalu berjumlah $1$.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+            <div class="quiz-card" data-answer="C" data-qid="st-m7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Simpangan baku dari data $8, 8, 8, 8$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$8$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$0$</button>
+                <button class="quiz-option" data-option="D">$1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Setiap nilai sama dengan rata-ratanya, jadi semua simpangan $x_i - \bar{x}$ bernilai nol. Simpangan baku nol berarti data tak menyebar sama sekali — dan itulah satu-satunya keadaan yang membuatnya nol.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-m8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Rata-rata data $2, 2, 4, 4$ adalah $3$. Ragam data tersebut adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$1$</button>
+                <button class="quiz-option" data-option="B">$2$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">$0$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Simpangannya $-1, -1, 1, 1$; kuadratnya $1, 1, 1, 1$ dengan jumlah $4$. Ragam $= \frac{4}{4} = 1$. Jebakan C berhenti di jumlah kuadratnya, belum dibagi $n$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
           </div>
 
           <!-- SEDANG -->
           <div class="tier-panel" data-tier="sedang">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -496,13 +580,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Tahap berurutan (pilih makanan <em>lalu</em> minuman) $\Rightarrow$ aturan perkalian: $3 \times 4 = 12$. Jebakan B menjumlahkan ($3+4$) — itu untuk pilihan "atau", bukan "lalu".</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+            <div class="quiz-card" data-answer="D" data-qid="st-s7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Simpangan baku dari data $3, 4, 5, 6, 7$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$10$</button>
+                <button class="quiz-option" data-option="C">$\sqrt{10}$</button>
+                <button class="quiz-option" data-option="D">$\sqrt{2}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rata-ratanya $5$, simpangannya $-2, -1, 0, 1, 2$, jumlah kuadratnya $10$. Ragam $= \frac{10}{5} = 2$, lalu diakar: $S = \sqrt{2}$. Jebakan B berhenti di jumlah kuadrat; jebakan C lupa membagi $n$ sebelum mengakar.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="st-s8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Ragam dari data $2, 4, 4, 4, 5, 5, 7, 9$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$32$</button>
+                <button class="quiz-option" data-option="D">$8$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rata-ratanya $\frac{40}{8} = 5$. Jumlah kuadrat simpangan $= 9+1+1+1+0+0+4+16 = 32$, dibagi $n = 8$ memberi ragam $4$. Jebakan A adalah simpangan bakunya ($\sqrt4 = 2$) — yang ditanya ragamnya.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
           </div>
 
           <!-- SULIT -->
           <div class="tier-panel" data-tier="sulit">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -573,13 +679,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Pakai komplemen: $P(\text{minimal 1 angka}) = 1 - P(\text{semua gambar}) = 1 - \left(\frac12\right)^3 = 1 - \frac18 = \frac78$. Jebakan B adalah peluang lawannya.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+            <div class="quiz-card" data-answer="B" data-qid="st-x7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Setiap nilai pada suatu kumpulan data ditambah $5$. Simpangan bakunya…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">bertambah $5$</button>
+                <button class="quiz-option" data-option="B">tidak berubah</button>
+                <button class="quiz-option" data-option="C">menjadi $5$ kali semula</button>
+                <button class="quiz-option" data-option="D">bertambah $\sqrt{5}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Menambah konstanta menggeser seluruh data <em>beserta</em> rata-ratanya, sehingga jarak tiap data ke rata-rata sama sekali tak berubah. Bandingkan: mengalikan semua data dengan $k$ membuat simpangan bakunya menjadi $\lvert k \rvert$ kali. Pergeseran tak berpengaruh, penskalaan berpengaruh.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="st-x8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Simpangan rata-rata dari data $4, 6, 8, 10, 12$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2{,}4$</button>
+                <button class="quiz-option" data-option="B">$8$</button>
+                <button class="quiz-option" data-option="C">$12$</button>
+                <button class="quiz-option" data-option="D">$2$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rata-ratanya $8$, dan nilai mutlak simpangannya $4, 2, 0, 2, 4$. Maka $SR = \frac{12}{5} = 2{,}4$. Jebakan C berhenti di jumlahnya; jebakan B adalah rata-ratanya sendiri.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
           </div>
 
           <!-- OLIMPIADE -->
           <div class="tier-panel" data-tier="olimpiade">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-score">Skor <strong>0/10</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -672,7 +800,29 @@
               <div class="quiz-feedback" hidden><strong></strong>Ruang sampel $36$. Jumlah yang prima: $2, 3, 5, 7, 11$ dengan cara berturut-turut $1, 2, 4, 6, 2 = 15$ cara. Jadi $P = \dfrac{15}{36} = \dfrac{5}{12}$. Ingat: $1$ bukan prima, dan jumlah maksimum $12$ (jadi $13$ mustahil).</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Statistika &amp; peluangmu siap diuji — lanjutkan ke <a href="tka.html" style="color:var(--medal);font-weight:700;">TKA Matematika Umum</a> yang menguji domain ini di lima indikatornya, atau ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a>.</div>
+            <div class="quiz-card" data-answer="C" data-qid="st-o9">
+              <div class="quiz-head"><span class="quiz-number">9</span><p class="quiz-question">Data $3, 5, 7, a, 9$ memiliki rata-rata $6$. Ragam data tersebut adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$20$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">$5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Dari $\frac{3+5+7+a+9}{5} = 6$ diperoleh $24 + a = 30$, jadi $a = 6$. Simpangannya $-3, -1, 1, 0, 3$ dengan jumlah kuadrat $20$, sehingga ragam $= \frac{20}{5} = 4$. Jebakan A adalah simpangan bakunya; B berhenti di jumlah kuadrat.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="st-o10">
+              <div class="quiz-head"><span class="quiz-number">10</span><p class="quiz-question">Dengan rumus pintas $S^2 = \overline{x^2} - \left(\bar{x}\right)^2$, ragam data $1, 2, 3, 4, 5$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$11$</button>
+                <button class="quiz-option" data-option="B">$9$</button>
+                <button class="quiz-option" data-option="C">$2$</button>
+                <button class="quiz-option" data-option="D">$20$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$\bar{x} = 3$ dan $\overline{x^2} = \frac{1+4+9+16+25}{5} = \frac{55}{5} = 11$, sehingga $S^2 = 11 - 9 = 2$. Jebakan A dan B adalah kedua bahan mentahnya. Hasil ini identik dengan cara panjang — hanya jauh lebih singkat saat rata-ratanya pecahan.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Statistika &amp; peluangmu siap diuji — lanjutkan ke <a href="tka.html" style="color:var(--medal);font-weight:700;">TKA Matematika Umum</a> yang menguji domain ini di lima indikatornya, atau ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a>.</div>
           </div>
         </div>
       </div>

@@ -63,6 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initDataLab();
   initAsimtotLab();
   initTurunanLab();
+  initHornerLab();
+  initCircleLab();
+  initVolumeLab();
   initKatex();
 });
 
@@ -590,6 +593,7 @@ function initUnitCircle() {
   const cosLine = svgEl('line', { x1: C, y1: C, x2: C, y2: C, class: 'uc-cos' }, svg);
   const sinLine = svgEl('line', { x1: C, y1: C, x2: C, y2: C, class: 'uc-sin' }, svg);
   const radLine = svgEl('line', { x1: C, y1: C, x2: C, y2: C, class: 'uc-rad' }, svg);
+  const twin = svgEl('circle', { cx: C, cy: C, r: 6, class: 'uc-twin' }, svg);
   const point = svgEl('circle', { cx: C, cy: C, r: 6, class: 'uc-pt' }, svg);
 
   /* --- Bangun kontrol --- */
@@ -627,7 +631,9 @@ function initUnitCircle() {
     '<div><span>sin \u03b8</span><b data-r="sin"></b></div>' +
     '<div><span>cos \u03b8</span><b data-r="cos"></b></div>' +
     '<div><span>tan \u03b8</span><b data-r="tan"></b></div>' +
-    '<div><span>Kuadran</span><b data-r="quad"></b></div>');
+    '<div><span>Kuadran</span><b data-r="quad"></b></div>' +
+    '<div><span>Sudut ber-sin sama</span><b data-r="twinsin"></b></div>' +
+    '<div><span>Sudut ber-cos sama</span><b data-r="twincos"></b></div>');
   controls.appendChild(readout);
 
   const legend = elDiv('legend',
@@ -749,6 +755,13 @@ function initUnitCircle() {
       q('[data-r="tan"]').textContent = Math.abs(cos) < 1e-4 ? 'tak terdefinisi' : fmt3(Math.tan(rad));
     }
     q('[data-r="quad"]').textContent = quadLabel(deg);
+    const tSin = ((180 - deg) % 360 + 360) % 360;
+    const tCos = ((360 - deg) % 360 + 360) % 360;
+    q('[data-r="twinsin"]').textContent = tSin + '\u00b0';
+    q('[data-r="twincos"]').textContent = tCos + '\u00b0';
+    const ta = tSin * Math.PI / 180;
+    twin.setAttribute('cx', (C + R * Math.cos(ta)).toFixed(1));
+    twin.setAttribute('cy', (C - R * Math.sin(ta)).toFixed(1));
 
     chips.querySelectorAll('.chip').forEach(ch => {
       ch.classList.toggle('active', Number(ch.dataset.deg) === (deg % 360));
@@ -1927,7 +1940,8 @@ function initDataLab() {
     '<div><span>Rata-rata (x\u0304)</span><b data-r="mean"></b></div>' +
     '<div><span>Median</span><b data-r="med"></b></div>' +
     '<div><span>Modus</span><b data-r="mod"></b></div>' +
-    '<div><span>Jangkauan</span><b data-r="range"></b></div>');
+    '<div><span>Jangkauan</span><b data-r="range"></b></div>' +
+    '<div><span>Simpangan baku</span><b data-r="sb"></b></div>');
   controls.appendChild(readout);
 
   const legend = elDiv('legend',
@@ -1997,7 +2011,9 @@ function initDataLab() {
     q('[data-r="mean"]').textContent = fmt(mean);
     q('[data-r="med"]').textContent = fmt(med);
     q('[data-r="mod"]').textContent = mo ? mo.map(fmt).join(', ') : '\u2014 (tak ada)';
+    const ragam = data.reduce((a, b) => a + (b - mean) * (b - mean), 0) / n;
     q('[data-r="range"]').textContent = fmt(rng);
+    q('[data-r="sb"]').textContent = fmt(Math.sqrt(ragam));
 
     const gap = mean - med;
     note.textContent = Math.abs(gap) < 0.5
@@ -2390,5 +2406,426 @@ function initTurunanLab() {
   ['pointerup', 'pointercancel'].forEach(ev => svg.addEventListener(ev, () => { drag = false; }));
 
   drawCurve();
+  render();
+}
+
+/* ==========================================================================
+   SIMULASI 10 — Skema Horner (aljabar.html)
+   Geser k dan saksikan pembagian sintetik terisi: sel terakhir adalah sisa,
+   dan sisa itu persis P(k) (Teorema Sisa). Sisa nol ⟹ (x − k) faktor.
+   ========================================================================== */
+function initHornerLab() {
+  const host = document.getElementById('widget-horner');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const SUP = { 2: '\u00b2', 3: '\u00b3' };
+  const PRESETS = [
+    ['Tiga Akar', [1, -6, 11, -6]],
+    ['Akar Kembar', [1, 0, -3, 2]],
+    ['Satu Akar', [1, -2, 1, -2]],
+    ['Tanpa Akar Bulat', [1, 0, -1, -1]]
+  ];
+  let coef = PRESETS[0][1].slice();
+  let k = 1;
+
+  const num = v => String(v).replace('-', '\u2212');
+  const polyStr = cs => {
+    const deg = cs.length - 1;
+    let out = '';
+    cs.forEach((c, i) => {
+      if (c === 0) return;
+      const pw = deg - i, a = Math.abs(c);
+      const sign = out === '' ? (c < 0 ? '\u2212' : '') : (c < 0 ? ' \u2212 ' : ' + ');
+      let term = (a === 1 && pw > 0) ? '' : String(a);
+      if (pw === 1) term += 'x';
+      else if (pw > 1) term += 'x' + (SUP[pw] || pw);
+      out += sign + term;
+    });
+    return out || '0';
+  };
+  const divStr = kk => kk === 0 ? 'x' : 'x ' + (kk > 0 ? '\u2212 ' : '+ ') + Math.abs(kk);
+
+  /* --- Tabel --- */
+  const wrap = elDiv('hn-wrap');
+  const table = document.createElement('table');
+  table.className = 'hn-table';
+  table.setAttribute('aria-label', 'Skema pembagian sintetik Horner');
+  wrap.appendChild(table);
+
+  /* --- Kontrol --- */
+  const controls = elDiv('widget-controls');
+
+  const chips = elDiv('chips');
+  PRESETS.forEach(p => {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'chip'; btn.textContent = p[0];
+    btn.addEventListener('click', () => { coef = p[1].slice(); render(); });
+    chips.appendChild(btn);
+  });
+  controls.appendChild(chips);
+
+  const row = elDiv('ctrl-row');
+  row.innerHTML = '<label>pembagi (x \u2212 k), nilai k</label><output></output>';
+  const slider = document.createElement('input');
+  slider.type = 'range'; slider.min = '-4'; slider.max = '4'; slider.step = '1'; slider.value = String(k);
+  slider.setAttribute('aria-label', 'nilai k');
+  slider.addEventListener('input', () => { k = parseInt(slider.value, 10); render(); });
+  controls.appendChild(row);
+  controls.appendChild(slider);
+  const out = row.querySelector('output');
+
+  const readout = elDiv('readout',
+    '<div><span>Suku banyak P(x)</span><b data-r="poly"></b></div>' +
+    '<div><span>Dibagi</span><b data-r="div"></b></div>' +
+    '<div><span>Hasil bagi</span><b data-r="bagi"></b></div>' +
+    '<div><span>Sisa</span><b data-r="sisa"></b></div>' +
+    '<div><span>Nilai P(k)</span><b data-r="pk"></b></div>');
+  controls.appendChild(readout);
+
+  const badgeWrap = elDiv('');
+  badgeWrap.innerHTML = '<span class="disc-badge gold" data-r="badge" hidden></span>';
+  controls.appendChild(badgeWrap);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(wrap);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  function render() {
+    const r0 = coef[0];
+    const r1 = r0 * k + coef[1];
+    const r2 = r1 * k + coef[2];
+    const sisa = r2 * k + coef[3];
+    const p1 = r0 * k, p2 = r1 * k, p3 = r2 * k;
+    const habis = sisa === 0;
+
+    table.innerHTML =
+      '<tr class="hn-line">' +
+        '<td class="hn-k">' + num(k) + '</td>' +
+        coef.map(c => '<td class="hn-coef">' + num(c) + '</td>').join('') +
+      '</tr>' +
+      '<tr>' +
+        '<td class="hn-cap">\u00d7 k \u2198</td>' +
+        '<td class="hn-prod"></td>' +
+        '<td class="hn-prod">' + num(p1) + '</td>' +
+        '<td class="hn-prod">' + num(p2) + '</td>' +
+        '<td class="hn-prod">' + num(p3) + '</td>' +
+      '</tr>' +
+      '<tr>' +
+        '<td class="hn-cap">jumlah \u2193</td>' +
+        '<td class="hn-res" data-hn="r0">' + num(r0) + '</td>' +
+        '<td class="hn-res" data-hn="r1">' + num(r1) + '</td>' +
+        '<td class="hn-res" data-hn="r2">' + num(r2) + '</td>' +
+        '<td class="hn-sisa' + (habis ? ' zero' : '') + '" data-hn="sisa">' + num(sisa) + '</td>' +
+      '</tr>';
+
+    q('[data-r="poly"]').textContent = polyStr(coef);
+    q('[data-r="div"]').textContent = '(' + divStr(k) + ')';
+    q('[data-r="bagi"]').textContent = polyStr([r0, r1, r2]);
+    q('[data-r="sisa"]').textContent = num(sisa);
+    q('[data-r="pk"]').textContent = num(sisa);
+
+    const badge = q('[data-r="badge"]');
+    badge.hidden = !habis;
+    if (habis) badge.textContent = 'sisa = 0 \u00b7 (' + divStr(k) + ') adalah faktor P(x)!';
+
+    note.textContent = habis
+      ? 'Sisa nol! Menurut Teorema Faktor, (' + divStr(k) + ') membagi habis P(x) \u2014 artinya ' + num(k) + ' adalah salah satu akarnya. Tiga sel biru di baris bawah adalah koefisien hasil baginya.'
+      : 'Sel emas di ujung baris bawah adalah sisanya \u2014 dan perhatikan, nilainya persis sama dengan P(k). Itulah Teorema Sisa. Geser k sampai sisanya nol untuk memergoki sebuah akar.';
+
+    out.textContent = num(k);
+    if (slider.value !== String(k)) slider.value = String(k);
+  }
+
+  render();
+}
+
+/* ==========================================================================
+   SIMULASI 11 — Lingkaran Analitik (geometri.html)
+   Geser pusat dan jari-jari; bentuk baku dan bentuk umum bergerak bersamaan,
+   memperlihatkan bahwa A = -2a, B = -2b, C = a^2 + b^2 - r^2.
+   ========================================================================== */
+function initCircleLab() {
+  const host = document.getElementById('widget-lingkaran-analitik');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const SIZE = 340, O = 170, U = 18.75;
+  const sx = x => O + x * U;
+  const sy = y => O - y * U;
+  const num = v => String(v).replace('-', '\u2212');
+
+  const term = (coef, v) => {
+    if (coef === 0) return '';
+    const mag = Math.abs(coef);
+    return (coef < 0 ? ' \u2212 ' : ' + ') + ((mag === 1 && v) ? '' : mag) + v;
+  };
+  const bakuTerm = (v, c) =>
+    c === 0 ? v + '\u00b2' : '(' + v + (c > 0 ? ' \u2212 ' : ' + ') + Math.abs(c) + ')\u00b2';
+
+  /* --- SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + SIZE + ' ' + SIZE,
+    class: 'ca-svg',
+    role: 'img',
+    'aria-label': 'Bidang koordinat dengan lingkaran yang dapat diatur pusat dan jari-jarinya'
+  });
+  for (let i = -8; i <= 8; i++) {
+    if (i === 0) continue;
+    svgEl('line', { x1: sx(i), y1: sy(-8), x2: sx(i), y2: sy(8), class: 'ca-grid' }, svg);
+    svgEl('line', { x1: sx(-8), y1: sy(i), x2: sx(8), y2: sy(i), class: 'ca-grid' }, svg);
+  }
+  svgEl('line', { x1: sx(-8), y1: sy(0), x2: sx(8), y2: sy(0), class: 'ca-axis' }, svg);
+  svgEl('line', { x1: sx(0), y1: sy(-8), x2: sx(0), y2: sy(8), class: 'ca-axis' }, svg);
+  [[sx(5) - 3, sy(0) + 15, '5'], [sx(-5) - 11, sy(0) + 15, '\u22125'],
+   [sx(0) + 7, sy(5) + 4, '5'], [sx(0) + 7, sy(-5) + 4, '\u22125']].forEach(t => {
+    const lbl = svgEl('text', { x: t[0], y: t[1], class: 'w-lbl' }, svg);
+    lbl.textContent = t[2];
+  });
+  const circ = svgEl('circle', { cx: O, cy: O, r: 0, class: 'ca-circle' }, svg);
+  const radLine = svgEl('line', { x1: O, y1: O, x2: O, y2: O, class: 'ca-rad' }, svg);
+  const ctr = svgEl('circle', { cx: O, cy: O, r: 4.5, class: 'ca-center' }, svg);
+
+  /* --- Kontrol --- */
+  const controls = elDiv('widget-controls');
+  const S = {};
+
+  const PRESETS = [
+    ['Pusat di O', 0, 0, 3],
+    ['Menyinggung Sumbu-X', 2, 3, 3],
+    ['Melalui O', 3, 4, 5],
+    ['Menyinggung Sumbu-Y', -2, 1, 2]
+  ];
+  const chips = elDiv('chips');
+  PRESETS.forEach(p => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = p[0];
+    b.addEventListener('click', () => {
+      S.a.inp.value = String(p[1]);
+      S.b.inp.value = String(p[2]);
+      S.r.inp.value = String(p[3]);
+      render();
+    });
+    chips.appendChild(b);
+  });
+  controls.appendChild(chips);
+
+  function mk(key, label, min, max, val) {
+    const row = elDiv('ctrl-row');
+    row.innerHTML = '<label>' + label + '</label><output></output>';
+    const inp = document.createElement('input');
+    inp.type = 'range';
+    inp.min = String(min); inp.max = String(max); inp.step = '1'; inp.value = String(val);
+    inp.setAttribute('aria-label', label);
+    inp.addEventListener('input', render);
+    controls.appendChild(row);
+    controls.appendChild(inp);
+    S[key] = { inp: inp, out: row.querySelector('output') };
+  }
+  mk('a', 'Pusat a (mendatar)', -5, 5, 0);
+  mk('b', 'Pusat b (tegak)', -5, 5, 0);
+  mk('r', 'Jari-jari r', 1, 5, 3);
+
+  const readout = elDiv('readout',
+    '<div class="full"><span>Bentuk baku</span><b data-r="baku"></b></div>' +
+    '<div class="full"><span>Bentuk umum</span><b data-r="umum"></b></div>' +
+    '<div><span>Pusat</span><b data-r="pusat"></b></div>' +
+    '<div><span>Jari-jari</span><b data-r="jari"></b></div>');
+  controls.appendChild(readout);
+
+  const badgeWrap = elDiv('');
+  badgeWrap.innerHTML = '<span class="disc-badge gold" data-r="badge" hidden></span>';
+  controls.appendChild(badgeWrap);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  function render() {
+    const a = parseInt(S.a.inp.value, 10);
+    const b = parseInt(S.b.inp.value, 10);
+    const r = parseInt(S.r.inp.value, 10);
+    S.a.out.textContent = 'a = ' + num(a);
+    S.b.out.textContent = 'b = ' + num(b);
+    S.r.out.textContent = 'r = ' + r;
+
+    circ.setAttribute('cx', sx(a)); circ.setAttribute('cy', sy(b));
+    circ.setAttribute('r', (r * U).toFixed(1));
+    ctr.setAttribute('cx', sx(a)); ctr.setAttribute('cy', sy(b));
+    radLine.setAttribute('x1', sx(a)); radLine.setAttribute('y1', sy(b));
+    radLine.setAttribute('x2', sx(a + r)); radLine.setAttribute('y2', sy(b));
+
+    const A = -2 * a, B = -2 * b, Cc = a * a + b * b - r * r;
+    q('[data-r="baku"]').textContent =
+      bakuTerm('x', a) + ' + ' + bakuTerm('y', b) + ' = ' + (r * r);
+    q('[data-r="umum"]').textContent =
+      'x\u00b2 + y\u00b2' + term(A, 'x') + term(B, 'y') + term(Cc, '') + ' = 0';
+    q('[data-r="pusat"]').textContent = '(' + num(a) + ', ' + num(b) + ')';
+    q('[data-r="jari"]').textContent = String(r);
+
+    let bd = '';
+    if (a === 0 && b === 0) bd = 'berpusat di titik asal O';
+    else if (Cc === 0) bd = 'melalui titik asal O';
+    else if (Math.abs(b) === r) bd = 'menyinggung sumbu-X';
+    else if (Math.abs(a) === r) bd = 'menyinggung sumbu-Y';
+    const badge = q('[data-r="badge"]');
+    badge.hidden = bd === '';
+    if (bd) badge.textContent = bd;
+
+    note.textContent = 'Bentuk umum lahir dari menjabarkan bentuk baku: A = \u22122a = ' + num(A) +
+      ', B = \u22122b = ' + num(B) + ', dan C = a\u00b2 + b\u00b2 \u2212 r\u00b2 = ' + num(Cc) +
+      '. Karena itu pusatnya selalu bisa dibaca balik sebagai (\u2212A/2, \u2212B/2).';
+  }
+
+  render();
+}
+
+/* ==========================================================================
+   SIMULASI 12 — Laboratorium Benda Putar (kalkulus.html)
+   Daerah di bawah kurva dicerminkan terhadap sumbu-X untuk membayangkan
+   bendanya, lalu volumenya dihitung langsung dengan V = pi * integral y^2 dx.
+   ========================================================================== */
+function initVolumeLab() {
+  const host = document.getElementById('widget-benda-putar');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const W = 340, H = 300, X0 = 32, AX = 150, SPAN = 284, HMAX = 96;
+  const fmt = v => String(Math.round(v * 100) / 100).replace('.', ',');
+
+  const PRESETS = [
+    { name: 'Garis y = x', label: 'y = x', kuad: 'x\u00b2', f: x => x,
+      vol: b => b * b * b / 3,
+      cek: b => 'Bendanya kerucut berjari-jari ' + b + ' dan tinggi ' + b +
+        '. Rumus bangun ruang \u2153\u03c0r\u00b2t memberi ' + fmt(b * b * b / 3) +
+        '\u03c0 \u2014 sama persis dengan hasil integralnya.' },
+    { name: 'Konstan y = 2', label: 'y = 2', kuad: '4', f: () => 2,
+      vol: b => 4 * b,
+      cek: b => 'Bendanya tabung berjari-jari 2 dan tinggi ' + b +
+        '. Rumus \u03c0r\u00b2t memberi ' + fmt(4 * b) + '\u03c0 \u2014 cocok.' },
+    { name: 'Akar y = \u221ax', label: 'y = \u221ax', kuad: 'x', f: x => Math.sqrt(x),
+      vol: b => b * b / 2,
+      cek: () => 'Mengkuadratkan \u221ax justru menyederhanakan: integralnya tinggal \u222bx dx. ' +
+        'Itulah sebabnya soal benda putar sering memakai fungsi akar.' },
+    { name: 'Parabola y = x\u00b2', label: 'y = x\u00b2', kuad: 'x\u2074', f: x => x * x,
+      vol: b => Math.pow(b, 5) / 5,
+      cek: () => 'Pangkatnya berlipat: y = x\u00b2 dikuadratkan menjadi x\u2074, sehingga volumenya tumbuh ' +
+        'jauh lebih cepat daripada luas daerahnya.' }
+  ];
+  let pre = 0, b = 3;
+
+  /* --- SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + W + ' ' + H,
+    class: 'vr-svg',
+    role: 'img',
+    'aria-label': 'Daerah di bawah kurva beserta bayangan cerminnya untuk membayangkan benda putar'
+  });
+  const fillTop = svgEl('path', { d: '', class: 'vr-fill' }, svg);
+  const fillBot = svgEl('path', { d: '', class: 'vr-fill mirror' }, svg);
+  svgEl('line', { x1: X0 - 12, y1: AX, x2: X0 + SPAN + 8, y2: AX, class: 'vr-axis' }, svg);
+  svgEl('line', { x1: X0, y1: 28, x2: X0, y2: H - 28, class: 'vr-axis' }, svg);
+  const curveTop = svgEl('path', { d: '', class: 'vr-curve' }, svg);
+  const curveBot = svgEl('path', { d: '', class: 'vr-curve mirror' }, svg);
+  const cap = svgEl('line', { x1: 0, y1: 0, x2: 0, y2: 0, class: 'vr-cap' }, svg);
+  const lblB = svgEl('text', { x: 0, y: AX + 18, class: 'w-lbl' }, svg);
+
+  /* --- Kontrol --- */
+  const controls = elDiv('widget-controls');
+  const chips = elDiv('chips');
+  PRESETS.forEach((p, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'chip'; btn.textContent = p.name;
+    btn.addEventListener('click', () => { pre = i; render(); });
+    chips.appendChild(btn);
+  });
+  controls.appendChild(chips);
+
+  const row = elDiv('ctrl-row');
+  row.innerHTML = '<label>Batas atas b</label><output></output>';
+  const slider = document.createElement('input');
+  slider.type = 'range'; slider.min = '1'; slider.max = '5'; slider.step = '1'; slider.value = String(b);
+  slider.setAttribute('aria-label', 'Batas atas b');
+  slider.addEventListener('input', () => { b = parseInt(slider.value, 10); render(); });
+  controls.appendChild(row);
+  controls.appendChild(slider);
+  const out = row.querySelector('output');
+
+  const readout = elDiv('readout',
+    '<div><span>Kurva</span><b data-r="fungsi"></b></div>' +
+    '<div><span>Batas</span><b data-r="batas"></b></div>' +
+    '<div class="full"><span>Rumus</span><b data-r="rumus"></b></div>' +
+    '<div><span>Volume</span><b data-r="volume"></b></div>');
+  controls.appendChild(readout);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  function render() {
+    const P = PRESETS[pre];
+    const N = 60;
+    let ymax = 0;
+    for (let i = 0; i <= N; i++) ymax = Math.max(ymax, P.f(b * i / N));
+    if (ymax <= 0) ymax = 1;
+    const kx = SPAN / b, ky = HMAX / ymax;
+    const px = x => X0 + x * kx;
+    const py = y => AX - y * ky;
+
+    let up = '', dn = '';
+    for (let i = 0; i <= N; i++) {
+      const x = b * i / N, y = P.f(x);
+      up += (i ? ' L ' : 'M ') + px(x).toFixed(1) + ' ' + py(y).toFixed(1);
+      dn += (i ? ' L ' : 'M ') + px(x).toFixed(1) + ' ' + (AX + (AX - py(y))).toFixed(1);
+    }
+    curveTop.setAttribute('d', up);
+    curveBot.setAttribute('d', dn);
+    fillTop.setAttribute('d', up + ' L ' + px(b).toFixed(1) + ' ' + AX + ' L ' + X0 + ' ' + AX + ' Z');
+    fillBot.setAttribute('d', dn + ' L ' + px(b).toFixed(1) + ' ' + AX + ' L ' + X0 + ' ' + AX + ' Z');
+    cap.setAttribute('x1', px(b).toFixed(1));
+    cap.setAttribute('y1', py(P.f(b)).toFixed(1));
+    cap.setAttribute('x2', px(b).toFixed(1));
+    cap.setAttribute('y2', (AX + (AX - py(P.f(b)))).toFixed(1));
+    lblB.setAttribute('x', px(b) - 4);
+    lblB.textContent = String(b);
+
+    out.textContent = 'b = ' + b;
+    q('[data-r="fungsi"]').textContent = P.label;
+    q('[data-r="batas"]').textContent = '0 sampai ' + b;
+    q('[data-r="rumus"]').textContent = '\u03c0 \u222b ' + P.kuad + ' dx, dari 0 sampai ' + b;
+    q('[data-r="volume"]').textContent = fmt(P.vol(b)) + '\u03c0';
+    note.textContent = P.cek(b);
+  }
+
   render();
 }

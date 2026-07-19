@@ -1631,3 +1631,36 @@ svg text.st-medianlbl { font-family: var(--font-mono); font-size: 12px; font-wei
 /* ---------- Simulasi 9: Laboratorium Turunan ---------- */
 .kl-curve { fill: none; stroke: var(--signal); stroke-width: 2.5; }
 .kl-tangent { stroke: var(--medal); stroke-width: 2.5; }
+
+/* ---------- Simulasi 10: Skema Horner (aljabar.html) ---------- */
+.hn-wrap { width: 100%; overflow-x: auto; }
+.hn-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 1rem; }
+.hn-table td { padding: 0.55rem 0.4rem; text-align: center; white-space: nowrap; }
+.hn-k { color: var(--medal); font-weight: 700; border-right: 2px solid var(--ink-line); }
+.hn-coef { color: var(--chalk); font-weight: 700; }
+.hn-line td { border-bottom: 2px solid var(--ink-line); }
+.hn-prod { color: var(--chalk-mute); }
+.hn-res { color: var(--signal); font-weight: 700; }
+.hn-sisa { color: var(--medal); font-weight: 700; border: 2px solid var(--medal-soft); border-radius: var(--r-sm); }
+.hn-sisa.zero { color: var(--tier-mudah); border-color: var(--tier-mudah); }
+.hn-cap { font-family: var(--font-body); font-size: 0.75rem; color: var(--chalk-mute); text-align: right; padding-right: 0.6rem; }
+
+/* ---------- Pendalaman: sudut kembaran di lingkaran satuan ---------- */
+.uc-twin { fill: none; stroke: var(--medal); stroke-width: 3; opacity: 0.9; }
+
+/* ---------- Simulasi 11: Lingkaran Analitik (geometri.html) ---------- */
+.ca-svg { width: 100%; height: auto; display: block; }
+.ca-grid { stroke: var(--ink-line-soft); stroke-width: 1; }
+.ca-axis { stroke: var(--ink-line); stroke-width: 2; }
+.ca-circle { fill: var(--signal-soft); stroke: var(--signal); stroke-width: 2.5; }
+.ca-rad { stroke: var(--medal); stroke-width: 2; stroke-dasharray: 4 3; }
+.ca-center { fill: var(--medal); }
+
+/* ---------- Simulasi 12: Benda Putar (kalkulus.html) ---------- */
+.vr-svg { width: 100%; height: auto; display: block; }
+.vr-axis { stroke: var(--ink-line); stroke-width: 2; }
+.vr-fill { fill: var(--signal-soft); }
+.vr-fill.mirror { fill: var(--signal-soft); opacity: 0.45; }
+.vr-curve { fill: none; stroke: var(--signal); stroke-width: 2.5; }
+.vr-curve.mirror { stroke: var(--signal-dim); stroke-dasharray: 5 4; }
+.vr-cap { stroke: var(--medal); stroke-width: 2.5; }

@@ -33,15 +33,15 @@
         <button class="nav-drop-btn active" type="button" aria-expanded="false" aria-haspopup="true">Materi<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="nav-drop-menu">
           <span class="nav-drop-label">Tersedia</span>
-          <a href="aljabar.html"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, bekal olimpiade</em></a>
-          <a href="trigonometri.html" class="active"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap</em></a>
-          <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran, Heron &amp; kuasa titik</em></a>
+          <a href="aljabar.html"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, suku banyak, bekal olimpiade</em></a>
+          <a href="trigonometri.html" class="active"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap, persamaan</em></a>
+          <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran &amp; persamaannya, Heron, kuasa titik</em></a>
           <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, limit</em></a>
           <a href="limit.html"><strong>Limit</strong><em>Konsep &amp; sifat, aljabar, trigonometri, tak hingga &amp; asimtot</em></a>
           <a href="matriks.html"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
           <a href="vektor.html"><strong>Vektor</strong><em>Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
-          <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan, pencacahan &amp; peluang</em></a>
-          <a href="kalkulus.html"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral &amp; luas daerah</em></a>
+          <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan &amp; penyebaran, pencacahan, peluang</em></a>
+          <a href="kalkulus.html"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral, luas &amp; volume benda putar</em></a>
         </div>
       </div>
       <div class="nav-drop">
@@ -80,6 +80,7 @@
       <a href="#identitas">Identitas Dasar</a>
       <a href="#aturan">Aturan Sinus &amp; Cosinus</a>
       <a href="#grafik">Grafik Fungsi</a>
+      <a href="#persamaan">Persamaan Trigonometri</a>
       <a href="#menuju-olimpiade">Menuju Olimpiade</a>
       <a href="#bedah-soal">Bedah Soal</a>
       <a href="#latihan">Latihan Soal</a>
@@ -166,7 +167,7 @@
           <div class="widget-head">
             <span class="widget-tag">Simulasi Interaktif</span>
             <h3>Lingkaran Satuan Interaktif</h3>
-            <p>Geser slider, klik sudut istimewa, atau seret langsung titiknya. Nilai sudut istimewa ditampilkan dalam bentuk eksak — persis seperti di tabel.</p>
+            <p>Geser slider, klik sudut istimewa, atau seret langsung titiknya. Nilai sudut istimewa ditampilkan dalam bentuk eksak — persis seperti di tabel. Panel kini turut menandai <strong>sudut kembaran</strong> (lingkaran emas): sudut lain yang bersinus sama, yaitu $180^\circ - \theta$. Itulah sebabnya persamaan $\sin x = c$ hampir selalu punya <em>dua</em> jawaban, bukan satu.</p>
           </div>
           <div class="widget-mount">
             <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
@@ -246,6 +247,62 @@
           <span class="box-label">Contoh</span>
           <p style="margin-bottom:0.3rem;">Tentukan amplitudo dan periode $y = 3\sin(2x)$.</p>
           <p style="margin-bottom:0;">Amplitudo $= 3$, periode $= \dfrac{360^\circ}{2} = 180^\circ$ — gelombangnya tiga kali lebih tinggi dan dua kali lebih rapat dari $\sin x$ biasa.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="persamaan">
+        <h2>Persamaan Trigonometri</h2>
+        <p>Persamaan aljabar seperti $2x = 6$ punya satu jawaban. Persamaan trigonometri berbeda wataknya: karena fungsinya <strong>berulang</strong>, jawabannya <em class="accent-word">tak terhingga banyaknya</em>. Karena itu soal hampir selalu memberi batas, misalnya $0^\circ \le x \le 360^\circ$ — dan tugas kita menangkap semua yang jatuh di dalamnya.</p>
+        <p>Mainkan lingkaran satuan di atas sambil membaca bab ini: geser $\theta$ dan perhatikan lingkaran emas. Titik itu selalu punya <em>sinus yang sama</em> dengan titik biru — bukti hidup bahwa satu nilai sinus dimiliki dua sudut sekaligus.</p>
+
+        <h3>Tiga Bentuk Dasar</h3>
+        <div class="box formula">
+          <span class="box-label">Penyelesaian Umum ($k$ bilangan bulat)</span>
+          $$\sin x = \sin \alpha \;\Longrightarrow\; x = \alpha + k\cdot360^\circ \ \text{ atau } \ x = (180^\circ - \alpha) + k\cdot360^\circ$$
+          $$\cos x = \cos \alpha \;\Longrightarrow\; x = \pm\alpha + k\cdot360^\circ$$
+          $$\tan x = \tan \alpha \;\Longrightarrow\; x = \alpha + k\cdot180^\circ$$
+        </div>
+        <p>Perhatikan ketimpangannya: sinus dan cosinus punya <strong>dua</strong> keluarga jawaban, tangen hanya <strong>satu</strong>. Sebabnya periode — $\sin$ dan $\cos$ berulang tiap $360^\circ$, sedangkan $\tan$ berulang tiap $180^\circ$ sehingga kedua keluarganya terlanjur menyatu.</p>
+        <p>Cara cepat mengingat pasangannya lewat kuadran: <strong>sinus</strong> bernilai sama di kuadran I dan II (pasangannya $180^\circ - \alpha$), <strong>cosinus</strong> di kuadran I dan IV (pasangannya $360^\circ - \alpha$), <strong>tangen</strong> di kuadran I dan III (pasangannya $\alpha + 180^\circ$).</p>
+        <div class="box example">
+          <span class="box-label">Contoh 1</span>
+          <p style="margin-bottom:0;">$\sin x = \tfrac12$ untuk $0^\circ \le x \le 360^\circ$. Sudut dasarnya $30^\circ$, dan pasangannya $180^\circ - 30^\circ = 150^\circ$. Jadi $x = 30^\circ$ atau $x = 150^\circ$.</p>
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh 2</span>
+          <p style="margin-bottom:0;">$\cos x = -\tfrac12$. Sudut dasarnya $60^\circ$, dan karena cosinus <em>negatif</em>, jawabannya berada di kuadran II dan III: $x = 180^\circ - 60^\circ = 120^\circ$ dan $x = 180^\circ + 60^\circ = 240^\circ$.</p>
+        </div>
+
+        <h3>Persamaan Berbentuk Kuadrat</h3>
+        <p>Bila $\sin x$ atau $\cos x$ muncul berpangkat dua, perlakukan saja sebagai variabel biasa — misalkan $p = \sin x$, selesaikan kuadratnya, lalu kembalikan.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">$2\sin^2 x - \sin x - 1 = 0$ untuk $0^\circ \le x \le 360^\circ$. Faktorkan: $(2\sin x + 1)(\sin x - 1) = 0$.</p>
+          <p style="margin-bottom:0.3rem;">Dari $\sin x = -\tfrac12$: jawabannya di kuadran III dan IV, yaitu $210^\circ$ dan $330^\circ$.</p>
+          <p style="margin-bottom:0;">Dari $\sin x = 1$: hanya $90^\circ$ — puncak sinus tak punya kembaran. Totalnya <strong>tiga</strong> penyelesaian.</p>
+        </div>
+
+        <h3>Bentuk $a\cos x + b\sin x$</h3>
+        <p>Dua suku berbeda sulit diselesaikan bersamaan. Trik klasiknya: memampatkan keduanya menjadi <em>satu</em> gelombang.</p>
+        <div class="box formula">
+          <span class="box-label">Pemampatan</span>
+          $$a\cos x + b\sin x = k\cos(x - \alpha), \qquad k = \sqrt{a^2 + b^2}, \qquad \tan\alpha = \frac{b}{a}$$
+        </div>
+        <p>Setelah dimampatkan, persamaannya tinggal berbentuk cosinus biasa. Bonusnya besar: karena $\cos$ tak pernah keluar dari $[-1, 1]$, seluruh bentuk itu terkurung di $[-k, k]$ — jadi <strong>nilai maksimumnya $k$ dan minimumnya $-k$</strong>, dan persamaan $a\cos x + b\sin x = c$ tak punya penyelesaian bila $\lvert c \rvert &gt; k$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">$\sqrt{3}\cos x + \sin x = 1$. Di sini $k = \sqrt{3 + 1} = 2$ dan $\tan\alpha = \tfrac{1}{\sqrt3}$ sehingga $\alpha = 30^\circ$.</p>
+          <p style="margin-bottom:0;">Persamaannya menjadi $2\cos(x - 30^\circ) = 1$, yakni $\cos(x - 30^\circ) = \tfrac12$. Maka $x - 30^\circ = \pm60^\circ$, memberi $x = 90^\circ$ atau $x = 330^\circ$.</p>
+        </div>
+
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li><strong>Jangan berhenti di satu jawaban.</strong> Kesalahan paling sering di bab ini adalah menuliskan $30^\circ$ lalu berhenti, padahal $150^\circ$ sama sahnya. Lirik lingkaran emas di simulasi bila ragu.</li>
+            <li>Sudutnya berkelipatan? <strong>Intervalnya ikut berlipat.</strong> Untuk $\cos 2x = c$ dengan $0^\circ \le x \le 360^\circ$, berarti $2x$ menjelajah $0^\circ$ sampai $720^\circ$ — jumlah penyelesaiannya berlipat dua.</li>
+            <li>Jangan membagi kedua ruas dengan $\sin x$ atau $\cos x$. Pembagian itu diam-diam membuang penyelesaian yang membuatnya nol — faktorkan, jangan bagi.</li>
+            <li>Periksa satuannya: derajat atau radian. Jawaban $\tfrac{\pi}{6}$ dan $30^\circ$ sama nilainya, tapi soal biasanya menuntut satu bentuk tertentu.</li>
+          </ul>
         </div>
       </div>
 
@@ -360,7 +417,7 @@
           <!-- MUDAH -->
           <div class="tier-panel active" data-tier="mudah">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -431,13 +488,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Kuadran II (sin positif), sudut acuan $180^\circ-150^\circ = 30^\circ$: $\sin 150^\circ = \sin 30^\circ = \frac{1}{2}$.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+            <div class="quiz-card" data-answer="B" data-qid="tri-m7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Himpunan penyelesaian $\sin x = \tfrac12$ untuk $0^\circ \le x \le 360^\circ$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\{30^\circ\}$</button>
+                <button class="quiz-option" data-option="B">$\{30^\circ, 150^\circ\}$</button>
+                <button class="quiz-option" data-option="C">$\{30^\circ, 330^\circ\}$</button>
+                <button class="quiz-option" data-option="D">$\{150^\circ, 210^\circ\}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Sinus bernilai positif di kuadran I dan II. Sudut dasarnya $30^\circ$, pasangannya $180^\circ - 30^\circ = 150^\circ$. Jebakan A hanya memberi satu jawaban — kesalahan paling umum di bab ini; jebakan C memakai pola cosinus ($360^\circ - \alpha$).</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="tri-m8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Periode fungsi $\tan x$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$360^\circ$</button>
+                <button class="quiz-option" data-option="B">$90^\circ$</button>
+                <button class="quiz-option" data-option="C">$180^\circ$</button>
+                <button class="quiz-option" data-option="D">$720^\circ$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Tangen berulang tiap $180^\circ$, bukan $360^\circ$, karena $\tan(x + 180^\circ) = \tan x$. Itulah sebabnya $\tan x = \tan\alpha$ hanya melahirkan satu keluarga jawaban: $x = \alpha + k\cdot180^\circ$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
           </div>
 
           <!-- SEDANG -->
           <div class="tier-panel" data-tier="sedang">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -508,13 +587,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Aturan cosinus: $c^2 = 25+64-2(5)(8)\cos 60^\circ = 89-40 = 49$, jadi $c = 7$.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+            <div class="quiz-card" data-answer="A" data-qid="tri-s7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Himpunan penyelesaian $\cos x = -\tfrac12$ untuk $0^\circ \le x \le 360^\circ$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\{120^\circ, 240^\circ\}$</button>
+                <button class="quiz-option" data-option="B">$\{60^\circ, 300^\circ\}$</button>
+                <button class="quiz-option" data-option="C">$\{120^\circ, 300^\circ\}$</button>
+                <button class="quiz-option" data-option="D">$\{60^\circ, 120^\circ\}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Sudut dasarnya $60^\circ$, dan karena cosinusnya <em>negatif</em>, jawabannya di kuadran II dan III: $180^\circ - 60^\circ = 120^\circ$ dan $180^\circ + 60^\circ = 240^\circ$. Jebakan B adalah penyelesaian untuk $\cos x = +\tfrac12$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="tri-s8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Himpunan penyelesaian $\tan x = \sqrt{3}$ untuk $0^\circ \le x \le 360^\circ$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\{60^\circ\}$</button>
+                <button class="quiz-option" data-option="B">$\{60^\circ, 120^\circ\}$</button>
+                <button class="quiz-option" data-option="C">$\{60^\circ, 300^\circ\}$</button>
+                <button class="quiz-option" data-option="D">$\{60^\circ, 240^\circ\}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Tangen positif di kuadran I dan III. Karena periodenya $180^\circ$, jawaban keduanya $60^\circ + 180^\circ = 240^\circ$. Jebakan B keliru memakai pola sinus; jebakan C memakai pola cosinus.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
           </div>
 
           <!-- SULIT -->
           <div class="tier-panel" data-tier="sulit">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -585,13 +686,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Segitiga $3$–$4$–$5$: $\cos\theta = \frac{4}{5}$. Maka $\sin 2\theta = 2\sin\theta\cos\theta = 2 \cdot \frac{3}{5} \cdot \frac{4}{5} = \frac{24}{25}$.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+            <div class="quiz-card" data-answer="B" data-qid="tri-x7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Banyaknya penyelesaian $2\sin^2 x - \sin x - 1 = 0$ untuk $0^\circ \le x \le 360^\circ$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$3$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">$1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Perlakukan sebagai kuadrat dalam $\sin x$: $(2\sin x + 1)(\sin x - 1) = 0$. Dari $\sin x = -\tfrac12$ lahir $210^\circ$ dan $330^\circ$; dari $\sin x = 1$ hanya $90^\circ$, karena puncak sinus tak punya kembaran. Totalnya tiga.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="tri-x8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Bentuk $\sqrt{3}\cos x + \sin x$ dapat ditulis sebagai $k\cos(x - \alpha)$ dengan…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$k = 4$, $\alpha = 30^\circ$</button>
+                <button class="quiz-option" data-option="B">$k = 2$, $\alpha = 60^\circ$</button>
+                <button class="quiz-option" data-option="C">$k = \sqrt{3}$, $\alpha = 45^\circ$</button>
+                <button class="quiz-option" data-option="D">$k = 2$, $\alpha = 30^\circ$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$k = \sqrt{a^2+b^2} = \sqrt{3+1} = 2$ dan $\tan\alpha = \tfrac{b}{a} = \tfrac{1}{\sqrt3}$, sehingga $\alpha = 30^\circ$. Jebakan A berhenti di $a^2 + b^2 = 4$ tanpa mengakarnya.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
           </div>
 
           <!-- OLIMPIADE -->
           <div class="tier-panel" data-tier="olimpiade">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-score">Skor <strong>0/10</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -684,7 +807,29 @@
               <div class="quiz-feedback" hidden><strong></strong>$\sin^4\theta+\cos^4\theta = (\sin^2\theta+\cos^2\theta)^2 - 2\sin^2\theta\cos^2\theta = 1 - 2\left(\frac{1}{3}\right)^2 = 1-\frac{2}{9} = \frac{7}{9}$.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Fondasi trigonometrimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
+            <div class="quiz-card" data-answer="C" data-qid="tri-o9">
+              <div class="quiz-head"><span class="quiz-number">9</span><p class="quiz-question">Nilai maksimum dari $3\cos x + 4\sin x$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$7$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$5$</button>
+                <button class="quiz-option" data-option="D">$25$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Mampatkan menjadi $k\cos(x - \alpha)$ dengan $k = \sqrt{9 + 16} = 5$. Karena $\cos$ tak pernah melebihi $1$, maksimumnya $5$ (dan minimumnya $-5$). Jebakan A menjumlahkan koefisien; jebakan D berhenti di $a^2 + b^2$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="tri-o10">
+              <div class="quiz-head"><span class="quiz-number">10</span><p class="quiz-question">Jumlah semua penyelesaian $\cos 2x = \tfrac12$ untuk $0^\circ \le x \le 360^\circ$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$360^\circ$</button>
+                <button class="quiz-option" data-option="B">$720^\circ$</button>
+                <button class="quiz-option" data-option="C">$540^\circ$</button>
+                <button class="quiz-option" data-option="D">$180^\circ$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Karena $0^\circ \le x \le 360^\circ$, sudut $2x$ menjelajah $0^\circ$ sampai $720^\circ$ — intervalnya berlipat, jadi penyelesaiannya pun berlipat. Diperoleh $2x = 60^\circ, 300^\circ, 420^\circ, 660^\circ$, sehingga $x = 30^\circ, 150^\circ, 210^\circ, 330^\circ$ yang berjumlah $720^\circ$. Lupa memperluas interval saat sudutnya berkelipatan adalah jebakan terbesar bab ini.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Fondasi trigonometrimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
           </div>
         </div>
       </div>

@@ -33,15 +33,15 @@
         <button class="nav-drop-btn active" type="button" aria-expanded="false" aria-haspopup="true">Materi<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="nav-drop-menu">
           <span class="nav-drop-label">Tersedia</span>
-          <a href="aljabar.html" class="active"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, bekal olimpiade</em></a>
-          <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap</em></a>
-          <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran, Heron &amp; kuasa titik</em></a>
+          <a href="aljabar.html" class="active"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, suku banyak, bekal olimpiade</em></a>
+          <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap, persamaan</em></a>
+          <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran &amp; persamaannya, Heron, kuasa titik</em></a>
           <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, limit</em></a>
           <a href="limit.html"><strong>Limit</strong><em>Konsep &amp; sifat, aljabar, trigonometri, tak hingga &amp; asimtot</em></a>
           <a href="matriks.html"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
           <a href="vektor.html"><strong>Vektor</strong><em>Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
-          <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan, pencacahan &amp; peluang</em></a>
-          <a href="kalkulus.html"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral &amp; luas daerah</em></a>
+          <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan &amp; penyebaran, pencacahan, peluang</em></a>
+          <a href="kalkulus.html"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral, luas &amp; volume benda putar</em></a>
         </div>
       </div>
       <div class="nav-drop">
@@ -80,6 +80,7 @@
       <a href="#persamaan-linear">Persamaan Linear</a>
       <a href="#spldv">Sistem Persamaan</a>
       <a href="#persamaan-kuadrat">Persamaan Kuadrat</a>
+      <a href="#suku-banyak">Suku Banyak</a>
       <a href="#menuju-olimpiade">Menuju Olimpiade</a>
       <a href="#bedah-soal">Bedah Soal</a>
       <a href="#latihan">Latihan Soal</a>
@@ -313,6 +314,89 @@
         </div>
       </div>
 
+      <div class="lesson-section" id="suku-banyak">
+        <h2>Suku Banyak (Polinomial)</h2>
+        <p>Persamaan kuadrat sudah kita taklukkan lewat pemfaktoran dan rumus abc. Tapi bagaimana kalau pangkatnya <em>tiga</em>, empat, atau lebih? Rumus abc tak berlaku lagi, dan menebak-nebak faktornya melelahkan. Bab ini memberi alat yang jauh lebih tajam: sebuah teorema yang mengubah pertanyaan "apakah ini faktor?" menjadi sekadar <em class="accent-word">menghitung satu nilai</em>.</p>
+        <div class="box formula">
+          <span class="box-label">Bentuk Umum</span>
+          $$P(x) = a_n x^n + a_{n-1}x^{n-1} + \dots + a_1 x + a_0, \qquad a_n \neq 0$$
+        </div>
+        <p>Pangkat tertinggi $n$ disebut <strong>derajat</strong>, dan $a_n$ adalah <strong>koefisien utama</strong>. Menghitung <strong>nilai suku banyak</strong> cukup dengan substitusi — $P(k)$ berarti ganti setiap $x$ dengan $k$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">$P(x) = x^3 - 4x + 1$ berderajat $3$, dan $P(2) = 8 - 8 + 1 = 1$.</p>
+        </div>
+
+        <h3>Pembagian Suku Banyak</h3>
+        <p>Membagi suku banyak mirip membagi bilangan: ada hasil bagi dan ada sisa.</p>
+        <div class="box formula">
+          <span class="box-label">Identitas Pembagian</span>
+          $$P(x) = (x - k)\cdot H(x) + S$$
+        </div>
+        <p>Pembagian bersusun bisa dipakai, tapi ada jalan pintas yang jauh lebih cepat: <strong>skema Horner</strong> (pembagian sintetik). Tulis koefisien-koefisiennya berjajar, turunkan yang pertama, lalu ulangi "kalikan $k$, jumlahkan ke bawah". Sel terakhir yang lahir adalah sisanya, dan sisa deretan itu adalah koefisien hasil baginya.</p>
+
+        <div class="widget-card reveal" id="widget-horner">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Skema Horner</h3>
+            <p>Geser nilai $k$ dan saksikan tabel pembagian sintetik terisi ulang. Sel emas di ujung adalah <strong>sisa</strong> — bandingkan dengan baris "Nilai P(k)" di panel: keduanya <em>selalu</em> sama. Lalu berburu: geser sampai sisanya nol dan lencana faktor menyala. Preset <strong>Tiga Akar</strong> menyembunyikan tiga tangkapan sekaligus!</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+
+        <h3>Teorema Sisa</h3>
+        <p>Kalau $x = k$ disubstitusikan ke identitas pembagian di atas, suku $(x-k)$ lenyap dan yang tersisa hanyalah $S$. Dari satu langkah sederhana itu lahir teorema yang menghemat banyak sekali pekerjaan:</p>
+        <div class="box formula">
+          <span class="box-label">Teorema Sisa</span>
+          $$P(x) \text{ dibagi } (x - k) \;\Longrightarrow\; S = P(k)$$
+        </div>
+        <p>Tak perlu membagi sama sekali — cukup substitusi! Bentuk pembaginya pun boleh lebih umum: dibagi $(ax - b)$, sisanya $P\!\left(\frac{b}{a}\right)$.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">Sisa pembagian $P(x) = x^3 + 2x^2 - 5$ oleh $(x - 1)$ adalah $P(1) = 1 + 2 - 5 = -2$ — selesai dalam satu baris.</p>
+        </div>
+
+        <h3>Teorema Faktor</h3>
+        <p>Sisa nol berarti pembagiannya habis — dan itulah definisi faktor:</p>
+        <div class="box formula">
+          <span class="box-label">Teorema Faktor</span>
+          $$(x - k) \text{ faktor dari } P(x) \iff P(k) = 0 \iff k \text{ akar } P(x)$$
+        </div>
+        <p>Tiga pernyataan itu — faktor, nilai nol, dan akar — adalah <em class="accent-word">satu hal yang sama dilihat dari tiga sisi</em>. Menguasai pergantian sudut pandang ini adalah inti bab ini.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0;">Agar $(x - 2)$ menjadi faktor $P(x) = x^3 - 3x^2 + kx - 2$, haruslah $P(2) = 0$: $8 - 12 + 2k - 2 = 0 \Rightarrow 2k = 6 \Rightarrow k = 3$.</p>
+        </div>
+
+        <h3>Berburu Akar</h3>
+        <p>Untuk suku banyak berkoefisien bulat, akar rasionalnya tak sembarangan — kandidatnya selalu berbentuk $\dfrac{\text{pembagi } a_0}{\text{pembagi } a_n}$. Jika koefisien utamanya $1$, kandidatnya cukup <strong>pembagi konstanta</strong> saja.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">$P(x) = x^3 - 6x^2 + 11x - 6$. Kandidat akar: pembagi $6$, yaitu $\pm1, \pm2, \pm3, \pm6$.</p>
+          <p style="margin-bottom:0;">$P(1) = 1 - 6 + 11 - 6 = 0$ ✓ — jadi $(x-1)$ faktor. Horner menyisakan $x^2 - 5x + 6 = (x-2)(x-3)$, sehingga $P(x) = (x-1)(x-2)(x-3)$. Persis preset <strong>Tiga Akar</strong> di simulasi di atas.</p>
+        </div>
+
+        <h3>Jumlah &amp; Hasil Kali Akar</h3>
+        <p>Vieta yang kamu kenal dari persamaan kuadrat punya saudara di derajat tiga. Untuk $ax^3 + bx^2 + cx + d = 0$ berakar $x_1, x_2, x_3$:</p>
+        <div class="box formula">
+          <span class="box-label">Vieta Derajat Tiga</span>
+          $$x_1 + x_2 + x_3 = -\frac{b}{a} \qquad x_1x_2 + x_1x_3 + x_2x_3 = \frac{c}{a} \qquad x_1x_2x_3 = -\frac{d}{a}$$
+        </div>
+        <p>Tandanya berselang-seling — dan dari ketiganya, banyak besaran lain bisa dipanen tanpa pernah mencari akarnya satu per satu. Misalnya $x_1^2 + x_2^2 + x_3^2 = (x_1+x_2+x_3)^2 - 2(x_1x_2 + x_1x_3 + x_2x_3)$: trik "kuadratkan lalu jabarkan" yang sama persis dengan senjata di bab <a href="vektor.html#menuju-olimpiade">Vektor</a>.</p>
+
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>Pembagi $(x + 2)$ berarti $k = \mathbf{-2}$, bukan $2$. Selalu tulis ulang menjadi bentuk $(x - k)$ dulu.</li>
+            <li>Horner menuntut <strong>koefisien lengkap</strong>. Untuk $x^3 - 3x + 2$, koefisiennya $1, 0, -3, 2$ — pangkat yang hilang wajib ditulis nol.</li>
+            <li>Sisa pembagian oleh $(x-k)$ selalu <em>konstanta</em>, tapi sisa pembagian oleh bentuk kuadrat bisa berupa $ax + b$ — derajat sisa selalu lebih rendah dari pembaginya.</li>
+            <li>Akar yang muncul dua kali (<strong>akar ganda</strong>) bukan kesalahan hitung — di <a href="kalkulus.html#bedah-soal">Kalkulus</a>, akar gandalah yang menandai garis menyinggung kurva.</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="lesson-section" id="menuju-olimpiade">
         <h2>Menuju Aljabar Olimpiade</h2>
         <p>Sampai di sini, seluruh aljabar dasar sudah di tanganmu. Di level olimpiade, soal jarang berbunyi "selesaikan persamaan ini" — yang diuji adalah <em class="accent-word">kejelian melihat struktur</em>: mengenali identitas yang tersembunyi, memanfaatkan hubungan antar-akar, dan memfaktorkan bentuk yang kelihatannya buntu. Enam perkakas pertama membangun refleks manipulasi; perkakas ketujuh membuka pintu ke polinomial berderajat tinggi.</p>
@@ -474,7 +558,7 @@
           <!-- MUDAH -->
           <div class="tier-panel active" data-tier="mudah">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -545,13 +629,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Basis sama → jumlahkan pangkat: $2^{3+2} = 2^5 = 32$. Jebakan $64$ datang dari keliru <em>mengalikan</em> pangkat ($2^6$).</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+            <div class="quiz-card" data-answer="A" data-qid="alj-m7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Nilai suku banyak $P(x) = x^3 - 2x + 3$ untuk $x = 2$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$7$</button>
+                <button class="quiz-option" data-option="B">$5$</button>
+                <button class="quiz-option" data-option="C">$9$</button>
+                <button class="quiz-option" data-option="D">$3$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Substitusikan: $P(2) = 8 - 4 + 3 = 7$. Jebakan D adalah konstantanya saja ($P(0)$).</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="alj-m8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Derajat suku banyak $P(x) = 2x^4 - 5x^2 + x - 7$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$7$</button>
+                <button class="quiz-option" data-option="C">$4$</button>
+                <button class="quiz-option" data-option="D">$5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Derajat = pangkat tertinggi, yaitu $4$. Jebakan D menghitung banyaknya suku; jebakan B mengambil konstantanya.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
           </div>
 
           <!-- SEDANG -->
           <div class="tier-panel" data-tier="sedang">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -622,13 +728,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Jumlahkan kedua persamaan agar $y$ lenyap: $3x = 12 \Rightarrow x = 4$ (dan $y = 3$). Cek: $2(4)+3 = 11$ ✓</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+            <div class="quiz-card" data-answer="B" data-qid="alj-s7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Sisa pembagian $P(x) = x^3 + 2x^2 - 5$ oleh $(x - 1)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$3$</button>
+                <button class="quiz-option" data-option="B">$-2$</button>
+                <button class="quiz-option" data-option="C">$2$</button>
+                <button class="quiz-option" data-option="D">$-5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Teorema Sisa: sisa $= P(1) = 1 + 2 - 5 = -2$ — tanpa perlu membagi sama sekali. Jebakan D adalah konstanta suku banyaknya.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="alj-s8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Agar $(x - 2)$ menjadi faktor dari $P(x) = x^3 - 3x^2 + kx - 2$, nilai $k$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2$</button>
+                <button class="quiz-option" data-option="B">$4$</button>
+                <button class="quiz-option" data-option="C">$3$</button>
+                <button class="quiz-option" data-option="D">$6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Teorema Faktor menuntut $P(2) = 0$: $8 - 12 + 2k - 2 = 0 \Rightarrow 2k = 6 \Rightarrow k = 3$. Jebakan D berhenti di $2k = 6$ tanpa membaginya.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
           </div>
 
           <!-- SULIT -->
           <div class="tier-panel" data-tier="sulit">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -699,13 +827,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Teorema sisa: sisa $= P(1) = 1 + 2 - 3 = 0$. Sisa nol berarti $(x-1)$ adalah <em>faktor</em> polinomial itu — teorema faktor beraksi.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+            <div class="quiz-card" data-answer="D" data-qid="alj-x7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Hasil bagi dan sisa dari $(2x^3 - 3x^2 + x - 5) : (x - 2)$ berturut-turut adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2x^2 - x + 3$ dan $1$</button>
+                <button class="quiz-option" data-option="B">$2x^2 + x - 3$ dan $-1$</button>
+                <button class="quiz-option" data-option="C">$2x^2 - 7x + 15$ dan $-35$</button>
+                <button class="quiz-option" data-option="D">$2x^2 + x + 3$ dan $1$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Horner dengan $k = 2$: turunkan $2$; lalu $2(2) - 3 = 1$; $1(2) + 1 = 3$; $3(2) - 5 = 1$. Jadi hasil baginya $2x^2 + x + 3$ dengan sisa $1$. Jebakan C memakai $k = -2$ — ingat, pembagi $(x-2)$ berarti $k = +2$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="alj-x8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Suku banyak $P(x)$ dibagi $(x - 1)$ bersisa $3$, dan dibagi $(x + 2)$ bersisa $-3$. Sisa pembagian $P(x)$ oleh $(x-1)(x+2)$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x + 2$</button>
+                <button class="quiz-option" data-option="B">$2x + 1$</button>
+                <button class="quiz-option" data-option="C">$2x - 1$</button>
+                <button class="quiz-option" data-option="D">$-2x + 5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pembagi berderajat $2$, jadi sisanya berbentuk $ax + b$. Dari $P(1) = 3$: $a + b = 3$; dari $P(-2) = -3$: $-2a + b = -3$. Kurangkan: $3a = 6 \Rightarrow a = 2$, $b = 1$ — sisanya $2x + 1$.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
           </div>
 
           <!-- OLIMPIADE -->
           <div class="tier-panel" data-tier="olimpiade">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-score">Skor <strong>0/10</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -798,7 +948,29 @@
               <div class="quiz-feedback" hidden><strong></strong>AM-GM tiga variabel: $\frac{a+b+c}{3} \ge \sqrt[3]{abc} = \sqrt[3]{27} = 3$, jadi $a+b+c \ge 9$, tercapai saat $a=b=c=3$.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Fondasimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
+            <div class="quiz-card" data-answer="B" data-qid="alj-o9">
+              <div class="quiz-head"><span class="quiz-number">9</span><p class="quiz-question">Akar-akar persamaan $x^3 - 6x^2 + 11x - 6 = 0$ adalah $x_1, x_2, x_3$. Nilai $x_1^2 + x_2^2 + x_3^2$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$36$</button>
+                <button class="quiz-option" data-option="B">$14$</button>
+                <button class="quiz-option" data-option="C">$22$</button>
+                <button class="quiz-option" data-option="D">$25$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Vieta: $\sum x = 6$ dan $\sum x_ix_j = 11$. Kuadratkan yang pertama lalu jabarkan: $x_1^2+x_2^2+x_3^2 = 6^2 - 2(11) = 14$ — tanpa pernah mencari akarnya. (Cek: akarnya memang $1, 2, 3$ dan $1 + 4 + 9 = 14$ ✓)</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="alj-o10">
+              <div class="quiz-head"><span class="quiz-number">10</span><p class="quiz-question">Suku banyak berderajat tiga dengan koefisien utama $1$ yang akar-akarnya $1$, $2$, dan $-3$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x^3 + 7x - 6$</button>
+                <button class="quiz-option" data-option="B">$x^3 - 7x - 6$</button>
+                <button class="quiz-option" data-option="C">$x^3 - 7x + 6$</button>
+                <button class="quiz-option" data-option="D">$x^3 + 6x^2 - 7x$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Rakit dari faktornya: $(x-1)(x-2)(x+3)$. Dua yang pertama memberi $x^2 - 3x + 2$, lalu dikali $(x+3)$ menghasilkan $x^3 - 7x + 6$ — suku $x^2$-nya lenyap karena $1 + 2 + (-3) = 0$, persis Vieta.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Fondasimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
           </div>
         </div>
       </div>

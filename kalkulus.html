@@ -33,15 +33,15 @@
         <button class="nav-drop-btn active" type="button" aria-expanded="false" aria-haspopup="true">Materi<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="nav-drop-menu">
           <span class="nav-drop-label">Tersedia</span>
-          <a href="aljabar.html"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, bekal olimpiade</em></a>
-          <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap</em></a>
-          <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran, Heron &amp; kuasa titik</em></a>
+          <a href="aljabar.html"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, suku banyak, bekal olimpiade</em></a>
+          <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap, persamaan</em></a>
+          <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran &amp; persamaannya, Heron, kuasa titik</em></a>
           <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, limit</em></a>
           <a href="limit.html"><strong>Limit</strong><em>Konsep &amp; sifat, aljabar, trigonometri, tak hingga &amp; asimtot</em></a>
           <a href="matriks.html"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
           <a href="vektor.html"><strong>Vektor</strong><em>Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
-          <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan, pencacahan &amp; peluang</em></a>
-          <a href="kalkulus.html" class="active"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral &amp; luas daerah</em></a>
+          <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan &amp; penyebaran, pencacahan, peluang</em></a>
+          <a href="kalkulus.html" class="active"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral, luas &amp; volume benda putar</em></a>
         </div>
       </div>
       <div class="nav-drop">
@@ -79,6 +79,8 @@
       <a href="#aplikasi">Aplikasi Turunan</a>
       <a href="#integral">Integral Tak Tentu</a>
       <a href="#integral-tentu">Integral Tentu &amp; Luas</a>
+      <a href="#teknik-integral">Substitusi &amp; Parsial</a>
+      <a href="#volume">Volume Benda Putar</a>
       <a href="#menuju-olimpiade">Menuju Olimpiade</a>
       <a href="#bedah-soal">Bedah Soal</a>
       <a href="#latihan">Latihan Soal</a>
@@ -217,6 +219,102 @@
         <p>dengan $a$ dan $b$ absis titik potong kedua kurva. Daerah di <em>bawah</em> sumbu-X bernilai integral negatif — pakai selisih "atas dikurang bawah" (atau tanda mutlak) agar luasnya tetap positif.</p>
       </div>
 
+      <div class="lesson-section" id="teknik-integral">
+        <h2>Teknik Integral: Substitusi &amp; Parsial</h2>
+        <p>Aturan pangkat terbalik menaklukkan $\int x^n dx$, tapi mentok begitu bertemu fungsi yang <em>bersarang</em> atau <em>berkalikan</em>. Dua teknik berikut adalah kebalikan dari dua aturan turunan yang sudah kamu kuasai — aturan rantai dan aturan hasil kali, dijalankan mundur.</p>
+
+        <h3>Substitusi — Aturan Rantai Dibalik</h3>
+        <p>Bila di dalam integral ada sebuah fungsi <em>beserta turunannya</em>, namai bagian dalam itu $u$ dan seluruh integral akan mengerut.</p>
+        <div class="box formula">
+          <span class="box-label">Substitusi</span>
+          $$\int f(g(x))\,g'(x)\,dx = \int f(u)\,du, \qquad u = g(x),\ du = g'(x)\,dx$$
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh 1</span>
+          <p style="margin-bottom:0.3rem;">$\int 2x\,(x^2+1)^3\,dx$. Pilih $u = x^2 + 1$, maka $du = 2x\,dx$ — dan $2x\,dx$ kebetulan sudah tersedia utuh.</p>
+          <p style="margin-bottom:0;">Integralnya menjadi $\int u^3\,du = \tfrac{u^4}{4}$, jadi hasilnya $\dfrac{(x^2+1)^4}{4} + C$.</p>
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh 2 — Bila Turunannya Kurang Sedikit</span>
+          <p style="margin-bottom:0.3rem;">$\int (2x+1)^5\,dx$. Pilih $u = 2x+1$, maka $du = 2\,dx$, sehingga $dx = \tfrac12\,du$.</p>
+          <p style="margin-bottom:0;">$\int u^5 \cdot \tfrac12\,du = \tfrac{u^6}{12}$, jadi hasilnya $\dfrac{(2x+1)^6}{12} + C$. Konstanta boleh dipindah keluar; yang <em>tak</em> boleh adalah memindahkan variabel.</p>
+        </div>
+
+        <h3>Parsial — Aturan Hasil Kali Dibalik</h3>
+        <p>Turunkan $uv$ dengan aturan hasil kali, lalu integralkan kedua ruas dan pindahkan satu suku. Lahirlah:</p>
+        <div class="box formula">
+          <span class="box-label">Integral Parsial</span>
+          $$\int u\,dv = uv - \int v\,du$$
+        </div>
+        <p>Teknik ini tidak langsung menyelesaikan integral — ia <strong>menukarnya</strong> dengan integral lain. Karena itu pemilihannya penting: jadikan $u$ bagian yang <em>menyederhana bila diturunkan</em> (biasanya suku polinomial), dan $dv$ bagian yang <em>mudah diintegralkan</em>.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">$\int x\cos x\,dx$. Pilih $u = x$ (turunannya $1$ — menyederhana) dan $dv = \cos x\,dx$ (sehingga $v = \sin x$).</p>
+          <p style="margin-bottom:0;">$\int x\cos x\,dx = x\sin x - \int \sin x\,dx = x\sin x + \cos x + C$. Perhatikan tandanya: $-\int\sin x\,dx$ menjadi $+\cos x$.</p>
+        </div>
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>Substitusi hanya bekerja bila $du$ <strong>benar-benar tersedia</strong> (boleh meleset konstanta, tak boleh meleset variabel). $\int (x^2+1)^3 dx$ tanpa faktor $x$ tak bisa disubstitusi begini.</li>
+            <li>Salah memilih $u$ pada parsial membuat integralnya justru lebih rumit. Bila hasilnya makin berat, tukar pilihannya.</li>
+            <li>Pada integral tentu dengan substitusi, <strong>batasnya ikut berubah</strong> — atau kembalikan dulu ke variabel semula sebelum memasukkan batas.</li>
+            <li>Selalu bisa diperiksa: turunkan kembali hasilnya. Ini bab dengan alat verifikasi paling murah di seluruh matematika.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="volume">
+        <h2>Volume Benda Putar</h2>
+        <p>Integral tentu menjumlahkan pias-pias tipis menjadi <em>luas</em>. Ganti piasnya dengan <strong>cakram</strong>, dan yang terjumlah menjadi <em class="accent-word">volume</em>.</p>
+        <p>Bayangkan daerah di bawah kurva diputar satu putaran penuh mengelilingi sumbu-X. Setiap irisan tegak setebal $dx$ menyapu sebuah cakram tipis berjari-jari $y = f(x)$, sehingga luas permukaannya $\pi y^2$. Menjumlahkan seluruh cakram memberi:</p>
+        <div class="box formula">
+          <span class="box-label">Mengelilingi Sumbu-X</span>
+          $$V = \pi \int_a^b y^2\,dx = \pi \int_a^b \big[f(x)\big]^2\,dx$$
+        </div>
+
+        <div class="widget-card reveal" id="widget-benda-putar">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Laboratorium Benda Putar</h3>
+            <p>Daerah biru di atas sumbu adalah daerah aslinya; bayangan pudar di bawahnya membantu membayangkan benda yang terbentuk saat daerah itu diputar. Geser batas $b$ dan perhatikan volumenya melonjak — jauh lebih cepat daripada luasnya, karena jari-jarinya <strong>dikuadratkan</strong>. Preset <strong>Garis</strong> dan <strong>Konstan</strong> menghasilkan kerucut dan tabung, jadi hasil integralnya bisa dicocokkan langsung dengan rumus bangun ruang yang sudah kamu hafal sejak SMP.</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+
+        <div class="box example">
+          <span class="box-label">Contoh — dan Buktinya</span>
+          <p style="margin-bottom:0.3rem;">Daerah di bawah $y = x$ dari $x = 0$ sampai $3$ diputar mengelilingi sumbu-X:</p>
+          <p style="margin-bottom:0.3rem;">$V = \pi\displaystyle\int_0^3 x^2\,dx = \pi\Big[\tfrac{x^3}{3}\Big]_0^3 = 9\pi$.</p>
+          <p style="margin-bottom:0;">Bendanya kerucut berjari-jari $3$ dan tinggi $3$. Rumus bangun ruang: $\tfrac13\pi r^2 t = \tfrac13\pi(9)(3) = 9\pi$ ✓ — kalkulus baru saja <em>membuktikan</em> rumus yang selama ini kamu terima begitu saja.</p>
+        </div>
+
+        <h3>Mengelilingi Sumbu-Y</h3>
+        <p>Tukar peran kedua sumbu: irisannya kini mendatar, jari-jarinya $x$, dan tebalnya $dy$.</p>
+        <div class="box formula">
+          <span class="box-label">Mengelilingi Sumbu-Y</span>
+          $$V = \pi \int_c^d x^2\,dy$$
+        </div>
+        <p>Konsekuensinya: nyatakan $x$ dalam $y$ terlebih dahulu, dan ambil batasnya pada sumbu-Y. Dari $y = x^2$, misalnya, diperoleh $x^2 = y$ sehingga integralnya menjadi $\pi\int y\,dy$.</p>
+
+        <h3>Daerah di Antara Dua Kurva</h3>
+        <p>Bila yang diputar adalah daerah antara dua kurva, bendanya berlubang — tiap irisannya berupa <strong>cincin</strong>:</p>
+        <div class="box formula">
+          <span class="box-label">Metode Cincin</span>
+          $$V = \pi \int_a^b \big( y_{\text{luar}}^2 - y_{\text{dalam}}^2 \big)\,dx$$
+        </div>
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li><strong>Kuadratkan dulu, baru kurangkan.</strong> Jebakan terbesar bab ini: menulis $(y_{\text{luar}} - y_{\text{dalam}})^2$. Padahal $(a-b)^2 \neq a^2 - b^2$ — dua hal yang sama sekali berbeda.</li>
+            <li>Jangan lupa faktor $\pi$. Ia mudah tertinggal karena berada di luar tanda integral.</li>
+            <li>Diputar mengelilingi sumbu-Y? Integralnya <em>terhadap $y$</em>, dan batasnya pun batas $y$ — bukan sekadar menukar huruf.</li>
+            <li>Luas tumbuh linear terhadap jari-jari, volume tumbuh kuadrat. Menggandakan $f(x)$ melipatempatkan volumenya, bukan melipatduakan.</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="lesson-section" id="menuju-olimpiade">
         <h2>Menuju Kalkulus Olimpiade</h2>
         <p>Empat perkakas yang mengubah aturan-aturan tadi menjadi senjata.</p>
@@ -319,7 +417,7 @@
           <!-- MUDAH -->
           <div class="tier-panel active" data-tier="mudah">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -390,13 +488,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Gradien singgung $= f'(3)$. Dari $f'(x) = 2x - 4$: $f'(3) = 2$. (Jebakan D adalah $f(3) = -2$… bukan, $f(3) = 9-12+1 = -2$; nilai fungsi ≠ gradien!)</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+            <div class="quiz-card" data-answer="C" data-qid="kl-m7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">Daerah di bawah $y = 2$ dari $x = 0$ sampai $x = 3$ diputar mengelilingi sumbu-X. Volumenya adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$6\pi$</button>
+                <button class="quiz-option" data-option="B">$4\pi$</button>
+                <button class="quiz-option" data-option="C">$12\pi$</button>
+                <button class="quiz-option" data-option="D">$36\pi$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$V = \pi\int_0^3 2^2\,dx = \pi\big[4x\big]_0^3 = 12\pi$. Bendanya tabung berjari-jari $2$ dan tinggi $3$: $\pi r^2 t = \pi(4)(3) = 12\pi$ ✓ Jebakan A lupa mengkuadratkan jari-jarinya.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="kl-m8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Rumus volume benda putar mengelilingi sumbu-X adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$V = \pi\int y^2\,dx$</button>
+                <button class="quiz-option" data-option="B">$V = \pi\int y\,dx$</button>
+                <button class="quiz-option" data-option="C">$V = \int y^2\,dx$</button>
+                <button class="quiz-option" data-option="D">$V = 2\pi\int y\,dx$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Setiap irisan tipis berupa cakram berjari-jari $y$ dan tebal $dx$, sehingga luasnya $\pi y^2$. Menjumlahkan seluruhnya memberi $V = \pi\int y^2 dx$. Jebakan B lupa mengkuadratkan — itu rumus <em>luas</em>, bukan volume.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
           </div>
 
           <!-- SEDANG -->
           <div class="tier-panel" data-tier="sedang">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -467,13 +587,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Teorema Dasar Kalkulus: $\big[x^3\big]_0^2 = 8 - 0 = 8$. Anti-turunan dulu, baru batas atas dikurangi batas bawah.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+            <div class="quiz-card" data-answer="B" data-qid="kl-s7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">$\displaystyle\int 2x\,(x^2+1)^3\,dx = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{(x^2+1)^4}{8} + C$</button>
+                <button class="quiz-option" data-option="B">$\frac{(x^2+1)^4}{4} + C$</button>
+                <button class="quiz-option" data-option="C">$(x^2+1)^4 + C$</button>
+                <button class="quiz-option" data-option="D">$6x^2(x^2+1)^2 + C$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Misalkan $u = x^2+1$, maka $du = 2x\,dx$ — dan faktor $2x\,dx$ sudah tersedia utuh di soal. Integralnya menjadi $\int u^3 du = \tfrac{u^4}{4}$, jadi hasilnya $\tfrac{(x^2+1)^4}{4} + C$. Periksa dengan menurunkan kembali ✓ Jebakan D malah <em>menurunkan</em>.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="C" data-qid="kl-s8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Daerah di bawah $y = x$ dari $x = 0$ sampai $x = 3$ diputar mengelilingi sumbu-X. Volumenya adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$27\pi$</button>
+                <button class="quiz-option" data-option="B">$3\pi$</button>
+                <button class="quiz-option" data-option="C">$9\pi$</button>
+                <button class="quiz-option" data-option="D">$\frac{9\pi}{2}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$V = \pi\int_0^3 x^2 dx = \pi\big[\tfrac{x^3}{3}\big]_0^3 = 9\pi$. Bendanya kerucut berjari-jari $3$ dan tinggi $3$: $\tfrac13\pi r^2 t = 9\pi$ ✓ Jebakan A lupa membagi $3$ saat mengintegralkan.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
           </div>
 
           <!-- SULIT -->
           <div class="tier-panel" data-tier="sulit">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-score">Skor <strong>0/8</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -544,13 +686,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Turunkan dua kali: $f' = 4x^3 - 6x^2$, lalu $f'' = 12x^2 - 12x$. Jebakan A berhenti di turunan pertama; D kebablasan ke turunan ketiga.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+            <div class="quiz-card" data-answer="B" data-qid="kl-x7">
+              <div class="quiz-head"><span class="quiz-number">7</span><p class="quiz-question">$\displaystyle\int x\cos x\,dx = \dots$</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x\sin x - \cos x + C$</button>
+                <button class="quiz-option" data-option="B">$x\sin x + \cos x + C$</button>
+                <button class="quiz-option" data-option="C">$x\sin x + \sin x + C$</button>
+                <button class="quiz-option" data-option="D">$-x\sin x + \cos x + C$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Integral parsial $\int u\,dv = uv - \int v\,du$ dengan $u = x$ (menyederhana bila diturunkan) dan $dv = \cos x\,dx$ sehingga $v = \sin x$. Hasilnya $x\sin x - \int\sin x\,dx = x\sin x + \cos x + C$. Jebakan A tergelincir tanda: $-\int \sin x\,dx$ menjadi $+\cos x$.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="kl-x8">
+              <div class="quiz-head"><span class="quiz-number">8</span><p class="quiz-question">Daerah yang dibatasi $y = \sqrt{x}$, sumbu-X, dan garis $x = 4$ diputar mengelilingi sumbu-X. Volumenya adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$16\pi$</button>
+                <button class="quiz-option" data-option="B">$4\pi$</button>
+                <button class="quiz-option" data-option="C">$\frac{32\pi}{3}$</button>
+                <button class="quiz-option" data-option="D">$8\pi$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>$V = \pi\int_0^4 (\sqrt{x})^2 dx = \pi\int_0^4 x\,dx = \pi\big[\tfrac{x^2}{2}\big]_0^4 = 8\pi$. Mengkuadratkan $\sqrt{x}$ justru menyederhanakan integralnya — ciri khas soal benda putar berfungsi akar.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
           </div>
 
           <!-- OLIMPIADE -->
           <div class="tier-panel" data-tier="olimpiade">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-score">Skor <strong>0/10</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -643,7 +807,29 @@
               <div class="quiz-feedback" hidden><strong></strong>Titik potong: $x^2 = 2x - x^2 \Rightarrow 2x^2 = 2x \Rightarrow x = 0, 1$. Di antaranya kurva $2x - x^2$ di atas. $L = \int_0^1 (2x - 2x^2)dx = \left[x^2 - \frac{2x^3}{3}\right]_0^1 = 1 - \frac23 = \frac13$.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai — dan seluruh sembilan mapel Khusni Academy telah kamu jelajahi!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Muara berikutnya: <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a>, atau uji seluruh bekalmu di <a href="tka-lanjut.html" style="color:var(--medal);font-weight:700;">TKA Matematika Lanjut</a>.</div>
+            <div class="quiz-card" data-answer="C" data-qid="kl-o9">
+              <div class="quiz-head"><span class="quiz-number">9</span><p class="quiz-question">Daerah yang dibatasi kurva $y = x$ dan $y = x^2$ diputar mengelilingi sumbu-X. Volumenya adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$\frac{\pi}{6}$</button>
+                <button class="quiz-option" data-option="B">$\frac{\pi}{15}$</button>
+                <button class="quiz-option" data-option="C">$\frac{2\pi}{15}$</button>
+                <button class="quiz-option" data-option="D">$\frac{\pi}{3}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Metode cincin: $V = \pi\int_0^1 \big(x^2 - x^4\big)dx = \pi\big[\tfrac{x^3}{3} - \tfrac{x^5}{5}\big]_0^1 = \pi\left(\tfrac13 - \tfrac15\right) = \tfrac{2\pi}{15}$. Jebakan terbesarnya: mengurangkan kurvanya dulu lalu mengkuadratkan. Ingat $(x - x^2)^2 \neq x^2 - x^4$ — kuadratkan dulu, baru kurangkan.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="kl-o10">
+              <div class="quiz-head"><span class="quiz-number">10</span><p class="quiz-question">Daerah yang dibatasi $y = x^2$, sumbu-Y, dan garis $y = 4$ diputar mengelilingi <strong>sumbu-Y</strong>. Volumenya adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4\pi$</button>
+                <button class="quiz-option" data-option="B">$16\pi$</button>
+                <button class="quiz-option" data-option="C">$\frac{32\pi}{5}$</button>
+                <button class="quiz-option" data-option="D">$8\pi$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Karena diputar mengelilingi sumbu-Y, integralnya terhadap $y$: $V = \pi\int_0^4 x^2\,dy$. Dari $y = x^2$ diperoleh $x^2 = y$, sehingga $V = \pi\int_0^4 y\,dy = \pi\big[\tfrac{y^2}{2}\big]_0^4 = 8\pi$. Kuncinya menukar peran $x$ dan $y$ — termasuk batasnya, yang kini diambil pada sumbu-Y.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai — dan seluruh sembilan mapel Khusni Academy telah kamu jelajahi!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Muara berikutnya: <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a>, atau uji seluruh bekalmu di <a href="tka-lanjut.html" style="color:var(--medal);font-weight:700;">TKA Matematika Lanjut</a>.</div>
           </div>
         </div>
       </div>
