@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulasi Ujian Matematika — Try Out Acak Lintas Materi | Khusni Academy</title>
+<meta name="description" content="Simulasi ujian matematika SMA: soal diacak dari 348 soal lintas sembilan mapel dan dua paket TKA, lengkap dengan pewaktu, penanda ragu, dan pembahasan tiap soal di akhir. Latih kondisi ujian yang sesungguhnya.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#090d17">
+<link rel="canonical" href="https://khusniacademy.netlify.app/simulasi.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Simulasi Ujian Matematika — Try Out Acak Lintas Materi">
+<meta property="og:description" content="Soal diacak dari 348 soal lintas sembilan mapel dan dua paket TKA, lengkap pewaktu dan pembahasan.">
+<meta property="og:url" content="https://khusniacademy.netlify.app/simulasi.html">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Simulasi Ujian Matematika — Khusni Academy">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f9dff'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia, serif' font-weight='700' fill='%23090d17' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <div class="nav-drop">
+        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-haspopup="true">Materi<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label">Tersedia</span>
+          <div class="nav-drop-group">
+            <a href="aljabar.html"><strong>Aljabar</strong><em>Persamaan &amp; pertidaksamaan, kuadrat, suku banyak, program linear</em></a>
+            <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap, persamaan</em></a>
+            <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran, kuasa titik, transformasi geometri</em></a>
+            <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, model fungsi, limit</em></a>
+            <a href="limit.html"><strong>Limit</strong><em>Konsep &amp; sifat, aljabar, trigonometri, tak hingga &amp; asimtot</em></a>
+            <a href="matriks.html"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
+            <a href="vektor.html"><strong>Vektor</strong><em>Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
+            <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan &amp; penyebaran, pencacahan, peluang</em></a>
+            <a href="kalkulus.html"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral, luas &amp; volume benda putar</em></a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-drop">
+        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-haspopup="true">TKA<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label">Persiapan TKA</span>
+          <div class="nav-drop-group">
+            <a href="tka.html"><strong>Matematika Umum</strong><em>Tentang, kisi-kisi, format, strategi, bedah soal, 25 latihan</em></a>
+            <a href="tka-lanjut.html"><strong>Matematika Lanjut</strong><em>Kisi-kisi, peta materi, strategi, bedah soal, 25 latihan</em></a>
+          </div>
+        </div>
+      </div>
+      <a href="simulasi.html" class="active">Simulasi</a>
+      <a href="olimpiade.html">Olimpiade</a>
+    </div>
+    <div class="nav-cta">
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Simulasi Ujian</span>
+    <h1>Try Out Acak Lintas Materi</h1>
+    <p class="lead">Berlatih soal satu per satu memang perlu — tapi ujian yang sesungguhnya tidak pernah memberitahu bab mana yang sedang diuji. Di sini soalnya <strong>diacak dari seluruh bank</strong>, waktunya berjalan, dan pembahasannya baru terbuka setelah semuanya selesai.</p>
+  </div>
+</header>
+
+<main class="container" id="exam-root">
+
+  <!-- ============ Layar 1: penyiapan ============ -->
+  <section class="exam-panel" data-layar="setup">
+    <div class="exam-card">
+      <h2>Susun Paketmu</h2>
+
+      <div class="exam-field">
+        <span class="exam-label">Sumber soal</span>
+        <div class="chips" data-pilih="paket">
+          <button type="button" class="chip active" data-nilai="semua">Campuran Semua Mapel</button>
+          <button type="button" class="chip" data-nilai="tka">TKA Matematika Umum</button>
+          <button type="button" class="chip" data-nilai="tka-lanjut">TKA Matematika Lanjut</button>
+          <button type="button" class="chip" data-nilai="aljabar">Aljabar</button>
+          <button type="button" class="chip" data-nilai="trigonometri">Trigonometri</button>
+          <button type="button" class="chip" data-nilai="geometri">Geometri</button>
+          <button type="button" class="chip" data-nilai="prakalkulus">Prakalkulus</button>
+          <button type="button" class="chip" data-nilai="limit">Limit</button>
+          <button type="button" class="chip" data-nilai="matriks">Matriks</button>
+          <button type="button" class="chip" data-nilai="vektor">Vektor</button>
+          <button type="button" class="chip" data-nilai="statistika">Statistika &amp; Peluang</button>
+          <button type="button" class="chip" data-nilai="kalkulus">Kalkulus</button>
+        </div>
+      </div>
+
+      <div class="exam-field">
+        <span class="exam-label">Tingkat kesulitan</span>
+        <div class="chips" data-pilih="tingkat">
+          <button type="button" class="chip active" data-nilai="semua">Semua Tingkat</button>
+          <button type="button" class="chip" data-nilai="dasar">Dasar — mudah &amp; sedang</button>
+          <button type="button" class="chip" data-nilai="lanjut">Lanjut — sulit &amp; olimpiade</button>
+        </div>
+        <p class="exam-hint">Paket TKA memakai domain kisi-kisi, bukan tingkat, sehingga saringan ini tidak berlaku untuknya.</p>
+      </div>
+
+      <div class="exam-field">
+        <span class="exam-label">Banyak soal</span>
+        <div class="chips" data-pilih="jumlah">
+          <button type="button" class="chip" data-nilai="10">10 soal</button>
+          <button type="button" class="chip active" data-nilai="20">20 soal</button>
+          <button type="button" class="chip" data-nilai="30">30 soal</button>
+          <button type="button" class="chip" data-nilai="semua">Semua yang tersedia</button>
+        </div>
+      </div>
+
+      <div class="exam-field">
+        <span class="exam-label">Pewaktu</span>
+        <div class="chips" data-pilih="waktu">
+          <button type="button" class="chip" data-nilai="0">Tanpa batas</button>
+          <button type="button" class="chip active" data-nilai="90">Standar — 1,5 menit/soal</button>
+          <button type="button" class="chip" data-nilai="60">Ketat — 1 menit/soal</button>
+        </div>
+      </div>
+
+      <div class="exam-summary" data-r="ringkas">Memuat bank soal…</div>
+      <button type="button" class="btn btn-primary exam-start" data-aksi="mulai">Mulai Simulasi</button>
+      <p class="exam-hint">Pembahasan sengaja disembunyikan sampai kamu menekan <strong>Selesai</strong> — supaya latihannya sedekat mungkin dengan ujian betulan.</p>
+    </div>
+  </section>
+
+  <!-- ============ Layar 2: pengerjaan ============ -->
+  <section class="exam-panel" data-layar="kerja" hidden>
+    <div class="exam-bar">
+      <div class="exam-bar-kiri">
+        <span class="exam-jam" data-r="jam">--:--</span>
+        <span class="exam-maju" data-r="maju">Soal 1 dari 20</span>
+      </div>
+      <div class="exam-bar-kanan">
+        <span class="exam-terjawab" data-r="terjawab">0 terjawab</span>
+        <button type="button" class="btn btn-outline exam-finish" data-aksi="selesai">Selesai</button>
+      </div>
+    </div>
+    <div class="exam-progress"><i data-r="garis"></i></div>
+
+    <div class="exam-body">
+      <div class="exam-soal" data-r="soal"></div>
+      <aside class="exam-nav">
+        <div class="exam-nav-title">Peta Soal</div>
+        <div class="exam-grid" data-r="peta"></div>
+        <div class="exam-legend">
+          <span><i class="lg terjawab"></i>terjawab</span>
+          <span><i class="lg ragu"></i>ragu</span>
+          <span><i class="lg kosong"></i>kosong</span>
+        </div>
+      </aside>
+    </div>
+
+    <div class="exam-aksi">
+      <button type="button" class="btn btn-outline" data-aksi="mundur">← Sebelumnya</button>
+      <button type="button" class="btn btn-ghost exam-ragu" data-aksi="ragu">Tandai Ragu</button>
+      <button type="button" class="btn btn-outline" data-aksi="maju">Berikutnya →</button>
+    </div>
+  </section>
+
+  <!-- ============ Layar 3: hasil ============ -->
+  <section class="exam-panel" data-layar="hasil" hidden>
+    <div class="exam-skor" data-r="skor"></div>
+    <div class="exam-rincian" data-r="rincian"></div>
+    <div class="exam-aksi-hasil">
+      <button type="button" class="btn btn-primary" data-aksi="ulang">Susun Paket Baru</button>
+    </div>
+    <h2 class="exam-review-judul">Pembahasan Lengkap</h2>
+    <div class="exam-review" data-r="review"></div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+        <p>Belajar Matematika dari konsep dasar sampai persiapan olimpiade, untuk pelajar SMA, mahasiswa, dan umum.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Materi</h4>
+          <a href="aljabar.html">Aljabar</a>
+          <a href="trigonometri.html">Trigonometri</a>
+          <a href="geometri.html">Geometri</a>
+          <a href="prakalkulus.html">Prakalkulus</a>
+          <a href="limit.html">Limit</a>
+          <a href="matriks.html">Matriks</a>
+          <a href="vektor.html">Vektor</a>
+          <a href="statistika.html">Statistika &amp; Peluang</a>
+          <a href="kalkulus.html">Kalkulus</a>
+        </div>
+        <div class="footer-col">
+          <h4>Latihan &amp; Persiapan</h4>
+          <a href="simulasi.html">Simulasi Ujian</a>
+          <a href="tka.html">TKA Matematika Umum</a>
+          <a href="tka-lanjut.html">TKA Matematika Lanjut</a>
+          <a href="olimpiade.html">Matematika Olimpiade</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tentang</h4>
+          <span>Khusni Academy</span>
+          <span>Dibuat untuk pelajar Indonesia</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Khusni Academy.</span>
+      <span>I have learned that I still have a lot to learn</span>
+    </div>
+  </div>
+</footer>
+<button class="back-top" aria-label="Kembali ke atas">↑</button>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="bank.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRegionLab();
   initTransformLab();
   initModelLab();
+  initExam();
   initKatex();
 });
 
@@ -3360,4 +3361,297 @@ function initModelLab() {
   }
 
   render();
+}
+
+/* ==========================================================================
+   SIMULASI UJIAN (simulasi.html)
+   Menarik soal acak dari bank hasil panen, menjalankan pewaktu, dan menahan
+   seluruh pembahasan sampai peserta menekan Selesai.
+   ========================================================================== */
+function initExam() {
+  const akar = document.getElementById('exam-root');
+  if (!akar || !window.KA_BANK) return;
+
+  const BANK = window.KA_BANK.soal;
+  const LABEL = window.KA_BANK.label;
+  const q = sel => akar.querySelector(sel);
+  const r = key => akar.querySelector('[data-r="' + key + '"]');
+  const layar = nama => akar.querySelector('[data-layar="' + nama + '"]');
+
+  const DASAR = ['mudah', 'sedang'];
+  const LANJUT = ['sulit', 'olimpiade'];
+  const pilihan = { paket: 'semua', tingkat: 'semua', jumlah: '20', waktu: '90' };
+
+  let sesi = null, jamId = null;
+
+  /* ---------- Alat ---------- */
+  const acak = arr => {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+  const jam = d => {
+    const m = Math.floor(Math.abs(d) / 60), s = Math.abs(d) % 60;
+    return (d < 0 ? '-' : '') + m + ':' + String(s).padStart(2, '0');
+  };
+  const rumus = el => {
+    if (typeof renderMathInElement === 'function') {
+      renderMathInElement(el, {
+        delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
+        throwOnError: false
+      });
+    }
+  };
+
+  function tersedia() {
+    let s = BANK;
+    if (pilihan.paket !== 'semua') s = s.filter(x => x.mapel === pilihan.paket);
+    else s = s.filter(x => !x.mapel.startsWith('tka'));
+    if (pilihan.tingkat !== 'semua' && !pilihan.paket.startsWith('tka')) {
+      const izin = pilihan.tingkat === 'dasar' ? DASAR : LANJUT;
+      s = s.filter(x => izin.includes(x.tier));
+    }
+    return s;
+  }
+
+  /* ---------- Layar 1: penyiapan ---------- */
+  akar.querySelectorAll('[data-pilih]').forEach(grup => {
+    grup.addEventListener('click', e => {
+      const b = e.target.closest('.chip');
+      if (!b) return;
+      grup.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      b.classList.add('active');
+      pilihan[grup.dataset.pilih] = b.dataset.nilai;
+      ringkas();
+    });
+  });
+
+  function ringkas() {
+    const ada = tersedia();
+    const minta = pilihan.jumlah === 'semua' ? ada.length : Math.min(+pilihan.jumlah, ada.length);
+    const detik = +pilihan.waktu * minta;
+    const namaPaket = pilihan.paket === 'semua' ? 'sembilan mapel' : LABEL[pilihan.paket];
+    let t = '<strong>' + minta + ' soal</strong> akan diambil acak dari ' + ada.length +
+      ' soal ' + namaPaket;
+    t += detik ? ' &middot; waktu <strong>' + jam(detik) + '</strong>' : ' &middot; <strong>tanpa batas waktu</strong>';
+    if (ada.length === 0) t = 'Tidak ada soal yang cocok dengan saringan ini.';
+    else if (minta < +pilihan.jumlah) t += '<br><em>Hanya ' + ada.length + ' soal tersedia, jadi semuanya dipakai.</em>';
+    r('ringkas').innerHTML = t;
+    q('[data-aksi="mulai"]').disabled = ada.length === 0;
+  }
+
+  /* ---------- Menjalankan sesi ---------- */
+  function mulai() {
+    const ada = tersedia();
+    if (!ada.length) return;
+    const n = pilihan.jumlah === 'semua' ? ada.length : Math.min(+pilihan.jumlah, ada.length);
+    sesi = {
+      soal: acak(ada).slice(0, n),
+      jawab: new Array(n).fill(null),
+      ragu: new Array(n).fill(false),
+      kini: 0,
+      sisa: +pilihan.waktu * n,
+      berbatas: +pilihan.waktu > 0,
+      mulaiPada: Date.now()
+    };
+    tampil('kerja');
+    petaBangun();
+    tampilSoal();
+    if (sesi.berbatas) {
+      jamId = setInterval(() => {
+        sesi.sisa--;
+        r('jam').textContent = jam(sesi.sisa);
+        r('jam').classList.toggle('kritis', sesi.sisa <= 60);
+        if (sesi.sisa <= 0) selesai(true);
+      }, 1000);
+      r('jam').textContent = jam(sesi.sisa);
+    } else {
+      r('jam').textContent = '∞';
+    }
+  }
+
+  function tampil(nama) {
+    ['setup', 'kerja', 'hasil'].forEach(x => { layar(x).hidden = x !== nama; });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function petaBangun() {
+    r('peta').innerHTML = sesi.soal.map((_, i) =>
+      '<button type="button" class="exam-kotak" data-ke="' + i + '">' + (i + 1) + '</button>').join('');
+    r('peta').onclick = e => {
+      const b = e.target.closest('.exam-kotak');
+      if (b) { sesi.kini = +b.dataset.ke; tampilSoal(); }
+    };
+  }
+
+  function petaSegar() {
+    [...r('peta').children].forEach((b, i) => {
+      b.classList.toggle('terjawab', sesi.jawab[i] !== null);
+      b.classList.toggle('ragu', sesi.ragu[i]);
+      b.classList.toggle('kini', i === sesi.kini);
+    });
+    const n = sesi.jawab.filter(x => x !== null).length;
+    r('terjawab').textContent = n + ' terjawab';
+    r('maju').textContent = 'Soal ' + (sesi.kini + 1) + ' dari ' + sesi.soal.length;
+    r('garis').style.width = (n / sesi.soal.length * 100) + '%';
+    q('[data-aksi="ragu"]').classList.toggle('aktif', sesi.ragu[sesi.kini]);
+  }
+
+  function kartuSoal(s, ke, jawab, kunci) {
+    const tag = s.tipe === 'tf' ? '<span class="quiz-tag tf">Benar–Salah</span>'
+      : s.tipe === 'multi' ? '<span class="quiz-tag multi">Pilihan Ganda Kompleks</span>' : '';
+    let t = '<div class="exam-kepala"><span class="exam-nomor">' + (ke + 1) + '</span>' +
+      '<span class="exam-asal">' + LABEL[s.mapel] + '</span></div>' +
+      '<p class="quiz-question">' + s.soal + '</p>' + tag +
+      (s.gambar || '');
+
+    if (s.tipe === 'tf') {
+      t += '<div class="tf-list">' + s.baris.map((b, i) => {
+        const dipilih = jawab ? jawab.split(',')[i] : '';
+        return '<div class="tf-row"><p>' + b.p + '</p><div class="tf-btns">' +
+          ['B', 'S'].map(v => '<button type="button" class="tf-btn' +
+            (dipilih === v ? ' aktif' : '') +
+            (kunci ? (b.a === v ? ' benar' : (dipilih === v ? ' salah' : '')) : '') +
+            '" data-baris="' + i + '" data-tf="' + v + '"' + (kunci ? ' disabled' : '') + '>' +
+            (v === 'B' ? 'Benar' : 'Salah') + '</button>').join('') +
+          '</div></div>';
+      }).join('') + '</div>';
+    } else {
+      const dipilih = jawab ? jawab.split(',') : [];
+      const benar = s.jawab.split(',');
+      t += '<div class="quiz-options ' + (s.kelas || '') + '">' + s.opsi.map(o => {
+        let k = 'quiz-option';
+        if (dipilih.includes(o.l)) k += ' dipilih';
+        if (kunci) {
+          if (benar.includes(o.l)) k += ' correct';
+          else if (dipilih.includes(o.l)) k += ' incorrect';
+        }
+        return '<button type="button" class="' + k + '" data-option="' + o.l + '"' +
+          (kunci ? ' disabled' : '') + '>' + o.h + '</button>';
+      }).join('') + '</div>';
+    }
+    return t;
+  }
+
+  function tampilSoal() {
+    const s = sesi.soal[sesi.kini];
+    const kotak = r('soal');
+    kotak.innerHTML = kartuSoal(s, sesi.kini, sesi.jawab[sesi.kini], false);
+    rumus(kotak);
+    petaSegar();
+
+    if (s.tipe === 'tf') {
+      kotak.querySelectorAll('.tf-btn').forEach(b => b.onclick = () => {
+        const kini = (sesi.jawab[sesi.kini] || new Array(s.baris.length).fill('').join(',')).split(',');
+        kini[+b.dataset.baris] = b.dataset.tf;
+        sesi.jawab[sesi.kini] = kini.every(x => x) ? kini.join(',') : kini.join(',');
+        if (!kini.some(x => x)) sesi.jawab[sesi.kini] = null;
+        tampilSoal();
+      });
+    } else if (s.tipe === 'multi') {
+      kotak.querySelectorAll('.quiz-option').forEach(b => b.onclick = () => {
+        const kini = sesi.jawab[sesi.kini] ? sesi.jawab[sesi.kini].split(',') : [];
+        const i = kini.indexOf(b.dataset.option);
+        if (i >= 0) kini.splice(i, 1); else kini.push(b.dataset.option);
+        kini.sort();
+        sesi.jawab[sesi.kini] = kini.length ? kini.join(',') : null;
+        tampilSoal();
+      });
+    } else {
+      kotak.querySelectorAll('.quiz-option').forEach(b => b.onclick = () => {
+        sesi.jawab[sesi.kini] = b.dataset.option;
+        if (sesi.kini < sesi.soal.length - 1) { sesi.kini++; tampilSoal(); }
+        else tampilSoal();
+      });
+    }
+  }
+
+  /* ---------- Penilaian ---------- */
+  const cocok = (s, j) => {
+    if (!j) return false;
+    if (s.tipe === 'tf') return j === s.jawab;
+    const a = j.split(',').sort().join(','), b = s.jawab.split(',').sort().join(',');
+    return a === b;
+  };
+
+  function selesai(paksa) {
+    if (!paksa) {
+      const kosong = sesi.jawab.filter(x => x === null).length;
+      const pesan = kosong
+        ? 'Masih ada ' + kosong + ' soal yang belum dijawab. Selesaikan sekarang?'
+        : 'Selesaikan dan lihat hasilnya?';
+      if (!window.confirm(pesan)) return;
+    }
+    if (jamId) { clearInterval(jamId); jamId = null; }
+    const benar = sesi.soal.filter((s, i) => cocok(s, sesi.jawab[i])).length;
+    const total = sesi.soal.length;
+    const pakai = Math.round((Date.now() - sesi.mulaiPada) / 1000);
+    const persen = Math.round(benar / total * 100);
+
+    const komentar = persen >= 85 ? 'Sangat baik — pertahankan ritmenya.'
+      : persen >= 70 ? 'Bagus. Rapikan bagian yang masih goyah di bawah.'
+      : persen >= 50 ? 'Separuh jalan. Pembahasan di bawah adalah tempat terbaik memulai.'
+      : 'Belum apa-apa — ini justru daftar belanja belajarmu.';
+
+    r('skor').innerHTML =
+      '<div class="skor-angka"><strong>' + benar + '</strong><span>/ ' + total + '</span></div>' +
+      '<div class="skor-persen">' + persen + '%</div>' +
+      '<p class="skor-komentar">' + komentar + '</p>' +
+      '<p class="skor-waktu">Waktu terpakai ' + jam(pakai) +
+      (paksa ? ' · <strong>waktu habis</strong>' : '') + '</p>';
+
+    const per = {};
+    sesi.soal.forEach((s, i) => {
+      const k = LABEL[s.mapel];
+      per[k] = per[k] || { benar: 0, total: 0 };
+      per[k].total++;
+      if (cocok(s, sesi.jawab[i])) per[k].benar++;
+    });
+    r('rincian').innerHTML = '<div class="table-scroll"><table class="math-table"><thead><tr>' +
+      '<th style="text-align:left;">Mapel</th><th>Benar</th><th>Soal</th><th>Capaian</th></tr></thead><tbody>' +
+      Object.entries(per).sort((a, b) => a[1].benar / a[1].total - b[1].benar / b[1].total)
+        .map(([k, v]) => '<tr><td style="text-align:left;">' + k + '</td><td>' + v.benar +
+          '</td><td>' + v.total + '</td><td>' + Math.round(v.benar / v.total * 100) + '%</td></tr>').join('') +
+      '</tbody></table></div>';
+
+    r('review').innerHTML = sesi.soal.map((s, i) => {
+      const ok = cocok(s, sesi.jawab[i]);
+      const jw = sesi.jawab[i] || '—';
+      return '<div class="exam-review-item ' + (ok ? 'benar' : 'salah') + '">' +
+        '<div class="review-status">' + (ok ? '✓ Benar' : '✗ ' + (sesi.jawab[i] ? 'Salah' : 'Tidak dijawab')) + '</div>' +
+        kartuSoal(s, i, sesi.jawab[i], true) +
+        '<div class="review-kunci">Jawabanmu <strong>' + jw + '</strong> &middot; kunci <strong>' + s.jawab + '</strong></div>' +
+        '<div class="review-bahas">' + s.bahas + '</div>' +
+        '<a class="review-tautan" href="' + s.sumber + '">Buka materi ' + LABEL[s.mapel] + ' →</a>' +
+        '</div>';
+    }).join('');
+
+    tampil('hasil');
+    rumus(r('rincian'));
+    rumus(r('review'));
+  }
+
+  /* ---------- Tombol ---------- */
+  akar.addEventListener('click', e => {
+    const b = e.target.closest('[data-aksi]');
+    if (!b) return;
+    const a = b.dataset.aksi;
+    if (a === 'mulai') mulai();
+    else if (a === 'selesai') selesai(false);
+    else if (a === 'mundur' && sesi.kini > 0) { sesi.kini--; tampilSoal(); }
+    else if (a === 'maju' && sesi.kini < sesi.soal.length - 1) { sesi.kini++; tampilSoal(); }
+    else if (a === 'ragu') { sesi.ragu[sesi.kini] = !sesi.ragu[sesi.kini]; petaSegar(); }
+    else if (a === 'ulang') { if (jamId) clearInterval(jamId); sesi = null; tampil('setup'); }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (layar('kerja').hidden || !sesi) return;
+    if (e.key === 'ArrowLeft' && sesi.kini > 0) { sesi.kini--; tampilSoal(); }
+    if (e.key === 'ArrowRight' && sesi.kini < sesi.soal.length - 1) { sesi.kini++; tampilSoal(); }
+  });
+
+  ringkas();
 }
