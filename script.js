@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHornerLab();
   initCircleLab();
   initVolumeLab();
+  initRegionLab();
   initKatex();
 });
 
@@ -2825,6 +2826,192 @@ function initVolumeLab() {
     q('[data-r="rumus"]').textContent = '\u03c0 \u222b ' + P.kuad + ' dx, dari 0 sampai ' + b;
     q('[data-r="volume"]').textContent = fmt(P.vol(b)) + '\u03c0';
     note.textContent = P.cek(b);
+  }
+
+  render();
+}
+
+/* ==========================================================================
+   SIMULASI 13 — Laboratorium Daerah Penyelesaian (aljabar.html)
+   Irisan beberapa setengah bidang dihitung langsung: setiap pasang garis
+   batas dipotongkan, titik yang memenuhi SEMUA kendala disimpan sebagai
+   titik pojok, lalu diurutkan melingkar menjadi poligon.
+   ========================================================================== */
+function initRegionLab() {
+  const host = document.getElementById('widget-daerah');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const SIZE = 340, OX = 36, OY = 304, U = 27, VMAX = 10, EPS = 1e-9;
+  const px = x => OX + x * U;
+  const py = y => OY - y * U;
+  const fmt = v => String(Math.round(v * 100) / 100).replace('.', ',');
+  const pt = p => '(' + fmt(p.x) + ', ' + fmt(p.y) + ')';
+
+  /* Kendala ditulis a·x + b·y (op) c; disimpan ternormalisasi jadi a·x + b·y <= c */
+  const K = (a, b, op, c) => ({ a: a, b: b, op: op, c: c });
+  const norm = k => k.op === '\u2265' ? { a: -k.a, b: -k.b, c: -k.c } : { a: k.a, b: k.b, c: k.c };
+  const teks = k => {
+    const kiri = (k.a === 0 ? '' : (k.a === 1 ? 'x' : k.a === -1 ? '\u2212x' : k.a + 'x')) +
+      (k.b === 0 ? '' : (k.a === 0 ? (k.b === 1 ? 'y' : k.b === -1 ? '\u2212y' : k.b + 'y')
+        : (k.b > 0 ? ' + ' : ' \u2212 ') + (Math.abs(k.b) === 1 ? 'y' : Math.abs(k.b) + 'y')));
+    return kiri + ' ' + k.op + ' ' + String(k.c).replace('-', '\u2212');
+  };
+
+  const PRESETS = [
+    { name: 'Segitiga', base: [K(1, 0, '\u2265', 0), K(0, 1, '\u2265', 0)], akhir: [1, 1, '\u2264'], k: 4 },
+    { name: 'Dua Kendala', base: [K(1, 0, '\u2265', 0), K(0, 1, '\u2265', 0), K(2, 1, '\u2264', 8)], akhir: [1, 2, '\u2264'], k: 10 },
+    { name: 'Berbatas x', base: [K(1, 0, '\u2265', 0), K(0, 1, '\u2265', 0), K(1, 1, '\u2264', 6)], akhir: [1, 0, '\u2264'], k: 3 },
+    { name: 'Tanpa Irisan', base: [K(1, 0, '\u2265', 0), K(0, 1, '\u2265', 0), K(1, 1, '\u2264', 2)], akhir: [1, 1, '\u2265'], k: 5 }
+  ];
+  let pre = 0, kVal = PRESETS[0].k;
+
+  /* --- SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + SIZE + ' ' + SIZE,
+    class: 'fr-svg',
+    role: 'img',
+    'aria-label': 'Bidang koordinat dengan daerah penyelesaian sistem pertidaksamaan linear'
+  });
+  for (let i = 1; i <= VMAX; i++) {
+    svgEl('line', { x1: px(i), y1: py(0), x2: px(i), y2: py(VMAX), class: 'fr-grid' }, svg);
+    svgEl('line', { x1: px(0), y1: py(i), x2: px(VMAX), y2: py(i), class: 'fr-grid' }, svg);
+  }
+  svgEl('line', { x1: px(0) - 10, y1: py(0), x2: px(VMAX) + 8, y2: py(0), class: 'fr-axis' }, svg);
+  svgEl('line', { x1: px(0), y1: py(0) + 10, x2: px(0), y2: py(VMAX) - 8, class: 'fr-axis' }, svg);
+  [[px(5) - 3, py(0) + 16, '5'], [px(10) - 6, py(0) + 16, '10'],
+   [px(0) - 14, py(5) + 4, '5'], [px(0) - 20, py(10) + 4, '10']].forEach(t => {
+    const lbl = svgEl('text', { x: t[0], y: t[1], class: 'w-lbl' }, svg);
+    lbl.textContent = t[2];
+  });
+  const lineLayer = svgEl('g', {}, svg);
+  const poly = svgEl('polygon', { points: '', class: 'fr-poly' }, svg);
+  const dotLayer = svgEl('g', {}, svg);
+
+  /* --- Kontrol --- */
+  const controls = elDiv('widget-controls');
+  const chips = elDiv('chips');
+  PRESETS.forEach((p, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = p.name;
+    b.addEventListener('click', () => { pre = i; kVal = p.k; slider.value = String(kVal); render(); });
+    chips.appendChild(b);
+  });
+  controls.appendChild(chips);
+
+  const row = elDiv('ctrl-row');
+  row.innerHTML = '<label>Batas kendala terakhir</label><output></output>';
+  const slider = document.createElement('input');
+  slider.type = 'range'; slider.min = '0'; slider.max = '10'; slider.step = '1'; slider.value = String(kVal);
+  slider.setAttribute('aria-label', 'Batas kendala terakhir');
+  slider.addEventListener('input', () => { kVal = parseInt(slider.value, 10); render(); });
+  controls.appendChild(row);
+  controls.appendChild(slider);
+  const out = row.querySelector('output');
+
+  const readout = elDiv('readout',
+    '<div class="full"><span>Sistem pertidaksamaan</span><b data-r="sistem"></b></div>' +
+    '<div><span>Banyak titik pojok</span><b data-r="banyak"></b></div>' +
+    '<div><span>Maks f = 3x + 2y</span><b data-r="maks"></b></div>' +
+    '<div class="full"><span>Titik pojok</span><b data-r="pojok"></b></div>');
+  controls.appendChild(readout);
+
+  const badgeWrap = elDiv('');
+  badgeWrap.innerHTML = '<span class="disc-badge gold" data-r="badge" hidden></span>';
+  controls.appendChild(badgeWrap);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  /* Potongan garis batas dengan kotak tampilan, untuk digambar */
+  function ruas(n) {
+    const cand = [];
+    const push = (x, y) => {
+      if (x >= -EPS && x <= VMAX + EPS && y >= -EPS && y <= VMAX + EPS) cand.push({ x: x, y: y });
+    };
+    if (Math.abs(n.b) > EPS) { push(0, n.c / n.b); push(VMAX, (n.c - n.a * VMAX) / n.b); }
+    if (Math.abs(n.a) > EPS) { push(n.c / n.a, 0); push((n.c - n.b * VMAX) / n.a, VMAX); }
+    if (cand.length < 2) return null;
+    let best = null, jauh = -1;
+    for (let i = 0; i < cand.length; i++) {
+      for (let j = i + 1; j < cand.length; j++) {
+        const d = Math.hypot(cand[i].x - cand[j].x, cand[i].y - cand[j].y);
+        if (d > jauh) { jauh = d; best = [cand[i], cand[j]]; }
+      }
+    }
+    return jauh > EPS ? best : null;
+  }
+
+  function render() {
+    const P = PRESETS[pre];
+    const kendala = P.base.concat([K(P.akhir[0], P.akhir[1], P.akhir[2], kVal)]);
+    const N = kendala.map(norm);
+
+    /* Titik pojok = perpotongan tiap pasang garis yang memenuhi semua kendala */
+    const sudut = [];
+    for (let i = 0; i < N.length; i++) {
+      for (let j = i + 1; j < N.length; j++) {
+        const det = N[i].a * N[j].b - N[j].a * N[i].b;
+        if (Math.abs(det) < EPS) continue;
+        const x = (N[i].c * N[j].b - N[j].c * N[i].b) / det;
+        const y = (N[i].a * N[j].c - N[j].a * N[i].c) / det;
+        if (N.every(n => n.a * x + n.b * y <= n.c + 1e-7)) {
+          const kunci = x.toFixed(6) + ',' + y.toFixed(6);
+          if (!sudut.some(s => s.kunci === kunci)) sudut.push({ x: x, y: y, kunci: kunci });
+        }
+      }
+    }
+    if (sudut.length > 2) {
+      const cx = sudut.reduce((a, s) => a + s.x, 0) / sudut.length;
+      const cy = sudut.reduce((a, s) => a + s.y, 0) / sudut.length;
+      sudut.sort((p1, p2) => Math.atan2(p1.y - cy, p1.x - cx) - Math.atan2(p2.y - cy, p2.x - cx));
+    }
+
+    /* Gambar */
+    lineLayer.innerHTML = '';
+    N.forEach(n => {
+      const r = ruas(n);
+      if (r) svgEl('line', {
+        x1: px(r[0].x), y1: py(r[0].y), x2: px(r[1].x), y2: py(r[1].y), class: 'fr-line'
+      }, lineLayer);
+    });
+    poly.setAttribute('points', sudut.map(s => px(s.x).toFixed(1) + ',' + py(s.y).toFixed(1)).join(' '));
+    dotLayer.innerHTML = '';
+    sudut.forEach(s => svgEl('circle', { cx: px(s.x), cy: py(s.y), r: 4.5, class: 'fr-vertex' }, dotLayer));
+
+    /* Panel */
+    out.textContent = 'batas = ' + kVal;
+    q('[data-r="sistem"]').textContent = kendala.map(teks).join(',  ');
+    q('[data-r="banyak"]').textContent = String(sudut.length);
+    q('[data-r="pojok"]').textContent = sudut.length ? sudut.map(pt).join('  \u00b7  ') : '\u2014';
+
+    const kosong = sudut.length === 0;
+    let maks = null;
+    sudut.forEach(s => {
+      const f = 3 * s.x + 2 * s.y;
+      if (maks === null || f > maks.f + EPS) maks = { f: f, s: s };
+    });
+    q('[data-r="maks"]').textContent = maks ? fmt(maks.f) : '\u2014';
+
+    const badge = q('[data-r="badge"]');
+    badge.hidden = !kosong;
+    if (kosong) badge.textContent = 'irisannya kosong \u00b7 tidak ada penyelesaian';
+
+    note.textContent = kosong
+      ? 'Kendala-kendalanya saling bertentangan, jadi tak ada satu pun titik yang memenuhi semuanya. Geser batasnya sampai daerahnya muncul kembali.'
+      : 'Program linear tak perlu menguji seluruh daerah \u2014 cukup titik pojoknya. Di sini f = 3x + 2y mencapai ' +
+        fmt(maks.f) + ' di titik ' + pt(maks.s) + '.';
   }
 
   render();

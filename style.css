@@ -1664,3 +1664,11 @@ svg text.st-medianlbl { font-family: var(--font-mono); font-size: 12px; font-wei
 .vr-curve { fill: none; stroke: var(--signal); stroke-width: 2.5; }
 .vr-curve.mirror { stroke: var(--signal-dim); stroke-dasharray: 5 4; }
 .vr-cap { stroke: var(--medal); stroke-width: 2.5; }
+
+/* ---------- Simulasi 13: Daerah Penyelesaian (aljabar.html) ---------- */
+.fr-svg { width: 100%; height: auto; display: block; }
+.fr-grid { stroke: var(--ink-line-soft); stroke-width: 1; }
+.fr-axis { stroke: var(--ink-line); stroke-width: 2; }
+.fr-line { stroke: var(--signal-dim); stroke-width: 1.6; stroke-dasharray: 5 4; }
+.fr-poly { fill: var(--signal-soft); stroke: var(--signal); stroke-width: 2.5; stroke-linejoin: round; }
+.fr-vertex { fill: var(--medal); }

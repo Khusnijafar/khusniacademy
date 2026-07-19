@@ -33,7 +33,7 @@
         <button class="nav-drop-btn active" type="button" aria-expanded="false" aria-haspopup="true">Materi<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="nav-drop-menu">
           <span class="nav-drop-label">Tersedia</span>
-          <a href="aljabar.html" class="active"><strong>Aljabar</strong><em>Faktorisasi, persamaan kuadrat, suku banyak, bekal olimpiade</em></a>
+          <a href="aljabar.html" class="active"><strong>Aljabar</strong><em>Persamaan &amp; pertidaksamaan, kuadrat, suku banyak, program linear</em></a>
           <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap, persamaan</em></a>
           <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran &amp; persamaannya, Heron, kuasa titik</em></a>
           <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, limit</em></a>
@@ -79,6 +79,7 @@
       <a href="#pangkat">Pangkat &amp; Akar</a>
       <a href="#persamaan-linear">Persamaan Linear</a>
       <a href="#spldv">Sistem Persamaan</a>
+      <a href="#pertidaksamaan-linear">Pertidaksamaan &amp; Multivariabel</a>
       <a href="#persamaan-kuadrat">Persamaan Kuadrat</a>
       <a href="#suku-banyak">Suku Banyak</a>
       <a href="#menuju-olimpiade">Menuju Olimpiade</a>
@@ -239,6 +240,93 @@
           <p style="margin-bottom:0;"><strong>Substitusi:</strong> dari persamaan kedua, $x = y+4$; masukkan ke pertama: $(y+4)+y = 10 \Rightarrow y = 3$, lalu $x = 7$. Dua metode, jawaban sama — persis kebiasaan "periksa lewat jalan kedua" di Bedah Soal nanti.</p>
         </div>
         <p>Di soal kompetisi, SPLDV jarang tampil polos — ia menyamar dalam soal cerita atau berpadu dengan bentuk kuadrat (seperti soal Sulit no. 2 di latihan). Kuncinya selalu sama: <em class="accent-word">lenyapkan satu variabel dulu</em>.</p>
+      </div>
+
+      <div class="lesson-section" id="pertidaksamaan-linear">
+        <h2>Pertidaksamaan Linear &amp; Sistem Multivariabel</h2>
+        <p>Dua bab sebelumnya menyelesaikan <a href="#persamaan-linear">persamaan linear satu variabel</a> dan <a href="#spldv">sistem dua variabel</a>. Dari sana ada dua arah perluasan, dan bab ini menempuh keduanya sekaligus: mengganti tanda $=$ dengan $\le$, dan menambah jumlah variabelnya.</p>
+        <p>Benang merahnya satu: <em class="accent-word">semakin banyak variabel dan semakin longgar tandanya, semakin besar himpunan penyelesaiannya</em> — dari sebuah titik, menjadi selang, menjadi daerah, lalu menjadi ruang.</p>
+
+        <h3>Satu Variabel: dari Titik ke Selang</h3>
+        <p>Persamaan $2x - 6 = 0$ punya tepat satu jawaban, $x = 3$. Ganti tandanya menjadi $2x - 6 \le 0$, dan jawabannya melebar menjadi seluruh selang $x \le 3$. Aturan mainnya sama persis dengan persamaan, dengan <strong>satu aturan ekstra</strong> yang sudah kita bahas di bab <a href="#persamaan-linear">Persamaan Linear</a>: mengali atau membagi dengan bilangan negatif <strong>membalik arah tanda</strong>.</p>
+        <p>Bila kendalanya lebih dari satu, penyelesaiannya adalah <strong>irisan</strong> — bagian yang memenuhi semuanya sekaligus.</p>
+        <div class="box example">
+          <span class="box-label">Contoh — Sistem Satu Variabel</span>
+          <p style="margin-bottom:0.3rem;">$2x - 1 \ge 3$ dan $x + 2 &lt; 8$.</p>
+          <p style="margin-bottom:0.3rem;">Yang pertama memberi $x \ge 2$; yang kedua memberi $x &lt; 6$.</p>
+          <p style="margin-bottom:0;">Irisannya: $2 \le x &lt; 6$. Perhatikan jenis tandanya ikut terbawa — ujung kiri tertutup, ujung kanan terbuka.</p>
+        </div>
+
+        <h3>Dua Variabel: dari Garis ke Daerah</h3>
+        <p>Persamaan $x + y = 4$ tidak punya satu jawaban, melainkan tak hingga banyak pasangan $(x, y)$ — dan semuanya terletak pada sebuah <strong>garis</strong>. Ubah tandanya menjadi $x + y \le 4$, dan penyelesaiannya melebar menjadi <strong>setengah bidang</strong>: seluruh wilayah di satu sisi garis itu.</p>
+        <div class="box recap">
+          <span class="box-label">Melukis Daerah Penyelesaian</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>1. Gambar garis batasnya</strong> dengan mengganti tanda menjadi $=$. Pakai garis <em>penuh</em> untuk $\le$ dan $\ge$ (batasnya ikut), garis <em>putus-putus</em> untuk $&lt;$ dan $&gt;$ (batasnya tidak ikut).</li>
+            <li><strong>2. Uji satu titik</strong> di luar garis — biasanya titik asal $(0,0)$, kecuali garisnya melewatinya. Bila titik uji memenuhi, arsir sisi itu; bila tidak, arsir sisi seberangnya.</li>
+            <li><strong>3. Untuk sistem</strong>, ulangi tiap pertidaksamaan lalu ambil <strong>irisan</strong> seluruh arsiran.</li>
+          </ul>
+        </div>
+        <p>Perpotongan garis-garis batas yang berada di tepi daerah itu disebut <strong>titik pojok</strong> — dan titik-titik inilah yang sebentar lagi menjadi kunci.</p>
+
+        <div class="widget-card reveal" id="widget-daerah">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Laboratorium Daerah Penyelesaian</h3>
+            <p>Pilih sistem pertidaksamaannya, lalu geser batas kendala terakhir dan perhatikan daerahnya memuai atau menyusut — sementara <strong>titik pojoknya dihitung ulang secara langsung</strong> beserta nilai maksimum $f = 3x + 2y$. Preset <strong>Tanpa Irisan</strong> sengaja dibuat bertentangan sehingga daerahnya kosong; geser batasnya turun sampai daerahnya muncul kembali.</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+
+        <h3>Program Linear</h3>
+        <p>Daerah penyelesaian menjadi berguna begitu kita punya sesuatu untuk dioptimalkan. Sebuah <strong>fungsi objektif</strong> $f = ax + by$ — misalnya keuntungan atau biaya — dicari nilai maksimum atau minimumnya pada daerah itu. Dan di sinilah sebuah kenyataan menyelamatkan kita dari memeriksa titik yang tak terhingga banyaknya:</p>
+        <div class="box formula">
+          <span class="box-label">Teorema Titik Pojok</span>
+          $$\text{Nilai optimum } f = ax + by \text{ selalu tercapai di salah satu \textbf{titik pojok} daerah penyelesaian.}$$
+        </div>
+        <p>Jadi resepnya cukup tiga langkah: <strong>lukis daerahnya</strong>, <strong>tentukan titik-titik pojoknya</strong>, lalu <strong>uji $f$ di tiap titik pojok</strong> dan pilih yang terbesar (atau terkecil).</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Maksimumkan $f = 3x + 2y$ pada $x \ge 0$, $y \ge 0$, $x + y \le 4$.</p>
+          <p style="margin-bottom:0.3rem;">Titik pojoknya $(0,0)$, $(4,0)$, dan $(0,4)$ — persis preset <strong>Segitiga</strong> di simulasi.</p>
+          <p style="margin-bottom:0;">Uji: $f(0,0) = 0$, $f(4,0) = 12$, $f(0,4) = 8$. Maksimumnya $\mathbf{12}$ di titik $(4,0)$ — masuk akal, karena koefisien $x$ lebih besar sehingga optimum condong ke arah sumbu-X.</p>
+        </div>
+
+        <h3>Multivariabel: Tiga Variabel dan Seterusnya</h3>
+        <p>Menambah variabel tidak menambah gagasan baru, hanya menambah langkah. Strategi untuk <strong>SPLTV</strong> selalu sama: <em>turunkan derajat masalahnya</em> — eliminasi satu variabel agar tersisa sistem dua variabel yang sudah kamu kuasai, lalu turunkan lagi menjadi satu.</p>
+        <div class="box example">
+          <span class="box-label">Contoh — SPLTV</span>
+          <p style="margin-bottom:0.3rem;">$x + y + z = 9$, &nbsp; $x - y = 1$, &nbsp; $y + z = 6$.</p>
+          <p style="margin-bottom:0.3rem;">Dari persamaan ketiga, $z = 6 - y$. Substitusikan ke yang pertama: $x + y + (6 - y) = 9$, sehingga $x = 3$ — variabel $y$ lenyap dengan sendirinya.</p>
+          <p style="margin-bottom:0;">Lalu $x - y = 1$ memberi $y = 2$, dan $z = 4$. Periksa ke <em>ketiga</em> persamaan: $3+2+4=9$ ✓, $3-2=1$ ✓, $2+4=6$ ✓</p>
+        </div>
+        <p>Bila sistemnya <strong>simetris</strong>, sering ada jalan pintas. Untuk $x+y=5$, $y+z=7$, $x+z=8$: jumlahkan ketiganya, dan setiap variabel muncul tepat dua kali, sehingga $2(x+y+z) = 20$ dan $x+y+z = 10$ — tanpa mencari satu pun variabelnya.</p>
+
+        <h4>Tiga Kemungkinan yang Selalu Ada</h4>
+        <p>Berapa pun banyak variabelnya, sistem linear hanya punya tiga nasib:</p>
+        <div class="box recap">
+          <span class="box-label">Nasib Sebuah Sistem Linear</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Tepat satu penyelesaian</strong> — garis atau bidangnya berpotongan di satu titik.</li>
+            <li><strong>Tak hingga banyak</strong> — persamaannya saling berimpit; salah satunya sebenarnya kelipatan yang lain.</li>
+            <li><strong>Tidak ada</strong> — persamaannya sejajar dan bertentangan, seperti preset <em>Tanpa Irisan</em> di simulasi.</li>
+          </ul>
+        </div>
+        <p>Yang membedakan ketiganya bisa dibaca dari koefisiennya saja. Untuk sistem dua variabel, hitung $ad - bc$: bila hasilnya <strong>tidak nol</strong>, penyelesaiannya pasti tunggal. Bilangan itu adalah <strong>determinan</strong>, dan seluruh ceritanya menunggu di halaman <a href="matriks.html#determinan">Matriks</a> — tempat sistem linear diselesaikan sekaligus dengan invers dan aturan Cramer.</p>
+
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <ul>
+            <li>Tanda dibalik <strong>hanya</strong> saat mengali atau membagi dengan bilangan negatif. Menambah atau mengurangi bilangan negatif tidak membalik apa pun.</li>
+            <li>Garis penuh atau putus-putus bukan hiasan: ia menyatakan apakah titik-titik pada batas ikut menjadi penyelesaian.</li>
+            <li>Jangan pakai $(0,0)$ sebagai titik uji bila garis batasnya melewati titik asal — pilih titik lain, misalnya $(1,0)$.</li>
+            <li>Daerah penyelesaian boleh <strong>kosong</strong>, dan boleh pula <strong>tak terbatas</strong>. Pada daerah tak terbatas, nilai maksimum bisa saja tidak ada.</li>
+            <li>Pada SPLTV, substitusikan kembali ke <em>semua</em> persamaan — bukan hanya yang terakhir dipakai. Kesalahan aritmetika di tengah jalan hanya ketahuan dari persamaan yang belum tersentuh.</li>
+            <li>Pada soal cerita program linear, variabelnya sering harus berupa <strong>bilangan bulat tak negatif</strong> (banyak barang tak boleh $2{,}5$ atau negatif). Kendala $x \ge 0$ dan $y \ge 0$ hampir selalu ikut, meski tak disebutkan.</li>
+          </ul>
+        </div>
       </div>
 
       <div class="lesson-section" id="persamaan-kuadrat">
@@ -558,7 +646,7 @@
           <!-- MUDAH -->
           <div class="tier-panel active" data-tier="mudah">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-score">Skor <strong>0/10</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -651,13 +739,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Derajat = pangkat tertinggi, yaitu $4$. Jebakan D menghitung banyaknya suku; jebakan B mengambil konstantanya.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
+            <div class="quiz-card" data-answer="B" data-qid="alj-m9">
+              <div class="quiz-head"><span class="quiz-number">9</span><p class="quiz-question">Penyelesaian dari $-2x + 6 &gt; 0$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$x &gt; 3$</button>
+                <button class="quiz-option" data-option="B">$x &lt; 3$</button>
+                <button class="quiz-option" data-option="C">$x &gt; -3$</button>
+                <button class="quiz-option" data-option="D">$x &lt; -3$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pindahkan: $-2x &gt; -6$. Membagi kedua ruas dengan $-2$ — sebuah bilangan negatif — <strong>membalik arah tandanya</strong>, sehingga $x &lt; 3$. Jebakan A lupa membalik: itulah satu-satunya aturan ekstra pada pertidaksamaan.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="D" data-qid="alj-m10">
+              <div class="quiz-head"><span class="quiz-number">10</span><p class="quiz-question">Titik berikut yang memenuhi pertidaksamaan $x + y \le 4$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(5, 0)$</button>
+                <button class="quiz-option" data-option="B">$(3, 2)$</button>
+                <button class="quiz-option" data-option="C">$(2, 3)$</button>
+                <button class="quiz-option" data-option="D">$(1, 2)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Substitusikan satu per satu: $(1,2)$ memberi $1 + 2 = 3 \le 4$ ✓, sedangkan ketiga titik lainnya sama-sama memberi $5$ yang melanggar batas. Menguji sebuah titik adalah cara tercepat menentukan sisi mana yang diarsir.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau naik ke tingkat berikutnya.</div>
           </div>
 
           <!-- SEDANG -->
           <div class="tier-panel" data-tier="sedang">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-score">Skor <strong>0/10</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -750,13 +860,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Teorema Faktor menuntut $P(2) = 0$: $8 - 12 + 2k - 2 = 0 \Rightarrow 2k = 6 \Rightarrow k = 3$. Jebakan D berhenti di $2k = 6$ tanpa membaginya.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
+            <div class="quiz-card" data-answer="C" data-qid="alj-s9">
+              <div class="quiz-head"><span class="quiz-number">9</span><p class="quiz-question">Penyelesaian sistem pertidaksamaan $2x - 1 \ge 3$ dan $x + 2 &lt; 8$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2 &lt; x \le 6$</button>
+                <button class="quiz-option" data-option="B">$x \ge 2$</button>
+                <button class="quiz-option" data-option="C">$2 \le x &lt; 6$</button>
+                <button class="quiz-option" data-option="D">$x &lt; 6$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Selesaikan terpisah: $2x - 1 \ge 3$ memberi $x \ge 2$, dan $x + 2 &lt; 8$ memberi $x &lt; 6$. Penyelesaian sistem adalah <strong>irisan</strong> keduanya, yaitu $2 \le x &lt; 6$. Jenis tandanya ikut terbawa — ujung kiri tertutup, ujung kanan terbuka.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="B" data-qid="alj-s10">
+              <div class="quiz-head"><span class="quiz-number">10</span><p class="quiz-question">Penyelesaian sistem $x + y + z = 9$, $x - y = 1$, dan $y + z = 6$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$(2, 3, 4)$</button>
+                <button class="quiz-option" data-option="B">$(3, 2, 4)$</button>
+                <button class="quiz-option" data-option="C">$(4, 3, 2)$</button>
+                <button class="quiz-option" data-option="D">$(3, 4, 2)$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Dari persamaan ketiga, $z = 6 - y$. Substitusikan ke persamaan pertama: $x + y + (6 - y) = 9$, sehingga $x = 3$ — variabel $y$ lenyap sendiri. Lalu $x - y = 1$ memberi $y = 2$ dan $z = 4$. Periksa ketiganya ✓ Kuncinya memilih substitusi yang melenyapkan satu variabel sekaligus.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Tekan "Ulangi" untuk mencoba lagi, atau tantang dirimu di tingkat Sulit.</div>
           </div>
 
           <!-- SULIT -->
           <div class="tier-panel" data-tier="sulit">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/8</strong></div>
+              <div class="tier-score">Skor <strong>0/10</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -849,13 +981,35 @@
               <div class="quiz-feedback" hidden><strong></strong>Pembagi berderajat $2$, jadi sisanya berbentuk $ax + b$. Dari $P(1) = 3$: $a + b = 3$; dari $P(-2) = -3$: $-2a + b = -3$. Kurangkan: $3a = 6 \Rightarrow a = 2$, $b = 1$ — sisanya $2x + 1$.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 8</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
+            <div class="quiz-card" data-answer="C" data-qid="alj-x9">
+              <div class="quiz-head"><span class="quiz-number">9</span><p class="quiz-question">Nilai maksimum $f = 3x + 2y$ pada daerah $x \ge 0$, $y \ge 0$, $x + y \le 4$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$8$</button>
+                <button class="quiz-option" data-option="B">$10$</button>
+                <button class="quiz-option" data-option="C">$12$</button>
+                <button class="quiz-option" data-option="D">$14$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Titik pojoknya $(0,0)$, $(4,0)$, dan $(0,4)$. Uji fungsi objektif di ketiganya: $0$, $12$, dan $8$. Maksimumnya $12$ di titik $(4,0)$. Menurut teorema titik pojok, cukup memeriksa sudut-sudutnya saja — bukan seluruh daerah.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="alj-x10">
+              <div class="quiz-head"><span class="quiz-number">10</span><p class="quiz-question">Daerah penyelesaian sistem $x \ge 0$, $y \ge 0$, $2x + y \le 8$, $x + 2y \le 10$ memiliki titik pojok sebanyak…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$4$</button>
+                <button class="quiz-option" data-option="B">$3$</button>
+                <button class="quiz-option" data-option="C">$2$</button>
+                <button class="quiz-option" data-option="D">$5$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Titik pojoknya $(0,0)$, $(4,0)$, $(0,5)$, dan perpotongan kedua garis miring di $(2,4)$ — seluruhnya empat. Ini persis preset <strong>Dua Kendala</strong> di simulasi. Menghitung titik pojok dengan tepat penting karena program linear hanya menguji titik-titik itu.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Siap naik kelas? Coba tab <strong>Olimpiade</strong> di sebelah kanan.</div>
           </div>
 
           <!-- OLIMPIADE -->
           <div class="tier-panel" data-tier="olimpiade">
             <div class="tier-meta">
-              <div class="tier-score">Skor <strong>0/10</strong></div>
+              <div class="tier-score">Skor <strong>0/12</strong></div>
               <div class="tier-progress" aria-hidden="true"><i></i></div>
               <button class="tier-reset" type="button">↺ Ulangi</button>
             </div>
@@ -970,7 +1124,29 @@
               <div class="quiz-feedback" hidden><strong></strong>Rakit dari faktornya: $(x-1)(x-2)(x+3)$. Dua yang pertama memberi $x^2 - 3x + 2$, lalu dikali $(x+3)$ menghasilkan $x^3 - 7x + 6$ — suku $x^2$-nya lenyap karena $1 + 2 + (-3) = 0$, persis Vieta.</div>
             </div>
 
-            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 10</span> soal. Fondasimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
+            <div class="quiz-card" data-answer="B" data-qid="alj-o11">
+              <div class="quiz-head"><span class="quiz-number">11</span><p class="quiz-question">Sistem $x + 2y = 3$ dan $2x + 4y = k$ <strong>tidak</strong> memiliki penyelesaian jika…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$k = 6$</button>
+                <button class="quiz-option" data-option="B">$k \neq 6$</button>
+                <button class="quiz-option" data-option="C">$k = 3$</button>
+                <button class="quiz-option" data-option="D">$k = 0$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Ruas kiri persamaan kedua persis dua kali ruas kiri yang pertama, jadi kedua garisnya sejajar. Bila $k = 6$ keduanya berimpit dan penyelesaiannya tak hingga banyak; untuk $k$ lainnya keduanya sejajar tanpa titik potong — tak ada penyelesaian. Determinan koefisiennya $1(4) - 2(2) = 0$, pertanda sistemnya memang tak punya penyelesaian tunggal.</div>
+            </div>
+
+            <div class="quiz-card" data-answer="A" data-qid="alj-o12">
+              <div class="quiz-head"><span class="quiz-number">12</span><p class="quiz-question">Diketahui $x + y = 5$, $y + z = 7$, dan $x + z = 8$. Nilai $x + y + z$ adalah…</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$10$</button>
+                <button class="quiz-option" data-option="B">$20$</button>
+                <button class="quiz-option" data-option="C">$12$</button>
+                <button class="quiz-option" data-option="D">$15$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jumlahkan ketiga persamaan: setiap variabel muncul tepat dua kali, sehingga $2(x+y+z) = 5 + 7 + 8 = 20$ dan $x + y + z = 10$. Jauh lebih cepat daripada mencari ketiganya satu per satu — meski bila diminta, dari sini $z = 5$, $x = 3$, dan $y = 2$. Jebakan B berhenti sebelum membagi dua.</div>
+            </div>
+
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 12</span> soal. Fondasimu siap diuji — lanjutkan ke <a href="olimpiade.html" style="color:var(--medal);font-weight:700;">Peta Jalan Olimpiade</a> dan mulai kerjakan arsip soal OSN.</div>
           </div>
         </div>
       </div>
