@@ -17,6 +17,7 @@
 <meta name="twitter:title" content="Simulasi Ujian Matematika — Khusni Academy">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f9dff'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia, serif' font-weight='700' fill='%23090d17' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
+<script>try{if(localStorage.getItem("ka-tema")==="terang")document.documentElement.setAttribute("data-tema","terang");var b=localStorage.getItem("ka-bahasa");if(b)document.documentElement.lang=b;}catch(e){}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 </head>
 <body>
@@ -24,42 +25,55 @@
   <div class="container">
     <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
     <div class="nav-links">
-      <a href="index.html">Beranda</a>
+      <a href="index.html" data-i18n="nav.beranda">Beranda</a>
       <div class="nav-drop">
-        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-haspopup="true">Materi<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.materi">Materi</span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="nav-drop-menu">
-          <span class="nav-drop-label">Tersedia</span>
+          <span class="nav-drop-label" data-i18n="nav.tersedia">Tersedia</span>
           <div class="nav-drop-group">
-            <a href="aljabar.html"><strong>Aljabar</strong><em>Persamaan &amp; pertidaksamaan, kuadrat, suku banyak, program linear</em></a>
-            <a href="trigonometri.html"><strong>Trigonometri</strong><em>Identitas, aturan sinus &amp; cosinus, sudut rangkap, persamaan</em></a>
-            <a href="geometri.html"><strong>Geometri</strong><em>Kesebangunan, lingkaran, kuasa titik, transformasi geometri</em></a>
-            <a href="prakalkulus.html"><strong>Prakalkulus</strong><em>Fungsi, logaritma, barisan &amp; deret, model fungsi, limit</em></a>
-            <a href="limit.html"><strong>Limit</strong><em>Konsep &amp; sifat, aljabar, trigonometri, tak hingga &amp; asimtot</em></a>
-            <a href="matriks.html"><strong>Matriks</strong><em>Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
-            <a href="vektor.html"><strong>Vektor</strong><em>Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
-            <a href="statistika.html"><strong>Statistika &amp; Peluang</strong><em>Data, pemusatan &amp; penyebaran, pencacahan, peluang</em></a>
-            <a href="kalkulus.html"><strong>Kalkulus</strong><em>Turunan, aplikasi, integral, luas &amp; volume benda putar</em></a>
+            <a href="aljabar.html"><strong data-i18n="m.aljabar">Aljabar</strong><em data-i18n="m.aljabar.d">Persamaan &amp; pertidaksamaan, kuadrat, suku banyak, program linear</em></a>
+            <a href="trigonometri.html"><strong data-i18n="m.trigonometri">Trigonometri</strong><em data-i18n="m.trigonometri.d">Identitas, aturan sinus &amp; cosinus, sudut rangkap, persamaan</em></a>
+            <a href="geometri.html"><strong data-i18n="m.geometri">Geometri</strong><em data-i18n="m.geometri.d">Kesebangunan, lingkaran, kuasa titik, transformasi geometri</em></a>
+            <a href="prakalkulus.html"><strong data-i18n="m.prakalkulus">Prakalkulus</strong><em data-i18n="m.prakalkulus.d">Fungsi, logaritma, barisan &amp; deret, model fungsi, limit</em></a>
+            <a href="limit.html"><strong data-i18n="m.limit">Limit</strong><em data-i18n="m.limit.d">Konsep &amp; sifat, aljabar, trigonometri, tak hingga &amp; asimtot</em></a>
+            <a href="matriks.html"><strong data-i18n="m.matriks">Matriks</strong><em data-i18n="m.matriks.d">Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton</em></a>
+            <a href="vektor.html"><strong data-i18n="m.vektor">Vektor</strong><em data-i18n="m.vektor.d">Komponen, resultan, dot product, proyeksi &amp; perbandingan</em></a>
+            <a href="statistika.html"><strong data-i18n="m.statistika">Statistika &amp; Peluang</strong><em data-i18n="m.statistika.d">Data, pemusatan &amp; penyebaran, pencacahan, peluang</em></a>
+            <a href="kalkulus.html"><strong data-i18n="m.kalkulus">Kalkulus</strong><em data-i18n="m.kalkulus.d">Turunan, aplikasi, integral, luas &amp; volume benda putar</em></a>
           </div>
         </div>
       </div>
       <div class="nav-drop">
-        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-haspopup="true">TKA<svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.tka">TKA</span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="nav-drop-menu">
-          <span class="nav-drop-label">Persiapan TKA</span>
+          <span class="nav-drop-label" data-i18n="nav.persiapanTka">Persiapan TKA</span>
           <div class="nav-drop-group">
-            <a href="tka.html"><strong>Matematika Umum</strong><em>Tentang, kisi-kisi, format, strategi, bedah soal, 25 latihan</em></a>
-            <a href="tka-lanjut.html"><strong>Matematika Lanjut</strong><em>Kisi-kisi, peta materi, strategi, bedah soal, 25 latihan</em></a>
+            <a href="tka.html"><strong data-i18n="tka.umum">Matematika Umum</strong><em data-i18n="tka.umum.d">Tentang, kisi-kisi, format, strategi, bedah soal, 25 latihan</em></a>
+            <a href="tka-lanjut.html"><strong data-i18n="tka.lanjut">Matematika Lanjut</strong><em data-i18n="tka.lanjut.d">Kisi-kisi, peta materi, strategi, bedah soal, 25 latihan</em></a>
           </div>
         </div>
       </div>
-      <a href="simulasi.html" class="active">Simulasi</a>
-      <a href="olimpiade.html">Olimpiade</a>
+      <div class="nav-drop">
+        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-haspopup="true"><span data-i18n="nav.utbk">UTBK</span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label" data-i18n="nav.persiapanUtbk">Persiapan UTBK</span>
+          <span class="nav-drop-soon"><span data-i18n="utbk.pm">Penalaran Matematika (PM)</span> <i data-i18n="nav.segera">Segera</i></span>
+          <span class="nav-drop-soon"><span data-i18n="utbk.pk">Penalaran Kuantitatif (PK)</span> <i data-i18n="nav.segera">Segera</i></span>
+        </div>
+      </div>
+      <a href="simulasi.html" class="active" data-i18n="nav.simulasi">Simulasi</a>
+      <a href="olimpiade.html" data-i18n="nav.olimpiade">Olimpiade</a>
     </div>
     <div class="nav-cta">
-      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <div class="nav-tools">
+        <button class="tool-btn tema-btn" type="button" aria-pressed="false" aria-label="Aktifkan tema terang"><svg class="ikon-gelap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg><svg class="ikon-terang" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5"/></svg></button>
+        <button class="tool-btn lang-btn" type="button" aria-label="Switch to English"><span data-bahasa="id" class="aktif">ID</span><span data-bahasa="en">EN</span></button>
+      </div>
+      <button class="nav-toggle" aria-label="Buka menu" data-i18n-aria="nav.bukaMenu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
+<p class="lang-notis" hidden></p>
 
 <header class="page-hero">
   <div class="container">
@@ -74,10 +88,10 @@
   <!-- ============ Layar 1: penyiapan ============ -->
   <section class="exam-panel" data-layar="setup">
     <div class="exam-card">
-      <h2>Susun Paketmu</h2>
+      <h2 data-i18n="sim.judul">Susun Paketmu</h2>
 
       <div class="exam-field">
-        <span class="exam-label">Sumber soal</span>
+        <span class="exam-label" data-i18n="sim.sumber">Sumber soal</span>
         <div class="chips" data-pilih="paket">
           <button type="button" class="chip active" data-nilai="semua">Campuran Semua Mapel</button>
           <button type="button" class="chip" data-nilai="tka">TKA Matematika Umum</button>
@@ -95,7 +109,7 @@
       </div>
 
       <div class="exam-field">
-        <span class="exam-label">Tingkat kesulitan</span>
+        <span class="exam-label" data-i18n="sim.tingkat">Tingkat kesulitan</span>
         <div class="chips" data-pilih="tingkat">
           <button type="button" class="chip active" data-nilai="semua">Semua Tingkat</button>
           <button type="button" class="chip" data-nilai="dasar">Dasar — mudah &amp; sedang</button>
@@ -105,7 +119,7 @@
       </div>
 
       <div class="exam-field">
-        <span class="exam-label">Banyak soal</span>
+        <span class="exam-label" data-i18n="sim.jumlah">Banyak soal</span>
         <div class="chips" data-pilih="jumlah">
           <button type="button" class="chip" data-nilai="10">10 soal</button>
           <button type="button" class="chip active" data-nilai="20">20 soal</button>
@@ -115,7 +129,7 @@
       </div>
 
       <div class="exam-field">
-        <span class="exam-label">Pewaktu</span>
+        <span class="exam-label" data-i18n="sim.waktu">Pewaktu</span>
         <div class="chips" data-pilih="waktu">
           <button type="button" class="chip" data-nilai="0">Tanpa batas</button>
           <button type="button" class="chip active" data-nilai="90">Standar — 1,5 menit/soal</button>
@@ -124,7 +138,7 @@
       </div>
 
       <div class="exam-summary" data-r="ringkas">Memuat bank soal…</div>
-      <button type="button" class="btn btn-primary exam-start" data-aksi="mulai">Mulai Simulasi</button>
+      <button type="button" class="btn btn-primary exam-start" data-aksi="mulai" data-i18n="sim.mulai">Mulai Simulasi</button>
       <p class="exam-hint">Pembahasan sengaja disembunyikan sampai kamu menekan <strong>Selesai</strong> — supaya latihannya sedekat mungkin dengan ujian betulan.</p>
     </div>
   </section>
@@ -138,7 +152,7 @@
       </div>
       <div class="exam-bar-kanan">
         <span class="exam-terjawab" data-r="terjawab">0 terjawab</span>
-        <button type="button" class="btn btn-outline exam-finish" data-aksi="selesai">Selesai</button>
+        <button type="button" class="btn btn-outline exam-finish" data-aksi="selesai" data-i18n="sim.selesai">Selesai</button>
       </div>
     </div>
     <div class="exam-progress"><i data-r="garis"></i></div>
@@ -146,20 +160,20 @@
     <div class="exam-body">
       <div class="exam-soal" data-r="soal"></div>
       <aside class="exam-nav">
-        <div class="exam-nav-title">Peta Soal</div>
+        <div class="exam-nav-title" data-i18n="sim.peta">Peta Soal</div>
         <div class="exam-grid" data-r="peta"></div>
         <div class="exam-legend">
-          <span><i class="lg terjawab"></i>terjawab</span>
-          <span><i class="lg ragu"></i>ragu</span>
-          <span><i class="lg kosong"></i>kosong</span>
+          <span><i class="lg terjawab"></i><span data-i18n="sim.lg.terjawab">terjawab</span></span>
+          <span><i class="lg ragu"></i><span data-i18n="sim.lg.ragu">ragu</span></span>
+          <span><i class="lg kosong"></i><span data-i18n="sim.lg.kosong">kosong</span></span>
         </div>
       </aside>
     </div>
 
     <div class="exam-aksi">
-      <button type="button" class="btn btn-outline" data-aksi="mundur">← Sebelumnya</button>
-      <button type="button" class="btn btn-ghost exam-ragu" data-aksi="ragu">Tandai Ragu</button>
-      <button type="button" class="btn btn-outline" data-aksi="maju">Berikutnya →</button>
+      <button type="button" class="btn btn-outline" data-aksi="mundur" data-i18n="sim.sebelum">← Sebelumnya</button>
+      <button type="button" class="btn btn-ghost exam-ragu" data-aksi="ragu" data-i18n="sim.ragu">Tandai Ragu</button>
+      <button type="button" class="btn btn-outline" data-aksi="maju" data-i18n="sim.berikut">Berikutnya →</button>
     </div>
   </section>
 
@@ -168,9 +182,9 @@
     <div class="exam-skor" data-r="skor"></div>
     <div class="exam-rincian" data-r="rincian"></div>
     <div class="exam-aksi-hasil">
-      <button type="button" class="btn btn-primary" data-aksi="ulang">Susun Paket Baru</button>
+      <button type="button" class="btn btn-primary" data-aksi="ulang" data-i18n="sim.ulang">Susun Paket Baru</button>
     </div>
-    <h2 class="exam-review-judul">Pembahasan Lengkap</h2>
+    <h2 class="exam-review-judul" data-i18n="sim.review">Pembahasan Lengkap</h2>
     <div class="exam-review" data-r="review"></div>
   </section>
 
@@ -185,28 +199,28 @@
       </div>
       <div class="footer-cols">
         <div class="footer-col">
-          <h4>Materi</h4>
-          <a href="aljabar.html">Aljabar</a>
-          <a href="trigonometri.html">Trigonometri</a>
-          <a href="geometri.html">Geometri</a>
-          <a href="prakalkulus.html">Prakalkulus</a>
-          <a href="limit.html">Limit</a>
-          <a href="matriks.html">Matriks</a>
-          <a href="vektor.html">Vektor</a>
-          <a href="statistika.html">Statistika &amp; Peluang</a>
-          <a href="kalkulus.html">Kalkulus</a>
+          <h4 data-i18n="foot.materi">Materi</h4>
+          <a href="aljabar.html" data-i18n="m.aljabar">Aljabar</a>
+          <a href="trigonometri.html" data-i18n="m.trigonometri">Trigonometri</a>
+          <a href="geometri.html" data-i18n="m.geometri">Geometri</a>
+          <a href="prakalkulus.html" data-i18n="m.prakalkulus">Prakalkulus</a>
+          <a href="limit.html" data-i18n="m.limit">Limit</a>
+          <a href="matriks.html" data-i18n="m.matriks">Matriks</a>
+          <a href="vektor.html" data-i18n="m.vektor">Vektor</a>
+          <a href="statistika.html" data-i18n="m.statistika">Statistika &amp; Peluang</a>
+          <a href="kalkulus.html" data-i18n="m.kalkulus">Kalkulus</a>
         </div>
         <div class="footer-col">
-          <h4>Latihan &amp; Persiapan</h4>
-          <a href="simulasi.html">Simulasi Ujian</a>
+          <h4 data-i18n="foot.latihan">Latihan &amp; Persiapan</h4>
+          <a href="simulasi.html" data-i18n="nav.simulasi">Simulasi Ujian</a>
           <a href="tka.html">TKA Matematika Umum</a>
           <a href="tka-lanjut.html">TKA Matematika Lanjut</a>
-          <a href="olimpiade.html">Matematika Olimpiade</a>
+          <a href="olimpiade.html" data-i18n="nav.olimpiade">Matematika Olimpiade</a>
         </div>
         <div class="footer-col">
-          <h4>Tentang</h4>
+          <h4 data-i18n="foot.tentang">Tentang</h4>
           <span>Khusni Academy</span>
-          <span>Dibuat untuk pelajar Indonesia</span>
+          <span data-i18n="foot.untuk">Dibuat untuk pelajar Indonesia</span>
         </div>
       </div>
     </div>

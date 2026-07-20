@@ -15,6 +15,13 @@
   --ink-raised-2: #161f34;
   --ink-line: #26304c;
   --ink-line-soft: #1a2340;
+  --ink-glass: rgba(9, 13, 23, 0.82);
+  --ink-glass-solid: rgba(9, 13, 23, 0.95);
+  --shadow-drop: rgba(3, 5, 12, 0.5);
+  --banner-jauh: #171025;
+  --garis-kuat: #33406a;
+  --di-atas-aksen: #05070d;
+  --di-atas-emas: #221602;
 
   /* --- Teks --- */
   --chalk: #eef1f8;
@@ -110,7 +117,7 @@ input { font-family: inherit; }
   left: 1rem;
   z-index: 300;
   background: var(--signal);
-  color: #05070d;
+  color: var(--di-atas-aksen);
   font-weight: 700;
   font-size: 0.9rem;
   padding: 0.65rem 1.1rem;
@@ -210,7 +217,7 @@ em.accent-word { font-style: italic; color: var(--signal); }
 }
 .btn-primary {
   background: var(--signal);
-  color: #05070d;
+  color: var(--di-atas-aksen);
 }
 .btn-primary:hover { background: #6fb0ff; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(79,157,255,0.25); }
 
@@ -222,7 +229,7 @@ em.accent-word { font-style: italic; color: var(--signal); }
 
 .btn-gold {
   background: var(--medal);
-  color: #221602;
+  color: var(--di-atas-emas);
 }
 .btn-gold:hover { background: #edc266; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(226,172,63,0.25); }
 
@@ -237,7 +244,7 @@ em.accent-word { font-style: italic; color: var(--signal); }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(9, 13, 23, 0.82);
+  background: var(--ink-glass);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--ink-line-soft);
@@ -245,7 +252,7 @@ em.accent-word { font-style: italic; color: var(--signal); }
 }
 .navbar.scrolled {
   border-bottom-color: var(--ink-line);
-  box-shadow: 0 10px 30px rgba(3, 5, 12, 0.45);
+  box-shadow: 0 10px 30px var(--shadow-drop);
 }
 .navbar .container {
   display: flex;
@@ -269,7 +276,7 @@ em.accent-word { font-style: italic; color: var(--signal); }
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display);
   font-weight: 600;
-  color: #05070d;
+  color: var(--di-atas-aksen);
   font-size: 1.1rem;
   flex-shrink: 0;
 }
@@ -456,7 +463,7 @@ em.accent-word { font-style: italic; color: var(--signal); }
 
 /* ---------- Banner Olimpiade (beranda) ---------- */
 .olim-banner {
-  background: linear-gradient(135deg, var(--ink-raised) 0%, #171025 100%);
+  background: linear-gradient(135deg, var(--ink-raised) 0%, var(--banner-jauh) 100%);
   border: 1px solid var(--medal-soft);
   border-radius: var(--r-lg);
   padding: clamp(2rem, 5vw, 3.2rem);
@@ -834,7 +841,7 @@ footer {
 /* Elemen SVG di dalam widget */
 .uc-axis { stroke: var(--ink-line); stroke-width: 1; }
 .uc-tick { stroke: var(--ink-line); stroke-width: 1; }
-.uc-circ { stroke: #33406a; stroke-width: 1.5; fill: none; }
+.uc-circ { stroke: var(--garis-kuat); stroke-width: 1.5; fill: none; }
 .uc-cos { stroke: var(--signal); stroke-width: 3.5; stroke-linecap: round; }
 .uc-sin { stroke: var(--tier-mudah); stroke-width: 3.5; stroke-linecap: round; }
 .uc-rad { stroke: var(--chalk); stroke-width: 1.5; opacity: 0.8; }
@@ -842,7 +849,7 @@ footer {
 .uc-pt { fill: var(--medal); stroke: var(--ink); stroke-width: 2; cursor: grab; }
 .uc-pt:active { cursor: grabbing; }
 .pb-grid { stroke: var(--ink-line-soft); stroke-width: 1; }
-.pb-axis { stroke: #33406a; stroke-width: 1.5; }
+.pb-axis { stroke: var(--garis-kuat); stroke-width: 1.5; }
 .pb-curve { stroke: var(--signal); stroke-width: 2.5; fill: none; stroke-linejoin: round; stroke-linecap: round; }
 .pb-root { fill: var(--tier-mudah); stroke: var(--ink); stroke-width: 2; }
 .pb-vertex { fill: var(--medal); stroke: var(--ink); stroke-width: 2; }
@@ -1452,7 +1459,7 @@ svg text.gc-lbl { font-family: var(--font-mono); font-size: 12px; font-weight: 6
   background: var(--ink-raised);
   border: 1px solid var(--ink-line);
   border-radius: var(--r-lg);
-  box-shadow: 0 18px 44px rgba(3, 5, 12, 0.55);
+  box-shadow: 0 18px 44px var(--shadow-drop);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -1771,7 +1778,7 @@ p, li, td, th, .quiz-question, .quiz-option, .w-note,
     z-index: 20;
     margin: 0 0 1.6rem;
     padding: 0.5rem 0;
-    background: rgba(9, 13, 23, 0.95);
+    background: var(--ink-glass-solid);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--ink-line-soft);
@@ -1892,7 +1899,7 @@ p, li, td, th, .quiz-question, .quiz-option, .w-note,
   gap: 1rem;
   flex-wrap: wrap;
   padding: 0.7rem 1rem;
-  background: rgba(9, 13, 23, 0.96);
+  background: var(--ink-glass-solid);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid var(--ink-line);
@@ -2021,4 +2028,109 @@ p, li, td, th, .quiz-question, .quiz-option, .w-note,
   .exam-jam { font-size: 1.15rem; }
   .exam-grid { grid-template-columns: repeat(8, 1fr); }
   .exam-aksi .btn { min-width: 0; padding-left: 0.6rem; padding-right: 0.6rem; font-size: 0.85rem; }
+}
+
+/* ==========================================================================
+   TEMA TERANG
+   Seluruh situs memakai token warna, jadi menukar temanya cukup dengan
+   menulis ulang tokennya. Nilai aksen digelapkan agar kontrasnya tetap
+   memadai di atas latar putih.
+   ========================================================================== */
+[data-tema="terang"] {
+  --ink: #f6f8fd;
+  --ink-raised: #ffffff;
+  --ink-raised-2: #eef2fa;
+  --ink-line: #ccd5e8;
+  --ink-line-soft: #e2e8f4;
+  --ink-glass: rgba(246, 248, 253, 0.86);
+  --ink-glass-solid: rgba(246, 248, 253, 0.96);
+  --shadow-drop: rgba(38, 48, 76, 0.14);
+
+  --chalk: #121a2c;
+  --chalk-dim: #45506c;
+  --chalk-mute: #6f7995;
+
+  --signal: #1a66c9;
+  --signal-dim: #4f9dff;
+  --signal-soft: rgba(26, 102, 201, 0.10);
+  --medal: #9a6d13;
+  --medal-dim: #c99a34;
+  --medal-soft: rgba(154, 109, 19, 0.12);
+
+  --tier-mudah: #0f7c50;
+  --tier-mudah-soft: rgba(15, 124, 80, 0.11);
+  --tier-sedang: #a4640f;
+  --tier-sedang-soft: rgba(164, 100, 15, 0.11);
+  --tier-sulit: #6f3cc4;
+  --tier-sulit-soft: rgba(111, 60, 196, 0.11);
+
+  --correct: #0f7c50;
+  --correct-soft: rgba(15, 124, 80, 0.12);
+  --incorrect: #c33227;
+  --incorrect-soft: rgba(195, 50, 39, 0.10);
+
+  --shadow-card: 0 10px 30px rgba(38, 48, 76, 0.08);
+  --banner-jauh: #e6e2f3;
+  --garis-kuat: #a9b4cd;
+  --di-atas-aksen: #ffffff;
+  --di-atas-emas: #ffffff;
+}
+
+/* Kilau latar dirancang untuk gelap — diredupkan agar tak keruh di tema terang */
+[data-tema="terang"] body {
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(26, 102, 201, 0.06), transparent 42%),
+    radial-gradient(circle at 88% 30%, rgba(154, 109, 19, 0.05), transparent 38%);
+}
+[data-tema="terang"] .exam-kotak,
+[data-tema="terang"] .quiz-option,
+[data-tema="terang"] .readout > div { background: var(--ink-raised); }
+[data-tema="terang"] .widget-canvas { background: var(--ink-raised); }
+
+/* --- Tombol penukar tema & bahasa --- */
+.nav-tools { display: flex; align-items: center; gap: 0.4rem; }
+.tool-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 0.3rem;
+  min-width: 38px; height: 38px;
+  padding: 0 0.6rem;
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--chalk-dim);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.tool-btn:hover { color: var(--signal); border-color: var(--signal); }
+.tool-btn svg { width: 16px; height: 16px; display: block; }
+.tool-btn .ikon-terang { display: none; }
+[data-tema="terang"] .tool-btn .ikon-gelap { display: none; }
+[data-tema="terang"] .tool-btn .ikon-terang { display: block; }
+.lang-btn span { opacity: 0.4; }
+.lang-btn span.aktif { opacity: 1; color: var(--signal); }
+
+@media (max-width: 900px) {
+  .nav-tools { gap: 0.3rem; }
+  .tool-btn { min-width: 34px; height: 34px; padding: 0 0.5rem; }
+}
+
+/* --- Pemberitahuan bahasa isi materi --- */
+.lang-notis {
+  margin: 0;
+  padding: 0.65rem 1.4rem;
+  background: var(--medal-soft);
+  border-bottom: 1px solid var(--ink-line-soft);
+  color: var(--chalk-dim);
+  font-size: 0.84rem;
+  text-align: center;
+}
+
+/* Sorotan tombol dirancang untuk latar gelap — di tema terang justru harus
+   menggelap, bukan menerang, supaya teks putihnya tetap kontras. */
+[data-tema="terang"] .btn-primary:hover { background: #14539f; }
+[data-tema="terang"] .btn-gold:hover { background: #7d570d; }
+[data-tema="terang"] .olim-banner::before {
+  background: radial-gradient(circle at 90% 10%, rgba(154, 109, 19, 0.10), transparent 55%);
 }

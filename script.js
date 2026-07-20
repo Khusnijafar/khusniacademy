@@ -70,6 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initTransformLab();
   initModelLab();
   initExam();
+  initTema();
+  initBahasa();
   initKatex();
 });
 
@@ -3654,4 +3656,138 @@ function initExam() {
   });
 
   ringkas();
+}
+
+/* ==========================================================================
+   TEMA TERANG / GELAP
+   Nilainya sudah dipasang oleh skrip kecil di <head> agar tak berkedip;
+   di sini hanya menyiapkan tombolnya dan menyimpan pilihan.
+   ========================================================================== */
+function initTema() {
+  const KUNCI = 'ka-tema';
+  const akar = document.documentElement;
+  const tombol = document.querySelectorAll('.tema-btn');
+  if (!tombol.length) return;
+
+  const simpan = v => { try { localStorage.setItem(KUNCI, v); } catch (e) {} };
+
+  function terapkan(t) {
+    if (t === 'terang') akar.setAttribute('data-tema', 'terang');
+    else akar.removeAttribute('data-tema');
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', t === 'terang' ? '#f6f8fd' : '#090d17');
+    tombol.forEach(b => {
+      b.setAttribute('aria-pressed', String(t === 'terang'));
+      b.setAttribute('aria-label', t === 'terang' ? 'Aktifkan tema gelap' : 'Aktifkan tema terang');
+    });
+  }
+
+  terapkan(akar.getAttribute('data-tema') === 'terang' ? 'terang' : 'gelap');
+  tombol.forEach(b => b.addEventListener('click', () => {
+    const baru = akar.getAttribute('data-tema') === 'terang' ? 'gelap' : 'terang';
+    terapkan(baru);
+    simpan(baru);
+  }));
+}
+
+/* ==========================================================================
+   DUA BAHASA — Indonesia & Inggris
+   Antarmuka (navigasi, footer, simulasi) diterjemahkan penuh. Isi materi
+   masih berbahasa Indonesia, dan itu dinyatakan terus terang lewat pemberitahuan
+   agar pembaca tak merasa tertipu.
+   ========================================================================== */
+window.KA_TEKS = {
+  id: {
+    'nav.beranda': 'Beranda', 'nav.materi': 'Materi', 'nav.tka': 'TKA', 'nav.utbk': 'UTBK',
+    'nav.simulasi': 'Simulasi', 'nav.olimpiade': 'Olimpiade',
+    'nav.tersedia': 'Tersedia', 'nav.segeraHadir': 'Segera Hadir', 'nav.segera': 'Segera',
+    'nav.persiapanTka': 'Persiapan TKA', 'nav.persiapanUtbk': 'Persiapan UTBK',
+    'nav.bukaMenu': 'Buka menu',
+    'm.aljabar': 'Aljabar', 'm.aljabar.d': 'Persamaan &amp; pertidaksamaan, kuadrat, suku banyak, program linear',
+    'm.trigonometri': 'Trigonometri', 'm.trigonometri.d': 'Identitas, aturan sinus &amp; cosinus, sudut rangkap, persamaan',
+    'm.geometri': 'Geometri', 'm.geometri.d': 'Kesebangunan, lingkaran, kuasa titik, transformasi geometri',
+    'm.prakalkulus': 'Prakalkulus', 'm.prakalkulus.d': 'Fungsi, logaritma, barisan &amp; deret, model fungsi, limit',
+    'm.limit': 'Limit', 'm.limit.d': 'Konsep &amp; sifat, aljabar, trigonometri, tak hingga &amp; asimtot',
+    'm.matriks': 'Matriks', 'm.matriks.d': 'Operasi, determinan &amp; invers, SPLDV, Cayley-Hamilton',
+    'm.vektor': 'Vektor', 'm.vektor.d': 'Komponen, resultan, dot product, proyeksi &amp; perbandingan',
+    'm.statistika': 'Statistika &amp; Peluang', 'm.statistika.d': 'Data, pemusatan &amp; penyebaran, pencacahan, peluang',
+    'm.kalkulus': 'Kalkulus', 'm.kalkulus.d': 'Turunan, aplikasi, integral, luas &amp; volume benda putar',
+    'tka.umum': 'Matematika Umum', 'tka.umum.d': 'Tentang, kisi-kisi, format, strategi, bedah soal, 25 latihan',
+    'tka.lanjut': 'Matematika Lanjut', 'tka.lanjut.d': 'Kisi-kisi, peta materi, strategi, bedah soal, 25 latihan',
+    'utbk.pm': 'Penalaran Matematika (PM)', 'utbk.pk': 'Penalaran Kuantitatif (PK)',
+    'foot.materi': 'Materi', 'foot.latihan': 'Latihan &amp; Persiapan', 'foot.tentang': 'Tentang',
+    'foot.untuk': 'Dibuat untuk pelajar Indonesia',
+    'sim.judul': 'Susun Paketmu', 'sim.sumber': 'Sumber soal', 'sim.tingkat': 'Tingkat kesulitan',
+    'sim.jumlah': 'Banyak soal', 'sim.waktu': 'Pewaktu', 'sim.mulai': 'Mulai Simulasi',
+    'sim.selesai': 'Selesai', 'sim.sebelum': '← Sebelumnya', 'sim.berikut': 'Berikutnya →',
+    'sim.ragu': 'Tandai Ragu', 'sim.peta': 'Peta Soal', 'sim.ulang': 'Susun Paket Baru',
+    'sim.review': 'Pembahasan Lengkap',
+    'sim.lg.terjawab': 'terjawab', 'sim.lg.ragu': 'ragu', 'sim.lg.kosong': 'kosong',
+    'notis.isi': 'Materi pelajaran masih berbahasa Indonesia. Antarmuka, navigasi, dan Simulasi Ujian sudah tersedia dalam bahasa Inggris.'
+  },
+  en: {
+    'nav.beranda': 'Home', 'nav.materi': 'Subjects', 'nav.tka': 'TKA', 'nav.utbk': 'UTBK',
+    'nav.simulasi': 'Mock Exam', 'nav.olimpiade': 'Olympiad',
+    'nav.tersedia': 'Available', 'nav.segeraHadir': 'Coming Soon', 'nav.segera': 'Soon',
+    'nav.persiapanTka': 'TKA Preparation', 'nav.persiapanUtbk': 'UTBK Preparation',
+    'nav.bukaMenu': 'Open menu',
+    'm.aljabar': 'Algebra', 'm.aljabar.d': 'Equations &amp; inequalities, quadratics, polynomials, linear programming',
+    'm.trigonometri': 'Trigonometry', 'm.trigonometri.d': 'Identities, sine &amp; cosine rules, double angles, equations',
+    'm.geometri': 'Geometry', 'm.geometri.d': 'Similarity, circles, power of a point, transformations',
+    'm.prakalkulus': 'Precalculus', 'm.prakalkulus.d': 'Functions, logarithms, sequences &amp; series, modelling, limits',
+    'm.limit': 'Limits', 'm.limit.d': 'Concepts &amp; laws, algebraic, trigonometric, infinity &amp; asymptotes',
+    'm.matriks': 'Matrices', 'm.matriks.d': 'Operations, determinant &amp; inverse, linear systems, Cayley-Hamilton',
+    'm.vektor': 'Vectors', 'm.vektor.d': 'Components, resultants, dot product, projection &amp; ratios',
+    'm.statistika': 'Statistics &amp; Probability', 'm.statistika.d': 'Data, centre &amp; spread, counting, probability',
+    'm.kalkulus': 'Calculus', 'm.kalkulus.d': 'Derivatives, applications, integrals, area &amp; solids of revolution',
+    'tka.umum': 'General Mathematics', 'tka.umum.d': 'Overview, blueprint, formats, strategy, worked problems, 25 drills',
+    'tka.lanjut': 'Advanced Mathematics', 'tka.lanjut.d': 'Blueprint, subject map, strategy, worked problems, 25 drills',
+    'utbk.pm': 'Mathematical Reasoning (PM)', 'utbk.pk': 'Quantitative Reasoning (PK)',
+    'foot.materi': 'Subjects', 'foot.latihan': 'Practice &amp; Preparation', 'foot.tentang': 'About',
+    'foot.untuk': 'Built for Indonesian students',
+    'sim.judul': 'Build Your Set', 'sim.sumber': 'Question source', 'sim.tingkat': 'Difficulty',
+    'sim.jumlah': 'Number of questions', 'sim.waktu': 'Timer', 'sim.mulai': 'Start Mock Exam',
+    'sim.selesai': 'Finish', 'sim.sebelum': '← Previous', 'sim.berikut': 'Next →',
+    'sim.ragu': 'Flag for Review', 'sim.peta': 'Question Map', 'sim.ulang': 'Build a New Set',
+    'sim.review': 'Full Solutions',
+    'sim.lg.terjawab': 'answered', 'sim.lg.ragu': 'flagged', 'sim.lg.kosong': 'blank',
+    'notis.isi': 'Lesson content is still in Indonesian. The interface, navigation and Mock Exam are available in English.'
+  }
+};
+
+function initBahasa() {
+  const KUNCI = 'ka-bahasa';
+  const akar = document.documentElement;
+  const tombol = document.querySelectorAll('.lang-btn');
+  const ambil = () => { try { return localStorage.getItem(KUNCI); } catch (e) { return null; } };
+
+  function terapkan(b) {
+    const kamus = window.KA_TEKS[b] || window.KA_TEKS.id;
+    akar.lang = b;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const t = kamus[el.dataset.i18n];
+      if (t !== undefined) el.innerHTML = t;
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const t = kamus[el.dataset.i18nAria];
+      if (t !== undefined) el.setAttribute('aria-label', t);
+    });
+    tombol.forEach(btn => {
+      btn.querySelectorAll('span').forEach(s => s.classList.toggle('aktif', s.dataset.bahasa === b));
+      btn.setAttribute('aria-label', b === 'en' ? 'Ganti ke bahasa Indonesia' : 'Switch to English');
+    });
+    const notis = document.querySelector('.lang-notis');
+    if (notis) {
+      notis.hidden = b !== 'en';
+      notis.textContent = kamus['notis.isi'];
+    }
+  }
+
+  const awal = ambil() || 'id';
+  terapkan(awal);
+  tombol.forEach(btn => btn.addEventListener('click', () => {
+    const baru = akar.lang === 'en' ? 'id' : 'en';
+    terapkan(baru);
+    try { localStorage.setItem(KUNCI, baru); } catch (e) {}
+  }));
 }
