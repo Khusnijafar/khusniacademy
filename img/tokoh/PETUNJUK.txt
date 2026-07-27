@@ -1,0 +1,33 @@
+WADAH FOTO TOKOH
+================
+
+Letakkan foto di folder ini dengan nama persis seperti daftar di bawah.
+Halaman tokoh.html akan langsung memakainya tanpa perlu mengubah kode apa pun.
+
+Format  : .jpg (bisa juga .png, tapi ubah dulu nama berkasnya di tokoh.html)
+Ukuran  : disarankan 440 x 520 piksel (perbandingan 11:13), potret
+Berat   : usahakan di bawah 150 KB per foto agar halaman tetap ringan
+
+Selama fotonya belum ada, kotaknya otomatis menampilkan monogram huruf awal
+nama tokoh — jadi halaman tetap rapi dan tak ada gambar rusak.
+
+Daftar berkas yang ditunggu:
+
+  euclid.jpg          Euclid
+  archimedes.jpg      Archimedes
+  hypatia.jpg         Hypatia
+  al-khwarizmi.jpg    Muhammad al-Khwarizmi
+  omar-khayyam.jpg    Omar Khayyam
+  descartes.jpg       Rene Descartes
+  newton.jpg          Isaac Newton
+  leibniz.jpg         Gottfried Leibniz
+  euler.jpg           Leonhard Euler
+  gauss.jpg           Carl Friedrich Gauss
+  kovalevskaya.jpg    Sofia Kovalevskaya
+  ramanujan.jpg       Srinivasa Ramanujan
+  noether.jpg         Emmy Noether
+  mirzakhani.jpg      Maryam Mirzakhani
+
+Catatan hak cipta: tokoh sebelum abad ke-20 umumnya potretnya sudah berstatus
+domain publik. Untuk Noether dan Mirzakhani, periksa dulu lisensi fotonya
+(Wikimedia Commons mencantumkan status lisensi tiap berkas).

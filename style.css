@@ -1257,28 +1257,6 @@ svg text.gc-lbl { font-family: var(--font-mono); font-size: 12px; font-weight: 6
 }
 
 @media (max-width: 768px) {
-  .nav-links {
-    position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
-    background: var(--ink);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 2rem 1.5rem;
-    gap: 0.4rem;
-    transform: translateX(100%);
-    transition: transform 0.25s ease;
-    overflow-y: auto;
-  }
-  .nav-links.open { transform: translateX(0); }
-  .nav-links a {
-    width: 100%;
-    padding: 0.9rem 0.2rem;
-    font-size: 1.05rem;
-    border-bottom: 1px solid var(--ink-line-soft);
-  }
-  .nav-links a.active::after { display: none; }
-  .nav-cta .btn-outline { display: none; }
-  .nav-toggle { display: flex; }
-
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .grid-3 { grid-template-columns: 1fr; }
   .grid-2 { grid-template-columns: 1fr; }
@@ -2133,4 +2111,292 @@ p, li, td, th, .quiz-question, .quiz-option, .w-note,
 [data-tema="terang"] .btn-gold:hover { background: #7d570d; }
 [data-tema="terang"] .olim-banner::before {
   background: radial-gradient(circle at 90% 10%, rgba(154, 109, 19, 0.10), transparent 55%);
+}
+
+/* ==========================================================================
+   TOKOH MATEMATIKA (tokoh.html)
+   Wadah fotonya sengaja dirancang tetap rapi walau fotonya belum dipasang:
+   monogram huruf awal menempati kotaknya sampai berkas gambarnya tersedia.
+   ========================================================================== */
+.era-ket { color: var(--chalk-mute); font-style: italic; margin-top: -0.5rem; margin-bottom: 2rem; }
+
+.tokoh-kartu {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 1.8rem;
+  align-items: start;
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-lg);
+  padding: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+/* --- Wadah foto --- */
+.tokoh-foto {
+  position: relative;
+  aspect-ratio: 11 / 13;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 32%, var(--signal-soft), transparent 62%),
+    var(--ink-raised-2);
+  border: 1px solid var(--ink-line);
+  display: grid;
+  place-items: center;
+}
+.tokoh-monogram {
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  font-weight: 500;
+  color: var(--chalk-mute);
+  opacity: 0.5;
+  user-select: none;
+  line-height: 1;
+}
+.tokoh-foto img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: var(--ink-raised-2);
+}
+/* Selama berkas fotonya belum ada, gambarnya disembunyikan dan monogram tampil */
+.tokoh-foto.tanpa-foto img { display: none; }
+.tokoh-foto::after {
+  content: '';
+  position: absolute; inset: 0;
+  box-shadow: inset 0 -50px 60px -30px var(--ink-raised);
+  pointer-events: none;
+}
+
+/* --- Isi kartu --- */
+.tokoh-julukan {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--medal);
+  margin-bottom: 0.4rem;
+}
+.tokoh-isi h3 { margin: 0 0 0.25rem; }
+.tokoh-meta {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--chalk-mute);
+  margin-bottom: 1rem;
+}
+.tokoh-isi p { margin-bottom: 0.9rem; }
+.tokoh-kutip {
+  margin: 1.1rem 0;
+  padding: 0.85rem 1.1rem;
+  border-left: 3px solid var(--medal);
+  background: var(--medal-soft);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--chalk);
+}
+.tokoh-kutip cite {
+  display: block;
+  margin-top: 0.45rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-style: normal;
+  color: var(--chalk-mute);
+}
+.tokoh-warisan {
+  border-top: 1px solid var(--ink-line-soft);
+  padding-top: 0.8rem;
+  font-size: 0.92rem;
+  color: var(--chalk-dim);
+}
+.tokoh-warisan strong { color: var(--medal); }
+.tokoh-tautan { display: inline-block; font-size: 0.86rem; color: var(--signal); }
+
+@media (max-width: 720px) {
+  .tokoh-kartu { grid-template-columns: 1fr; gap: 1.1rem; padding: 1.1rem; }
+  .tokoh-foto { max-width: 190px; }
+  .tokoh-monogram { font-size: 2.8rem; }
+}
+
+/* Tujuh butir navigasi butuh lebih banyak ruang: di layar lebar jaraknya
+   dirapatkan, dan lacinya kini muncul sejak 1024px agar tak pernah berdesakan.
+   Aturannya dipindahkan utuh dari blok 768px, memakai kelas .open yang sama. */
+@media (min-width: 1025px) {
+  .nav-links { gap: 1.45rem; }
+}
+@media (max-width: 1024px) {
+  .nav-links {
+    position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
+    background: var(--ink);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1.5rem;
+    gap: 0.4rem;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    overflow-y: auto;
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links a {
+    width: 100%;
+    padding: 0.9rem 0.2rem;
+    font-size: 1.05rem;
+    border-bottom: 1px solid var(--ink-line-soft);
+  }
+  .nav-links a.active::after { display: none; }
+  .nav-cta .btn-outline { display: none; }
+  .nav-toggle { display: flex; }
+}
+
+/* ==========================================================================
+   HALAMAN KEMAJUAN (kemajuan.html)
+   ========================================================================== */
+.kem-kosong {
+  text-align: center;
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-lg);
+  padding: 3rem 1.6rem;
+  max-width: 620px;
+  margin: 0 auto;
+}
+.kem-kosong p { color: var(--chalk-dim); margin-bottom: 1.4rem; }
+
+/* --- Ringkasan angka --- */
+.kem-ringkas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.2rem;
+}
+.kem-angka {
+  background: linear-gradient(180deg, var(--ink-raised-2), var(--ink-raised));
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-md);
+  padding: 1.2rem 1rem;
+  text-align: center;
+}
+.kem-angka strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  font-weight: 500;
+  color: var(--signal);
+  line-height: 1;
+}
+.kem-angka span {
+  display: block;
+  margin-top: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--chalk-mute);
+}
+
+/* --- Kartu grafik & tabel --- */
+.kem-kartu {
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-lg);
+  padding: 1.6rem;
+  margin-bottom: 1.8rem;
+}
+.kem-kartu h2 { margin-bottom: 0.3rem; }
+.kem-ket { color: var(--chalk-mute); font-size: 0.88rem; margin-bottom: 1.3rem; }
+
+.kem-svg { width: 100%; height: auto; display: block; }
+.kem-grid { stroke: var(--ink-line-soft); stroke-width: 1; }
+.kem-tick { fill: var(--chalk-mute); font-family: var(--font-mono); font-size: 11px; }
+.kem-garis { fill: none; stroke: var(--signal); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.kem-area { fill: var(--signal-soft); stroke: none; }
+.kem-dot { fill: var(--chalk); stroke: var(--signal); stroke-width: 2; }
+
+/* --- Arah perkembangan --- */
+.kem-naik { color: var(--correct); font-family: var(--font-mono); font-weight: 700; }
+.kem-turun { color: var(--incorrect); font-family: var(--font-mono); font-weight: 700; }
+.kem-datar { color: var(--chalk-mute); font-family: var(--font-mono); }
+
+/* --- Daftar percobaan --- */
+.kem-baris {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 0.85rem 1.1rem;
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-md);
+  margin-bottom: 0.7rem;
+}
+.kem-baris-nilai {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 72px;
+  padding-right: 1.1rem;
+  border-right: 1px solid var(--ink-line-soft);
+}
+.kem-baris-nilai strong { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; color: var(--signal); line-height: 1; }
+.kem-baris-nilai span { font-family: var(--font-mono); font-size: 0.72rem; color: var(--chalk-mute); margin-top: 0.2rem; }
+.kem-baris-info { display: flex; flex-direction: column; gap: 0.25rem; }
+.kem-baris-paket { color: var(--chalk-dim); font-size: 0.94rem; }
+.kem-baris-tgl { font-family: var(--font-mono); font-size: 0.76rem; color: var(--chalk-mute); }
+
+.kem-alat { display: flex; justify-content: flex-end; margin-top: 1.2rem; }
+.kem-hapus {
+  background: transparent;
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-full);
+  color: var(--chalk-mute);
+  padding: 0.5rem 1.1rem;
+  font-size: 0.82rem;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.kem-hapus:hover { color: var(--incorrect); border-color: var(--incorrect); }
+
+/* --- Tautan kemajuan di halaman simulasi & catatan jejak di hasil --- */
+.skor-jejak {
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: var(--medal);
+  margin: 0.2rem 0 0.6rem;
+}
+.exam-kemajuan-link {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  color: var(--signal);
+}
+.exam-aksi-hasil { display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center; }
+
+@media (max-width: 640px) {
+  .kem-ringkas { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .kem-kartu { padding: 1.1rem; }
+  .kem-baris { flex-wrap: wrap; gap: 0.6rem; }
+}
+
+/* --- Peta Latihan di halaman Kemajuan --- */
+.kem-latihan-ringkas {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--chalk-dim);
+  margin: -0.4rem 0 1.2rem;
+}
+.kem-latihan-ringkas strong { color: var(--signal); }
+.kem-lencana {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--chalk-mute);
+}
+.kem-lencana-penuh {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--correct);
 }

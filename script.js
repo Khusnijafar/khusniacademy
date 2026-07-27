@@ -70,8 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initTransformLab();
   initModelLab();
   initExam();
+  initKemajuan();
   initTema();
   initBahasa();
+  initTokoh();
   initKatex();
 });
 
@@ -414,6 +416,38 @@ function refreshPanel(panel) {
       done.hidden = true;
     }
   }
+
+  simpanLatihan(panel, correctCount, cards.length, answered.length);
+}
+
+/* Rekam capaian latihan tiap tingkat ke penyimpanan ringkas `ka-latihan`,
+   dipakai oleh Peta Latihan di halaman Kemajuan. Menyimpan skor TERBAIK yang
+   pernah dicapai (tak pernah turun), plus apakah tingkatnya sudah dituntaskan
+   (semua benar). Tak mengubah interaksi kuis sama sekali. */
+function simpanLatihan(panel, benar, jumlah, terjawab) {
+  if (!KAStore.ok || !jumlah) return;
+  const tier = panel.dataset.tier;
+  if (!tier) return;
+  const halaman = (location.pathname.split('/').pop() || '').replace('.html', '') || 'index';
+  if (!halaman || halaman === 'index') return;
+  try {
+    const semua = KAStore.get('ka-latihan', {}) || {};
+    const hal = semua[halaman] || {};
+    const lama = hal[tier];
+    // Jangan tulis apa pun sampai ada yang benar-benar dijawab, dan jangan
+    // tulis ulang bila tak ada kemajuan (mencegah catatan kosong saat halaman dibuka).
+    if (terjawab === 0 && !lama) return;
+    const gabung = {
+      best: Math.max((lama && lama.best) || 0, benar),
+      total: jumlah,
+      done: ((lama && lama.done) || false) || (terjawab === jumlah && benar === jumlah),
+      dijawab: Math.max((lama && lama.dijawab) || 0, terjawab)
+    };
+    if (lama && lama.best === gabung.best && lama.done === gabung.done && lama.dijawab === gabung.dijawab) return;
+    hal[tier] = gabung;
+    semua[halaman] = hal;
+    KAStore.set('ka-latihan', semua);
+  } catch (e) {}
 }
 
 /* ---------- Scroll reveal ---------- */
@@ -3399,6 +3433,20 @@ function initExam() {
     const m = Math.floor(Math.abs(d) / 60), s = Math.abs(d) % 60;
     return (d < 0 ? '-' : '') + m + ':' + String(s).padStart(2, '0');
   };
+  const bacaRiwayat = () => {
+    try {
+      const v = JSON.parse(localStorage.getItem('ka-riwayat') || '[]');
+      return Array.isArray(v) ? v : [];
+    } catch (e) { return []; }
+  };
+  const simpanRiwayat = rec => {
+    try {
+      const arr = bacaRiwayat();
+      arr.push(rec);
+      while (arr.length > 60) arr.shift();      // simpan 60 percobaan terakhir
+      localStorage.setItem('ka-riwayat', JSON.stringify(arr));
+    } catch (e) {}
+  };
   const rumus = el => {
     if (typeof renderMathInElement === 'function') {
       renderMathInElement(el, {
@@ -3598,10 +3646,27 @@ function initExam() {
       : persen >= 50 ? 'Separuh jalan. Pembahasan di bawah adalah tempat terbaik memulai.'
       : 'Belum apa-apa — ini justru daftar belanja belajarmu.';
 
+    /* Bandingkan dengan riwayat SEBELUM menyimpan hasil ini, supaya
+       perbandingannya melawan percobaan lampau, bukan dirinya sendiri. */
+    const lampau = bacaRiwayat();
+    let jejak = '';
+    if (lampau.length === 0) {
+      jejak = 'Simulasi pertamamu tersimpan. Mulai sekarang kemajuanmu terekam.';
+    } else {
+      const persenLampau = lampau.map(x => x.persen);
+      const tertinggi = Math.max.apply(null, persenLampau);
+      const rerata = Math.round(persenLampau.reduce((a, b) => a + b, 0) / persenLampau.length);
+      if (persen > tertinggi) jejak = 'Rekor baru — sebelumnya tertingginya ' + tertinggi + '%.';
+      else if (persen === tertinggi) jejak = 'Menyamai rekor terbaikmu, ' + tertinggi + '%.';
+      else if (persen >= rerata) jejak = 'Di atas rata-ratamu (' + rerata + '%). Terus naik.';
+      else jejak = 'Rata-ratamu sejauh ini ' + rerata + '%. Percobaan berikutnya bisa lebih baik.';
+    }
+
     r('skor').innerHTML =
       '<div class="skor-angka"><strong>' + benar + '</strong><span>/ ' + total + '</span></div>' +
       '<div class="skor-persen">' + persen + '%</div>' +
       '<p class="skor-komentar">' + komentar + '</p>' +
+      '<p class="skor-jejak">' + jejak + '</p>' +
       '<p class="skor-waktu">Waktu terpakai ' + jam(pakai) +
       (paksa ? ' · <strong>waktu habis</strong>' : '') + '</p>';
 
@@ -3611,6 +3676,19 @@ function initExam() {
       per[k] = per[k] || { benar: 0, total: 0 };
       per[k].total++;
       if (cocok(s, sesi.jawab[i])) per[k].benar++;
+    });
+
+    /* Simpan hasil ke riwayat. Rincian per-mapel disimpan memakai KODE mapel
+       (bukan label tampilan) agar halaman Kemajuan bisa menerjemahkan namanya. */
+    const perKode = {};
+    sesi.soal.forEach((s, i) => {
+      perKode[s.mapel] = perKode[s.mapel] || { b: 0, t: 0 };
+      perKode[s.mapel].t++;
+      if (cocok(s, sesi.jawab[i])) perKode[s.mapel].b++;
+    });
+    simpanRiwayat({
+      t: Date.now(), benar: benar, total: total, persen: persen, detik: pakai,
+      paket: pilihan.paket, tingkat: pilihan.tingkat, per: perKode
     });
     r('rincian').innerHTML = '<div class="table-scroll"><table class="math-table"><thead><tr>' +
       '<th style="text-align:left;">Mapel</th><th>Benar</th><th>Soal</th><th>Capaian</th></tr></thead><tbody>' +
@@ -3702,6 +3780,7 @@ window.KA_TEKS = {
     'nav.simulasi': 'Simulasi', 'nav.olimpiade': 'Olimpiade',
     'nav.tersedia': 'Tersedia', 'nav.segeraHadir': 'Segera Hadir', 'nav.segera': 'Segera',
     'nav.persiapanTka': 'Persiapan TKA', 'nav.persiapanUtbk': 'Persiapan UTBK',
+    'nav.tokoh': 'Tokoh', 'foot.tokoh': 'Tokoh Matematika',
     'nav.bukaMenu': 'Buka menu',
     'm.aljabar': 'Aljabar', 'm.aljabar.d': 'Persamaan &amp; pertidaksamaan, kuadrat, suku banyak, program linear',
     'm.trigonometri': 'Trigonometri', 'm.trigonometri.d': 'Identitas, aturan sinus &amp; cosinus, sudut rangkap, persamaan',
@@ -3715,7 +3794,7 @@ window.KA_TEKS = {
     'tka.umum': 'Matematika Umum', 'tka.umum.d': 'Tentang, kisi-kisi, format, strategi, bedah soal, 25 latihan',
     'tka.lanjut': 'Matematika Lanjut', 'tka.lanjut.d': 'Kisi-kisi, peta materi, strategi, bedah soal, 25 latihan',
     'utbk.pm': 'Penalaran Matematika (PM)', 'utbk.pk': 'Penalaran Kuantitatif (PK)',
-    'foot.materi': 'Materi', 'foot.latihan': 'Latihan &amp; Persiapan', 'foot.tentang': 'Tentang',
+    'foot.materi': 'Materi', 'foot.latihan': 'Latihan &amp; Pengayaan', 'foot.tentang': 'Tentang',
     'foot.untuk': 'Dibuat untuk pelajar Indonesia',
     'sim.judul': 'Susun Paketmu', 'sim.sumber': 'Sumber soal', 'sim.tingkat': 'Tingkat kesulitan',
     'sim.jumlah': 'Banyak soal', 'sim.waktu': 'Pewaktu', 'sim.mulai': 'Mulai Simulasi',
@@ -3723,6 +3802,20 @@ window.KA_TEKS = {
     'sim.ragu': 'Tandai Ragu', 'sim.peta': 'Peta Soal', 'sim.ulang': 'Susun Paket Baru',
     'sim.review': 'Pembahasan Lengkap',
     'sim.lg.terjawab': 'terjawab', 'sim.lg.ragu': 'ragu', 'sim.lg.kosong': 'kosong',
+    'nav.kemajuan': 'Kemajuan', 'foot.kemajuan': 'Kemajuan Belajar',
+    'kem.judul': 'Kemajuan Belajarmu', 'kem.lead': 'Tiap simulasi yang kamu selesaikan tersimpan di perangkat ini — jadi kamu bisa melihat ke mana arahnya, bukan sekadar nilai hari ini.',
+    'kem.kosong': 'Belum ada yang terekam. Kerjakan kuis di halaman materi atau selesaikan satu Simulasi Ujian, lalu kemajuanmu akan muncul di sini.',
+    'kem.mulai': 'Mulai Simulasi Pertama →',
+    'kem.jumlahUji': 'Simulasi selesai', 'kem.terbaik': 'Nilai terbaik', 'kem.rerata': 'Rata-rata', 'kem.totalSoal': 'Total soal dikerjakan',
+    'kem.grafikJudul': 'Nilai dari Waktu ke Waktu', 'kem.grafikKet': 'Persentase tiap simulasi, dari yang terlama ke terbaru (paling banyak 20 terakhir).',
+    'kem.mapelJudul': 'Perkembangan Tiap Mapel', 'kem.mapelKet': 'Membandingkan capaian pertama dan terakhir tiap mapel, diurutkan dari yang paling perlu perhatian.',
+    'kem.mapel': 'Mapel', 'kem.pertama': 'Awal', 'kem.terakhir': 'Terakhir', 'kem.arah': 'Arah', 'kem.dilatih': 'Dilatih', 'kem.soalSingkat': 'soal',
+    'kem.daftarJudul': 'Riwayat Percobaan', 'kem.hapus': 'Hapus Riwayat',
+    'kem.campuran': 'Campuran', 'kem.dasar': 'Dasar', 'kem.lanjut': 'Lanjut', 'kem.semuaTingkat': 'Semua Tingkat',
+    'kem.lihat': 'Lihat kemajuan belajarmu →',
+    'kem.latihanJudul': 'Peta Latihan', 'kem.latihanKet': 'Kemajuan kuis di halaman materi — berapa tingkat yang sudah kamu tuntaskan sempurna di tiap mapel.',
+    'kem.tingkatTuntas': 'tingkat dituntaskan sempurna', 'kem.mapelDisentuh': 'mapel telah dilatih',
+    'kem.tingkatTuntasSingkat': 'Tuntas', 'kem.skorTerbaik': 'Skor terbaik',
     'notis.isi': 'Materi pelajaran masih berbahasa Indonesia. Antarmuka, navigasi, dan Simulasi Ujian sudah tersedia dalam bahasa Inggris.'
   },
   en: {
@@ -3730,6 +3823,7 @@ window.KA_TEKS = {
     'nav.simulasi': 'Mock Exam', 'nav.olimpiade': 'Olympiad',
     'nav.tersedia': 'Available', 'nav.segeraHadir': 'Coming Soon', 'nav.segera': 'Soon',
     'nav.persiapanTka': 'TKA Preparation', 'nav.persiapanUtbk': 'UTBK Preparation',
+    'nav.tokoh': 'Mathematicians', 'foot.tokoh': 'Great Mathematicians',
     'nav.bukaMenu': 'Open menu',
     'm.aljabar': 'Algebra', 'm.aljabar.d': 'Equations &amp; inequalities, quadratics, polynomials, linear programming',
     'm.trigonometri': 'Trigonometry', 'm.trigonometri.d': 'Identities, sine &amp; cosine rules, double angles, equations',
@@ -3743,7 +3837,7 @@ window.KA_TEKS = {
     'tka.umum': 'General Mathematics', 'tka.umum.d': 'Overview, blueprint, formats, strategy, worked problems, 25 drills',
     'tka.lanjut': 'Advanced Mathematics', 'tka.lanjut.d': 'Blueprint, subject map, strategy, worked problems, 25 drills',
     'utbk.pm': 'Mathematical Reasoning (PM)', 'utbk.pk': 'Quantitative Reasoning (PK)',
-    'foot.materi': 'Subjects', 'foot.latihan': 'Practice &amp; Preparation', 'foot.tentang': 'About',
+    'foot.materi': 'Subjects', 'foot.latihan': 'Practice &amp; Enrichment', 'foot.tentang': 'About',
     'foot.untuk': 'Built for Indonesian students',
     'sim.judul': 'Build Your Set', 'sim.sumber': 'Question source', 'sim.tingkat': 'Difficulty',
     'sim.jumlah': 'Number of questions', 'sim.waktu': 'Timer', 'sim.mulai': 'Start Mock Exam',
@@ -3751,6 +3845,20 @@ window.KA_TEKS = {
     'sim.ragu': 'Flag for Review', 'sim.peta': 'Question Map', 'sim.ulang': 'Build a New Set',
     'sim.review': 'Full Solutions',
     'sim.lg.terjawab': 'answered', 'sim.lg.ragu': 'flagged', 'sim.lg.kosong': 'blank',
+    'nav.kemajuan': 'Progress', 'foot.kemajuan': 'Learning Progress',
+    'kem.judul': 'Your Progress', 'kem.lead': 'Every mock exam you finish is saved on this device — so you can see where you are heading, not just today\u2019s score.',
+    'kem.kosong': 'Nothing recorded yet. Take a quiz on any lesson page or finish one Mock Exam, and your progress will show up here.',
+    'kem.mulai': 'Start Your First Mock Exam →',
+    'kem.jumlahUji': 'Mock exams done', 'kem.terbaik': 'Best score', 'kem.rerata': 'Average', 'kem.totalSoal': 'Questions attempted',
+    'kem.grafikJudul': 'Scores Over Time', 'kem.grafikKet': 'Percentage of each mock exam, oldest to newest (last 20 at most).',
+    'kem.mapelJudul': 'Progress by Subject', 'kem.mapelKet': 'Comparing your first and latest result in each subject, weakest first.',
+    'kem.mapel': 'Subject', 'kem.pertama': 'First', 'kem.terakhir': 'Latest', 'kem.arah': 'Trend', 'kem.dilatih': 'Practiced', 'kem.soalSingkat': 'questions',
+    'kem.daftarJudul': 'Attempt History', 'kem.hapus': 'Clear History',
+    'kem.campuran': 'Mixed', 'kem.dasar': 'Basic', 'kem.lanjut': 'Advanced', 'kem.semuaTingkat': 'All Levels',
+    'kem.lihat': 'See your learning progress →',
+    'kem.latihanJudul': 'Practice Map', 'kem.latihanKet': 'Your quiz progress on the lesson pages — how many tiers you have fully cleared in each subject.',
+    'kem.tingkatTuntas': 'tiers fully cleared', 'kem.mapelDisentuh': 'subjects practiced',
+    'kem.tingkatTuntasSingkat': 'Cleared', 'kem.skorTerbaik': 'Best score',
     'notis.isi': 'Lesson content is still in Indonesian. The interface, navigation and Mock Exam are available in English.'
   }
 };
@@ -3783,6 +3891,10 @@ function initBahasa() {
     }
   }
 
+  // Dibuka agar konten yang dibuat belakangan (mis. halaman Kemajuan)
+  // bisa ikut diterjemahkan ulang tanpa menunggu tombol ditekan.
+  window.KA_terapkanBahasa = terapkan;
+
   const awal = ambil() || 'id';
   terapkan(awal);
   tombol.forEach(btn => btn.addEventListener('click', () => {
@@ -3790,4 +3902,271 @@ function initBahasa() {
     terapkan(baru);
     try { localStorage.setItem(KUNCI, baru); } catch (e) {}
   }));
+}
+
+/* ==========================================================================
+   TOKOH MATEMATIKA — cadangan wadah foto
+   Selama berkas foto belum diletakkan di img/tokoh/, gambarnya disembunyikan
+   dan monogram huruf awal namanya yang tampil. Tak ada gambar rusak.
+   ========================================================================== */
+function initTokoh() {
+  const wadah = document.querySelectorAll('.tokoh-foto');
+  if (!wadah.length) return;
+  wadah.forEach(kotak => {
+    const img = kotak.querySelector('img');
+    if (!img) return;
+    const gagal = () => kotak.classList.add('tanpa-foto');
+    const berhasil = () => { if (img.naturalWidth > 0) kotak.classList.remove('tanpa-foto'); };
+    if (img.complete) { if (img.naturalWidth === 0) gagal(); }
+    img.addEventListener('error', gagal);
+    img.addEventListener('load', berhasil);
+  });
+}
+
+/* ==========================================================================
+   HALAMAN KEMAJUAN (kemajuan.html)
+   Membaca riwayat simulasi dari localStorage lalu menggambarnya: ringkasan,
+   grafik nilai dari waktu ke waktu, perkembangan tiap mapel, dan daftar
+   percobaan terakhir. Tak memuat bank soal — cukup catatan tersimpan.
+   ========================================================================== */
+function initKemajuan() {
+  const akar = document.getElementById('kemajuan-root');
+  if (!akar) return;
+
+  const KODE_MAPEL = ['aljabar', 'trigonometri', 'geometri', 'prakalkulus', 'limit',
+    'matriks', 'vektor', 'statistika', 'kalkulus'];
+  const r = key => akar.querySelector('[data-r="' + key + '"]');
+
+  const baca = () => {
+    try {
+      const v = JSON.parse(localStorage.getItem('ka-riwayat') || '[]');
+      return Array.isArray(v) ? v : [];
+    } catch (e) { return []; }
+  };
+
+  /* Nama mapel/paket dibungkus <span data-i18n> agar ikut berpindah bahasa. */
+  const namaMapel = kode => {
+    if (kode === 'tka') return '<span data-i18n="tka.umum">Matematika Umum</span>';
+    if (kode === 'tka-lanjut') return '<span data-i18n="tka.lanjut">Matematika Lanjut</span>';
+    return '<span data-i18n="m.' + kode + '">' + kode + '</span>';
+  };
+  const namaPaket = kode => {
+    if (kode === 'semua') return '<span data-i18n="kem.campuran">Campuran</span>';
+    return namaMapel(kode);
+  };
+  const namaTingkat = kode => {
+    const k = kode === 'dasar' ? 'kem.dasar' : kode === 'lanjut' ? 'kem.lanjut' : 'kem.semuaTingkat';
+    const teks = kode === 'dasar' ? 'Dasar' : kode === 'lanjut' ? 'Lanjut' : 'Semua Tingkat';
+    return '<span data-i18n="' + k + '">' + teks + '</span>';
+  };
+
+  const bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+  const tanggal = ms => {
+    const d = new Date(ms);
+    const jj = String(d.getHours()).padStart(2, '0');
+    const mm = String(d.getMinutes()).padStart(2, '0');
+    return d.getDate() + ' ' + bulan[d.getMonth()] + ' ' + d.getFullYear() + ', ' + jj + '.' + mm;
+  };
+  const svgEl = (tag, attr, induk) => {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (const k in attr) el.setAttribute(k, attr[k]);
+    if (induk) induk.appendChild(el);
+    return el;
+  };
+
+  /* ---------- Grafik nilai dari waktu ke waktu ---------- */
+  function grafik(data) {
+    const W = 640, H = 260, PL = 38, PR = 16, PT = 20, PB = 34;
+    const titik = data.slice(-20);           // paling banyak 20 titik terakhir
+    const n = titik.length;
+    const svg = svgEl('svg', {
+      viewBox: '0 0 ' + W + ' ' + H, class: 'kem-svg', role: 'img',
+      'aria-label': 'Grafik persentase nilai simulasi dari waktu ke waktu'
+    });
+    const sx = i => n === 1 ? (PL + (W - PL - PR) / 2) : PL + (i / (n - 1)) * (W - PL - PR);
+    const sy = p => H - PB - (p / 100) * (H - PT - PB);
+
+    [0, 25, 50, 75, 100].forEach(g => {
+      svgEl('line', { x1: PL, y1: sy(g), x2: W - PR, y2: sy(g), class: 'kem-grid' }, svg);
+      svgEl('text', { x: PL - 8, y: sy(g) + 4, class: 'kem-tick', 'text-anchor': 'end' }, svg)
+        .textContent = g;
+    });
+
+    if (n >= 2) {
+      let d = '';
+      titik.forEach((t, i) => { d += (i ? ' L ' : 'M ') + sx(i).toFixed(1) + ' ' + sy(t.persen).toFixed(1); });
+      // area lembut di bawah garis
+      const area = d + ' L ' + sx(n - 1).toFixed(1) + ' ' + sy(0) + ' L ' + sx(0).toFixed(1) + ' ' + sy(0) + ' Z';
+      svgEl('path', { d: area, class: 'kem-area' }, svg);
+      svgEl('path', { d: d, class: 'kem-garis' }, svg);
+    }
+    titik.forEach((t, i) => {
+      svgEl('circle', { cx: sx(i), cy: sy(t.persen), r: n === 1 ? 6 : 4, class: 'kem-dot' }, svg);
+    });
+    return svg;
+  }
+
+  /* ---------- Perkembangan tiap mapel (paling awal → paling akhir) ---------- */
+  function perMapel(data) {
+    const jejak = {};                         // kode -> [{t, persen}]
+    data.forEach(rec => {
+      const per = rec.per || {};
+      for (const kode in per) {
+        const v = per[kode];
+        if (!v || !v.t) continue;
+        (jejak[kode] = jejak[kode] || []).push({ t: rec.t, persen: Math.round(v.b / v.t * 100), soal: v.t });
+      }
+    });
+    return Object.keys(jejak).map(kode => {
+      const arr = jejak[kode].sort((a, b) => a.t - b.t);
+      const awal = arr[0].persen, akhir = arr[arr.length - 1].persen;
+      const soal = arr.reduce((s, x) => s + x.soal, 0);
+      return { kode: kode, awal: awal, akhir: akhir, delta: akhir - awal, kali: arr.length, soal: soal };
+    }).sort((a, b) => a.akhir - b.akhir);     // terlemah dulu
+  }
+
+  /* ---------- Peta Latihan: kemajuan kuis di halaman materi ---------- */
+  const URUT_MAPEL = ['aljabar', 'trigonometri', 'geometri', 'prakalkulus', 'limit',
+    'matriks', 'vektor', 'statistika', 'kalkulus', 'tka', 'tka-lanjut'];
+  function bacaLatihan() {
+    try {
+      const v = JSON.parse(localStorage.getItem('ka-latihan') || '{}');
+      return (v && typeof v === 'object') ? v : {};
+    } catch (e) { return {}; }
+  }
+  function petaLatihan() {
+    const data = bacaLatihan();
+    const halaman = Object.keys(data).filter(h => data[h] && Object.keys(data[h]).length);
+    if (!halaman.length) { r('latihanWrap').hidden = true; return { adaData: false }; }
+
+    let tuntasTier = 0, totalTier = 0, adaTier = 0;
+    const baris = URUT_MAPEL.filter(h => data[h]).map(h => {
+      const tiers = data[h];
+      const kunci = Object.keys(tiers);
+      const jumlahTier = kunci.length;
+      const tuntas = kunci.filter(k => tiers[k].done).length;
+      const benar = kunci.reduce((s, k) => s + (tiers[k].best || 0), 0);
+      const soal = kunci.reduce((s, k) => s + (tiers[k].total || 0), 0);
+      tuntasTier += tuntas; totalTier += jumlahTier; adaTier += kunci.filter(k => (tiers[k].dijawab || 0) > 0).length;
+      return { kode: h, jumlahTier: jumlahTier, tuntas: tuntas, benar: benar, soal: soal,
+        persen: soal ? Math.round(benar / soal * 100) : 0 };
+    });
+
+    r('latihanWrap').hidden = false;
+    r('latihanRingkas').innerHTML =
+      '<strong>' + tuntasTier + '</strong>/' + totalTier +
+      ' <span data-i18n="kem.tingkatTuntas">tingkat dituntaskan sempurna</span>' +
+      ' &middot; <strong>' + baris.length + '</strong> <span data-i18n="kem.mapelDisentuh">mapel telah dilatih</span>';
+
+    r('latihan').innerHTML = '<div class="table-scroll"><table class="math-table"><thead><tr>' +
+      '<th style="text-align:left;"><span data-i18n="kem.mapel">Mapel</span></th>' +
+      '<th><span data-i18n="kem.tingkatTuntasSingkat">Tuntas</span></th>' +
+      '<th><span data-i18n="kem.skorTerbaik">Skor terbaik</span></th></tr></thead><tbody>' +
+      baris.map(m => {
+        const lencana = m.tuntas === m.jumlahTier
+          ? '<span class="kem-lencana-penuh">✓ ' + m.tuntas + '/' + m.jumlahTier + '</span>'
+          : '<span class="kem-lencana">' + m.tuntas + '/' + m.jumlahTier + '</span>';
+        return '<tr><td style="text-align:left;">' + namaMapel(m.kode) + '</td>' +
+          '<td>' + lencana + '</td>' +
+          '<td>' + m.benar + '/' + m.soal + ' · ' + m.persen + '%</td></tr>';
+      }).join('') + '</tbody></table></div>';
+    return { adaData: true };
+  }
+
+  /* ---------- Gambar ulang seluruh halaman ---------- */
+  function render() {
+    const data = baca().slice().sort((a, b) => a.t - b.t);
+    const latih = petaLatihan();
+
+    // Halaman dianggap "kosong" hanya bila TAK ada simulasi DAN tak ada latihan.
+    const kosong = data.length === 0 && !latih.adaData;
+    r('kosong').hidden = !kosong;
+    r('isi').hidden = kosong;
+    if (kosong) { sinkronBahasa(); return; }
+
+    // Blok yang khusus butuh riwayat simulasi disembunyikan bila belum ada.
+    const adaUji = data.length > 0;
+    r('ringkas').hidden = !adaUji;
+    r('grafikWrap').hidden = !adaUji;
+    r('daftarWrap').hidden = !adaUji;
+    if (!adaUji) { sinkronBahasa(); return; }
+
+    const persenSemua = data.map(x => x.persen);
+    const terbaik = Math.max.apply(null, persenSemua);
+    const rerata = Math.round(persenSemua.reduce((a, b) => a + b, 0) / persenSemua.length);
+    const totalSoal = data.reduce((s, x) => s + x.total, 0);
+
+    r('ringkas').innerHTML =
+      kartuAngka(data.length, 'kem.jumlahUji', 'Simulasi selesai') +
+      kartuAngka(terbaik + '%', 'kem.terbaik', 'Nilai terbaik') +
+      kartuAngka(rerata + '%', 'kem.rerata', 'Rata-rata') +
+      kartuAngka(totalSoal, 'kem.totalSoal', 'Total soal dikerjakan');
+
+    const g = r('grafik');
+    g.innerHTML = '';
+    g.appendChild(grafik(data));
+
+    const mp = perMapel(data);
+    if (mp.length) {
+      r('mapelWrap').hidden = false;
+      r('mapel').innerHTML = '<div class="table-scroll"><table class="math-table"><thead><tr>' +
+        '<th style="text-align:left;"><span data-i18n="kem.mapel">Mapel</span></th>' +
+        '<th><span data-i18n="kem.pertama">Awal</span></th>' +
+        '<th><span data-i18n="kem.terakhir">Terakhir</span></th>' +
+        '<th><span data-i18n="kem.arah">Arah</span></th>' +
+        '<th><span data-i18n="kem.dilatih">Dilatih</span></th></tr></thead><tbody>' +
+        mp.map(m => {
+          const arah = m.delta > 0 ? '<span class="kem-naik">▲ +' + m.delta + '</span>'
+            : m.delta < 0 ? '<span class="kem-turun">▼ ' + m.delta + '</span>'
+            : '<span class="kem-datar">— 0</span>';
+          const kaliTxt = m.kali === 1
+            ? '1×'
+            : m.kali + '×';
+          return '<tr><td style="text-align:left;">' + namaMapel(m.kode) + '</td>' +
+            '<td>' + m.awal + '%</td><td>' + m.akhir + '%</td><td>' + arah + '</td>' +
+            '<td>' + kaliTxt + ' · ' + m.soal + ' <span data-i18n="kem.soalSingkat">soal</span></td></tr>';
+        }).join('') + '</tbody></table></div>';
+    } else {
+      r('mapelWrap').hidden = true;
+    }
+
+    r('daftar').innerHTML = data.slice().reverse().map(rec =>
+      '<div class="kem-baris">' +
+        '<div class="kem-baris-nilai"><strong>' + rec.persen + '%</strong>' +
+          '<span>' + rec.benar + '/' + rec.total + '</span></div>' +
+        '<div class="kem-baris-info">' +
+          '<span class="kem-baris-paket">' + namaPaket(rec.paket) +
+            (rec.paket === 'semua' ? ' · ' + namaTingkat(rec.tingkat) : '') + '</span>' +
+          '<span class="kem-baris-tgl">' + tanggal(rec.t) + '</span>' +
+        '</div>' +
+      '</div>').join('');
+
+    sinkronBahasa();
+  }
+
+  function kartuAngka(nilai, kunci, fallback) {
+    return '<div class="kem-angka"><strong>' + nilai + '</strong>' +
+      '<span data-i18n="' + kunci + '">' + fallback + '</span></div>';
+  }
+
+  // Terjemahkan elemen yang baru dibuat ke bahasa yang sedang aktif.
+  function sinkronBahasa() {
+    if (window.KA_terapkanBahasa) {
+      window.KA_terapkanBahasa(document.documentElement.lang || 'id');
+    }
+  }
+
+  // Tombol hapus (riwayat simulasi + peta latihan)
+  const hapus = akar.querySelector('[data-aksi="hapus"]');
+  if (hapus) hapus.addEventListener('click', () => {
+    const teks = document.documentElement.lang === 'en'
+      ? 'Delete all saved progress — mock exam history and practice map? This cannot be undone.'
+      : 'Hapus seluruh kemajuan tersimpan — riwayat simulasi dan peta latihan? Tindakan ini tak bisa dibatalkan.';
+    if (!window.confirm(teks)) return;
+    try { localStorage.removeItem('ka-riwayat'); } catch (e) {}
+    try { localStorage.removeItem('ka-latihan'); } catch (e) {}
+    render();
+  });
+
+  render();
 }
