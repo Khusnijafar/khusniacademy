@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinematika — Gerak Lurus, GLB, GLBB & Grafik Gerak | Khusni Academy</title>
+<meta name="description" content="Materi Kinematika Fisika SMA: jarak & perpindahan, GLB, GLBB dan tiga persamaannya, membaca grafik gerak, gerak jatuh bebas & vertikal, gerak relatif & parabola, dengan Laboratorium Gerak interaktif dan 24 soal latihan bertingkat lengkap pembahasan.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://khusniacademy.netlify.app/kinematika.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kinematika — Khusni Academy">
+<meta property="og:description" content="Materi Kinematika Fisika SMA: jarak & perpindahan, GLB, GLBB dan tiga persamaannya, membaca grafik gerak, gerak jatuh bebas & vertikal, gerak relatif & parabola, dengan Laboratorium Gerak interaktif dan 24 soal latihan bertingkat lengkap pembahasan.">
+<meta property="og:url" content="https://khusniacademy.netlify.app/kinematika.html">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kinematika — Khusni Academy">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2314432e'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia, serif' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<a class="skip-link" href="#konten">Langsung ke konten</a>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <div class="nav-drop">
+        <button class="nav-drop-btn active" type="button" aria-expanded="false" aria-haspopup="true"><span>Materi</span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-drop-menu">
+          <span class="nav-drop-label">Tersedia</span>
+          <div class="nav-drop-group">
+            <a href="kinematika.html" class="active"><strong>Kinematika</strong><em>Gerak lurus: GLB, GLBB, grafik gerak, gerak vertikal</em></a>
+          </div>
+          <div class="nav-drop-sep"></div>
+          <span class="nav-drop-label">Segera Hadir</span>
+          <span class="nav-drop-soon">Dinamika — Hukum Newton <i>Segera</i></span>
+          <span class="nav-drop-soon">Usaha &amp; Energi <i>Segera</i></span>
+          <span class="nav-drop-soon">Momentum &amp; Impuls <i>Segera</i></span>
+          <span class="nav-drop-soon">Getaran &amp; Gelombang <i>Segera</i></span>
+          <span class="nav-drop-soon">Listrik &amp; Magnet <i>Segera</i></span>
+        </div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<header class="page-hero" id="konten">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><span>/</span><a href="index.html#materi">Materi</a><span>/</span><span>Kinematika</span></div>
+    <span class="eyebrow">Materi &middot; Tersedia</span>
+    <h1>Kinematika</h1>
+    <p class="hero-sub">Ilmu tentang <em>bagaimana</em> benda bergerak &mdash; posisi, kecepatan, dan percepatan &mdash; tanpa dulu menanyakan apa penyebabnya. Fondasi yang dipakai hampir seluruh Fisika sesudahnya.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container lesson-layout">
+    <aside class="lesson-nav">
+      <div class="lesson-nav-title">Isi Materi</div>
+      <a href="#pendahuluan">Pendahuluan</a>
+      <a href="#besaran">Jarak, Perpindahan, Kecepatan</a>
+      <a href="#glb">Gerak Lurus Beraturan</a>
+      <a href="#glbb">Gerak Berubah Beraturan</a>
+      <a href="#prinsip">Dari Prinsip Dasar</a>
+      <a href="#lab">Laboratorium Gerak</a>
+      <a href="#grafik">Membaca Grafik Gerak</a>
+      <a href="#vertikal">Jatuh Bebas &amp; Gerak Vertikal</a>
+      <a href="#pendalaman">Gerak Relatif &amp; Parabola</a>
+      <a href="#bedah-soal">Bedah Soal</a>
+      <a href="#latihan">Latihan Soal</a>
+      <a href="#teka-teki">Teka-Teki Logika</a>
+    </aside>
+
+    <div class="lesson">
+
+      <div class="lesson-section" id="pendahuluan">
+        <h2>Pendahuluan</h2>
+        <p>Kinematika mempelajari <strong>gerak</strong> apa adanya: di mana sebuah benda berada, secepat apa ia berpindah, dan bagaimana kecepatannya berubah. Ia sengaja <em>tidak</em> menanyakan penyebab gerak itu &mdash; soal gaya dan massa adalah urusan Dinamika. Dengan memisahkan "bagaimana" dari "mengapa", kita bisa memahami gerak dengan sangat teliti hanya lewat tiga besaran: posisi, kecepatan, dan percepatan.</p>
+        <p>Langkah pertama yang sering dilewatkan: menetapkan <strong>kerangka acuan</strong>. Gerak selalu diukur relatif terhadap sesuatu. Kita pilih sebuah titik sebagai nol dan satu arah sebagai positif (misalnya ke kanan atau ke atas). Setelah itu, posisi yang di seberang titik nol otomatis bertanda negatif &mdash; dan tanda inilah yang nanti membedakan "maju" dari "mundur", "naik" dari "turun".</p>
+        <div class="box">
+          <span class="box-label">Peta Belajar Halaman Ini</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Bedakan dulu besarannya</strong> &mdash; jarak vs perpindahan, kelajuan vs kecepatan. Banyak soal sengaja menjebak di sini.</li>
+            <li><strong>Mainkan Laboratorium Gerak</strong> &mdash; lihat grafik posisi dan kecepatan bergerak serempak, biar hubungan keduanya menempel lewat mata.</li>
+            <li><strong>Kuasai membaca grafik</strong> &mdash; kemiringan dan luas di bawah kurva adalah separuh isi soal kinematika di ujian.</li>
+            <li><strong>Naik bertahap di latihan</strong> &mdash; dari Mudah sampai Olimpiade; ulangi tingkat yang skornya belum penuh.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="besaran">
+        <h2>Jarak, Perpindahan, Kecepatan</h2>
+        <p>Dua pasang kata ini terdengar mirip tapi punya makna yang tegas berbeda. Salah membedakannya adalah sumber kesalahan paling umum di kinematika.</p>
+        <p><strong>Jarak</strong> adalah panjang seluruh lintasan yang ditempuh &mdash; sebuah <em class="accent-word">skalar</em> (hanya punya nilai, selalu positif). <strong>Perpindahan</strong> adalah perubahan posisi dari awal ke akhir &mdash; sebuah <em class="accent-word">vektor</em> (punya nilai sekaligus arah, bisa bertanda negatif):</p>
+        <div class="box formula"><span class="box-label">Perpindahan</span>$$\Delta x = x_{\text{akhir}} - x_{\text{awal}}$$</div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Kamu lari $400\text{ m}$ mengelilingi lintasan dan kembali ke titik start.</p>
+          <p style="margin-bottom:0;">Jarak $= 400\text{ m}$ (panjang lintasan), tetapi perpindahan $= 0$ (posisi awal = akhir). Dua angka yang benar-benar berbeda untuk gerak yang sama.</p>
+        </div>
+        <p>Pembagian serupa berlaku untuk laju gerak. <strong>Kelajuan</strong> (skalar) memakai jarak; <strong>kecepatan</strong> (vektor) memakai perpindahan:</p>
+        <div class="box formula"><span class="box-label">Rata-rata</span>$$\text{kelajuan rata-rata} = \frac{\text{jarak}}{\Delta t} \qquad \vec{v}_{\text{rata-rata}} = \frac{\Delta x}{\Delta t}$$</div>
+        <p>Satu lagi yang penting: <strong>kecepatan rata-rata</strong> vs <strong>kecepatan sesaat</strong>. Rata-rata meratakan seluruh perjalanan; sesaat adalah nilai pada satu titik waktu &mdash; yang ditunjuk spidometer, atau kemiringan grafik posisi di satu titik. Keduanya bisa sangat berbeda: mobil yang berangkat dan tiba di tempat sama punya kecepatan rata-rata nol, walau spidometernya sempat menunjuk $100\text{ km/jam}$.</p>
+        <div class="box warn">
+          <span class="box-label">Awas, Jebakan Klasik!</span>
+          <ul>
+            <li>"Kecepatan rata-rata" <strong>bukan</strong> rata-rata dari dua kecepatan, kecuali kedua selang waktunya sama. Selalu pakai $\dfrac{\text{perpindahan total}}{\text{waktu total}}$.</li>
+            <li>Jarak $\geq$ besar perpindahan, selalu. Keduanya sama hanya bila gerak lurus tak pernah berbalik arah.</li>
+            <li>Kelajuan tak pernah negatif; kecepatan bisa, dan tandanya memberitahu arah.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="glb">
+        <h2>Gerak Lurus Beraturan (GLB)</h2>
+        <p>GLB adalah gerak pada lintasan lurus dengan <strong>kecepatan tetap</strong> &mdash; artinya percepatan $a = 0$. Tiap detik benda menempuh jarak yang sama persis. Posisinya tumbuh secara linear terhadap waktu:</p>
+        <div class="box formula"><span class="box-label">Persamaan GLB</span>$$x = x_0 + v\,t$$</div>
+        <p>Karena kecepatannya tetap, dua grafiknya sangat khas: grafik <strong>posisi-waktu</strong> ($x$&ndash;$t$) berupa garis lurus miring (kemiringannya $= v$), dan grafik <strong>kecepatan-waktu</strong> ($v$&ndash;$t$) berupa garis mendatar.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Kereta melaju tetap $30\text{ m/s}$. Berapa jarak yang ditempuh dalam $1\text{ menit}$?</p>
+          <p style="margin-bottom:0;">$x = v\,t = 30 \times 60 = 1800\text{ m} = 1{,}8\text{ km}$.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="glbb">
+        <h2>Gerak Lurus Berubah Beraturan (GLBB)</h2>
+        <p>Begitu kecepatan ikut berubah &mdash; tapi berubahnya <em>tetap</em> tiap detik &mdash; kita masuk GLBB: gerak lurus dengan <strong>percepatan konstan</strong> $a$. Inilah model untuk mobil yang menginjak gas atau rem secara mantap, dan untuk benda yang jatuh. Tiga persamaan menjadi perkakas utamanya:</p>
+        <div class="box formula">
+          <span class="box-label">Tiga Persamaan GLBB</span>
+          $$v_t = v_0 + a\,t$$
+          $$x = x_0 + v_0\,t + \tfrac12 a\,t^2$$
+          $$v_t^2 = v_0^2 + 2a\,\Delta x$$
+        </div>
+        <p>Tandanya penting. Bila $a$ <strong>searah</strong> kecepatan, benda <em>dipercepat</em>; bila $a$ <strong>berlawanan</strong> arah kecepatan, benda <em>diperlambat</em>. Perlambatan bukan besaran baru &mdash; cuma percepatan yang bertanda berlawanan dengan gerak.</p>
+        <div class="box recap">
+          <span class="box-label">Memilih Persamaan yang Tepat</span>
+          <ul style="margin-bottom:0;">
+            <li>Tak tahu <strong>jarak</strong>, tak ditanya jarak &rarr; pakai $v_t = v_0 + a\,t$.</li>
+            <li>Butuh <strong>posisi</strong> pada waktu tertentu &rarr; pakai $x = x_0 + v_0 t + \tfrac12 a t^2$.</li>
+            <li>Tak tahu <strong>waktu</strong>, tak ditanya waktu &rarr; pakai $v_t^2 = v_0^2 + 2a\,\Delta x$ (persamaan ini "melompati" waktu).</li>
+          </ul>
+        </div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Motor dari diam dipercepat $3\text{ m/s}^2$. Berapa kecepatan dan jarak setelah $4\text{ s}$?</p>
+          <p style="margin-bottom:0.3rem;">Kecepatan: $v_t = 0 + 3(4) = 12\text{ m/s}$.</p>
+          <p style="margin-bottom:0;">Jarak: $x = 0 + 0 + \tfrac12(3)(4)^2 = \tfrac12(3)(16) = 24\text{ m}$.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="prinsip">
+        <h2>Dari Prinsip Dasar</h2>
+        <p>Ketiga persamaan GLBB tadi mudah terasa seperti tiga rumus terpisah yang harus dihafal. Padahal semuanya tumbuh dari <strong>dua definisi</strong> yang sangat sederhana. Kalau kamu paham bagian ini, kamu tak perlu menghafal satu pun — karena bisa membangunnya ulang kapan saja, bahkan di tengah ujian saat ingatan mendadak kosong.</p>
+        <div class="box recap">
+          <span class="box-label">Dua Prinsip, Itu Saja</span>
+          <ul style="margin-bottom:0;">
+            <li><strong>Kecepatan</strong> adalah laju perubahan posisi: $v = \dfrac{\Delta x}{\Delta t}$.</li>
+            <li><strong>Percepatan</strong> adalah laju perubahan kecepatan: $a = \dfrac{\Delta v}{\Delta t}$.</li>
+          </ul>
+        </div>
+        <p>Semua selebihnya hanyalah akibat dari dua kalimat itu. Mari turunkan ketiga persamaannya — perhatikan bahwa tak ada satu pun "rumus baru" yang muncul dari langit; semuanya mengalir dari definisi di atas.</p>
+
+        <h3>Persamaan 1 — definisi percepatan, ditata ulang</h3>
+        <p>Dengan percepatan tetap, $a = \dfrac{v_t - v_0}{t}$. Kalikan dengan $t$, lalu pindahkan $v_0$ ke ruas kiri:</p>
+        <div class="box formula">$$a\,t = v_t - v_0 \quad\Longrightarrow\quad v_t = v_0 + a\,t$$</div>
+        <p>Persamaan pertama bukan temuan baru — ia <em>adalah</em> definisi percepatan, ditulis ulang.</p>
+
+        <h3>Persamaan 2 — lewat kecepatan rata-rata</h3>
+        <p>Karena percepatannya tetap, kecepatan bertambah <em>lurus</em> terhadap waktu. Maka kecepatan rata-ratanya persis nilai tengah antara awal dan akhir:</p>
+        <div class="box formula">$$\bar v = \frac{v_0 + v_t}{2}$$</div>
+        <p>Jarak adalah kecepatan rata-rata dikali waktu, $x = \bar v\,t$. Masukkan $v_t = v_0 + at$:</p>
+        <div class="box formula">$$x = \frac{v_0 + (v_0 + at)}{2}\,t = \left(v_0 + \tfrac12 a t\right)t = v_0\,t + \tfrac12 a\,t^2$$</div>
+        <p>Dan ini menautkan kembali ke grafik: $v_0 t$ adalah luas persegi panjang di bawah grafik $v$&ndash;$t$, sedangkan $\tfrac12 a t^2$ adalah luas segitiga di atasnya. Rumus dan grafik ternyata mengatakan hal yang sama persis.</p>
+
+        <h3>Persamaan 3 — singkirkan waktunya</h3>
+        <p>Kadang kita tak peduli waktu. Kuadratkan Persamaan 1, lalu kenali bentuk Persamaan 2 yang tersembunyi di dalamnya:</p>
+        <div class="box formula">$$v_t^2 = (v_0 + at)^2 = v_0^2 + 2a\left(v_0 t + \tfrac12 a t^2\right) = v_0^2 + 2a\,\Delta x$$</div>
+        <p>Tiga persamaan, satu keluarga, lahir dari dua kalimat. Inilah inti berpikir dengan <em class="accent-word">prinsip dasar</em>: bukan menimbun rumus, melainkan memahami dari mana tiap rumus berasal — sehingga kalau satu terlupa, kamu bisa menurunkannya kembali dalam tiga baris. Pola yang sama akan kita pakai di setiap bab Fisika berikutnya.</p>
+      </div>
+
+      <div class="lesson-section" id="lab">
+        <h2>Laboratorium Gerak</h2>
+        <p>Teori di atas jauh lebih mudah dicerna kalau dilihat bergerak. Di bawah ini, atur <strong>kecepatan awal</strong> $v_0$ dan <strong>percepatan</strong> $a$, lalu geser penanda waktu. Perhatikan bagaimana grafik posisi ($x$&ndash;$t$) dan grafik kecepatan ($v$&ndash;$t$) berubah <em>bersamaan</em>, dan bagaimana kemiringan yang satu menjadi nilai yang lain.</p>
+        <div class="widget-card reveal" id="widget-gerak">
+          <div class="widget-head">
+            <span class="widget-tag">Simulasi Interaktif</span>
+            <h3>Laboratorium Gerak Lurus</h3>
+            <p>Dua grafik, satu benda. Coba preset <strong>GLB</strong> (garis lurus, $v$ mendatar), <strong>Dipercepat</strong> (kurva $x$&ndash;$t$ makin curam), dan <strong>Berbalik arah</strong> (kecepatan menembus nol, lalu posisi berbalik turun). Titik emas menandai saat benda berhenti sesaat sebelum berbalik &mdash; di situ grafik posisi mencapai puncaknya.</p>
+          </div>
+          <div class="widget-mount">
+            <p class="w-fallback">Aktifkan JavaScript untuk memainkan simulasi ini.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="grafik">
+        <h2>Membaca Grafik Gerak</h2>
+        <p>Di ujian, kinematika sering muncul bukan sebagai angka, melainkan sebagai <strong>grafik</strong>. Kabar baiknya, hanya ada tiga aturan yang perlu benar-benar dikuasai &mdash; dan ketiganya saling menautkan posisi, kecepatan, dan percepatan.</p>
+        <div class="box formula">
+          <span class="box-label">Tiga Kunci Grafik</span>
+          <ul style="margin-bottom:0; text-align:left;">
+            <li>Kemiringan grafik $x$&ndash;$t$ $\;=\;$ kecepatan $v$</li>
+            <li>Kemiringan grafik $v$&ndash;$t$ $\;=\;$ percepatan $a$</li>
+            <li>Luas di bawah grafik $v$&ndash;$t$ $\;=\;$ perpindahan $\Delta x$</li>
+          </ul>
+        </div>
+        <p>Aturan <strong>luas</strong> adalah yang paling sering menyelesaikan soal dengan cepat. Grafik $v$&ndash;$t$ yang berupa potongan garis lurus tinggal dipecah menjadi segitiga dan persegi panjang, lalu luasnya dijumlahkan.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Grafik $v$&ndash;$t$ sebuah benda naik dari $0$ ke $8\text{ m/s}$ dalam $4\text{ s}$, lalu tetap $8\text{ m/s}$ selama $3\text{ s}$. Berapa perpindahan totalnya?</p>
+          <p style="margin-bottom:0;">Segitiga: $\tfrac12 \times 4 \times 8 = 16\text{ m}$. Persegi panjang: $8 \times 3 = 24\text{ m}$. Total $= 40\text{ m}$. Tak perlu satu pun persamaan GLBB.</p>
+        </div>
+        <div class="box warn">
+          <span class="box-label">Awas!</span>
+          <p style="margin-bottom:0;">Grafik $x$&ndash;$t$ yang melengkung ke atas berarti <em>dipercepat</em>; yang melengkung mendatar berarti <em>diperlambat</em>. Grafik $x$&ndash;$t$ yang mendatar (kemiringan nol) berarti benda <strong>diam</strong>, bukan bergerak tetap &mdash; jangan tertukar dengan grafik $v$&ndash;$t$ yang mendatar.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="vertikal">
+        <h2>Jatuh Bebas &amp; Gerak Vertikal</h2>
+        <p>Gerak di bawah pengaruh gravitasi hanyalah GLBB istimewa: percepatannya tetap, sebesar <strong>percepatan gravitasi</strong> $g \approx 10\text{ m/s}^2$ (kadang dipakai $9{,}8$), selalu mengarah ke bawah. Yang menakjubkan &mdash; dan sudah dibuktikan Galileo &mdash; besarnya tak bergantung pada massa: bulu dan batu jatuh sama cepat bila tak ada hambatan udara.</p>
+        <p><strong>Jatuh bebas</strong> adalah kasus $v_0 = 0$. Tinggal ganti $a \to g$ dan $v_0 \to 0$ pada persamaan GLBB:</p>
+        <div class="box formula"><span class="box-label">Jatuh Bebas</span>$$v = g\,t \qquad h = \tfrac12 g\,t^2 \qquad v^2 = 2g\,h$$</div>
+        <p>Untuk benda yang <strong>dilempar ke atas</strong>, ambil arah ke atas sebagai positif, sehingga percepatannya $-g$ (melawan gerak naik). Dua fakta kunci mempermudah hampir semua soalnya:</p>
+        <ul>
+          <li>Di titik tertinggi, kecepatan sesaat $v = 0$ (bukan percepatannya &mdash; $a$ tetap $-g$ di sepanjang gerak).</li>
+          <li>Waktu naik ke puncak sama persis dengan waktu turun kembali ke ketinggian semula.</li>
+        </ul>
+        <div class="box formula"><span class="box-label">Lemparan ke Atas</span>$$t_{\text{puncak}} = \frac{v_0}{g} \qquad h_{\text{maks}} = \frac{v_0^2}{2g} \qquad t_{\text{udara}} = \frac{2v_0}{g}$$</div>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Batu dijatuhkan ke dalam sumur dan terdengar membentur air $2\text{ s}$ kemudian ($g = 10$). Berapa dalam sumurnya?</p>
+          <p style="margin-bottom:0;">$h = \tfrac12 g t^2 = \tfrac12 (10)(2)^2 = 20\text{ m}$.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="pendalaman">
+        <h2>Gerak Relatif &amp; Gerak Parabola</h2>
+        <p>Dua gagasan ini menjadi jembatan ke topik-topik berikutnya, dan keduanya tumbuh dari satu prinsip sederhana: <strong>kecepatan bisa dijumlahkan sebagai vektor</strong>.</p>
+        <h3>Gerak Relatif</h3>
+        <p>Kecepatan selalu bergantung pada siapa yang mengukur. Kecepatan benda A dilihat dari benda B adalah selisih vektornya:</p>
+        <div class="box formula"><span class="box-label">Kecepatan Relatif</span>$$\vec{v}_{A,B} = \vec{v}_A - \vec{v}_B$$</div>
+        <p>Pada satu garis lurus, ini jadi urusan tanda. Dua mobil berpapasan (berlawanan arah): kelajuan saling mendekatnya adalah <em>jumlah</em> kelajuan keduanya. Dua mobil beriringan (searah): yang di belakang mendekat dengan <em>selisih</em> kelajuannya. Itulah kenapa menyalip di jalan dua arah terasa jauh lebih cepat dan berbahaya.</p>
+        <h3>Gerak Parabola</h3>
+        <p>Benda yang dilempar menyudut tampak menempuh lintasan melengkung yang rumit. Kuncinya: <strong>uraikan menjadi dua gerak yang saling bebas</strong>. Arah mendatar adalah GLB (tak ada gaya mendatar, kecepatannya tetap); arah vertikal adalah GLBB jatuh bebas (ditarik gravitasi). Keduanya hanya berbagi satu hal &mdash; waktu.</p>
+        <div class="box example">
+          <span class="box-label">Contoh</span>
+          <p style="margin-bottom:0.3rem;">Bola ditendang mendatar dari meja setinggi $1{,}25\text{ m}$ dengan kelajuan $4\text{ m/s}$ ($g = 10$). Sejauh mana ia mendarat dari kaki meja?</p>
+          <p style="margin-bottom:0;">Vertikal menentukan waktu: $1{,}25 = \tfrac12(10)t^2 \Rightarrow t^2 = 0{,}25 \Rightarrow t = 0{,}5\text{ s}$. Mendatar: $x = 4 \times 0{,}5 = 2\text{ m}$.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="bedah-soal">
+        <h2>Bedah Soal</h2>
+        <p>Satu soal gabungan, dikerjakan pelan-pelan supaya cara berpikirnya terlihat &mdash; bukan cuma hasilnya.</p>
+        <div class="box">
+          <span class="box-label">Soal</span>
+          <p style="margin-bottom:0;">Sebuah bus berangkat dari halte, dipercepat tetap dari diam hingga mencapai $20\text{ m/s}$ dalam $10\text{ s}$. Ia lalu melaju tetap $20\text{ m/s}$ selama $30\text{ s}$, sebelum direm hingga berhenti dalam $5\text{ s}$. Berapa jarak total yang ditempuh bus?</p>
+        </div>
+        <p><strong>Langkah 1 &mdash; pecah menjadi tiga fase.</strong> Soal gerak bertahap hampir selalu diselesaikan dengan memecahnya pada titik-titik perubahan.</p>
+        <p><strong>Fase 1 (dipercepat).</strong> Percepatannya $a = \dfrac{20 - 0}{10} = 2\text{ m/s}^2$. Cara tercepat menghitung jaraknya: luas grafik $v$&ndash;$t$, yaitu segitiga $\tfrac12 \times 10 \times 20 = 100\text{ m}$.</p>
+        <p><strong>Fase 2 (GLB).</strong> $x_2 = v\,t = 20 \times 30 = 600\text{ m}$ &mdash; persegi panjang di grafik $v$&ndash;$t$.</p>
+        <p><strong>Fase 3 (diperlambat).</strong> Dari $20\text{ m/s}$ ke $0$ dalam $5\text{ s}$: segitiga $\tfrac12 \times 5 \times 20 = 50\text{ m}$.</p>
+        <p><strong>Langkah 2 &mdash; jumlahkan.</strong> $x_{\text{total}} = 100 + 600 + 50 = 750\text{ m}$. Perhatikan bahwa seluruh soal selesai tanpa menyentuh persamaan $x = v_0 t + \tfrac12 a t^2$ satu kali pun &mdash; karena ketiga jaraknya langsung terbaca sebagai luas di bawah grafik $v$&ndash;$t$. Itulah kekuatan pendekatan grafik.</p>
+      </div>
+
+      <div class="lesson-section" id="latihan">
+        <h2>Latihan Soal Bertingkat</h2>
+        <p>Empat tingkat kesulitan &mdash; dari Mudah sampai Olimpiade. Klik salah satu pilihan untuk melihat benar-salahnya beserta pembahasan. Pakai $g = 10\text{ m/s}^2$ kecuali disebut lain.</p>
+        <p class="quiz-note">Progres tersimpan otomatis di peramban ini &mdash; tekan &quot;Ulangi&quot; untuk mencoba lagi dari awal.</p>
+        <div data-tier-group>
+          <div class="tier-tabs">
+            <button class="tier-tab active" data-tier="mudah"><span class="dot"></span>Mudah</button>
+            <button class="tier-tab" data-tier="sedang"><span class="dot"></span>Sedang</button>
+            <button class="tier-tab" data-tier="sulit"><span class="dot"></span>Sulit</button>
+            <button class="tier-tab" data-tier="olimpiade"><span class="dot"></span>Olimpiade</button>
+          </div>
+          <div class="tier-panel active" data-tier="mudah">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">&#8635; Ulangi</button>
+            </div>
+            <div class="quiz-card" data-answer="B" data-qid="kin-m1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Seseorang berjalan $3\text{ m}$ ke timur, lalu $4\text{ m}$ ke barat. Besar <strong>perpindahan</strong>-nya adalah&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$7\text{ m}$</button>
+                <button class="quiz-option" data-option="B">$1\text{ m}$</button>
+                <button class="quiz-option" data-option="C">$5\text{ m}$</button>
+                <button class="quiz-option" data-option="D">$3\text{ m}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Perpindahan hanya memperhatikan posisi awal dan akhir. Ambil timur sebagai positif: $+3 - 4 = -1\text{ m}$, jadi besarnya $1\text{ m}$ (ke barat). Angka $7\text{ m}$ itu <em>jarak</em> (panjang lintasan total), bukan perpindahan.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-m2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Kelajuan $72\text{ km/jam}$ sama dengan&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$20\text{ m/s}$</button>
+                <button class="quiz-option" data-option="B">$72\text{ m/s}$</button>
+                <button class="quiz-option" data-option="C">$7{,}2\text{ m/s}$</button>
+                <button class="quiz-option" data-option="D">$200\text{ m/s}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kalikan dengan $\dfrac{1000}{3600} = \dfrac{1}{3{,}6}$: $\;72 \div 3{,}6 = 20\text{ m/s}$. Pintasannya: bagi dengan $3{,}6$ untuk km/jam $\to$ m/s.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-m3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Mobil bergerak lurus beraturan dengan kecepatan $15\text{ m/s}$ selama $4\text{ s}$. Jarak yang ditempuh&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$60\text{ m}$</button>
+                <button class="quiz-option" data-option="B">$3{,}75\text{ m}$</button>
+                <button class="quiz-option" data-option="C">$19\text{ m}$</button>
+                <button class="quiz-option" data-option="D">$11\text{ m}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pada GLB, $x = v\,t = 15 \times 4 = 60\text{ m}$.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-m4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Benda mulai dari diam ($v_0 = 0$) dengan percepatan tetap $2\text{ m/s}^2$. Kecepatannya setelah $5\text{ s}$ adalah&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$10\text{ m/s}$</button>
+                <button class="quiz-option" data-option="B">$2\text{ m/s}$</button>
+                <button class="quiz-option" data-option="C">$25\text{ m/s}$</button>
+                <button class="quiz-option" data-option="D">$5\text{ m/s}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pakai $v_t = v_0 + a\,t = 0 + 2 \times 5 = 10\text{ m/s}$.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-m5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Sebuah batu dijatuhkan (tanpa kecepatan awal). Dengan $g = 10\text{ m/s}^2$, kecepatannya setelah $3\text{ s}$ adalah&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$30\text{ m/s}$</button>
+                <button class="quiz-option" data-option="B">$10\text{ m/s}$</button>
+                <button class="quiz-option" data-option="C">$45\text{ m/s}$</button>
+                <button class="quiz-option" data-option="D">$3\text{ m/s}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jatuh bebas adalah GLBB dengan $a = g$. Maka $v = g\,t = 10 \times 3 = 30\text{ m/s}$. Nilai $45$ itu <em>jaraknya</em> ($\tfrac12 g t^2$), bukan kecepatan.</div>
+            </div>
+            <div class="quiz-card" data-answer="C" data-qid="kin-m6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Grafik kecepatan-waktu ($v$&ndash;$t$) sebuah benda berupa garis <strong>mendatar</strong> di $v = 8\text{ m/s}$. Gerak benda itu&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">dipercepat</button>
+                <button class="quiz-option" data-option="B">diperlambat</button>
+                <button class="quiz-option" data-option="C">GLB (kecepatan tetap)</button>
+                <button class="quiz-option" data-option="D">diam</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Garis $v$&ndash;$t$ mendatar berarti kecepatan tidak berubah, jadi percepatan $a = 0$ &mdash; inilah Gerak Lurus Beraturan. Benda tetap bergerak ($v = 8 \neq 0$), bukan diam.</div>
+            </div>
+            <div class="tier-complete" hidden><strong>Tingkat Mudah selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Lanjut ke tingkat Sedang kalau sudah mantap.</div>
+          </div>
+          <div class="tier-panel" data-tier="sedang">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">&#8635; Ulangi</button>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-s1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Benda bergerak dengan $v_0 = 4\text{ m/s}$ dan percepatan tetap $2\text{ m/s}^2$. Jarak tempuh selama $3\text{ s}$ adalah&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$21\text{ m}$</button>
+                <button class="quiz-option" data-option="B">$30\text{ m}$</button>
+                <button class="quiz-option" data-option="C">$12\text{ m}$</button>
+                <button class="quiz-option" data-option="D">$18\text{ m}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pakai $x = v_0 t + \tfrac12 a t^2 = 4(3) + \tfrac12 (2)(3)^2 = 12 + 9 = 21\text{ m}$.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-s2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Mobil $20\text{ m/s}$ direm dengan perlambatan tetap $5\text{ m/s}^2$ hingga berhenti. Jarak pengeremannya&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$40\text{ m}$</button>
+                <button class="quiz-option" data-option="B">$20\text{ m}$</button>
+                <button class="quiz-option" data-option="C">$80\text{ m}$</button>
+                <button class="quiz-option" data-option="D">$4\text{ m}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Waktu tak ditanya, jadi pakai $v_t^2 = v_0^2 + 2a\,\Delta x$. Saat berhenti $v_t = 0$: $\;0 = 20^2 - 2(5)\Delta x \Rightarrow \Delta x = \dfrac{400}{10} = 40\text{ m}$.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-s3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Bola dilempar lurus ke atas dengan $v_0 = 20\text{ m/s}$ ($g = 10\text{ m/s}^2$). Tinggi maksimum yang dicapai&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$20\text{ m}$</button>
+                <button class="quiz-option" data-option="B">$40\text{ m}$</button>
+                <button class="quiz-option" data-option="C">$2\text{ m}$</button>
+                <button class="quiz-option" data-option="D">$10\text{ m}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Di titik tertinggi $v = 0$. Dengan $v_t^2 = v_0^2 - 2g\,h$: $\;0 = 20^2 - 2(10)h \Rightarrow h = \dfrac{400}{20} = 20\text{ m}$.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-s4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Masih dari soal sebelumnya ($v_0 = 20\text{ m/s}$, $g = 10$), waktu untuk mencapai titik tertinggi adalah&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$2\text{ s}$</button>
+                <button class="quiz-option" data-option="B">$4\text{ s}$</button>
+                <button class="quiz-option" data-option="C">$20\text{ s}$</button>
+                <button class="quiz-option" data-option="D">$1\text{ s}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Di puncak $v = 0$, maka $0 = v_0 - g\,t \Rightarrow t = \dfrac{v_0}{g} = \dfrac{20}{10} = 2\text{ s}$. (Waktu turun kembali ke titik lempar juga $2\text{ s}$, jadi total melayang $4\text{ s}$.)</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-s5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Sebuah benda menempuh $100\text{ m}$ dalam $8\text{ s}$, lalu lanjut searah $60\text{ m}$ dalam $2\text{ s}$. Kecepatan rata-ratanya&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$16\text{ m/s}$</button>
+                <button class="quiz-option" data-option="B">$21{,}25\text{ m/s}$</button>
+                <button class="quiz-option" data-option="C">$160\text{ m/s}$</button>
+                <button class="quiz-option" data-option="D">$32\text{ m/s}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kecepatan rata-rata $= \dfrac{\text{perpindahan total}}{\text{waktu total}} = \dfrac{100 + 60}{8 + 2} = \dfrac{160}{10} = 16\text{ m/s}$. Jebakannya: ini <strong>bukan</strong> rata-rata dari dua kelajuan ($\tfrac{12{,}5 + 30}{2} = 21{,}25$) &mdash; itu keliru karena kedua tahap beda durasi.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-s6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Grafik $v$&ndash;$t$ sebuah benda berupa garis lurus dari $0$ naik ke $12\text{ m/s}$ selama $6\text{ s}$. Perpindahannya&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$36\text{ m}$</button>
+                <button class="quiz-option" data-option="B">$72\text{ m}$</button>
+                <button class="quiz-option" data-option="C">$18\text{ m}$</button>
+                <button class="quiz-option" data-option="D">$12\text{ m}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Perpindahan $=$ luas di bawah grafik $v$&ndash;$t$. Bentuknya segitiga: $\;\tfrac12 \times \text{alas} \times \text{tinggi} = \tfrac12 \times 6 \times 12 = 36\text{ m}$.</div>
+            </div>
+            <div class="tier-complete" hidden><strong>Tingkat Sedang selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Naik ke tingkat Sulit untuk soal dua tahap.</div>
+          </div>
+          <div class="tier-panel" data-tier="sulit">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">&#8635; Ulangi</button>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-x1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Mobil dari diam dipercepat $2\text{ m/s}^2$ selama $5\text{ s}$, lalu bergerak lurus beraturan $10\text{ s}$. Jarak total yang ditempuh&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$125\text{ m}$</button>
+                <button class="quiz-option" data-option="B">$100\text{ m}$</button>
+                <button class="quiz-option" data-option="C">$150\text{ m}$</button>
+                <button class="quiz-option" data-option="D">$75\text{ m}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Fase 1 (GLBB): $x_1 = \tfrac12(2)(5)^2 = 25\text{ m}$, dan kecepatan akhirnya $v = 2 \times 5 = 10\text{ m/s}$. Fase 2 (GLB): $x_2 = 10 \times 10 = 100\text{ m}$. Total $= 25 + 100 = 125\text{ m}$.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-x2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Bola dilempar ke atas dengan $v_0 = 25\text{ m/s}$ ($g = 10$). Saat <strong>pertama kali</strong> berada di ketinggian $20\text{ m}$, waktunya&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$1\text{ s}$</button>
+                <button class="quiz-option" data-option="B">$4\text{ s}$</button>
+                <button class="quiz-option" data-option="C">$2\text{ s}$</button>
+                <button class="quiz-option" data-option="D">$2{,}5\text{ s}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Dari $h = v_0 t - \tfrac12 g t^2$: $\;20 = 25t - 5t^2 \Rightarrow t^2 - 5t + 4 = 0 \Rightarrow (t-1)(t-4)=0$. Jadi $t = 1\text{ s}$ (saat naik) atau $t = 4\text{ s}$ (saat turun). Yang pertama: $t = 1\text{ s}$.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-x3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Grafik $v$&ndash;$t$: naik lurus dari $0$ ke $10\text{ m/s}$ selama $4\text{ s}$, lalu tetap $10\text{ m/s}$ selama $6\text{ s}$. Perpindahan total&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$80\text{ m}$</button>
+                <button class="quiz-option" data-option="B">$100\text{ m}$</button>
+                <button class="quiz-option" data-option="C">$60\text{ m}$</button>
+                <button class="quiz-option" data-option="D">$140\text{ m}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pecah luasnya jadi dua. Segitiga ($0$&ndash;$4\text{ s}$): $\tfrac12 \times 4 \times 10 = 20\text{ m}$. Persegi panjang ($4$&ndash;$10\text{ s}$): $10 \times 6 = 60\text{ m}$. Total $= 20 + 60 = 80\text{ m}$.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-x4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Sebuah benda jatuh bebas dari gedung dan tiba di tanah setelah $4\text{ s}$ ($g = 10$). Tinggi gedung itu&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$80\text{ m}$</button>
+                <button class="quiz-option" data-option="B">$40\text{ m}$</button>
+                <button class="quiz-option" data-option="C">$160\text{ m}$</button>
+                <button class="quiz-option" data-option="D">$20\text{ m}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jatuh bebas $v_0 = 0$: $\;h = \tfrac12 g t^2 = \tfrac12 (10)(4)^2 = \tfrac12 (10)(16) = 80\text{ m}$. (Nilai $40$ adalah kecepatan saat tiba, $v = gt$, bukan tingginya.)</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-x5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Dua benda bergerak saling mendekat di garis lurus: A dengan $4\text{ m/s}$ dan B dengan $6\text{ m/s}$. Jarak awal keduanya $100\text{ m}$. Mereka berpapasan setelah&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$10\text{ s}$</button>
+                <button class="quiz-option" data-option="B">$20\text{ s}$</button>
+                <button class="quiz-option" data-option="C">$25\text{ s}$</button>
+                <button class="quiz-option" data-option="D">$16{,}7\text{ s}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Karena saling mendekat, jarak menyusut dengan laju gabungan $4 + 6 = 10\text{ m/s}$. Waktu berpapasan $= \dfrac{100}{10} = 10\text{ s}$.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-x6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Kereta A melaju $60\text{ km/jam}$ ke timur, kereta B $40\text{ km/jam}$ ke barat di rel sebelahnya. Kecepatan B <strong>relatif terhadap</strong> A adalah&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$100\text{ km/jam}$</button>
+                <button class="quiz-option" data-option="B">$20\text{ km/jam}$</button>
+                <button class="quiz-option" data-option="C">$50\text{ km/jam}$</button>
+                <button class="quiz-option" data-option="D">$24\text{ km/jam}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kecepatan relatif $v_{B,A} = v_B - v_A$. Ambil timur positif: $v_A = +60$, $v_B = -40$. Maka $v_{B,A} = -40 - 60 = -100\text{ km/jam}$, besarnya $100\text{ km/jam}$ (B tampak mendekat lalu menjauh sangat cepat dari A). Arah berlawanan membuat kelajuan relatif <em>dijumlah</em>.</div>
+            </div>
+            <div class="tier-complete" hidden><strong>Tingkat Sulit selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Tantang dirimu di tingkat Olimpiade.</div>
+          </div>
+          <div class="tier-panel" data-tier="olimpiade">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/6</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">&#8635; Ulangi</button>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-o1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Peluru ditembakkan <strong>mendatar</strong> dari tebing setinggi $45\text{ m}$ dengan kelajuan $20\text{ m/s}$ ($g = 10$). Jarak mendatar jatuhnya dari kaki tebing&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$60\text{ m}$</button>
+                <button class="quiz-option" data-option="B">$45\text{ m}$</button>
+                <button class="quiz-option" data-option="C">$90\text{ m}$</button>
+                <button class="quiz-option" data-option="D">$20\text{ m}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Gerak parabola = dua gerak bebas. Vertikal (jatuh bebas) menentukan waktu: $45 = \tfrac12(10)t^2 \Rightarrow t^2 = 9 \Rightarrow t = 3\text{ s}$. Mendatar (GLB): $x = 20 \times 3 = 60\text{ m}$. Komponen mendatar dan vertikal tak saling memengaruhi.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-o2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Perahu diarahkan tegak lurus menyeberangi sungai dengan kelajuan $3\text{ m/s}$ (relatif air). Arus sungai $4\text{ m/s}$. Kelajuan perahu relatif terhadap tanah&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$5\text{ m/s}$</button>
+                <button class="quiz-option" data-option="B">$7\text{ m/s}$</button>
+                <button class="quiz-option" data-option="C">$1\text{ m/s}$</button>
+                <button class="quiz-option" data-option="D">$3{,}5\text{ m/s}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Kedua kecepatan tegak lurus, jadi dijumlah secara vektor (teorema Pythagoras): $\;v = \sqrt{3^2 + 4^2} = \sqrt{25} = 5\text{ m/s}$.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-o3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Benda bergerak lurus dengan $v_0 = 12\text{ m/s}$ dan percepatan tetap $-4\text{ m/s}^2$. Dalam $5\text{ s}$ pertama, <strong>jarak tempuh</strong> totalnya&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$26\text{ m}$</button>
+                <button class="quiz-option" data-option="B">$10\text{ m}$</button>
+                <button class="quiz-option" data-option="C">$36\text{ m}$</button>
+                <button class="quiz-option" data-option="D">$18\text{ m}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Benda berbalik saat $v = 0$: $\;t = 12/4 = 3\text{ s}$. Maju sampai $t=3$: $x(3) = 12(3) - 2(3)^2 = 18\text{ m}$. Posisi di $t=5$: $x(5) = 12(5) - 2(5)^2 = 10\text{ m}$, jadi mundur $18 - 10 = 8\text{ m}$. Jarak tempuh $= 18 + 8 = 26\text{ m}$ (sedangkan perpindahan hanya $10\text{ m}$).</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-o4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Mobil $30\text{ m/s}$. Sopir butuh $0{,}5\text{ s}$ untuk bereaksi (mobil masih melaju tetap), lalu mengerem $6\text{ m/s}^2$ hingga berhenti. Jarak total dari saat bahaya muncul&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$90\text{ m}$</button>
+                <button class="quiz-option" data-option="B">$75\text{ m}$</button>
+                <button class="quiz-option" data-option="C">$15\text{ m}$</button>
+                <button class="quiz-option" data-option="D">$105\text{ m}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jarak reaksi (GLB): $30 \times 0{,}5 = 15\text{ m}$. Jarak pengereman: $0 = 30^2 - 2(6)\Delta x \Rightarrow \Delta x = \dfrac{900}{12} = 75\text{ m}$. Total $= 15 + 75 = 90\text{ m}$. Jarak reaksi inilah alasan menjaga jarak aman.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-o5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Bola dilempar lurus ke atas dengan $v_0 = 30\text{ m/s}$ ($g = 10$). Selang waktu total di udara sampai kembali ke ketinggian semula&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$6\text{ s}$</button>
+                <button class="quiz-option" data-option="B">$3\text{ s}$</button>
+                <button class="quiz-option" data-option="C">$9\text{ s}$</button>
+                <button class="quiz-option" data-option="D">$4{,}5\text{ s}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Waktu naik $= v_0/g = 3\text{ s}$; waktu turun sama persis $= 3\text{ s}$. Total $= \dfrac{2 v_0}{g} = \dfrac{2(30)}{10} = 6\text{ s}$.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-o6">
+              <div class="quiz-head"><span class="quiz-number">6</span><p class="quiz-question">Dari tempat dan saat yang sama, bola P dijatuhkan ($v_0 = 0$) dan bola Q dilempar lurus ke bawah dengan $v_0 = 5\text{ m/s}$ ($g = 10$). Selisih jarak tempuh keduanya setelah $2\text{ s}$&hellip;</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$10\text{ m}$</button>
+                <button class="quiz-option" data-option="B">$20\text{ m}$</button>
+                <button class="quiz-option" data-option="C">$5\text{ m}$</button>
+                <button class="quiz-option" data-option="D">$50\text{ m}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Keduanya punya percepatan sama ($g$), jadi suku $\tfrac12 g t^2$ identik dan saling hapus. Selisihnya hanya dari kecepatan awal: $\Delta = (v_{0Q} - v_{0P})\,t = (5 - 0)(2) = 10\text{ m}$. Selisih ini tetap bertambah seiring waktu karena Q selalu lebih cepat sebanyak $5\text{ m/s}$.</div>
+            </div>
+            <div class="tier-complete" hidden><strong>Tingkat Olimpiade selesai!</strong> Kamu menjawab benar <span data-final>0 dari 6</span> soal. Kalau tingkat ini penuh, fondasi kinematikamu sudah kokoh.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson-section" id="teka-teki">
+        <h2>Teka-Teki Logika</h2>
+        <p>Soal-soal ini tidak menguji rumus, melainkan <strong>cara berpikir</strong>. Semuanya bisa dipecahkan nyaris tanpa hitungan &mdash; asalkan kamu memilih sudut pandang yang tepat. Justru di sinilah fisika paling terasa seperti teka-teki yang memuaskan untuk dipecahkan. Coba sendiri dulu sebelum membuka pembahasannya.</p>
+        <div data-tier-group>
+          <div class="tier-tabs">
+            <button class="tier-tab active" data-tier="teka-teki"><span class="dot"></span>Teka-Teki</button>
+          </div>
+          <div class="tier-panel active" data-tier="teka-teki">
+            <div class="tier-meta">
+              <div class="tier-score">Skor <strong>0/5</strong></div>
+              <div class="tier-progress" aria-hidden="true"><i></i></div>
+              <button class="tier-reset" type="button">&#8635; Ulangi</button>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-tt1">
+              <div class="quiz-head"><span class="quiz-number">1</span><p class="quiz-question">Dua kereta berjarak $100\text{ km}$ saling mendekat, masing-masing $50\text{ km/jam}$. Seekor lalat terbang bolak-balik di antara keduanya dengan $100\text{ km/jam}$ sampai kedua kereta bertemu. Berapa <strong>total</strong> jarak yang ditempuh lalat?</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$100\text{ km}$</button>
+                <button class="quiz-option" data-option="B">$50\text{ km}$</button>
+                <button class="quiz-option" data-option="C">$150\text{ km}$</button>
+                <button class="quiz-option" data-option="D">tak hingga</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Jangan menjumlahkan lintasan bolak-balik yang tak berujung &mdash; tanyakan <strong>berapa lama</strong> dulu. Kedua kereta saling mendekat dengan laju gabungan $100\text{ km/jam}$, jadi bertemu setelah $\tfrac{100}{100} = 1\text{ jam}$. Dalam $1$ jam itu lalat terbang $100 \times 1 = 100\text{ km}$. Konon saat teka-teki ini diajukan ke matematikawan John von Neumann, ia langsung menjawab benar &mdash; dengan menjumlahkan deret tak hingga di kepalanya, cara yang justru paling susah.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-tt2">
+              <div class="quiz-head"><span class="quiz-number">2</span><p class="quiz-question">Dari ketinggian sama dan pada saat yang sama, satu bola <strong>dijatuhkan</strong> lurus ke bawah dan satu bola lagi <strong>dilempar mendatar</strong>. Mana yang lebih dulu menyentuh tanah? (Abaikan hambatan udara.)</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">keduanya bersamaan</button>
+                <button class="quiz-option" data-option="B">yang dijatuhkan</button>
+                <button class="quiz-option" data-option="C">yang dilempar mendatar</button>
+                <button class="quiz-option" data-option="D">tergantung kecepatan lemparan</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Gerak mendatar dan gerak vertikal saling bebas &mdash; kecepatan mendatar sama sekali tak memengaruhi seberapa cepat benda jatuh. Keduanya ditarik percepatan $g$ yang sama dari ketinggian yang sama, jadi <strong>mendarat bersamaan</strong>. Bola yang dilempar hanya mendarat lebih <em>jauh</em>, bukan lebih <em>lama</em>. Inilah inti gerak parabola.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-tt3">
+              <div class="quiz-head"><span class="quiz-number">3</span><p class="quiz-question">Sebuah perahu berpapasan dengan sebatang botol yang hanyut di sungai. Perahu melaju ke hulu (melawan arus) selama $1\text{ jam}$, lalu berbalik dan menyusul botol itu lagi. Ternyata botol telah hanyut $3\text{ km}$ (diukur dari tepi) sejak berpapasan. Berapa kelajuan arus?</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$1{,}5\text{ km/jam}$</button>
+                <button class="quiz-option" data-option="B">$3\text{ km/jam}$</button>
+                <button class="quiz-option" data-option="C">$2\text{ km/jam}$</button>
+                <button class="quiz-option" data-option="D">$0{,}75\text{ km/jam}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Pindah ke <strong>kerangka air</strong>: di sana botol diam, dan perahu menjauh lalu kembali dengan kelajuan yang sama &mdash; jadi waktu menyusul sama dengan waktu menjauh, yaitu $1\text{ jam}$ lagi. Total $2\text{ jam}$. Selama $2$ jam itu botol (ikut arus) hanyut $3\text{ km}$, maka kelajuan arus $= \tfrac{3}{2} = 1{,}5\text{ km/jam}$. Kelajuan perahu sendiri tak pernah dibutuhkan &mdash; itulah kekuatan memilih kerangka acuan yang tepat.</div>
+            </div>
+            <div class="quiz-card" data-answer="B" data-qid="kin-tt4">
+              <div class="quiz-head"><span class="quiz-number">4</span><p class="quiz-question">Kamu menempuh sebuah rute dengan $60\text{ km/jam}$, lalu kembali di rute yang sama dengan $30\text{ km/jam}$. Berapa kelajuan rata-rata seluruh perjalanan?</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">$45\text{ km/jam}$</button>
+                <button class="quiz-option" data-option="B">$40\text{ km/jam}$</button>
+                <button class="quiz-option" data-option="C">$50\text{ km/jam}$</button>
+                <button class="quiz-option" data-option="D">$90\text{ km/jam}$</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Bukan $45$ &mdash; itu jebakannya. Kelajuan rata-rata $= \tfrac{\text{jarak total}}{\text{waktu total}}$, dan karena <em>jaraknya</em> yang sama (bukan waktunya), waktu di laju lambat jadi lebih lama dan menyeret rata-rata ke bawah. Misal satu arah $60\text{ km}$: pergi $1$ jam, pulang $2$ jam; total $120\text{ km}$ dalam $3$ jam $= 40\text{ km/jam}$. Ini rata-rata harmonik, $\tfrac{2 \cdot 60 \cdot 30}{60 + 30}$.</div>
+            </div>
+            <div class="quiz-card" data-answer="A" data-qid="kin-tt5">
+              <div class="quiz-head"><span class="quiz-number">5</span><p class="quiz-question">Seorang pemburu membidik <strong>tepat lurus</strong> ke arah monyet yang bergelantungan di dahan. Persis saat peluru ditembakkan, monyet melepaskan pegangan dan jatuh. Apa yang terjadi? (Abaikan hambatan udara.)</p></div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-option="A">peluru tetap mengenai monyet</button>
+                <button class="quiz-option" data-option="B">peluru lewat di atas monyet</button>
+                <button class="quiz-option" data-option="C">peluru lewat di bawah monyet</button>
+                <button class="quiz-option" data-option="D">tergantung kecepatan peluru</button>
+              </div>
+              <div class="quiz-feedback" hidden><strong></strong>Begitu keduanya melayang, <strong>peluru dan monyet jatuh dengan percepatan $g$ yang sama</strong>. Tanpa gravitasi peluru akan melesat lurus ke posisi awal monyet; dengan gravitasi, keduanya "turun" sebanyak $\tfrac12 g t^2$ yang sama persis pada tiap saat &mdash; jadi peluru selalu membidik monyet yang sedang jatuh, dan <strong>mengenainya</strong>. Berapa pun kelajuan peluru (asalkan cukup cepat menjangkau monyet sebelum keduanya menyentuh tanah).</div>
+            </div>
+            <div class="tier-complete" hidden><strong>Semua teka-teki selesai!</strong> Kamu menjawab benar <span data-final>0 dari 5</span>. Yang terpenting bukan skornya, melainkan "aha"-nya &mdash; baca ulang pembahasan yang sempat mengecohmu.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="brand-mark">K</span>Khusni Academy</a>
+        <p>Belajar Fisika SMA dari konsep dasar sampai penerapannya — untuk pelajar, mahasiswa, dan siapa pun yang ingin memahami cara kerja alam.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Materi</h4>
+          <a href="kinematika.html">Kinematika</a>
+          <span>Dinamika (Segera)</span>
+          <span>Usaha &amp; Energi (Segera)</span>
+          <span>Getaran &amp; Gelombang (Segera)</span>
+          <span>Listrik &amp; Magnet (Segera)</span>
+        </div>
+        <div class="footer-col">
+          <h4>Tentang</h4>
+          <span>Khusni Academy</span>
+          <span>Dibuat untuk pelajar Indonesia</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Khusni Academy.</span>
+      <span>Memahami alam, satu konsep dalam satu waktu.</span>
+    </div>
+  </div>
+</footer>
+<button class="back-top" aria-label="Kembali ke atas">&uarr;</button>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

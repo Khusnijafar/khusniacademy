@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRegionLab();
   initTransformLab();
   initModelLab();
+  initGerakLurus();
   initExam();
   initKemajuan();
   initTema();
@@ -3750,19 +3751,19 @@ function initTema() {
   const simpan = v => { try { localStorage.setItem(KUNCI, v); } catch (e) {} };
 
   function terapkan(t) {
-    if (t === 'terang') akar.setAttribute('data-tema', 'terang');
+    if (t === 'gelap') akar.setAttribute('data-tema', 'gelap');
     else akar.removeAttribute('data-tema');
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', t === 'terang' ? '#f6f8fd' : '#090d17');
+    if (meta) meta.setAttribute('content', t === 'gelap' ? '#0f1613' : '#ffffff');
     tombol.forEach(b => {
-      b.setAttribute('aria-pressed', String(t === 'terang'));
-      b.setAttribute('aria-label', t === 'terang' ? 'Aktifkan tema gelap' : 'Aktifkan tema terang');
+      b.setAttribute('aria-pressed', String(t === 'gelap'));
+      b.setAttribute('aria-label', t === 'gelap' ? 'Aktifkan tema terang' : 'Aktifkan tema gelap');
     });
   }
 
-  terapkan(akar.getAttribute('data-tema') === 'terang' ? 'terang' : 'gelap');
+  terapkan(akar.getAttribute('data-tema') === 'gelap' ? 'gelap' : 'terang');
   tombol.forEach(b => b.addEventListener('click', () => {
-    const baru = akar.getAttribute('data-tema') === 'terang' ? 'gelap' : 'terang';
+    const baru = akar.getAttribute('data-tema') === 'gelap' ? 'terang' : 'gelap';
     terapkan(baru);
     simpan(baru);
   }));
@@ -4167,6 +4168,237 @@ function initKemajuan() {
     try { localStorage.removeItem('ka-latihan'); } catch (e) {}
     render();
   });
+
+  render();
+}
+
+/* ==========================================================================
+   SIMULASI FISIKA 1 — Laboratorium Gerak Lurus (kinematika.html)
+   Menampilkan grafik posisi-waktu (x-t) dan kecepatan-waktu (v-t) berdampingan
+   untuk satu benda yang bergerak di sepanjang garis. Geser v0 dan a, lalu
+   geret penanda waktu untuk membaca nilai di kedua grafik pada saat yang sama.
+   Kemiringan x-t = kecepatan; kemiringan v-t = percepatan; luas di bawah v-t
+   = perpindahan. Tiga hubungan itulah inti kinematika, dan di sini terlihat
+   serempak.
+   ========================================================================== */
+function initGerakLurus() {
+  const host = document.getElementById('widget-gerak');
+  if (!host) return;
+  const mount = host.querySelector('.widget-mount');
+  if (!mount) return;
+
+  const T = 8;                 // jendela waktu tampak (detik)
+  const W = 360, H = 430;
+  const PL = 38, PR = 14;
+  const TY = 20, GH = 150, GAP = 46;        // graf-1 (x-t) atas
+  const BY = TY + GH + GAP;                  // graf-2 (v-t)
+
+  const gnum = v => {
+    const r = Math.round(v * 100) / 100;
+    let s = String(Object.is(r, -0) ? 0 : r);
+    return s.replace('-', '−').replace('.', ',');
+  };
+  const sx = t => PL + (t / T) * (W - PL - PR);
+
+  let v0 = 6, a = 0, tp = 0;   // kecepatan awal, percepatan, waktu penanda
+  const xOf = t => v0 * t + 0.5 * a * t * t;
+  const vOf = t => v0 + a * t;
+
+  /* --- SVG --- */
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + W + ' ' + H, class: 'gl-svg', role: 'img',
+    'aria-label': 'Grafik posisi-waktu dan kecepatan-waktu benda yang bergerak lurus'
+  });
+  const gGrid = svgEl('g', {}, svg);
+  const nowLine = svgEl('line', { class: 'gl-now' }, svg);
+  // kurva + penanda
+  const xCurve = svgEl('path', { d: '', class: 'gl-curve' }, svg);
+  const vLine = svgEl('line', { class: 'gl-curve' }, svg);
+  const xBalik = svgEl('circle', { r: 4.5, class: 'gl-balik', display: 'none' }, svg);
+  const vZero = svgEl('circle', { r: 4.5, class: 'gl-balik', display: 'none' }, svg);
+  const xDot = svgEl('circle', { r: 5, class: 'gl-dot' }, svg);
+  const vDot = svgEl('circle', { r: 5, class: 'gl-dot' }, svg);
+  const lbl = (t, x, y, cls) => { const e = svgEl('text', { x: x, y: y, class: cls || 'w-lbl' }, svg); e.textContent = t; return e; };
+
+  /* --- Kontrol --- */
+  const controls = elDiv('widget-controls');
+  const sl = {};
+  [['v0', 'Kecepatan awal v₀ (m/s)', -12, 12, 1, 6],
+   ['a', 'Percepatan a (m/s²)', -4, 4, 0.5, 0]].forEach(cfg => {
+    const row = elDiv('ctrl-row');
+    const l = document.createElement('label'); l.textContent = cfg[1];
+    const out = document.createElement('output');
+    row.appendChild(l); row.appendChild(out); controls.appendChild(row);
+    const s = document.createElement('input');
+    s.type = 'range'; s.min = String(cfg[2]); s.max = String(cfg[3]); s.step = String(cfg[4]); s.value = String(cfg[5]);
+    s.setAttribute('aria-label', cfg[1]);
+    controls.appendChild(s);
+    sl[cfg[0]] = { input: s, out: out };
+    s.addEventListener('input', render);
+  });
+
+  const chips = elDiv('chips');
+  [['GLB', 6, 0], ['Dipercepat', 0, 2], ['Diperlambat', 12, -2], ['Berbalik arah', 9, -3]].forEach(p => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = p[0];
+    b.addEventListener('click', () => {
+      sl.v0.input.value = String(p[1]); sl.a.input.value = String(p[2]); render();
+    });
+    chips.appendChild(b);
+  });
+  controls.appendChild(chips);
+
+  const probeRow = elDiv('ctrl-row');
+  probeRow.innerHTML = '<label>Penanda waktu t (s)</label><output data-r="tp"></output>';
+  controls.appendChild(probeRow);
+  const probe = document.createElement('input');
+  probe.type = 'range'; probe.min = '0'; probe.max = String(T); probe.step = '0.2'; probe.value = '0';
+  probe.setAttribute('aria-label', 'Penanda waktu t detik');
+  probe.addEventListener('input', () => { tp = parseFloat(probe.value); render(); });
+  controls.appendChild(probe);
+
+  const readout = elDiv('readout',
+    '<div><span>Jenis gerak</span><b data-r="jenis"></b></div>' +
+    '<div><span>Perpindahan 0→t</span><b data-r="disp"></b></div>' +
+    '<div class="full"><span>Posisi x(t)</span><b data-r="xeq"></b></div>' +
+    '<div class="full"><span>Kecepatan v(t)</span><b data-r="veq"></b></div>' +
+    '<div><span data-r="atlabel">Pada t</span><b data-r="xat"></b></div>' +
+    '<div><span>Kecepatan saat itu</span><b data-r="vat"></b></div>');
+  controls.appendChild(readout);
+
+  const legend = elDiv('legend',
+    '<span><i class="dot" style="background:var(--signal)"></i>x–t &amp; v–t</span>' +
+    '<span><i class="dot" style="background:var(--medal)"></i>titik balik (v = 0)</span>' +
+    '<span><i class="dot" style="background:var(--chalk)"></i>penanda t</span>');
+  controls.appendChild(legend);
+
+  const note = elDiv('w-note');
+  controls.appendChild(note);
+
+  const body = elDiv('widget-body');
+  const canvas = elDiv('widget-canvas');
+  canvas.appendChild(svg);
+  body.appendChild(canvas);
+  body.appendChild(controls);
+  mount.innerHTML = '';
+  mount.appendChild(body);
+
+  const q = sel => controls.querySelector(sel);
+
+  /* skala & gridline "bagus" */
+  function nice(range) {
+    const raw = range / 4;
+    const pow = Math.pow(10, Math.floor(Math.log10(raw || 1)));
+    const base = raw / pow;
+    const m = base < 1.5 ? 1 : base < 3 ? 2 : base < 7 ? 5 : 10;
+    return m * pow;
+  }
+
+  function render() {
+    v0 = parseFloat(sl.v0.input.value);
+    a = parseFloat(sl.a.input.value);
+    sl.v0.out.textContent = gnum(v0);
+    sl.a.out.textContent = gnum(a);
+    q('[data-r="tp"]').textContent = gnum(tp);
+
+    /* rentang nilai */
+    const tb = a !== 0 ? -v0 / a : null;          // waktu v = 0
+    const balik = (tb !== null && tb > 0 && tb < T) ? tb : null;
+    const xsamp = [0, xOf(T)];
+    if (balik !== null) xsamp.push(xOf(balik));
+    let xmin = Math.min(0, ...xsamp), xmax = Math.max(0, ...xsamp);
+    if (xmin === xmax) { xmin -= 1; xmax += 1; }
+    const vmin = Math.min(0, vOf(0), vOf(T)), vmaxRaw = Math.max(0, vOf(0), vOf(T));
+    let vlo = vmin, vhi = vmaxRaw; if (vlo === vhi) { vlo -= 1; vhi += 1; }
+
+    const pyX = x => (TY + GH) - (x - xmin) / (xmax - xmin) * GH;
+    const pyV = v => (BY + GH) - (v - vlo) / (vhi - vlo) * GH;
+
+    /* grid + sumbu */
+    gGrid.innerHTML = '';
+    const frameX = (x1, y1, x2, y2, cls) => svgEl('line', { x1, y1, x2, y2, class: cls }, gGrid);
+    // garis waktu vertikal (gridlines) tiap 2 s
+    for (let t = 0; t <= T; t += 2) {
+      frameX(sx(t), TY, sx(t), TY + GH, 'gl-grid');
+      frameX(sx(t), BY, sx(t), BY + GH, 'gl-grid');
+      const tl1 = svgEl('text', { x: sx(t), y: TY + GH + 14, class: 'gl-tick', 'text-anchor': 'middle' }, gGrid); tl1.textContent = t;
+      const tl2 = svgEl('text', { x: sx(t), y: BY + GH + 14, class: 'gl-tick', 'text-anchor': 'middle' }, gGrid); tl2.textContent = t;
+    }
+    // gridlines nilai + angka (x-t)
+    const stepX = nice(xmax - xmin);
+    for (let g = Math.ceil(xmin / stepX) * stepX; g <= xmax + 1e-9; g += stepX) {
+      frameX(PL, pyX(g), W - PR, pyX(g), Math.abs(g) < 1e-9 ? 'gl-axis' : 'gl-grid');
+      const tt = svgEl('text', { x: PL - 5, y: pyX(g) + 3, class: 'gl-tick', 'text-anchor': 'end' }, gGrid); tt.textContent = gnum(g);
+    }
+    const stepV = nice(vhi - vlo);
+    for (let g = Math.ceil(vlo / stepV) * stepV; g <= vhi + 1e-9; g += stepV) {
+      frameX(PL, pyV(g), W - PR, pyV(g), Math.abs(g) < 1e-9 ? 'gl-axis' : 'gl-grid');
+      const tt = svgEl('text', { x: PL - 5, y: pyV(g) + 3, class: 'gl-tick', 'text-anchor': 'end' }, gGrid); tt.textContent = gnum(g);
+    }
+    // label sumbu
+    svgEl('text', { x: PL - 2, y: TY - 7, class: 'gl-axislbl' }, gGrid).textContent = 'x (m)';
+    svgEl('text', { x: PL - 2, y: BY - 7, class: 'gl-axislbl' }, gGrid).textContent = 'v (m/s)';
+    svgEl('text', { x: W - PR, y: TY + GH + 28, class: 'gl-tick', 'text-anchor': 'end' }, gGrid).textContent = 't (s)';
+    svgEl('text', { x: W - PR, y: BY + GH + 28, class: 'gl-tick', 'text-anchor': 'end' }, gGrid).textContent = 't (s)';
+
+    /* kurva x-t (parabola/garis) */
+    let d = '';
+    for (let i = 0; i <= 160; i++) { const t = T * i / 160; d += (i ? ' L ' : 'M ') + sx(t).toFixed(1) + ' ' + pyX(xOf(t)).toFixed(1); }
+    xCurve.setAttribute('d', d);
+    /* garis v-t (lurus) */
+    vLine.setAttribute('x1', sx(0)); vLine.setAttribute('y1', pyV(vOf(0)));
+    vLine.setAttribute('x2', sx(T)); vLine.setAttribute('y2', pyV(vOf(T)));
+
+    /* titik balik */
+    if (balik !== null) {
+      xBalik.setAttribute('display', ''); vZero.setAttribute('display', '');
+      xBalik.setAttribute('cx', sx(balik)); xBalik.setAttribute('cy', pyX(xOf(balik)));
+      vZero.setAttribute('cx', sx(balik)); vZero.setAttribute('cy', pyV(0));
+    } else { xBalik.setAttribute('display', 'none'); vZero.setAttribute('display', 'none'); }
+
+    /* garis "sekarang" + penanda */
+    nowLine.setAttribute('x1', sx(tp)); nowLine.setAttribute('y1', TY);
+    nowLine.setAttribute('x2', sx(tp)); nowLine.setAttribute('y2', BY + GH);
+    xDot.setAttribute('cx', sx(tp)); xDot.setAttribute('cy', pyX(xOf(tp)));
+    vDot.setAttribute('cx', sx(tp)); vDot.setAttribute('cy', pyV(vOf(tp)));
+
+    /* jenis gerak */
+    let jenis;
+    if (v0 === 0 && a === 0) jenis = 'Diam';
+    else if (a === 0) jenis = 'GLB (v tetap)';
+    else if (v0 === 0 || v0 * a > 0) jenis = 'GLBB dipercepat';
+    else jenis = 'GLBB diperlambat';
+
+    /* persamaan */
+    const xeq = (() => {
+      const t1 = v0 === 0 ? '' : gnum(v0) + 't';
+      const half = a / 2;
+      const t2 = a === 0 ? '' : (half === 1 ? '' : half === -1 ? '−' : gnum(half)) + 't²';
+      if (!t1 && !t2) return '0';
+      if (t1 && t2) return t1 + (half < 0 ? ' − ' : ' + ') + t2.replace('−', '');
+      return (t1 || t2);
+    })();
+    const veq = (() => {
+      if (a === 0) return gnum(v0);
+      const t2 = (a === 1 ? '' : a === -1 ? '−' : gnum(a)) + 't';
+      if (v0 === 0) return t2;
+      return gnum(v0) + (a < 0 ? ' − ' : ' + ') + t2.replace('−', '');
+    })();
+
+    q('[data-r="jenis"]').textContent = jenis;
+    q('[data-r="xeq"]').textContent = 'x = ' + xeq;
+    q('[data-r="veq"]').textContent = 'v = ' + veq;
+    q('[data-r="disp"]').textContent = gnum(xOf(tp)) + ' m';
+    q('[data-r="atlabel"]').textContent = 'Posisi di t = ' + gnum(tp) + ' s';
+    q('[data-r="xat"]').textContent = gnum(xOf(tp)) + ' m';
+    q('[data-r="vat"]').textContent = gnum(vOf(tp)) + ' m/s';
+
+    /* catatan */
+    let n = 'Kemiringan grafik x–t di suatu titik sama dengan kecepatan v di saat itu; kemiringan grafik v–t sama dengan percepatan a (' + gnum(a) + ' m/s², tetap). Luas di bawah grafik v–t sampai t sama dengan perpindahannya.';
+    if (balik !== null) n += ' Perhatikan titik emas: di t = ' + gnum(balik) + ' s kecepatan nol, benda berhenti sesaat lalu berbalik arah — di situ grafik x–t mencapai puncak/lembah, dan setelahnya jarak tempuh terus bertambah meski perpindahan mengecil.';
+    else if (a === 0) n += ' Karena a = 0, grafik x–t berupa garis lurus (kemiringan tetap) dan grafik v–t mendatar.';
+    note.textContent = n;
+  }
 
   render();
 }
